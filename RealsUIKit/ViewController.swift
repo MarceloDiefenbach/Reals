@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
           if (segue.identifier == "goToFeed"){
-            let displayVC = segue.destination as! UIViewController
+//            let displayVC = segue.destination as! UIViewController
 
 //            displayVC.posts = posts
 

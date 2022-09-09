@@ -26,5 +26,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to capture Reals</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used to capture Reals</string>
 </dict>
 </plist>

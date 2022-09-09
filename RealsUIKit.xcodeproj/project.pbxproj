@@ -19,7 +19,11 @@
 		DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5428CA0BD50038E47C /* FeedViewController.swift */; };
 		DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927128CA2E4200162F1E /* PlayerView.swift */; };
 		DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */; };
+		DF7B6D0228CA91680082A4B0 /* CaptureVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0128CA91680082A4B0 /* CaptureVideo.swift */; };
+		DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */; };
+		DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */; };
 		DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */; };
+		DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +44,11 @@
 		DF219F5428CA0BD50038E47C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		DF3B927128CA2E4200162F1E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
+		DF7B6D0128CA91680082A4B0 /* CaptureVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideo.swift; sourceTree = "<group>"; };
+		DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CaptureVideo.storyboard; sourceTree = "<group>"; };
+		DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowVideo.storyboard; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +104,7 @@
 			children = (
 				DF3B927028CA203700162F1E /* Extensions */,
 				DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */,
+				DF7B6D0028CA91570082A4B0 /* CaptureVideo */,
 				DF219F4A28CA0AC60038E47C /* Service */,
 				DF219F4E28CA0B9C0038E47C /* Feed */,
 				DF219F3628CA0A9A0038E47C /* AppDelegate.swift */,
@@ -142,6 +151,17 @@
 			children = (
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DF7B6D0028CA91570082A4B0 /* CaptureVideo */ = {
+			isa = PBXGroup;
+			children = (
+				DF7B6D0128CA91680082A4B0 /* CaptureVideo.swift */,
+				DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */,
+				DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */,
+				DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */,
+			);
+			path = CaptureVideo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,11 +226,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */,
 				DF219F4328CA0A9B0038E47C /* LaunchScreen.storyboard in Resources */,
 				DF219F4028CA0A9B0038E47C /* Assets.xcassets in Resources */,
 				DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */,
 				DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */,
 				DF219F3E28CA0A9A0038E47C /* Main.storyboard in Resources */,
+				DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,9 +289,11 @@
 				DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
+				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
 				DF219F5128CA0BAE0038E47C /* PostTableViewCell.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,
 				DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */,
+				DF7B6D0228CA91680082A4B0 /* CaptureVideo.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

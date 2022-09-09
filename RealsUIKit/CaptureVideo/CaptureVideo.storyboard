@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CaptureVideo-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="captureVideo" title="CaptureVideo" id="Y6W-OH-hqX" customClass="CaptureVideo" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1U-KD-NSH">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJl-5D-OVC">
+                                <rect key="frame" x="20" y="471" width="374" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Start"/>
+                                <connections>
+                                    <action selector="startButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Rty-jt-9LO"/>
+                                    <action selector="stopButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VGT-Wq-8pY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veu-7I-iPy">
+                                <rect key="frame" x="20" y="531" width="374" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Stop"/>
+                                <connections>
+                                    <action selector="startButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="I43-qI-A7I"/>
+                                    <action selector="stopButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pP2-2o-3d2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MJl-5D-OVC" secondAttribute="trailing" constant="20" id="C6r-MK-aez"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="veu-7I-iPy" secondAttribute="trailing" constant="20" id="C88-5G-LWY"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="V1U-KD-NSH" secondAttribute="trailing" id="OIo-ml-kUg"/>
+                            <constraint firstItem="MJl-5D-OVC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Tib-K2-yqg"/>
+                            <constraint firstItem="V1U-KD-NSH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Xwx-dN-PG5"/>
+                            <constraint firstItem="V1U-KD-NSH" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="j0r-Q8-Usr"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="veu-7I-iPy" secondAttribute="bottom" constant="300" id="knh-24-OKR"/>
+                            <constraint firstItem="veu-7I-iPy" firstAttribute="top" secondItem="MJl-5D-OVC" secondAttribute="bottom" constant="29" id="nzL-ac-tFV"/>
+                            <constraint firstItem="V1U-KD-NSH" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="tAP-SU-Gih"/>
+                            <constraint firstItem="veu-7I-iPy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="yif-RT-qKO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="camPreview" destination="V1U-KD-NSH" id="Yrp-Xx-0Lw"/>
+                        <segue destination="TIz-8X-YZJ" kind="show" identifier="showVideo" id="MTK-EM-qlu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7" y="97"/>
+        </scene>
+        <!--ShowVideo-->
+        <scene sceneID="Roa-GS-YB8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ShowVideo" id="TIz-8X-YZJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Y50-cc-3l6"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="POl-d3-SJy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="569" y="240"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

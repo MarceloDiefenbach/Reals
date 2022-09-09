@@ -9,6 +9,8 @@ class VideoCellTableViewCell: UITableViewCell {
     var avPlayerLayer: AVPlayerLayer?
     var paused: Bool = false
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
     //This will be called everytime a new value is set on the videoplayer item
     var videoPlayerItem: AVPlayerItem? = nil {
         didSet {
@@ -31,13 +33,14 @@ class VideoCellTableViewCell: UITableViewCell {
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
-        avPlayerLayer?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*1.6)
+        avPlayerLayer?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.width*1.6)
         
         avPlayer?.volume = 0
         avPlayer?.actionAtItemEnd = .none
 
         self.backgroundColor = .clear
         self.videoPlayerSuperView.layer.insertSublayer(avPlayerLayer!, at: 0)
+        self.videoPlayerSuperView.layer.cornerRadius = 16
 
         // This notification is fired when the video ends, you can handle it in the method.
         NotificationCenter.default.addObserver(self,

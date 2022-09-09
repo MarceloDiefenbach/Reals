@@ -9,5 +9,7 @@ target 'RealsUIKit' do
   pod 'Firebase'
   pod 'FirebaseFirestore'
   pod 'FirebaseCore'
+  pod 'FirebaseAuth'
+  pod 'Firebase/Storage'
 
 end
