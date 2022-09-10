@@ -28,8 +28,6 @@ class VideoPlayback: UIViewController {
         videoView.layer.insertSublayer(avPlayerLayer, at: 0)
     
         view.layoutIfNeeded()
-
-        print(videoURL!)
         
         let playerItem = AVPlayerItem(url: videoURL as URL)
         avPlayer.replaceCurrentItem(with: playerItem)

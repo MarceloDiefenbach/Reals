@@ -19,11 +19,11 @@ struct Post {
 
 struct ServiceFirebase {
     
+    let db = Firestore.firestore()
+    
     func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
 
         var posts: [Post] = []
-
-        let db = Firestore.firestore()
 
         db.collection("posts").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -61,19 +61,50 @@ struct ServiceFirebase {
 
     }
     
+    func createReals(urlVideo: String, username: String){
+        
+        db.collection("posts").document().setData(
+            [
+              "ownerId": username,
+              "photo": urlVideo,
+              "title": "Teste Upload"
+            ]
+        )
+    }
+    
     func uploadVideo(urlVideo: URL) {
         
-        let storageRef = Storage.storage().reference()
+        print(urlVideo)
         
-        // Local file you want to upload
-        let localFile = urlVideo
+        let storageRef = Storage.storage().reference()
 
-        // Create the file metadata
+        // Create a reference to the file you want to upload
+        let riversRef = storageRef.child("images/video.mp4")
+        
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
 
-        // Upload file and metadata to the object 'images/mountains.jpg'
-        let uploadTask = storageRef.putFile(from: localFile, metadata: metadata)
+
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = riversRef.putFile(from: urlVideo, metadata: metadata) { metadata, error in
+            print(error)
+          guard let metadata = metadata else {
+            // Uh-oh, an error occurred!
+            return
+          }
+          // Metadata contains file metadata such as size, content-type.
+          let size = metadata.size
+          // You can also access to download URL after upload.
+          riversRef.downloadURL { (url, error) in
+              print(url)
+              createReals(urlVideo: url?.description ?? "", username: "PohMarcelo")
+            guard let downloadURL = url else {
+              // Uh-oh, an error occurred!
+              return
+            }
+              
+          }
+        }
 
         // Listen for state changes, errors, and completion of the upload.
         uploadTask.observe(.resume) { snapshot in
