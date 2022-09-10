@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mnw-CB-kXf">
-                                <rect key="frame" x="20" y="423" width="374" height="139"/>
+                                <rect key="frame" x="20" y="372" width="374" height="190"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O4g-uT-EY8" userLabel="Email">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -46,6 +46,11 @@
                                         <connections>
                                             <action selector="loginButton:" destination="ljt-Dv-mfd" eventType="touchUpInside" id="pPv-wY-TwL"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9I-v8-Qsy">
+                                        <rect key="frame" x="0.0" y="159" width="374" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Criar uma conta"/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -71,7 +76,7 @@
         <!--Login-->
         <scene sceneID="sKx-de-WZs">
             <objects>
-                <viewController title="Login" id="k1J-qF-pq7" customClass="ViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login" id="k1J-qF-pq7" customClass="RegisterViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Eo-Ap-uaK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,9 +103,6 @@
                                         <rect key="frame" x="0.0" y="162" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Fazer login"/>
-                                        <connections>
-                                            <action selector="loginButton:" destination="k1J-qF-pq7" eventType="touchUpInside" id="2cX-yN-8np"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -113,9 +115,6 @@
                             <constraint firstItem="Pgi-G6-Zwu" firstAttribute="leading" secondItem="Yhn-vT-7Ag" secondAttribute="leading" constant="20" id="eLs-ms-foZ"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="passwordField" destination="j6N-8A-794" id="xCE-Xe-6Vo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0H-PV-lvq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

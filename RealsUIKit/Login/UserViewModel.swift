@@ -14,14 +14,16 @@ struct UserViewModel {
     
     func doLogin(email: String, password: String, completionHandler: @escaping (String) -> Void) {
         
-//        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-//            print(authResult)
-//            print(error)
-//        }
-        
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             guard let strongSelf = authResult?.user else { return }
-            print(authResult?.user.email)
+        }
+        completionHandler("teste")
+    }
+    
+    func createAccount(email: String, password: String, completionHandler: @escaping (String) -> Void) {
+        
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            print(authResult)
             print(error)
         }
         completionHandler("teste")

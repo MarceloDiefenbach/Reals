@@ -25,7 +25,6 @@
 		DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */; };
 		DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */; };
 		DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */; };
-		DFDD00EF28CCD2E600830B36 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00EE28CCD2E600830B36 /* UserViewModel.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +51,6 @@
 		DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowVideo.storyboard; sourceTree = "<group>"; };
 		DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		DFDD00EE28CCD2E600830B36 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				DF219F3C28CA0A9A0038E47C /* Main.storyboard */,
-				DFDD00EE28CCD2E600830B36 /* UserViewModel.swift */,
 				DF219F3A28CA0A9A0038E47C /* ViewController.swift */,
 				DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */,
 			);
@@ -307,7 +304,6 @@
 				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
 				DF219F5128CA0BAE0038E47C /* PostTableViewCell.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,
-				DFDD00EF28CCD2E600830B36 /* UserViewModel.swift in Sources */,
 				DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */,
 				DF7B6D0228CA91680082A4B0 /* CaptureVideo.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,

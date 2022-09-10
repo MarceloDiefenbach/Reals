@@ -13,7 +13,6 @@ import FirebaseAuth
 
 class ViewController: UIViewController {
     
-    var UserViewModel = UserViewModel()
     let firebaseAuth = Auth.auth()
 
     @IBOutlet weak var emailField: UITextField!
@@ -22,7 +21,7 @@ class ViewController: UIViewController {
     
     @IBAction func loginButton(_ sender: Any) {
         
-        UserViewModel.doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
+        doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
             print(self.firebaseAuth.currentUser?.email)
             print(completionReturn)
         })
@@ -44,4 +43,17 @@ class ViewController: UIViewController {
         passwordField.text = "lelo318318"
         
     }
+    
+    
+    //MARK: - FUNCTIONS
+    
+    func doLogin(email: String, password: String, completionHandler: @escaping (String) -> Void) {
+        
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            guard let strongSelf = authResult?.user else { return }
+        }
+        completionHandler("teste")
+    }
 }
+
+
