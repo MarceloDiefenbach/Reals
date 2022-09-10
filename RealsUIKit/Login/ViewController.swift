@@ -17,7 +17,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-
     
     @IBAction func loginButton(_ sender: Any) {
         
@@ -29,11 +28,10 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    
+
         if firebaseAuth.currentUser?.email != nil {
             performSegue(withIdentifier: "goToFeed", sender: nil)
         }
-    
     }
     
     override func viewDidLoad() {
@@ -51,6 +49,11 @@ class ViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             guard let strongSelf = authResult?.user else { return }
+            print(strongSelf)
+            //aqui eu preciso dar um pop to root view controller
+            self.navigationController?.popToRootViewController(animated: true)
+
+
         }
         completionHandler("teste")
     }

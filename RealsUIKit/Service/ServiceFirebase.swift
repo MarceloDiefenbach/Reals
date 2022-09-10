@@ -10,6 +10,7 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 import AVFoundation
 
 struct Post {
@@ -75,10 +76,26 @@ struct ServiceFirebase {
     
     func uploadVideo(urlVideo: URL) {
         
+        let firebaseAuth = Auth.auth()
+        
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let formattedDate = format.string(from: date)
+        print(formattedDate)
+
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        
         let storageRef = Storage.storage().reference()
         
         // Create a reference to the file you want to upload
-        let riversRef = storageRef.child("images/video.mp4")
+        let riversRef = storageRef.child("videoReals/\(year)/\(month)/\(day)/\(String(describing: firebaseAuth.currentUser!.uid))-\(hour)-\(minute)-\(seconds).mp4")
         
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
@@ -100,6 +117,7 @@ struct ServiceFirebase {
                     // Uh-oh, an error occurred!
                     return
                 }
+                print(url?.description)
                 createReals(urlVideo: url?.description ?? "", username: "PohMarcelo")
             }
         }

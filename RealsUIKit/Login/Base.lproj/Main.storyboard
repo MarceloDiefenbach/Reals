@@ -50,7 +50,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9I-v8-Qsy">
                                         <rect key="frame" x="0.0" y="159" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Criar uma conta"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Quero criar uma conta!"/>
+                                        <connections>
+                                            <segue destination="k1J-qF-pq7" kind="show" id="grG-Lx-gwu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -78,11 +81,11 @@
             <objects>
                 <viewController title="Login" id="k1J-qF-pq7" customClass="RegisterViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Eo-Ap-uaK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Pgi-G6-Zwu">
-                                <rect key="frame" x="20" y="369" width="374" height="193"/>
+                                <rect key="frame" x="20" y="298" width="374" height="244"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgr-XW-lxd" userLabel="Email">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -103,6 +106,17 @@
                                         <rect key="frame" x="0.0" y="162" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Fazer login"/>
+                                        <connections>
+                                            <action selector="createAccountButton:" destination="k1J-qF-pq7" eventType="touchUpInside" id="SuT-DZ-LiF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LES-4a-MbB">
+                                        <rect key="frame" x="0.0" y="213" width="374" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Já tenho conta. Fazer login!"/>
+                                        <connections>
+                                            <action selector="backToLoginButton:" destination="k1J-qF-pq7" eventType="touchUpInside" id="VDR-ih-52V"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -115,12 +129,22 @@
                             <constraint firstItem="Pgi-G6-Zwu" firstAttribute="leading" secondItem="Yhn-vT-7Ag" secondAttribute="leading" constant="20" id="eLs-ms-foZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="nvs-v8-sk9"/>
+                    <connections>
+                        <outlet property="emailField" destination="79N-1j-sZR" id="eTs-DZ-Hbg"/>
+                        <outlet property="passwordField" destination="j6N-8A-794" id="EZN-2N-Dy3"/>
+                        <outlet property="usernameField" destination="tgr-XW-lxd" id="s5O-rs-Hny"/>
+                        <segue destination="SHE-0A-bDs" kind="presentation" identifier="goToFeed" modalPresentationStyle="fullScreen" id="Ca2-Oe-3rY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0H-PV-lvq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="99" y="824"/>
+            <point key="canvasLocation" x="-899" y="808"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ca2-Oe-3rY"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
