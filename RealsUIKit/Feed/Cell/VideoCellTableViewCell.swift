@@ -7,6 +7,7 @@ class VideoCellTableViewCell: UITableViewCell {
     @IBOutlet weak var videoPlayerSuperView: UIView!
     var avPlayer: AVPlayer?
     var avPlayerLayer: AVPlayerLayer?
+    @IBOutlet weak var blackMaskImage: UIImageView!
     var paused: Bool = false
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -26,6 +27,8 @@ class VideoCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         //Setup you avplayer while the cell is created
         self.setupMoviePlayer()
+        
+        blackMaskImage.layer.cornerRadius = 16
     }
 
     func setupMoviePlayer(){
