@@ -15,10 +15,13 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
 
     @IBAction func startButton(_ sender: Any) {
         startCapture()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.stopRecording()
+         }
     }
     
-    @IBAction func stopButton(_ sender: Any) {
-        stopRecording()
+    @IBAction func sendToServer(_ sender: Any) {
+        performSegue(withIdentifier: "showVideo", sender: nil)
     }
     
     override func viewDidLoad() {
@@ -116,16 +119,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     func currentVideoOrientation() -> AVCaptureVideoOrientation {
         var orientation: AVCaptureVideoOrientation
 
-        switch UIDevice.current.orientation {
-        case .portrait:
-            orientation = AVCaptureVideoOrientation.portrait
-        case .landscapeRight:
-            orientation = AVCaptureVideoOrientation.landscapeLeft
-        case .portraitUpsideDown:
-            orientation = AVCaptureVideoOrientation.portraitUpsideDown
-        default:
-            orientation = AVCaptureVideoOrientation.landscapeRight
-        }
+        orientation = AVCaptureVideoOrientation.portrait
 
         return orientation
     }
@@ -198,14 +192,43 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     }
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        
         print("stop record")
         if (error != nil) {
             print("Error recording movie: \(error!.localizedDescription)")
         } else {
             
-//            let videoRecorded = outputURL! as URL
+            guard let data = try? Data(contentsOf: outputFileURL) else {
+                 return
+             }
+             print("File size before compression: \(Double(data.count / 1048576)) mb")
+             
+             let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + UUID().uuidString + ".mp4")
+             compressVideo(inputURL: outputFileURL as URL,
+                           outputURL: compressedURL) { exportSession in
+                 guard let session = exportSession else {
+                     return
+                 }
+                 switch session.status {
+                 case .unknown:
+                     break
+                 case .waiting:
+                     break
+                 case .exporting:
+                     break
+                 case .completed:
+                     guard let compressedData = try? Data(contentsOf: compressedURL) else {
+                         return
+                     }
+                     self.outputURL = compressedURL
+                     print("File size after compression: \(Double(compressedData.count / 1048576)) mb")
+                 case .failed:
+                     break
+                 case .cancelled:
+                     break
+                 }
+             }
             
-            performSegue(withIdentifier: "showVideo", sender: nil)
         }
     }
     
@@ -217,3 +240,22 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
           }
       }
 }
+
+extension CaptureVideo {
+
+     func compressVideo(inputURL: URL,
+                        outputURL: URL,
+                        handler:@escaping (_ exportSession: AVAssetExportSession?) -> Void) {
+         let urlAsset = AVURLAsset(url: inputURL, options: nil)
+         guard let exportSession = AVAssetExportSession(asset: urlAsset,
+                                                        presetName: AVAsset) else {
+             handler(nil)
+             return
+         }
+         exportSession.outputURL = outputURL
+         exportSession.outputFileType = .mp4
+         exportSession.exportAsynchronously {
+             handler(exportSession)
+         }
+     }
+ }
