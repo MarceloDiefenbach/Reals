@@ -15,10 +15,10 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
 
     @IBAction func startButton(_ sender: Any) {
         startCapture()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.stopRecording()
          }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.performSegue(withIdentifier: "showVideo", sender: nil)
          }
     }
@@ -58,7 +58,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
 //        captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
 
         // Setup Camera
-        let camera = AVCaptureDevice.default(for: .video)
+        let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
 
         do {
             let input = try AVCaptureDeviceInput(device: camera!)
@@ -266,3 +266,22 @@ extension CaptureVideo {
          }
      }
  }
+
+extension AVCaptureDevice {
+    func set(frameRate: Double) {
+    guard let range = activeFormat.videoSupportedFrameRateRanges.first,
+        range.minFrameRate...range.maxFrameRate ~= frameRate
+        else {
+            print("Requested FPS is not supported by the device's activeFormat !")
+            return
+    }
+
+    do { try lockForConfiguration()
+        activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: Int32(frameRate))
+        activeVideoMaxFrameDuration = CMTimeMake(value: 1, timescale: Int32(frameRate))
+        unlockForConfiguration()
+    } catch {
+        print("LockForConfiguration failed with error: \(error.localizedDescription)")
+    }
+  }
+}

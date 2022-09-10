@@ -14,7 +14,6 @@
 		DF219F4028CA0A9B0038E47C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF219F3F28CA0A9B0038E47C /* Assets.xcassets */; };
 		DF219F4328CA0A9B0038E47C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F4128CA0A9B0038E47C /* LaunchScreen.storyboard */; };
 		DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */; };
-		DF219F5128CA0BAE0038E47C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5028CA0BAE0038E47C /* PostTableViewCell.swift */; };
 		DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F5228CA0BC80038E47C /* Feed.storyboard */; };
 		DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5428CA0BD50038E47C /* FeedViewController.swift */; };
 		DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927128CA2E4200162F1E /* PlayerView.swift */; };
@@ -27,6 +26,7 @@
 		DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */; };
 		DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F128CCF36300830B36 /* ProfileViewController.swift */; };
 		DFDD00F428CCF36E00830B36 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDD00F328CCF36E00830B36 /* Profile.storyboard */; };
+		DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F528CD125900830B36 /* ReportViewController.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +42,6 @@
 		DF219F4228CA0A9B0038E47C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF219F4428CA0A9B0038E47C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFirebase.swift; sourceTree = "<group>"; };
-		DF219F5028CA0BAE0038E47C /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DF219F5228CA0BC80038E47C /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		DF219F5428CA0BD50038E47C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		DF3B927128CA2E4200162F1E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		DFDD00F128CCF36300830B36 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DFDD00F328CCF36E00830B36 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		DFDD00F528CD125900830B36 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +138,7 @@
 				DF219F4F28CA0BA10038E47C /* Cell */,
 				DF219F5228CA0BC80038E47C /* Feed.storyboard */,
 				DF219F5428CA0BD50038E47C /* FeedViewController.swift */,
+				DFDD00F528CD125900830B36 /* ReportViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -145,7 +146,6 @@
 		DF219F4F28CA0BA10038E47C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				DF219F5028CA0BAE0038E47C /* PostTableViewCell.swift */,
 				DF3B927128CA2E4200162F1E /* PlayerView.swift */,
 				DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */,
 			);
@@ -318,8 +318,8 @@
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
 				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
 				DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */,
-				DF219F5128CA0BAE0038E47C /* PostTableViewCell.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,
+				DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */,
 				DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */,
 				DF7B6D0228CA91680082A4B0 /* CaptureVideo.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,
@@ -473,9 +473,11 @@
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to capture Reals";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,7 +485,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.RealsUIKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -502,9 +504,11 @@
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to capture Reals";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -512,7 +516,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.RealsUIKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

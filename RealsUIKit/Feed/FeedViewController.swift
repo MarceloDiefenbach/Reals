@@ -23,11 +23,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var avPlayerLayer: AVPlayerLayer!
     var videoURLs = Array<URL>()
     var firstLoad = true
-
-    @IBAction func CreateRealButton(_ sender: Any) {
-//        performSegue(withIdentifier: "captureVideo", sender: nil)
-
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //          if (segue.identifier == "captureVideo"){
@@ -44,7 +39,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         // get all posts of firebase
-        service.getAllPost { (posts) in
+        service.getFriendsReals { (posts) in
             self.posts = posts
 
             DispatchQueue.main.async {
@@ -61,8 +56,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
         cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
-        cell.titleLabel.text = posts[indexPath.row].owner
+        cell.titleLabel.text = posts[indexPath.row].ownerUsername
         cell.subtitleLabel.text = posts[indexPath.row].title
+        cell.selectionStyle = .none
         
         playVideoOnTheCell(cell: cell, indexPath: indexPath)
         return cell

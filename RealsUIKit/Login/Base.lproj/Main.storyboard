@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mnw-CB-kXf">
-                                <rect key="frame" x="20" y="372" width="374" height="190"/>
+                                <rect key="frame" x="20" y="353" width="374" height="209"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O4g-uT-EY8" userLabel="Email">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -40,7 +40,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3z-8l-a0w">
-                                        <rect key="frame" x="0.0" y="108" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="108" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="kJN-hB-ChX"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Fazer login"/>
                                         <connections>
@@ -48,7 +51,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9I-v8-Qsy">
-                                        <rect key="frame" x="0.0" y="159" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="178" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Quero criar uma conta!"/>
                                         <connections>
@@ -85,7 +88,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Pgi-G6-Zwu">
-                                <rect key="frame" x="20" y="298" width="374" height="244"/>
+                                <rect key="frame" x="20" y="279" width="374" height="263"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgr-XW-lxd" userLabel="Email">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
@@ -103,15 +106,18 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-na-yTv">
-                                        <rect key="frame" x="0.0" y="162" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="162" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Va9-g3-Du7"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Fazer login"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Criar conta"/>
                                         <connections>
                                             <action selector="createAccountButton:" destination="k1J-qF-pq7" eventType="touchUpInside" id="SuT-DZ-LiF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LES-4a-MbB">
-                                        <rect key="frame" x="0.0" y="213" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="232" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Já tenho conta. Fazer login!"/>
                                         <connections>

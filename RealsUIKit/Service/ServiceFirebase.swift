@@ -14,14 +14,19 @@ import FirebaseAuth
 import AVFoundation
 
 struct Post {
-    let title: String
-    let owner: String
+    let ownerId: String
+    let ownerUsername: String
     let photo: String
+    let title: String
+    let postUid: String
+    //TODO: - tava dando erro na hora de criar ali no for dos get posts
+//    let date: String
 }
 
 struct ServiceFirebase {
     
     let db = Firestore.firestore()
+    let firebaseAuth = Auth.auth()
     
     func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
         
@@ -37,9 +42,9 @@ struct ServiceFirebase {
                         
                         let data = doc.data()
                         
-                        if let title = data["title"] as? String, let owner = data["ownerId"] as? String, let photo = data["photo"] as? String {
+                        if let title = data["title"] as? String, let ownerId = data["ownerId"] as? String, let photo = data["photo"] as? String, let ownerUsername = data["ownerUsername"] as? String {
                             
-                            let post = Post(title: title, owner: owner, photo: photo)
+                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
                             
                             posts.append(post)
                             print(post)
@@ -51,32 +56,76 @@ struct ServiceFirebase {
         }
     }
     
-    func getImageFromString (urlString: String, completionHandler: @escaping (UIImage) -> Void) {
-        guard let url = URL(string: urlString) else {return}
+    
+    func getFriendsReals(completionHandler: @escaping ([Post]) -> Void) {
         
-        DispatchQueue.global(qos: .background).async {
-            guard let image = try? Data(contentsOf: url) else { return }
-            DispatchQueue.main.async {
-                completionHandler(UIImage(data: image)!)
+        var posts: [Post] = []
+        
+        let friendsUsername = ["PohMarcelo", "Brenda"]
+        
+        db.collection("posts").whereField("ownerUsername", in: friendsUsername).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                if let snapshotDocumentos = querySnapshot?.documents {
+                    for doc in snapshotDocumentos {
+                        
+                        let data = doc.data()
+                        
+                        if let title = data["title"] as? String, let ownerId = data["ownerId"] as? String, let photo = data["photo"] as? String, let ownerUsername = data["ownerUsername"] as? String {
+                            
+                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
+                            
+                            posts.append(post)
+                            print(post)
+                        }
+                    }
+                    completionHandler(posts)
+                }
             }
         }
+    }
+    
+    func getAllUsernames(completionHandler: @escaping ([String]) -> Void) {
         
+        var allUsernames: [String] = []
+        
+        db.collection("allUsernames").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                if let snapshotDocumentos = querySnapshot?.documents {
+                    for doc in snapshotDocumentos {
+                        
+                        let data = doc.data()
+                        
+                        if let username = data["username"] as? String {
+                            
+                            allUsernames.append(username)
+                        }
+                    }
+                    completionHandler(allUsernames)
+                }
+            }
+        }
     }
     
     func createReals(urlVideo: String, username: String){
         
         db.collection("posts").document().setData(
             [
-                "ownerId": username,
+                "ownerId": firebaseAuth.currentUser?.uid,
+                "ownerUsername": username,
                 "photo": urlVideo,
-                "title": "Teste Upload"
+                "title": "Teste Upload",
+                "date": Date.now,
             ]
         )
     }
     
     func uploadVideo(urlVideo: URL) {
-        
-        let firebaseAuth = Auth.auth()
         
         let date = Date()
         let format = DateFormatter()

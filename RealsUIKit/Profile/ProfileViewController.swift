@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
     
     let firebaseAuth = Auth.auth()
+    let db = Firestore.firestore()
     
     //MARK: - outlets
     
@@ -23,7 +25,16 @@ class ProfileViewController: UIViewController {
         
         let alert = UIAlertController(title: "Apagar conta", message: "Essa ação não poderá ser desfeita", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Apagar conta", style: .destructive, handler:  { action in
+            
             self.firebaseAuth.currentUser?.delete()
+            self.db.collection("ciusersties").document(self.firebaseAuth.currentUser?.uid ?? "").delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+            
             do {
                 try self.firebaseAuth.signOut()
                 
@@ -32,7 +43,9 @@ class ProfileViewController: UIViewController {
             } catch let signOutError as NSError {
                 print("Error signing out: %@", signOutError)
             }
+            
             //TODO: - voltar para o login
+            
         }))
         alert.addAction(UIAlertAction(title: "Não apagar", style: .default, handler: { action in
             

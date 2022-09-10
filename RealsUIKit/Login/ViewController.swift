@@ -50,8 +50,10 @@ class ViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             guard let strongSelf = authResult?.user else { return }
             print(strongSelf)
-            //aqui eu preciso dar um pop to root view controller
-            self.navigationController?.popToRootViewController(animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.performSegue(withIdentifier: "goToFeed", sender: nil)
+            })
 
 
         }

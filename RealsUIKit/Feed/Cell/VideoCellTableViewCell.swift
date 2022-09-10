@@ -59,11 +59,11 @@ class VideoCellTableViewCell: UITableViewCell {
     func startPlayback(){
         self.avPlayer?.play()
     }
-
-    // A notification is fired and seeker is sent to the beginning to loop the video again
+    
     @objc func playerItemDidReachEnd(notification: Notification) {
-        let p: AVPlayerItem = notification.object as! AVPlayerItem
-        p.seek(to: CMTime.zero)
+        if let playerItem = notification.object as? AVPlayerItem {
+            playerItem.seek(to: CMTime.zero, completionHandler: nil)
+        }
     }
 
 }

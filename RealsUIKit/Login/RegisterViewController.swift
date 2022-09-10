@@ -15,6 +15,9 @@ class RegisterViewController: UIViewController {
 
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
+    var service = ServiceFirebase()
+    
+    var allUsernames: [String] = []
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -28,9 +31,7 @@ class RegisterViewController: UIViewController {
     @IBAction func createAccountButton(_ sender: Any) {
         
         createAccount(username: "", email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
-            print(self.firebaseAuth.currentUser?.email)
-            print(completionReturn)
-            self.performSegue(withIdentifier: "goToFeed", sender: nil)
+            
         })
     }
     
@@ -42,19 +43,44 @@ class RegisterViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        service.getAllUsernames(completionHandler: { (completionReturn) -> Void in
+            
+            self.allUsernames = completionReturn
+            print(self.allUsernames.first)
+        })
+        
+    }
+    
     //MARK: - FUNCTIONS
     
     func createAccount(username: String, email: String, password: String, completionHandler: @escaping (String) -> Void) {
         
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
-                [
-                    "username": username,
-                ]
-                , merge: true
-            )
+        
+
+        
+        if self.allUsernames.contains(username) {
+            print("ja existe")
+        } else {
+            print("nao existe")
+//            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+//                self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
+//                    [
+//                        "username": self.usernameField.text!,
+//                        "email": self.passwordField.text!,
+//                        "friends": ["PohMarcelo", "Brenda"]
+//                    ]
+//                    , merge: true
+//                )
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+//                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")
+//                    self.performSegue(withIdentifier: "goToFeed", sender: nil)
+//                })
+//            }
+//            completionHandler("account created")
         }
-        completionHandler("account created")
     }
     
 }
