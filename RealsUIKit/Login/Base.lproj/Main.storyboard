@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ljt-Dv-mfd">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Feed-->
+        <scene sceneID="nnq-p3-4cl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Feed" id="SHE-0A-bDs" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="gdZ-oa-VSj"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pmc-bp-X68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="764" y="83"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="91t-vb-t67">
+            <objects>
+                <viewController title="Login" id="ljt-Dv-mfd" customClass="ViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bPU-d2-mwK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mnw-CB-kXf">
+                                <rect key="frame" x="20" y="423" width="374" height="139"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O4g-uT-EY8" userLabel="Email">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Senha" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16v-0c-l92" userLabel="Senha">
+                                        <rect key="frame" x="0.0" y="54" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3z-8l-a0w">
+                                        <rect key="frame" x="0.0" y="108" width="374" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Fazer login"/>
+                                        <connections>
+                                            <action selector="loginButton:" destination="ljt-Dv-mfd" eventType="touchUpInside" id="pPv-wY-TwL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8u9-eV-hov"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8u9-eV-hov" firstAttribute="trailing" secondItem="mnw-CB-kXf" secondAttribute="trailing" constant="20" id="0qZ-Ze-cTe"/>
+                            <constraint firstItem="mnw-CB-kXf" firstAttribute="leading" secondItem="8u9-eV-hov" secondAttribute="leading" constant="20" id="MQD-6N-cth"/>
+                            <constraint firstItem="8u9-eV-hov" firstAttribute="bottom" secondItem="mnw-CB-kXf" secondAttribute="bottom" constant="300" id="URO-wK-AX3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="O4g-uT-EY8" id="tMG-5r-UWs"/>
+                        <outlet property="passwordField" destination="16v-0c-l92" id="4hs-mr-bZH"/>
+                        <segue destination="SHE-0A-bDs" kind="presentation" identifier="goToFeed" modalPresentationStyle="fullScreen" id="ZZR-7M-FkL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qFh-Vo-U7o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="99" y="82"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="sKx-de-WZs">
+            <objects>
+                <viewController title="Login" id="k1J-qF-pq7" customClass="ViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Eo-Ap-uaK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Pgi-G6-Zwu">
+                                <rect key="frame" x="20" y="369" width="374" height="193"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgr-XW-lxd" userLabel="Email">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="79N-1j-sZR" userLabel="Email">
+                                        <rect key="frame" x="0.0" y="54" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Senha" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j6N-8A-794" userLabel="Senha">
+                                        <rect key="frame" x="0.0" y="108" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-na-yTv">
+                                        <rect key="frame" x="0.0" y="162" width="374" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Fazer login"/>
+                                        <connections>
+                                            <action selector="loginButton:" destination="k1J-qF-pq7" eventType="touchUpInside" id="2cX-yN-8np"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Yhn-vT-7Ag"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Yhn-vT-7Ag" firstAttribute="trailing" secondItem="Pgi-G6-Zwu" secondAttribute="trailing" constant="20" id="Z6M-3F-vB5"/>
+                            <constraint firstItem="Yhn-vT-7Ag" firstAttribute="bottom" secondItem="Pgi-G6-Zwu" secondAttribute="bottom" constant="300" id="cDB-hh-6mJ"/>
+                            <constraint firstItem="Pgi-G6-Zwu" firstAttribute="leading" secondItem="Yhn-vT-7Ag" secondAttribute="leading" constant="20" id="eLs-ms-foZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passwordField" destination="j6N-8A-794" id="xCE-Xe-6Vo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o0H-PV-lvq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="99" y="824"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
