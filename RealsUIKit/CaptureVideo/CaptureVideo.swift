@@ -18,6 +18,9 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.stopRecording()
          }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            self.performSegue(withIdentifier: "showVideo", sender: nil)
+         }
     }
     
     @IBAction func sendToServer(_ sender: Any) {
@@ -26,11 +29,15 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
+
         // Do any additional setup after loading the view, typically from a nib.
-        if setupSession() {
-            setupPreview()
-            startSession()
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if self.setupSession() {
+                self.setupPreview()
+                self.startSession()
+            }
+         }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +55,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     //MARK:- Setup Camera
 
     func setupSession() -> Bool {
-        captureSession.sessionPreset = AVCaptureSession.Preset.high
+//        captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
 
         // Setup Camera
         let camera = AVCaptureDevice.default(for: .video)
@@ -198,36 +205,36 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
             print("Error recording movie: \(error!.localizedDescription)")
         } else {
             
-            guard let data = try? Data(contentsOf: outputFileURL) else {
-                 return
-             }
-             print("File size before compression: \(Double(data.count / 1048576)) mb")
-             
-             let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + UUID().uuidString + ".mp4")
-             compressVideo(inputURL: outputFileURL as URL,
-                           outputURL: compressedURL) { exportSession in
-                 guard let session = exportSession else {
-                     return
-                 }
-                 switch session.status {
-                 case .unknown:
-                     break
-                 case .waiting:
-                     break
-                 case .exporting:
-                     break
-                 case .completed:
-                     guard let compressedData = try? Data(contentsOf: compressedURL) else {
-                         return
-                     }
-                     self.outputURL = compressedURL
-                     print("File size after compression: \(Double(compressedData.count / 1048576)) mb")
-                 case .failed:
-                     break
-                 case .cancelled:
-                     break
-                 }
-             }
+//            guard let data = try? Data(contentsOf: outputFileURL) else {
+//                 return
+//             }
+//             print("File size before compression: \(Double(data.count / 1048576)) mb")
+//
+//             let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + UUID().uuidString + ".mp4")
+//             compressVideo(inputURL: outputFileURL as URL,
+//                           outputURL: compressedURL) { exportSession in
+//                 guard let session = exportSession else {
+//                     return
+//                 }
+//                 switch session.status {
+//                 case .unknown:
+//                     break
+//                 case .waiting:
+//                     break
+//                 case .exporting:
+//                     break
+//                 case .completed:
+//                     guard let compressedData = try? Data(contentsOf: compressedURL) else {
+//                         return
+//                     }
+//                     self.outputURL = compressedURL
+//                     print("File size after compression: \(Double(compressedData.count / 1048576)) mb")
+//                 case .failed:
+//                     break
+//                 case .cancelled:
+//                     break
+//                 }
+//             }
             
         }
     }
@@ -248,7 +255,7 @@ extension CaptureVideo {
                         handler:@escaping (_ exportSession: AVAssetExportSession?) -> Void) {
          let urlAsset = AVURLAsset(url: inputURL, options: nil)
          guard let exportSession = AVAssetExportSession(asset: urlAsset,
-                                                        presetName: AVAsset) else {
+                                                        presetName: AVAssetExportPreset1280x720) else {
              handler(nil)
              return
          }

@@ -75,8 +75,6 @@ struct ServiceFirebase {
     
     func uploadVideo(urlVideo: URL) {
         
-        print(urlVideo)
-        
         let storageRef = Storage.storage().reference()
         
         // Create a reference to the file you want to upload
@@ -102,9 +100,7 @@ struct ServiceFirebase {
                     // Uh-oh, an error occurred!
                     return
                 }
-
                 createReals(urlVideo: url?.description ?? "", username: "PohMarcelo")
-                
             }
         }
         
