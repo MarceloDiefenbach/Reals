@@ -13,10 +13,8 @@ class VideoPlayback: UIViewController {
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
     var service = ServiceFirebase()
-
-
     var videoURL: URL!
-    //connect this to your uiview in storyboard
+    
     @IBOutlet weak var videoView: UIView!
 
     override func viewDidLoad() {
@@ -33,7 +31,20 @@ class VideoPlayback: UIViewController {
         avPlayer.replaceCurrentItem(with: playerItem)
     
         avPlayer.play()
-        upload()
+        avPlayer.actionAtItemEnd = .none
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playerItemDidReachEnd(notification:)),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: avPlayer.currentItem)
+        
+//        upload()
+    }
+    @objc func playerItemDidReachEnd(notification: Notification) {
+        if let playerItem = notification.object as? AVPlayerItem {
+            playerItem.seek(to: CMTime.zero)
+
+        }
     }
     
     func upload(){
