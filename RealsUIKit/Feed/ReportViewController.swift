@@ -10,10 +10,18 @@ import UIKit
 
 class ReportViewController: UIViewController, UITextFieldDelegate {
 
+    var ownerUsernameVar: String?
+    var ownerIdVar: String?
+    var postUidVar: String?
+    
+    @IBOutlet weak var ownerUsername: UILabel!
+    @IBOutlet weak var postUid: UILabel!
     
     override func viewDidLoad() {
-
-
+        
+        ownerUsername.text = ownerUsernameVar
+        postUid.text = postUidVar
+        
     }
     
     //close keyboard on return button

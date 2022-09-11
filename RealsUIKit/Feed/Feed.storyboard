@@ -63,7 +63,7 @@
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="exclamationmark.triangle" catalog="system"/>
                                                             <connections>
-                                                                <segue destination="qwi-ws-q8K" kind="presentation" id="tgE-HM-Mae"/>
+                                                                <action selector="reportButton:" destination="hcs-fb-gJX" eventType="touchUpInside" id="6is-mE-buS"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -124,6 +124,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="p3Y-yA-d8G" id="8Dn-Wz-w0K"/>
+                        <segue destination="qwi-ws-q8K" kind="showDetail" identifier="goToReport" id="fJV-2m-3tq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -193,6 +194,10 @@
                             <constraint firstItem="HdM-ma-u58" firstAttribute="centerY" secondItem="V5F-Ie-LAv" secondAttribute="centerY" id="zij-7x-n3o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ownerUsername" destination="AVe-By-FPh" id="0Yb-hL-g4I"/>
+                        <outlet property="postUid" destination="oqF-VX-3pa" id="iLl-WS-qH1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqA-OA-0xf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

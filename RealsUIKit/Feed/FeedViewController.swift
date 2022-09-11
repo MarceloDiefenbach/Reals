@@ -12,6 +12,26 @@ import AVFoundation
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var ownerId: String = ""
+    var ownerUsername: String = ""
+    var photo: String = ""
+    var postUid: String = ""
+    
+    //MARK: - prepare segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+          if (segue.identifier == "goToReport"){
+            let displayVC = segue.destination as! ReportViewController
+              
+              displayVC.ownerIdVar = self.ownerId
+              displayVC.ownerUsernameVar = self.ownerUsername
+              displayVC.postUidVar = self.postUid
+
+          }
+      }
+    
+    
+    
     var service = ServiceFirebase()
     
     var posts: [Post] = []
@@ -23,13 +43,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var avPlayerLayer: AVPlayerLayer!
     var videoURLs = Array<URL>()
     var firstLoad = true
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//          if (segue.identifier == "captureVideo"){
-//            let displayVC = segue.destination as! CaptureVideo
-//
-//          }
-      }
     
     
     override func viewDidLoad() {
@@ -59,6 +72,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.titleLabel.text = posts[indexPath.row].ownerUsername
         cell.subtitleLabel.text = posts[indexPath.row].title
         cell.selectionStyle = .none
+        cell.post = posts[indexPath.row]
+        cell.delegate = self
         
         playVideoOnTheCell(cell: cell, indexPath: indexPath)
         return cell
@@ -81,4 +96,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        if let videoCell = cell as? VideoCellTableViewCell {
 //        }
 //    }
+    
+}
+
+extension FeedViewController: MyCustomCellDelegator {
+    func callSegueFromCell(ownerUsername: String, postUid: String, ownerId: String, photo: String) {
+        self.ownerId = ownerId
+        self.ownerUsername = ownerUsername
+        self.photo = photo
+        self.postUid = postUid
+        
+        performSegue(withIdentifier: "goToReport", sender: nil)
+    }
 }

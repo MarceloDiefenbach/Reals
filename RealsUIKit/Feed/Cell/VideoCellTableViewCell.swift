@@ -1,17 +1,38 @@
 import UIKit
 import AVFoundation
 
+protocol MyCustomCellDelegator: AnyObject {
+    func callSegueFromCell(ownerUsername: String, postUid: String, ownerId: String, photo: String)
+}
+
 class VideoCellTableViewCell: UITableViewCell {
 
     // I have put the avplayer layer on this view
-    @IBOutlet weak var videoPlayerSuperView: UIView!
     var avPlayer: AVPlayer?
     var avPlayerLayer: AVPlayerLayer?
-    @IBOutlet weak var blackMaskImage: UIImageView!
     var paused: Bool = false
+    var delegate: MyCustomCellDelegator!
+    
+    var post: Post?
 
+    //MARK: - outlets
+    
+    @IBOutlet weak var videoPlayerSuperView: UIView!
+    @IBOutlet weak var blackMaskImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    
+    //MARK: - actions
+    
+    @IBAction func reportButton(_ sender: Any) {
+        if(self.delegate != nil){ //Just to be safe.
+            self.delegate.callSegueFromCell(ownerUsername: post?.ownerUsername ?? "", postUid: post?.postUid ?? "", ownerId: post?.ownerId ?? "", photo: post?.photo ?? "")
+        }
+
+    }
+    
+    //MARK: - functions
+    
     //This will be called everytime a new value is set on the videoplayer item
     var videoPlayerItem: AVPlayerItem? = nil {
         didSet {

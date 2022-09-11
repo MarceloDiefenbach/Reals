@@ -17,7 +17,7 @@ class RegisterViewController: UIViewController {
     let db = Firestore.firestore()
     var service = ServiceFirebase()
     
-    var allUsernames: [String] = []
+    var allUsernames: [String] = [""]
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -47,9 +47,8 @@ class RegisterViewController: UIViewController {
         super.viewDidAppear(animated)
 
         service.getAllUsernames(completionHandler: { (completionReturn) -> Void in
-            
+            //MARK: - pega todos nomes de usuários pra não deixar criar repetidos
             self.allUsernames = completionReturn
-            print(self.allUsernames.first)
         })
         
     }
@@ -57,30 +56,22 @@ class RegisterViewController: UIViewController {
     //MARK: - FUNCTIONS
     
     func createAccount(username: String, email: String, password: String, completionHandler: @escaping (String) -> Void) {
-        
-        
 
-        
-        if self.allUsernames.contains(username) {
-            print("ja existe")
-        } else {
-            print("nao existe")
-//            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-//                self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
-//                    [
-//                        "username": self.usernameField.text!,
-//                        "email": self.passwordField.text!,
-//                        "friends": ["PohMarcelo", "Brenda"]
-//                    ]
-//                    , merge: true
-//                )
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-//                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")
-//                    self.performSegue(withIdentifier: "goToFeed", sender: nil)
-//                })
-//            }
-//            completionHandler("account created")
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
+                [
+                    "username": self.usernameField.text!,
+                    "email": self.passwordField.text!,
+                    "friends": ["PohMarcelo", "Brenda"]
+                ]
+                , merge: true
+            )
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                UserDefaults.standard.set(self.usernameField.text, forKey: "username")
+                self.performSegue(withIdentifier: "goToFeed", sender: nil)
+            })
         }
+        completionHandler("account created")
     }
     
 }
