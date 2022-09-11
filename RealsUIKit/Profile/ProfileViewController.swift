@@ -38,13 +38,11 @@ class ProfileViewController: UIViewController {
             do {
                 try self.firebaseAuth.signOut()
                 
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
+                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                 
             } catch let signOutError as NSError {
                 print("Error signing out: %@", signOutError)
             }
-            
-            //TODO: - voltar para o login
             
         }))
         alert.addAction(UIAlertAction(title: "Não apagar", style: .default, handler: { action in
@@ -65,8 +63,6 @@ class ProfileViewController: UIViewController {
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
-        //TODO: - voltar para o login
-        
         
     }
     
