@@ -17,19 +17,6 @@ class FeedViewController: UIViewController {
     var photo: String = ""
     var postUid: String = ""
     
-    //MARK: - prepare segues
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-          if (segue.identifier == "goToReport"){
-            let displayVC = segue.destination as! ReportViewController
-              
-              displayVC.ownerIdVar = self.ownerId
-              displayVC.ownerUsernameVar = self.ownerUsername
-              displayVC.postUidVar = self.postUid
-
-          }
-      }
-    
     var service = ServiceFirebase()
     
     var posts: [Post] = []
@@ -66,6 +53,17 @@ class FeedViewController: UIViewController {
     func stopPlayBack(cell : VideoCellTableViewCell, indexPath : IndexPath){
         cell.stopPlayback()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+          if (segue.identifier == "goToReport"){
+            let displayVC = segue.destination as! ReportViewController
+              
+              displayVC.ownerIdVar = self.ownerId
+              displayVC.ownerUsernameVar = self.ownerUsername
+              displayVC.postUidVar = self.postUid
+
+          }
+      }
 }
 
 extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
