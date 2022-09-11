@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedViewController: UIViewController {
     
     var ownerId: String = ""
     var ownerUsername: String = ""
@@ -30,8 +30,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
           }
       }
     
-    
-    
     var service = ServiceFirebase()
     
     var posts: [Post] = []
@@ -43,7 +41,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var avPlayerLayer: AVPlayerLayer!
     var videoURLs = Array<URL>()
     var firstLoad = true
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +58,18 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         visibleIP = IndexPath.init(row: 0, section: 0)
     }
+    
+    func playVideoOnTheCell(cell : VideoCellTableViewCell, indexPath : IndexPath){
+        cell.startPlayback()
+    }
 
+    func stopPlayBack(cell : VideoCellTableViewCell, indexPath : IndexPath){
+        cell.stopPlayback()
+    }
+}
+
+extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
@@ -82,21 +90,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
-    
-    func playVideoOnTheCell(cell : VideoCellTableViewCell, indexPath : IndexPath){
-        cell.startPlayback()
-    }
-
-    func stopPlayBack(cell : VideoCellTableViewCell, indexPath : IndexPath){
-        cell.stopPlayback()
-    }
 
 //    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        print("end = \(indexPath)")
 //        if let videoCell = cell as? VideoCellTableViewCell {
 //        }
 //    }
-    
+        
 }
 
 extension FeedViewController: MyCustomCellDelegator {

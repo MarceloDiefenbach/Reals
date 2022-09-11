@@ -28,7 +28,6 @@ class VideoCellTableViewCell: UITableViewCell {
         if(self.delegate != nil){ //Just to be safe.
             self.delegate.callSegueFromCell(ownerUsername: post?.ownerUsername ?? "", postUid: post?.postUid ?? "", ownerId: post?.ownerId ?? "", photo: post?.photo ?? "")
         }
-
     }
     
     //MARK: - functions
