@@ -17,6 +17,14 @@ class ReportViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ownerUsername: UILabel!
     @IBOutlet weak var postUid: UILabel!
     
+    @IBAction func onlyReport(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Denuncia recebida", message: "Vamos analisar em até 24 horas e se necessário interviremos na publicação", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { action in
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         
         ownerUsername.text = ownerUsernameVar

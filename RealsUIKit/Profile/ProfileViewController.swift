@@ -59,7 +59,7 @@ class ProfileViewController: UIViewController {
         do {
             try firebaseAuth.signOut()
             
-            self.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
             
             
         } catch let signOutError as NSError {

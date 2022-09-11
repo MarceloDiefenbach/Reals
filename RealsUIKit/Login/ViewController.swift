@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailField.text = "lelode15@gmail.com"
+        emailField.text = "lelod15@gmail.com"
         passwordField.text = "lelo318318"
         
     }

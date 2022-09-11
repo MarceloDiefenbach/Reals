@@ -173,6 +173,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Apenas denunciar"/>
+                                        <connections>
+                                            <action selector="onlyReport:" destination="qwi-ws-q8K" eventType="touchUpInside" id="DfC-HM-WtD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dP4-V9-GSB">
                                         <rect key="frame" x="0.0" y="229" width="374" height="31"/>
