@@ -38,7 +38,6 @@ class RegisterViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         } else {
         
-                
                 service.verifyIsExist(username: usernameField.text ?? "", completionHandler: { (existUsername) -> Void in
                     
                     if existUsername {
@@ -102,8 +101,6 @@ class RegisterViewController: UIViewController {
                     UserDefaults.standard.set(self.usernameField.text, forKey: "username")
                     self.performSegue(withIdentifier: "goToFeed", sender: nil)
                 })
-                
-                print(error)
             } else {
                 switch error!._code {
                     case 17007:
@@ -117,7 +114,6 @@ class RegisterViewController: UIViewController {
                     print("Outro erro \(error!._code)")
                 }
             }
-            
         }
         completionHandler("account created")
     }
