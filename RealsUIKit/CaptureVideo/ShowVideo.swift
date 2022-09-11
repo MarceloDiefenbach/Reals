@@ -17,6 +17,14 @@ class VideoPlayback: UIViewController {
     
     @IBOutlet weak var videoView: UIView!
 
+    @IBAction func publishRealButton(_ sender: Any) {
+        upload()
+    }
+    @IBAction func retakeReal(_ sender: Any) {
+        self.dismiss(animated: true, completion: {})
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

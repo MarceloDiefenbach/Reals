@@ -20,12 +20,45 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0C2-KY-9AN">
+                                <rect key="frame" x="20" y="734" width="374" height="108"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdG-NJ-BBR">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="6oK-dv-Ddx"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Publicar"/>
+                                        <connections>
+                                            <action selector="publishRealButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kCt-dN-RbC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QkH-ei-hy3">
+                                        <rect key="frame" x="0.0" y="58" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="EvJ-Ps-NUh"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Gravar outro Real">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="retakeReal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7ro-WL-ctN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="AJ2-vz-ATW" secondAttribute="bottom" id="6GZ-Vy-ben"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="HgD-7a-cZS"/>
+                            <constraint firstItem="0C2-KY-9AN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="NZi-jw-edy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="0C2-KY-9AN" secondAttribute="bottom" constant="20" id="OkW-Rw-dgk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0C2-KY-9AN" secondAttribute="trailing" constant="20" id="hpW-pp-ftP"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="htR-FL-cGq"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="w3D-FU-vcF"/>
                         </constraints>

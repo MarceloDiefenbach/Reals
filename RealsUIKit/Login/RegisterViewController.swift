@@ -91,27 +91,21 @@ class RegisterViewController: UIViewController {
                     ]
                     , merge: true
                 )
-                self.db.collection("allUsernames").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
-                    [
-                        "username": self.usernameField.text!,
-                    ]
-                    , merge: true
-                )
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")
+                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")                    
                     self.performSegue(withIdentifier: "goToFeed", sender: nil)
                 })
             } else {
                 switch error!._code {
                     case 17007:
-                    let alert = UIAlertController(title: "E-mail já em uso", message: "Já existe uma conta vinculada a este e-mail", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                        //nothing to do
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                    print("Email já existe")
+                        let alert = UIAlertController(title: "E-mail já em uso", message: "Já existe uma conta vinculada a este e-mail", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                            //nothing to do
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        print("Email já existe")
                     default:
-                    print("Outro erro \(error!._code)")
+                        print("Outro erro \(error!._code)")
                 }
             }
         }

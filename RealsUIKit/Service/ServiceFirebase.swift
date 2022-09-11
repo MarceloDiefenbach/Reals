@@ -93,7 +93,7 @@ struct ServiceFirebase {
         
         print(username)
 
-        db.collection("allUsernames").whereField("username", isEqualTo: username)
+        db.collection("users").whereField("username", isEqualTo: username)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
