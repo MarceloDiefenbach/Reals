@@ -118,7 +118,7 @@
                         <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="EKV-TP-NXD">
                             <connections>
                                 <action selector="CreateRealButton:" destination="Y6W-OH-hqX" id="cY5-bu-gru"/>
-                                <segue destination="xSI-5o-4oO" kind="presentation" modalPresentationStyle="automatic" id="XJJ-Hr-wLx"/>
+                                <segue destination="xSI-5o-4oO" kind="presentation" modalPresentationStyle="fullScreen" id="XJJ-Hr-wLx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
