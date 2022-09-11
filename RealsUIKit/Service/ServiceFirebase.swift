@@ -19,8 +19,14 @@ struct Post {
     let photo: String
     let title: String
     let postUid: String
-    //TODO: - tava dando erro na hora de criar ali no for dos get posts
-//    let date: String
+}
+
+struct FriendRequest {
+    let ownerIdSender: String
+    let ownerUsernameSender: String
+    let ownerIdReceiver: String
+    let ownerUsernameReceiver: String
+    let requestId: String
 }
 
 struct ServiceFirebase {
@@ -55,7 +61,6 @@ struct ServiceFirebase {
             }
         }
     }
-    
     
     func getFriendsReals(completionHandler: @escaping ([Post]) -> Void) {
         
@@ -217,4 +222,145 @@ struct ServiceFirebase {
             }
         }
     }
+    
+    func addFriendToMyFriend(usernameToAdd: String) {
+        
+        if usernameToAdd != "" {
+            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
+                "friends": FieldValue.arrayUnion([usernameToAdd ?? ""])
+            ])
+            
+            getIdByUser(username: usernameToAdd, completionHandler: { (ownerID) -> Void in
+                print()
+                db.collection("users").document(ownerID).updateData([
+                    "friends": FieldValue.arrayUnion([UserDefaults.standard.string(forKey: "username") ?? "k"])
+                ])
+            })
+        }
+    }
+    
+    func addMeOnFriendOfAcceptedRequest(usernameToAdd: String) {
+        
+        if usernameToAdd != "" {
+            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
+                "friends": FieldValue.arrayUnion([usernameToAdd ?? ""])
+            ])
+        }
+    }
+    
+    func removeFriend(usernameToAdd: String) {
+        
+        if usernameToAdd != "" {
+            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
+                "friends": FieldValue.arrayRemove([usernameToAdd ?? ""])
+            ])
+        }
+    }
+    
+    func getAllRequestFriend(completionHandler: @escaping ([FriendRequest]) -> Void) {
+        
+        var exist: Bool = false
+        
+        var allFriendsRequests: [FriendRequest] = []
+
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest")
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        
+                        let data = document.data()
+                        
+                        if let ownerIdSender = data["ownerIdSender"] as? String,
+                           let ownerUsernameSender = data["ownerUsernameSender"] as? String,
+                           let ownerIdReceiver = data["ownerIdReceiver"] as? String,
+                           let ownerUsernameReceiver = data["ownerUsernameReceiver"] as? String,
+                           let requestId = document.documentID as?String {
+                            
+                            let friendRequest = FriendRequest(
+                                ownerIdSender: ownerIdSender,
+                                ownerUsernameSender: ownerUsernameSender,
+                                ownerIdReceiver: ownerIdReceiver,
+                                ownerUsernameReceiver: ownerUsernameReceiver,
+                                requestId: requestId
+                            )
+                            
+                            allFriendsRequests.append(friendRequest)
+                            print(allFriendsRequests)
+                    }
+                }
+                completionHandler(allFriendsRequests)
+            }
+        }
+    }
+    
+    func doRequestFriend(
+        ownerUsernameReceiver: String,
+        completionHandler: @escaping (Bool) -> Void) {
+        
+        getIdByUser(username: ownerUsernameReceiver, completionHandler: { (usernameReturn) -> Void in
+            
+            db.collection("users").document(usernameReturn).collection("friendsRequest").document()
+                .setData(
+                    [
+                        "ownerIdSender": firebaseAuth.currentUser?.uid,
+                        "ownerUsernameSender": UserDefaults.standard.string(forKey: "username" ?? ""),
+                        "ownerIdReceiver": usernameReturn,
+                        "ownerUsernameReceiver": ownerUsernameReceiver
+                    ]
+                )
+            completionHandler(true)
+        })
+    }
+    
+    
+    func deleteFriendRequest(requestId: String, completionHandler: @escaping (Bool) -> Void) {
+        
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest").document(requestId).delete(){ err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+            completionHandler(true)
+        }
+    }
+    
+    func getIdByUser(username: String, completionHandler: @escaping (String) -> Void) {
+        
+        var ownerIDReceiver: String = ""
+
+        db.collection("users").whereField("username", isEqualTo: username)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        print(document.documentID)
+                        ownerIDReceiver = document.documentID
+                        
+                    }
+                }
+                completionHandler(ownerIDReceiver)
+        }
+
+    }
+
+    func acceptFriendRequest(
+        ownerUsernameReceiver: String,
+        requestId: String,
+        completionHandler: @escaping (String) -> Void) {
+
+            addFriendToMyFriend(usernameToAdd: ownerUsernameReceiver)
+
+            deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
+
+            })
+
+
+    }
+    
 }

@@ -86,13 +86,13 @@ class RegisterViewController: UIViewController {
                 self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
                     [
                         "username": self.usernameField.text!,
-                        "email": self.passwordField.text!,
-                        "friends": ["PohMarcelo", "Brenda"]
+                        "email": self.emailField.text!,
+                        "friends": ["teste"]
                     ]
                     , merge: true
                 )
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")                    
+                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")
                     self.performSegue(withIdentifier: "goToFeed", sender: nil)
                 })
             } else {

@@ -14,15 +14,46 @@ class ProfileViewController: UIViewController {
     
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
+    let service = ServiceFirebase()
     
     //MARK: - outlets
     
-    
-    
     //MARK: - actions
+    @IBAction func addFriendButton(_ sender: Any) {
+        
+    }
     
     @IBAction func deleteAccount(_ sender: Any) {
-        
+        deleteUser()
+    }
+    
+    @IBAction func logOut(_ sender: Any) {
+        logOut()
+    }
+    
+    override func viewDidLoad() {
+        service.addFriendToMyFriend(usernameToAdd: "PohMarcelo")
+    }
+    
+    
+}
+
+
+extension ProfileViewController {
+    
+    func logOut() {
+        do {
+            try firebaseAuth.signOut()
+            
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            
+            
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+    }
+    
+    func deleteUser() {
         let alert = UIAlertController(title: "Apagar conta", message: "Essa ação não poderá ser desfeita", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Apagar conta", style: .destructive, handler:  { action in
             
@@ -49,27 +80,6 @@ class ProfileViewController: UIViewController {
             
         }))
         self.present(alert, animated: true, completion: nil)
-        
     }
-    
-    @IBAction func logOut(_ sender: Any) {
-        
-        do {
-            try firebaseAuth.signOut()
-            
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-            
-            
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
-        
-    }
-    
-    override func viewDidLoad() {
-        
-    }
-    
-    
     
 }
