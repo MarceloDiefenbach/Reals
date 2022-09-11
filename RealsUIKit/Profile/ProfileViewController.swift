@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Apagar conta", style: .destructive, handler:  { action in
             
             self.firebaseAuth.currentUser?.delete()
-            self.db.collection("ciusersties").document(self.firebaseAuth.currentUser?.uid ?? "").delete() { err in
+            self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").delete() { err in
                 if let err = err {
                     print("Error removing document: \(err)")
                 } else {

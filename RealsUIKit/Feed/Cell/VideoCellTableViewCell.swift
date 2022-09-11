@@ -58,7 +58,7 @@ class VideoCellTableViewCell: UITableViewCell {
         
         avPlayerLayer?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width*0.9, height: UIScreen.main.bounds.width*1.6)
         
-        avPlayer?.volume = 0
+        avPlayer?.isMuted = true
         avPlayer?.actionAtItemEnd = .none
 
         self.backgroundColor = .clear

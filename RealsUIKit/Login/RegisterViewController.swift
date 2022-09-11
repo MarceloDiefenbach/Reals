@@ -30,26 +30,50 @@ class RegisterViewController: UIViewController {
     
     @IBAction func createAccountButton(_ sender: Any) {
         
-        createAccount(username: "", email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
+        if emailField.text ?? "" == "" || passwordField.text ?? "" == "" || usernameField.text ?? "" == "" {
+            let alert = UIAlertController(title: "Campos vazios", message: "Preecncha todos os campos e tente novamente", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                //nothing to do
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+        
+                
+                service.verifyIsExist(username: usernameField.text ?? "", completionHandler: { (existUsername) -> Void in
+                    
+                    if existUsername {
+                        
+                        let alert = UIAlertController(title: "Usuário já existe", message: "O nome de usuário informado já está sendo utilizado, escolha outro e tente novamente", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                            //nothing to do
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    } else {
+                        self.createAccount(
+                            username: self.usernameField.text ?? "",
+                            email: self.emailField.text ?? "",
+                            password: self.passwordField.text ?? "",
+                            completionHandler: { (valueReturn) -> Void in
+                                
+                            })
+                    }
+                })
             
-        })
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailField.text = "lelode15@gmail.com"
+        usernameField.text = "PohMarcelo"
+        emailField.text = "lelod15@gmail.com"
         passwordField.text = "lelo318318"
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        service.getAllUsernames(completionHandler: { (completionReturn) -> Void in
-            //MARK: - pega todos nomes de usuários pra não deixar criar repetidos
-            self.allUsernames = completionReturn
-        })
         
     }
     
@@ -58,18 +82,42 @@ class RegisterViewController: UIViewController {
     func createAccount(username: String, email: String, password: String, completionHandler: @escaping (String) -> Void) {
 
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
-                [
-                    "username": self.usernameField.text!,
-                    "email": self.passwordField.text!,
-                    "friends": ["PohMarcelo", "Brenda"]
-                ]
-                , merge: true
-            )
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                UserDefaults.standard.set(self.usernameField.text, forKey: "username")
-                self.performSegue(withIdentifier: "goToFeed", sender: nil)
-            })
+            
+            if error == nil {
+                self.db.collection("users").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
+                    [
+                        "username": self.usernameField.text!,
+                        "email": self.passwordField.text!,
+                        "friends": ["PohMarcelo", "Brenda"]
+                    ]
+                    , merge: true
+                )
+                self.db.collection("allUsernames").document(self.firebaseAuth.currentUser?.uid ?? "").setData(
+                    [
+                        "username": self.usernameField.text!,
+                    ]
+                    , merge: true
+                )
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    UserDefaults.standard.set(self.usernameField.text, forKey: "username")
+                    self.performSegue(withIdentifier: "goToFeed", sender: nil)
+                })
+                
+                print(error)
+            } else {
+                switch error!._code {
+                    case 17007:
+                    let alert = UIAlertController(title: "E-mail já em uso", message: "Já existe uma conta vinculada a este e-mail", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                        //nothing to do
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    print("Email já existe")
+                    default:
+                    print("Outro erro \(error!._code)")
+                }
+            }
+            
         }
         completionHandler("account created")
     }

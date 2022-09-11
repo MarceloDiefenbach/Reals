@@ -87,29 +87,31 @@ struct ServiceFirebase {
         }
     }
     
-    func getAllUsernames(completionHandler: @escaping ([String]) -> Void) {
+    func verifyIsExist(username: String, completionHandler: @escaping (Bool) -> Void) {
         
-        var allUsernames: [String] = []
+        var exist: Bool = false
         
-        db.collection("allUsernames").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                
-                if let snapshotDocumentos = querySnapshot?.documents {
-                    for doc in snapshotDocumentos {
+        print(username)
+
+        db.collection("allUsernames").whereField("username", isEqualTo: username)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
                         
-                        let data = doc.data()
-                        
-                        if let username = data["username"] as? String {
-                            
-                            allUsernames.append(username)
+                        if document.data()["username"] as! String == username {
+                            exist = true
+                        } else {
+                            exist = false
                         }
+                        
                     }
-                    completionHandler(allUsernames)
                 }
-            }
+                completionHandler(exist)
         }
+
     }
     
     func createReals(urlVideo: String, username: String){
