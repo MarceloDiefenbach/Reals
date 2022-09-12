@@ -40,7 +40,6 @@ struct ServiceFirebase {
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
     
-    
     func getAllUsers(completionHandler: @escaping ([User]) -> Void) {
         
         var allUsers: [User] = []
@@ -229,7 +228,7 @@ struct ServiceFirebase {
         )
     }
     
-    func uploadVideo(urlVideo: URL) {
+    func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
         
         let date = Date()
         let format = DateFormatter()
@@ -292,6 +291,8 @@ struct ServiceFirebase {
         
         uploadTask.observe(.success) { snapshot in
             // Upload completed successfully
+            print("finalizou")
+            completionHandler(true)
         }
         
         uploadTask.observe(.failure) { snapshot in

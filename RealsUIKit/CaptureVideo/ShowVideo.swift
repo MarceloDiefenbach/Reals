@@ -56,6 +56,8 @@ class VideoPlayback: UIViewController {
     }
     
     func upload(){
-        service.uploadVideo(urlVideo: videoURL)
+        service.uploadVideo(urlVideo: videoURL, completionHandler: { (uploadFinish) in
+            print("executou o completion")
+        })
     }
 }
