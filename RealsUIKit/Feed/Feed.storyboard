@@ -110,11 +110,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reals" id="Do0-pe-XpF">
-                        <barButtonItem key="leftBarButtonItem" image="person.fill" catalog="system" id="UdM-c7-0U7">
-                            <connections>
-                                <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="automatic" id="KQi-L7-2NS"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem image="person.fill" catalog="system" id="UdM-c7-0U7">
+                                <connections>
+                                    <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="fullScreen" id="KQi-L7-2NS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="person.3.fill" catalog="system" id="lx9-LR-TMg">
+                                <connections>
+                                    <action selector="friendsButton:" destination="Y6W-OH-hqX" id="Lwp-se-iEQ"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="EKV-TP-NXD">
                             <connections>
                                 <action selector="CreateRealButton:" destination="Y6W-OH-hqX" id="cY5-bu-gru"/>
@@ -125,6 +132,7 @@
                     <connections>
                         <outlet property="tableView" destination="p3Y-yA-d8G" id="8Dn-Wz-w0K"/>
                         <segue destination="qwi-ws-q8K" kind="showDetail" identifier="goToReport" id="fJV-2m-3tq"/>
+                        <segue destination="rGQ-HK-uu5" kind="presentation" identifier="goToFriends" id="Mbe-zG-ZyD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -209,10 +217,12 @@
         <!--Profile-->
         <scene sceneID="D3H-u0-2My">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="profile" storyboardName="Profile" id="v2O-Uf-IeC" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="profile" storyboardName="Profile" id="v2O-Uf-IeC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Tr2-yX-Rvd"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaI-gx-kH5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1754" y="106"/>
+            <point key="canvasLocation" x="1686" y="106"/>
         </scene>
         <!--CaptureVideo-->
         <scene sceneID="gGz-dX-lpX">
@@ -220,7 +230,17 @@
                 <viewControllerPlaceholder storyboardName="CaptureVideo" id="xSI-5o-4oO" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NPL-n7-Tsy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1718" y="226"/>
+            <point key="canvasLocation" x="1717" y="210"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="Wtm-YA-h0O">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Friends" storyboardName="Friends" id="rGQ-HK-uu5" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="PLs-LV-BNh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yxt-5l-ciY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1690" y="309"/>
         </scene>
         <!--Reals-->
         <scene sceneID="3OL-dF-fxJ">
@@ -263,6 +283,7 @@
     <resources>
         <image name="blackMask" width="370" height="663"/>
         <image name="exclamationmark.triangle" catalog="system" width="128" height="112"/>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DF05668328CE634500670911 /* recording.json in Resources */ = {isa = PBXBuildFile; fileRef = DF05668228CE634500670911 /* recording.json */; };
+		DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668428CEBC6A00670911 /* UsersViewController.swift */; };
+		DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF05668728CEC0AE00670911 /* Friends.storyboard */; };
+		DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668928CECB3500670911 /* UserTableViewCell.swift */; };
 		DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3628CA0A9A0038E47C /* AppDelegate.swift */; };
 		DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */; };
 		DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3A28CA0A9A0038E47C /* ViewController.swift */; };
@@ -35,6 +38,9 @@
 		11ECBFC9ED00B60B12D59871 /* Pods-RealsUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.debug.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealsUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF05668228CE634500670911 /* recording.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recording.json; sourceTree = "<group>"; };
+		DF05668428CEBC6A00670911 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		DF05668728CEC0AE00670911 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
+		DF05668928CECB3500670911 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		DF219F3328CA0A9A0038E47C /* RealsUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealsUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF219F3628CA0A9A0038E47C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +103,16 @@
 			path = LottieFiles;
 			sourceTree = "<group>";
 		};
+		DF05668628CEC09F00670911 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				DF05668428CEBC6A00670911 /* UsersViewController.swift */,
+				DF05668728CEC0AE00670911 /* Friends.storyboard */,
+				DF05668928CECB3500670911 /* UserTableViewCell.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
 		DF219F2A28CA0A9A0038E47C = {
 			isa = PBXGroup;
 			children = (
@@ -147,9 +163,9 @@
 			isa = PBXGroup;
 			children = (
 				DF219F4F28CA0BA10038E47C /* Cell */,
-				DF219F5228CA0BC80038E47C /* Feed.storyboard */,
 				DF219F5428CA0BD50038E47C /* FeedViewController.swift */,
 				DFDD00F528CD125900830B36 /* ReportViewController.swift */,
+				DF219F5228CA0BC80038E47C /* Feed.storyboard */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -194,6 +210,7 @@
 		DFDD00F028CCF34300830B36 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DF05668628CEC09F00670911 /* Friends */,
 				DFDD00F128CCF36300830B36 /* ProfileViewController.swift */,
 				DFDD00F328CCF36E00830B36 /* Profile.storyboard */,
 			);
@@ -268,6 +285,7 @@
 				DFDD00F428CCF36E00830B36 /* Profile.storyboard in Resources */,
 				DF219F4028CA0A9B0038E47C /* Assets.xcassets in Resources */,
 				DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */,
+				DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */,
 				DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */,
 				DF219F3E28CA0A9A0038E47C /* Main.storyboard in Resources */,
 				DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */,
@@ -325,6 +343,8 @@
 			files = (
 				DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */,
 				DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */,
+				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
+				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,
 				DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */,
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,

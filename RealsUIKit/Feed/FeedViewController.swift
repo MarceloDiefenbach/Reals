@@ -21,6 +21,10 @@ class FeedViewController: UIViewController {
     
     var posts: [Post] = []
     
+    @IBAction func friendsButton(_ sender: Any) {
+        performSegue(withIdentifier: "goToFriends", sender: nil)
+    }
+    
     @IBOutlet weak var tableView: UITableView!
 
     var visibleIP : IndexPath?
