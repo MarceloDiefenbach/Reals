@@ -303,7 +303,7 @@ struct ServiceFirebase {
                 .setData(
                     [
                         "ownerIdSender": firebaseAuth.currentUser?.uid,
-                        "ownerUsernameSender": UserDefaults.standard.string(forKey: "username" ?? ""),
+                        "ownerUsernameSender": UserDefaults.standard.string(forKey: "username"),
                         "ownerIdReceiver": usernameReturn,
                         "ownerUsernameReceiver": ownerUsernameReceiver
                     ]

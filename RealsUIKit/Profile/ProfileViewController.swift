@@ -32,7 +32,9 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-//        service.add(usernameToAdd: "PohMarcelo")
+        service.doRequestFriend(ownerUsernameReceiver: "PohMarcelo", completionHandler: { (receiver) in
+            
+        })
     }
     
     
