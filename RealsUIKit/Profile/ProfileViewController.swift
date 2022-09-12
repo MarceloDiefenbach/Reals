@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        service.addFriendToMyFriend(usernameToAdd: "PohMarcelo")
+//        service.add(usernameToAdd: "PohMarcelo")
     }
     
     

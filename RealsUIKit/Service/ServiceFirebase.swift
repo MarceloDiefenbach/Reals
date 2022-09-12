@@ -223,7 +223,7 @@ struct ServiceFirebase {
         }
     }
     
-    func addFriendToMyFriend(usernameToAdd: String) {
+    func addFriend(usernameToAdd: String) {
         
         if usernameToAdd != "" {
             db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
@@ -239,21 +239,19 @@ struct ServiceFirebase {
         }
     }
     
-    func addMeOnFriendOfAcceptedRequest(usernameToAdd: String) {
-        
-        if usernameToAdd != "" {
-            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
-                "friends": FieldValue.arrayUnion([usernameToAdd ?? ""])
-            ])
-        }
-    }
-    
     func removeFriend(usernameToAdd: String) {
         
         if usernameToAdd != "" {
             db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
                 "friends": FieldValue.arrayRemove([usernameToAdd ?? ""])
             ])
+            
+            getIdByUser(username: usernameToAdd, completionHandler: { (ownerID) -> Void in
+                print()
+                db.collection("users").document(ownerID).updateData([
+                    "friends": FieldValue.arrayRemove([UserDefaults.standard.string(forKey: "username") ?? "k"])
+                ])
+            })
         }
     }
     
@@ -314,7 +312,6 @@ struct ServiceFirebase {
         })
     }
     
-    
     func deleteFriendRequest(requestId: String, completionHandler: @escaping (Bool) -> Void) {
         
         db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest").document(requestId).delete(){ err in
@@ -354,13 +351,18 @@ struct ServiceFirebase {
         requestId: String,
         completionHandler: @escaping (String) -> Void) {
 
-            addFriendToMyFriend(usernameToAdd: ownerUsernameReceiver)
+            addFriend(usernameToAdd: ownerUsernameReceiver)
 
             deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
 
             })
 
+    }
+    
+    func rejectFriendRequest(requestId: String) {
+        deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
 
+        })
     }
     
 }
