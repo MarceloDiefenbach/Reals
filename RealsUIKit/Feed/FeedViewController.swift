@@ -39,7 +39,7 @@ class FeedViewController: UIViewController {
         tableView.dataSource = self
         
         
-        // get all posts of firebase
+//         get all posts of firebase
         service.getFriendsReals { (posts) in
             self.posts = posts
 

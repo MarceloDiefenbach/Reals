@@ -37,6 +37,10 @@ struct User {
 
 struct ServiceFirebase {
     
+    #warning("se precisar de ajuda, falar com a gabi")
+    // separar os serviços por tipo em arquivos diferentes
+    // tem que ter um singleton que ai o serviço vai ser criado só uma vez
+    
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
     
@@ -60,7 +64,6 @@ struct ServiceFirebase {
                             let user = User(username: username, email: email, userId: doc.documentID)
                             
                             allUsers.append(user)
-                            print(allUsers)
                         }
                     }
                     completionHandler(allUsers)
@@ -84,8 +87,9 @@ struct ServiceFirebase {
                     
                     for friend in friends {
                         let user = User(username: friend, email: "", userId: "")
-                        allFriends.append(user)
-                        print(user)
+                        if user.username != UserDefaults.standard.string(forKey: "username") {
+                            allFriends.append(user)
+                        }
                     }
                     completionHandler(allFriends)
                 }
@@ -162,30 +166,40 @@ struct ServiceFirebase {
         
         var posts: [Post] = []
         
-        let friendsUsername = ["PohMarcelo", "Brenda"]
+        var friendsUsername: [String] = []
         
-        db.collection("posts").whereField("ownerUsername", in: friendsUsername).getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                
-                if let snapshotDocumentos = querySnapshot?.documents {
-                    for doc in snapshotDocumentos {
-                        
-                        let data = doc.data()
-                        
-                        if let title = data["title"] as? String, let ownerId = data["ownerId"] as? String, let photo = data["photo"] as? String, let ownerUsername = data["ownerUsername"] as? String {
-                            
-                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
-                            
-                            posts.append(post)
-                            print(post)
+        getAllFriends(completionHandler: { (friends) in
+            
+            friendsUsername = friends.map( { $0.username } )
+            friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")
+          
+            db.collection("posts").whereField("ownerUsername", in: friendsUsername).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+
+                    if let snapshotDocumentos = querySnapshot?.documents {
+                        for doc in snapshotDocumentos {
+
+                            let data = doc.data()
+
+                            if let title = data["title"] as? String,
+                               let ownerId = data["ownerId"] as? String,
+                               let photo = data["photo"] as? String,
+                               let ownerUsername = data["ownerUsername"] as? String {
+
+                                let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
+
+                                posts.append(post)
+                                print(post)
+                            }
                         }
+                        completionHandler(posts)
                     }
-                    completionHandler(posts)
                 }
             }
-        }
+            
+        })
     }
     
     func verifyIsExist(username: String, completionHandler: @escaping (Bool) -> Void) {
@@ -215,17 +229,25 @@ struct ServiceFirebase {
 
     }
     
-    func createReals(urlVideo: String, username: String){
+    func createReals(urlVideo: String){
         
-        db.collection("posts").document().setData(
+        var ref: DocumentReference? = nil
+
+        ref = db.collection("posts").addDocument(data:
             [
                 "ownerId": firebaseAuth.currentUser?.uid,
-                "ownerUsername": username,
+                "ownerUsername": UserDefaults.standard.string(forKey: "username"),
                 "photo": urlVideo,
-                "title": "Teste Upload",
+                "title": "",
                 "date": Date.now,
-            ]
-        )
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(ref!.documentID)")
+                }
+        }
+        
     }
     
     func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
@@ -270,7 +292,7 @@ struct ServiceFirebase {
                     return
                 }
                 print(url?.description)
-                createReals(urlVideo: url?.description ?? "", username: "PohMarcelo")
+                createReals(urlVideo: url?.description ?? "")
             }
         }
         
@@ -331,7 +353,7 @@ struct ServiceFirebase {
             getIdByUser(username: usernameToAdd, completionHandler: { (ownerID) -> Void in
                 print()
                 db.collection("users").document(ownerID).updateData([
-                    "friends": FieldValue.arrayUnion([UserDefaults.standard.string(forKey: "username") ?? "k"])
+                    "friends": FieldValue.arrayUnion([UserDefaults.standard.string(forKey: "username") ?? ""])
                 ])
             })
         }
@@ -440,6 +462,29 @@ struct ServiceFirebase {
                     }
                 }
                 completionHandler(ownerIDReceiver)
+        }
+
+    }
+    
+    func getUserByEmail(email: String, completionHandler: @escaping (String) -> Void) {
+        
+      var ownerUsernameReceiver: String = ""
+
+        db.collection("users").whereField("email", isEqualTo: email)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        print(document.data()["username"] ?? "")
+                        
+                        ownerUsernameReceiver = document.data()["username"] as! String
+                        
+                    }
+                }
+                completionHandler(ownerUsernameReceiver)
         }
 
     }

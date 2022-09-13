@@ -113,7 +113,7 @@
                         <leftBarButtonItems>
                             <barButtonItem image="person.fill" catalog="system" id="UdM-c7-0U7">
                                 <connections>
-                                    <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="fullScreen" id="KQi-L7-2NS"/>
+                                    <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="automatic" id="KQi-L7-2NS"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="person.3.fill" catalog="system" id="lx9-LR-TMg">
@@ -282,10 +282,10 @@
     </scenes>
     <resources>
         <image name="blackMask" width="370" height="663"/>
-        <image name="exclamationmark.triangle" catalog="system" width="128" height="112"/>
-        <image name="person.3.fill" catalog="system" width="128" height="61"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="exclamationmark.triangle" catalog="system" width="32" height="32"/>
+        <image name="person.3.fill" catalog="system" width="32" height="32"/>
+        <image name="person.fill" catalog="system" width="32" height="32"/>
+        <image name="plus.circle" catalog="system" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

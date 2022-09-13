@@ -21,9 +21,10 @@ class ReportViewController: UIViewController, UITextFieldDelegate {
         
         let alert = UIAlertController(title: "Denuncia recebida", message: "Vamos analisar em até 24 horas e se necessário interviremos na publicação", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { action in
+        
+            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
+            viewController?.dismiss(animated: true, completion: nil)
             
-            //aqui ta voltando até o login, e eu queria voltar só até o feed.
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }

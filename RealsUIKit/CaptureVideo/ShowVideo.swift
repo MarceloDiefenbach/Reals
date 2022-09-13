@@ -46,7 +46,6 @@ class VideoPlayback: UIViewController {
                                                name: .AVPlayerItemDidPlayToEndTime,
                                                object: avPlayer.currentItem)
         
-//        upload()
     }
     @objc func playerItemDidReachEnd(notification: Notification) {
         if let playerItem = notification.object as? AVPlayerItem {
@@ -57,7 +56,9 @@ class VideoPlayback: UIViewController {
     
     func upload(){
         service.uploadVideo(urlVideo: videoURL, completionHandler: { (uploadFinish) in
-            print("executou o completion")
+            // esse codigo pega a ultima rootViewController do contexto e fecha tudo que ta aberto por cima
+            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
+            viewController?.dismiss(animated: true, completion: nil)
         })
     }
 }

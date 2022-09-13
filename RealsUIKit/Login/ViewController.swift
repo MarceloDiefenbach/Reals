@@ -14,6 +14,7 @@ import FirebaseAuth
 class ViewController: UIViewController {
     
     let firebaseAuth = Auth.auth()
+    var service = ServiceFirebase()
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -23,6 +24,7 @@ class ViewController: UIViewController {
         doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
             print(self.firebaseAuth.currentUser?.email)
             print(completionReturn)
+            self.saveOnUserDefaults()
         })
     }
     
@@ -58,6 +60,15 @@ class ViewController: UIViewController {
 
         }
         completionHandler("teste")
+    }
+    
+    func saveOnUserDefaults() {
+        
+        service.getUserByEmail(email: emailField.text ?? "", completionHandler: { (response) in
+            print(response)
+            UserDefaults.standard.set(response, forKey: "username")
+        })
+        
     }
 }
 
