@@ -48,6 +48,8 @@ class FeedViewController: UIViewController {
             }
         }
         visibleIP = IndexPath.init(row: 0, section: 0)
+        
+//        self.service.uploadToDrive()
     }
     
     func playVideoOnTheCell(cell : VideoCellTableViewCell, indexPath : IndexPath){

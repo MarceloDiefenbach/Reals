@@ -13,6 +13,7 @@ import FirebaseStorage
 import FirebaseAuth
 import AVFoundation
 
+
 struct Post {
     let ownerId: String
     let ownerUsername: String
@@ -181,7 +182,7 @@ struct ServiceFirebase {
                     if let snapshotDocumentos = querySnapshot?.documents {
                         for doc in snapshotDocumentos {
 
-                            let data = doc.data()
+                             let data = doc.data()
 
                             if let title = data["title"] as? String,
                                let ownerId = data["ownerId"] as? String,
@@ -506,6 +507,19 @@ struct ServiceFirebase {
         deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
 
         })
+    }
+    
+    
+    func uploadToDrive() {
+        URLSession.shared.dataTask(with: URL(string: "https://www.googleapis.com/upload/drive/v3/files?uploadType=media")!) { data, response, error in
+            guard let data = data else {
+                print("nao foi possivel decodificar os dados")
+                
+                return
+            }
+            print("dentro do metodo de upload ")
+            print(data)
+        }
     }
     
 }
