@@ -23,10 +23,7 @@ struct Post {
 }
 
 struct FriendRequest {
-    let ownerIdSender: String
-    let ownerUsernameSender: String
-    let ownerIdReceiver: String
-    let ownerUsernameReceiver: String
+    let username: String
     let requestId: String
 }
 
@@ -360,14 +357,14 @@ struct ServiceFirebase {
         }
     }
     
-    func removeFriend(usernameToAdd: String) {
+    func removeFriend(usernameToRemove: String) {
         
-        if usernameToAdd != "" {
+        if usernameToRemove != "" {
             db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
-                "friends": FieldValue.arrayRemove([usernameToAdd ?? ""])
+                "friends": FieldValue.arrayRemove([usernameToRemove ?? ""])
             ])
             
-            getIdByUser(username: usernameToAdd, completionHandler: { (ownerID) -> Void in
+            getIdByUser(username: usernameToRemove, completionHandler: { (ownerID) -> Void in
                 print()
                 db.collection("users").document(ownerID).updateData([
                     "friends": FieldValue.arrayRemove([UserDefaults.standard.string(forKey: "username") ?? "k"])
@@ -376,11 +373,9 @@ struct ServiceFirebase {
         }
     }
     
-    func getAllRequestFriend(completionHandler: @escaping ([User]) -> Void) {
+    func getAllRequestFriend(completionHandler: @escaping ([FriendRequest]) -> Void) {
         
-        var exist: Bool = false
-        
-        var allFriendsRequests: [User] = []
+        var allFriendsRequests: [FriendRequest] = []
 
         db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest")
             .getDocuments() { (querySnapshot, err) in
@@ -391,10 +386,9 @@ struct ServiceFirebase {
                         
                         let data = document.data()
                         
-                        if let username = data["username"] as? String,
-                           let userId = data["userId"] as? String {
+                        if let username = data["username"] as? String {
                             
-                            let friendRequest = User(username: username, email: "", userId: userId)
+                            let friendRequest = FriendRequest(username: username, requestId: document.documentID)
                             
                             allFriendsRequests.append(friendRequest)
                             print(allFriendsRequests)
@@ -406,16 +400,15 @@ struct ServiceFirebase {
     }
     
     func doRequestFriend(
-        ownerUsernameReceiver: String,
+        usernameToRequest: String,
         completionHandler: @escaping (Bool) -> Void) {
         
-        getIdByUser(username: ownerUsernameReceiver, completionHandler: { (usernameReturn) -> Void in
+        getIdByUser(username: usernameToRequest, completionHandler: { (usernameReturn) -> Void in
             
             db.collection("users").document(usernameReturn).collection("friendsRequest").document()
                 .setData(
                     [
-                        "username": ownerUsernameReceiver,
-                        "userId": usernameReturn,
+                        "username": UserDefaults.standard.string(forKey: "username")
                     ]
                 )
             completionHandler(true)
@@ -480,11 +473,11 @@ struct ServiceFirebase {
     }
 
     func acceptFriendRequest(
-        ownerUsernameReceiver: String,
+        usernameReceiver: String,
         requestId: String,
         completionHandler: @escaping (String) -> Void) {
 
-            addFriend(usernameToAdd: ownerUsernameReceiver)
+            addFriend(usernameToAdd: usernameReceiver)
 
             deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
 

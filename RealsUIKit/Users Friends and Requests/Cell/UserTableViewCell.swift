@@ -11,6 +11,7 @@ class UserTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    var delegate: DelegateUserRequests!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +23,8 @@ class UserTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    @IBAction func addFriendButton(_ sender: Any) {
+        delegate.addFriend(usernameToAdd: nameLabel.text ?? "")
+    }
+    
 }

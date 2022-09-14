@@ -33,6 +33,8 @@
 		DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F128CCF36300830B36 /* ProfileViewController.swift */; };
 		DFDD00F428CCF36E00830B36 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDD00F328CCF36E00830B36 /* Profile.storyboard */; };
 		DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F528CD125900830B36 /* ReportViewController.swift */; };
+		DFDF7FE228D20B8E007DD713 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE128D20B8E007DD713 /* http.swift */; };
+		DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */; };
 		DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3828D1602600156053 /* FriendTableViewCell.swift */; };
 		DFF96A3B28D1617B00156053 /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3A28D1617B00156053 /* RequestTableViewCell.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
@@ -69,6 +71,8 @@
 		DFDD00F128CCF36300830B36 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DFDD00F328CCF36E00830B36 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		DFDD00F528CD125900830B36 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		DFDF7FE128D20B8E007DD713 /* http.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = http.swift; sourceTree = "<group>"; };
+		DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateUserRequests.swift; sourceTree = "<group>"; };
 		DFF96A3828D1602600156053 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		DFF96A3A28D1617B00156053 /* RequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */,
+				DFDF7FE128D20B8E007DD713 /* http.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				DF05668928CECB3500670911 /* UserTableViewCell.swift */,
 				DFF96A3828D1602600156053 /* FriendTableViewCell.swift */,
 				DFF96A3A28D1617B00156053 /* RequestTableViewCell.swift */,
+				DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 			files = (
 				DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */,
 				DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */,
+				DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */,
 				DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */,
 				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
 				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
@@ -387,6 +394,7 @@
 				DFF96A3B28D1617B00156053 /* RequestTableViewCell.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,
+				DFDF7FE228D20B8E007DD713 /* http.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,26 +540,29 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Reals;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Used to capture Reals";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to record a Real";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -564,26 +575,29 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Reals;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Used to capture Reals";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to record a Real";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

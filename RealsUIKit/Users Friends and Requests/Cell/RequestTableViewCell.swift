@@ -11,6 +11,8 @@ class RequestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    var delegate: DelegateUserRequests!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

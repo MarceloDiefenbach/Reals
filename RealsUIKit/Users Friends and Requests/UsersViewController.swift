@@ -13,14 +13,13 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var service = ServiceFirebase()
     var contentShowInList: [User] = []
     var users: [User] = []
-    var userRequests: [User] = []
+    var friendRequests: [FriendRequest] = []
+    var userRequests: [FriendRequest] = []
     var friends: [User] = []
     let searchController = UISearchController(searchResultsController: nil)
     var filteredUsers: [User] = []
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
-
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -46,26 +45,21 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func actionBlockedToggle(_ sender: UISegmentedControl) {
         
         if segmentedControl.selectedSegmentIndex == 0 {
-            
             self.contentShowInList = self.users
-            
         } else if segmentedControl.selectedSegmentIndex == 1 {
-            
             self.contentShowInList = self.friends
-            
         } else {
-            
-            self.contentShowInList = self.userRequests
-            
+            self.friendRequests = self.userRequests
         }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            
-        }
+        updateTableView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contentShowInList.count
+        if segmentedControl.selectedSegmentIndex == 2 {
+            return friendRequests.count
+        } else {
+            return contentShowInList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,42 +68,37 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUser") as! UserTableViewCell
             
             cell.nameLabel.text = contentShowInList[indexPath.row].username
-            
+            cell.delegate = self
             return cell
+            
         } else if segmentedControl.selectedSegmentIndex == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellFriend") as! FriendTableViewCell
             
             cell.nameLabel.text = contentShowInList[indexPath.row].username
-            
+            cell.delegate = self
             return cell
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellRequest") as! RequestTableViewCell
             
-            cell.nameLabel.text = contentShowInList[indexPath.row].username
-            
+            cell.nameLabel.text = friendRequests[indexPath.row].username
+            cell.delegate = self
             return cell
+            
         }
     }
     
     func updateTableViewData() {
-        service.getAllUsersWithoutFriends(completionHandler: { (users) in
-            self.users = users
-            self.contentShowInList = users
-        })
-        
-        service.getAllRequestFriend(completionHandler: { (userRequest) in
-            self.userRequests = userRequest
-        })
-        
-        service.getAllFriends(completionHandler: { (friends) in
-            self.friends = friends
-        })
-        
+        getAllUsers()
+        getAllRequests()
+        getAllFriends()
+        updateTableView()
+    }
+    
+    func updateTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
-        
     }
 }
 
@@ -128,7 +117,48 @@ extension UsersViewController: UISearchResultsUpdating {
         filteredUsers = users.filter { (user: User) -> Bool in
         return user.username.lowercased().contains(searchText.lowercased())
       }
-      
-      tableView.reloadData()
+      updateTableView()
+    }
+}
+
+extension UsersViewController: DelegateUserRequests {
+    
+    func getAllUsers() {
+        service.getAllUsersWithoutFriends(completionHandler: { (users) in
+            self.users = users
+            self.contentShowInList = users
+        })
+        self.updateTableView()
+    }
+    
+    func getAllRequests() {
+        service.getAllRequestFriend(completionHandler: { (userRequest) in
+            self.friendRequests = userRequest
+        })
+        self.updateTableView()
+    }
+    
+    func getAllFriends() {
+        service.getAllFriends(completionHandler: { (friends) in
+            self.friends = friends
+
+        })
+        self.updateTableView()
+    }
+    
+    func addFriend(usernameToAdd: String) {
+        service.doRequestFriend(usernameToRequest: usernameToAdd, completionHandler: { (callback) in
+            //do something
+        })
+        getAllUsers()
+    }
+    
+    func removeFriend(usernameToRemove: String) {
+        service.removeFriend(usernameToRemove: usernameToRemove)
+        getAllUsers()
+    }
+    
+    func acceptFriendRequest() {
+        
     }
 }

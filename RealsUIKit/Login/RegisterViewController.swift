@@ -65,9 +65,10 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameField.text = "PohMarcelo"
-        emailField.text = "lelod15@gmail.com"
-        passwordField.text = "lelo318318"
+        usernameField.text = ""
+        emailField.text = ""
+        passwordField.text = ""
+        passwordField.isSecureTextEntry = true
         
     }
     

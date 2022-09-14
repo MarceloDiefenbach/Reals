@@ -39,6 +39,9 @@
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="filled" title="Adicionar"/>
+                                                    <connections>
+                                                        <action selector="addFriendButton:" destination="KOF-rU-2PB" eventType="touchUpInside" id="IIR-xK-qi5"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -79,6 +82,9 @@
                                                         <color key="baseForegroundColor" systemColor="systemRedColor"/>
                                                         <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="addFriendButton:" destination="tM4-am-xTP" eventType="touchUpInside" id="efr-Sx-Big"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -92,7 +98,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addButton" destination="cM2-Mn-0fg" id="aMv-0H-psp"/>
+                                            <outlet property="addButton" destination="cM2-Mn-0fg" id="lMR-GK-dOA"/>
                                             <outlet property="nameLabel" destination="gMU-OB-3O5" id="SQX-81-Plx"/>
                                         </connections>
                                     </tableViewCell>

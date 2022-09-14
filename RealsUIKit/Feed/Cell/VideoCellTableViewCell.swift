@@ -65,7 +65,7 @@ class VideoCellTableViewCell: UITableViewCell {
         _ = Calendar.current
         let day = Calendar.current.component(.day, from: date)
         
-        if UserDefaults.standard.integer(forKey: "alreadyPost") == day {
+        if UserDefaults.standard.integer(forKey: "alreadyPost") != day {
             opacityLayer.layer.opacity = 0
             createRealsButton.isHidden = true
         } else {
