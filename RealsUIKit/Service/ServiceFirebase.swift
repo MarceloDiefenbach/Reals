@@ -13,27 +13,14 @@ import FirebaseStorage
 import FirebaseAuth
 import AVFoundation
 
-
-struct Post {
-    let ownerId: String
-    let ownerUsername: String
-    let photo: String
-    let title: String
-    let postUid: String
-}
-
 struct FriendRequest {
     let username: String
     let requestId: String
 }
 
-struct User {
-    let username: String
-    let email: String
-    let userId: String
-}
-
 struct ServiceFirebase {
+    
+    var serviceSocial = ServiceSocial()
     
     #warning("se precisar de ajuda, falar com a gabi")
     // separar os serviços por tipo em arquivos diferentes
@@ -41,97 +28,7 @@ struct ServiceFirebase {
     
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
-    
-    func getAllUsers(completionHandler: @escaping ([User]) -> Void) {
-        
-        var allUsers: [User] = []
-        
-        db.collection("users").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                
-                if let snapshotDocumentos = querySnapshot?.documents {
-                    for doc in snapshotDocumentos {
-                        
-                        let data = doc.data()
-                        
-                        if let username = data["username"] as? String,
-                           let email = data["email"] as? String {
-                            
-                            let user = User(username: username, email: email, userId: doc.documentID)
-                            
-                            allUsers.append(user)
-                        }
-                    }
-                    completionHandler(allUsers)
-                }
-            }
-        }
-    }
-    
-    //MARK: - getAllFriends: get only username of friends
-    func getAllFriends(completionHandler: @escaping ([User]) -> Void) {
-        
-        var allFriends: [User] = []
-        
-        db.collection("users").document(firebaseAuth.currentUser!.uid).getDocument() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                
-                if let data = querySnapshot?.data() {
-                    let friends = data["friends"] as? [String] ?? []
-                    
-                    for friend in friends {
-                        let user = User(username: friend, email: "", userId: "")
-                        if user.username != UserDefaults.standard.string(forKey: "username") {
-                            allFriends.append(user)
-                        }
-                    }
-                    completionHandler(allFriends)
-                }
-            }
-        }
-    }
-    
-    func getAllUsersWithoutFriends(completionHandler: @escaping ([User]) -> Void) {
-            
-        getAllFriends(completionHandler: { (response) in
-            
-            var allUsersWithoutFriends: [User] = []
-            
-            db.collection("users").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    
-                    if let snapshotDocumentos = querySnapshot?.documents {
-                        for doc in snapshotDocumentos {
-                            
-                            let data = doc.data()
-                            
-                            if let username = data["username"] as? String,
-                               let email = data["email"] as? String,
-                               let userId = doc.documentID as? String {
-                                
-                                if username != UserDefaults.standard.string(forKey: "username") {
-                                    if !response.contains(where: { $0.username == username }) {
-                                        allUsersWithoutFriends.append(User(username: username, email: email, userId: userId))
-                                    }
-                                }
-                                print(allUsersWithoutFriends)
-                            }
-                        }
-                        completionHandler(allUsersWithoutFriends)
-                    }
-                }
-            }
-            
-        })
-        
-    }
-    
+
     func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
         
         var posts: [Post] = []
@@ -166,7 +63,7 @@ struct ServiceFirebase {
         
         var friendsUsername: [String] = []
         
-        getAllFriends(completionHandler: { (friends) in
+        serviceSocial.getUsersFollowing(completionHandler: { (friends) in
             
             friendsUsername = friends.map( { $0.username } )
             friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")

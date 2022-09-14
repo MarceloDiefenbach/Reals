@@ -24,7 +24,7 @@ class UserTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func addFriendButton(_ sender: Any) {
-        delegate.addFriend(usernameToAdd: nameLabel.text ?? "")
+        delegate.followSomeone(usernameToFollow: nameLabel.text ?? "")
     }
     
 }

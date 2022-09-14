@@ -25,6 +25,9 @@
 		DF7B6D0228CA91680082A4B0 /* CaptureVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0128CA91680082A4B0 /* CaptureVideo.swift */; };
 		DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */; };
 		DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */; };
+		DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */; };
+		DFB75F7228D29590000D5B5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7128D29590000D5B5F /* User.swift */; };
+		DFB75F7428D295A7000D5B5F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7328D295A7000D5B5F /* Post.swift */; };
 		DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */; };
 		DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCDCC5528D0B8AA0089DAB8 /* ScanViewController.swift */; };
 		DFCDCC5928D0B9AE0089DAB8 /* Scan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */; };
@@ -63,6 +66,9 @@
 		DF7B6D0128CA91680082A4B0 /* CaptureVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideo.swift; sourceTree = "<group>"; };
 		DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CaptureVideo.storyboard; sourceTree = "<group>"; };
 		DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
+		DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSocial.swift; sourceTree = "<group>"; };
+		DFB75F7128D29590000D5B5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DFB75F7328D295A7000D5B5F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DFCDCC5528D0B8AA0089DAB8 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Scan.storyboard; sourceTree = "<group>"; };
@@ -147,6 +153,7 @@
 		DF219F3528CA0A9A0038E47C /* RealsUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				DFB75F7028D29585000D5B5F /* Model */,
 				DF05667F28CE617B00670911 /* LottieFiles */,
 				DF3B927028CA203700162F1E /* Extensions */,
 				DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */,
@@ -170,6 +177,7 @@
 			children = (
 				DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */,
 				DFDF7FE128D20B8E007DD713 /* http.swift */,
+				DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -210,6 +218,15 @@
 				DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */,
 			);
 			path = CaptureVideo;
+			sourceTree = "<group>";
+		};
+		DFB75F7028D29585000D5B5F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DFB75F7128D29590000D5B5F /* User.swift */,
+				DFB75F7328D295A7000D5B5F /* Post.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DFCDCC5728D0B99C0089DAB8 /* QRCode */ = {
@@ -377,11 +394,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */,
+				DFB75F7428D295A7000D5B5F /* Post.swift in Sources */,
 				DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */,
 				DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */,
 				DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */,
 				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
 				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
+				DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,
 				DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */,
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
@@ -395,6 +414,7 @@
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,
 				DFDF7FE228D20B8E007DD713 /* http.swift in Sources */,
+				DFB75F7228D29590000D5B5F /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

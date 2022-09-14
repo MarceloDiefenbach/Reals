@@ -10,12 +10,12 @@ import UIKit
 
 class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var serviceSocial = ServiceSocial()
     var service = ServiceFirebase()
+    
     var contentShowInList: [User] = []
     var users: [User] = []
-    var friendRequests: [FriendRequest] = []
-    var userRequests: [FriendRequest] = []
-    var friends: [User] = []
+    var following: [User] = []
     let searchController = UISearchController(searchResultsController: nil)
     var filteredUsers: [User] = []
     
@@ -27,7 +27,6 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         tableView.delegate = self
         tableView.dataSource = self
-        
 
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -38,28 +37,20 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         updateTableViewData()
         
         segmentedControl.setTitle("Usuários", forSegmentAt: 0)
-        segmentedControl.setTitle("Amigos", forSegmentAt: 1)
-        segmentedControl.setTitle("Solicitações", forSegmentAt: 2)
+        segmentedControl.setTitle("Seguindo", forSegmentAt: 1)
     }
     
     @IBAction func actionBlockedToggle(_ sender: UISegmentedControl) {
         
         if segmentedControl.selectedSegmentIndex == 0 {
-            self.contentShowInList = self.users
-        } else if segmentedControl.selectedSegmentIndex == 1 {
-            self.contentShowInList = self.friends
+            self.getAllUsersWithoutFriends()
         } else {
-            self.friendRequests = self.userRequests
+            self.getAllFollowing()
         }
-        updateTableView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if segmentedControl.selectedSegmentIndex == 2 {
-            return friendRequests.count
-        } else {
             return contentShowInList.count
-        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,17 +62,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.delegate = self
             return cell
             
-        } else if segmentedControl.selectedSegmentIndex == 1 {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellFriend") as! FriendTableViewCell
             
             cell.nameLabel.text = contentShowInList[indexPath.row].username
-            cell.delegate = self
-            return cell
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellRequest") as! RequestTableViewCell
-            
-            cell.nameLabel.text = friendRequests[indexPath.row].username
             cell.delegate = self
             return cell
             
@@ -89,9 +73,8 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func updateTableViewData() {
-        getAllUsers()
-        getAllRequests()
-        getAllFriends()
+        getAllUsersWithoutFriends()
+        getAllFollowing()
         updateTableView()
     }
     
@@ -121,44 +104,37 @@ extension UsersViewController: UISearchResultsUpdating {
     }
 }
 
-extension UsersViewController: DelegateUserRequests {
-    
-    func getAllUsers() {
-        service.getAllUsersWithoutFriends(completionHandler: { (users) in
+//MARK: - functions
+extension UsersViewController {
+    func getAllUsersWithoutFriends() {
+        serviceSocial.getAllUsersWithoutFriends(completionHandler: { (users) in
             self.users = users
             self.contentShowInList = users
+            self.updateTableView()
         })
-        self.updateTableView()
     }
     
-    func getAllRequests() {
-        service.getAllRequestFriend(completionHandler: { (userRequest) in
-            self.friendRequests = userRequest
+    func getAllFollowing() {
+        serviceSocial.getUsersFollowing(completionHandler: { (following) in
+            self.following = following
+            self.contentShowInList = following
+            self.updateTableView()
         })
-        self.updateTableView()
     }
-    
-    func getAllFriends() {
-        service.getAllFriends(completionHandler: { (friends) in
-            self.friends = friends
+}
 
+//MARK: - delegat of cells
+extension UsersViewController: DelegateUserRequests {
+    
+    func followSomeone(usernameToFollow: String) {
+        serviceSocial.followSomeone(usernameToFollow: usernameToFollow, completionHandler: { (repsonse) in
         })
-        self.updateTableView()
+        self.getAllUsersWithoutFriends()
     }
     
-    func addFriend(usernameToAdd: String) {
-        service.doRequestFriend(usernameToRequest: usernameToAdd, completionHandler: { (callback) in
-            //do something
+    func unfollowSomeone(usernameToUnfollow: String) {
+        serviceSocial.unfollowSomeone(usernameToUnfollow: usernameToUnfollow, completionHandler: { (repsonse) in
         })
-        getAllUsers()
-    }
-    
-    func removeFriend(usernameToRemove: String) {
-        service.removeFriend(usernameToRemove: usernameToRemove)
-        getAllUsers()
-    }
-    
-    func acceptFriendRequest() {
-        
+        self.getAllFollowing()
     }
 }

@@ -25,7 +25,7 @@ class FriendTableViewCell: UITableViewCell {
     }
     
     @IBAction func addFriendButton(_ sender: Any) {
-        delegate.removeFriend(usernameToRemove: nameLabel.text ?? "")
+        delegate.unfollowSomeone(usernameToUnfollow: nameLabel.text ?? "")
     }
 
 }
