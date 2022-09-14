@@ -104,6 +104,10 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
 }
 
 extension FeedViewController: MyCustomCellDelegator {
+    func createReals() {
+        performSegue(withIdentifier: "goToCapture", sender: nil)
+    }
+    
     func callSegueFromCell(ownerUsername: String, postUid: String, ownerId: String, photo: String) {
         self.ownerId = ownerId
         self.ownerUsername = ownerUsername
@@ -112,4 +116,6 @@ extension FeedViewController: MyCustomCellDelegator {
         
         performSegue(withIdentifier: "goToReport", sender: nil)
     }
+    
+    
 }

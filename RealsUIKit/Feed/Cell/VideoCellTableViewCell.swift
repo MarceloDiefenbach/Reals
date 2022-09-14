@@ -3,6 +3,8 @@ import AVFoundation
 
 protocol MyCustomCellDelegator: AnyObject {
     func callSegueFromCell(ownerUsername: String, postUid: String, ownerId: String, photo: String)
+    
+    func createReals()
 }
 
 class VideoCellTableViewCell: UITableViewCell {
@@ -12,6 +14,7 @@ class VideoCellTableViewCell: UITableViewCell {
     var avPlayerLayer: AVPlayerLayer?
     var paused: Bool = false
     var delegate: MyCustomCellDelegator!
+    @IBOutlet weak var opacityLayer: UIView!
     
     var post: Post?
 
@@ -21,8 +24,13 @@ class VideoCellTableViewCell: UITableViewCell {
     @IBOutlet weak var blackMaskImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var createRealsButton: UIButton!
     
     //MARK: - actions
+    
+    @IBAction func createReals(_ sender: Any) {
+        self.delegate.createReals()
+    }
     
     @IBAction func reportButton(_ sender: Any) {
         if(self.delegate != nil){ //Just to be safe.
@@ -49,6 +57,21 @@ class VideoCellTableViewCell: UITableViewCell {
         self.setupMoviePlayer()
         
         blackMaskImage.layer.cornerRadius = 16
+        
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        _ = format.string(from: date)
+        _ = Calendar.current
+        let day = Calendar.current.component(.day, from: date)
+        
+        if UserDefaults.standard.integer(forKey: "alreadyPost") == day {
+            opacityLayer.layer.opacity = 0
+            createRealsButton.isHidden = true
+        } else {
+            opacityLayer.layer.opacity = 0.85
+            createRealsButton.isHidden = false
+        }
     }
 
     func setupMoviePlayer(){
