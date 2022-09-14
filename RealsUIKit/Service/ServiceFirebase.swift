@@ -376,11 +376,11 @@ struct ServiceFirebase {
         }
     }
     
-    func getAllRequestFriend(completionHandler: @escaping ([FriendRequest]) -> Void) {
+    func getAllRequestFriend(completionHandler: @escaping ([User]) -> Void) {
         
         var exist: Bool = false
         
-        var allFriendsRequests: [FriendRequest] = []
+        var allFriendsRequests: [User] = []
 
         db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest")
             .getDocuments() { (querySnapshot, err) in
@@ -391,19 +391,10 @@ struct ServiceFirebase {
                         
                         let data = document.data()
                         
-                        if let ownerIdSender = data["ownerIdSender"] as? String,
-                           let ownerUsernameSender = data["ownerUsernameSender"] as? String,
-                           let ownerIdReceiver = data["ownerIdReceiver"] as? String,
-                           let ownerUsernameReceiver = data["ownerUsernameReceiver"] as? String,
-                           let requestId = document.documentID as?String {
+                        if let username = data["username"] as? String,
+                           let userId = data["userId"] as? String {
                             
-                            let friendRequest = FriendRequest(
-                                ownerIdSender: ownerIdSender,
-                                ownerUsernameSender: ownerUsernameSender,
-                                ownerIdReceiver: ownerIdReceiver,
-                                ownerUsernameReceiver: ownerUsernameReceiver,
-                                requestId: requestId
-                            )
+                            let friendRequest = User(username: username, email: "", userId: userId)
                             
                             allFriendsRequests.append(friendRequest)
                             print(allFriendsRequests)
@@ -423,10 +414,8 @@ struct ServiceFirebase {
             db.collection("users").document(usernameReturn).collection("friendsRequest").document()
                 .setData(
                     [
-                        "ownerIdSender": firebaseAuth.currentUser?.uid,
-                        "ownerUsernameSender": UserDefaults.standard.string(forKey: "username"),
-                        "ownerIdReceiver": usernameReturn,
-                        "ownerUsernameReceiver": ownerUsernameReceiver
+                        "username": ownerUsernameReceiver,
+                        "userId": usernameReturn,
                     ]
                 )
             completionHandler(true)

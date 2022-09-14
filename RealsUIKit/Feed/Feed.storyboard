@@ -214,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="1860.8695652173915" y="-281.25"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--Profile-->
         <scene sceneID="D3H-u0-2My">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="profile" id="v2O-Uf-IeC" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="profile" storyboardName="Profile" id="v2O-Uf-IeC" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Tr2-yX-Rvd"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaI-gx-kH5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

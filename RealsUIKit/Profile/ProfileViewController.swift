@@ -19,10 +19,6 @@ class ProfileViewController: UIViewController {
     //MARK: - outlets
     
     //MARK: - actions
-    @IBAction func addFriendButton(_ sender: Any) {
-        
-    }
-    
     @IBAction func deleteAccount(_ sender: Any) {
         deleteUser()
     }
@@ -63,22 +59,19 @@ extension ProfileViewController {
                 if let err = err {
                     print("Error removing document: \(err)")
                 } else {
-                    print("Document successfully removed!")
+                    
+                    do {
+                        try self.firebaseAuth.signOut()
+                        
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
                 }
             }
-            
-            do {
-                try self.firebaseAuth.signOut()
-                
-                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                
-            } catch let signOutError as NSError {
-                print("Error signing out: %@", signOutError)
-            }
-            
         }))
         alert.addAction(UIAlertAction(title: "Não apagar", style: .default, handler: { action in
-            
         }))
         self.present(alert, animated: true, completion: nil)
     }
