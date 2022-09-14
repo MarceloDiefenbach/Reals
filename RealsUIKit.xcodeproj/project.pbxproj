@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF05668328CE634500670911 /* recording.json in Resources */ = {isa = PBXBuildFile; fileRef = DF05668228CE634500670911 /* recording.json */; };
+		DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668428CEBC6A00670911 /* UsersViewController.swift */; };
+		DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF05668728CEC0AE00670911 /* Friends.storyboard */; };
+		DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668928CECB3500670911 /* UserTableViewCell.swift */; };
 		DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3628CA0A9A0038E47C /* AppDelegate.swift */; };
 		DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */; };
 		DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3A28CA0A9A0038E47C /* ViewController.swift */; };
@@ -14,7 +18,6 @@
 		DF219F4028CA0A9B0038E47C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF219F3F28CA0A9B0038E47C /* Assets.xcassets */; };
 		DF219F4328CA0A9B0038E47C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F4128CA0A9B0038E47C /* LaunchScreen.storyboard */; };
 		DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */; };
-		DF219F5128CA0BAE0038E47C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5028CA0BAE0038E47C /* PostTableViewCell.swift */; };
 		DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F5228CA0BC80038E47C /* Feed.storyboard */; };
 		DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5428CA0BD50038E47C /* FeedViewController.swift */; };
 		DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927128CA2E4200162F1E /* PlayerView.swift */; };
@@ -23,14 +26,23 @@
 		DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */; };
 		DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */; };
 		DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */; };
+		DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCDCC5528D0B8AA0089DAB8 /* ScanViewController.swift */; };
+		DFCDCC5928D0B9AE0089DAB8 /* Scan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */; };
 		DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */; };
 		DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */; };
+		DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F128CCF36300830B36 /* ProfileViewController.swift */; };
+		DFDD00F428CCF36E00830B36 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDD00F328CCF36E00830B36 /* Profile.storyboard */; };
+		DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F528CD125900830B36 /* ReportViewController.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		11ECBFC9ED00B60B12D59871 /* Pods-RealsUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.debug.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealsUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF05668228CE634500670911 /* recording.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recording.json; sourceTree = "<group>"; };
+		DF05668428CEBC6A00670911 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		DF05668728CEC0AE00670911 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
+		DF05668928CECB3500670911 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		DF219F3328CA0A9A0038E47C /* RealsUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealsUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF219F3628CA0A9A0038E47C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,7 +52,6 @@
 		DF219F4228CA0A9B0038E47C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF219F4428CA0A9B0038E47C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFirebase.swift; sourceTree = "<group>"; };
-		DF219F5028CA0BAE0038E47C /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DF219F5228CA0BC80038E47C /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		DF219F5428CA0BD50038E47C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		DF3B927128CA2E4200162F1E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -49,8 +60,13 @@
 		DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CaptureVideo.storyboard; sourceTree = "<group>"; };
 		DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
 		DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DFCDCC5528D0B8AA0089DAB8 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Scan.storyboard; sourceTree = "<group>"; };
 		DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowVideo.storyboard; sourceTree = "<group>"; };
 		DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		DFDD00F128CCF36300830B36 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DFDD00F328CCF36E00830B36 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		DFDD00F528CD125900830B36 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +99,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DF05667F28CE617B00670911 /* LottieFiles */ = {
+			isa = PBXGroup;
+			children = (
+				DF05668228CE634500670911 /* recording.json */,
+			);
+			path = LottieFiles;
+			sourceTree = "<group>";
+		};
+		DF05668628CEC09F00670911 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				DFCDCC5728D0B99C0089DAB8 /* QRCode */,
+				DF05668428CEBC6A00670911 /* UsersViewController.swift */,
+				DF05668728CEC0AE00670911 /* Friends.storyboard */,
+				DF05668928CECB3500670911 /* UserTableViewCell.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
 		DF219F2A28CA0A9A0038E47C = {
 			isa = PBXGroup;
 			children = (
@@ -104,11 +139,13 @@
 		DF219F3528CA0A9A0038E47C /* RealsUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				DF05667F28CE617B00670911 /* LottieFiles */,
 				DF3B927028CA203700162F1E /* Extensions */,
 				DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */,
 				DF7B6D0028CA91570082A4B0 /* CaptureVideo */,
 				DF219F4A28CA0AC60038E47C /* Service */,
 				DF219F4E28CA0B9C0038E47C /* Feed */,
+				DFDD00F028CCF34300830B36 /* Profile */,
 				DFDD00E728CCD19700830B36 /* Login */,
 				DF219F3628CA0A9A0038E47C /* AppDelegate.swift */,
 				DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */,
@@ -131,8 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				DF219F4F28CA0BA10038E47C /* Cell */,
-				DF219F5228CA0BC80038E47C /* Feed.storyboard */,
 				DF219F5428CA0BD50038E47C /* FeedViewController.swift */,
+				DFDD00F528CD125900830B36 /* ReportViewController.swift */,
+				DF219F5228CA0BC80038E47C /* Feed.storyboard */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -140,7 +178,6 @@
 		DF219F4F28CA0BA10038E47C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				DF219F5028CA0BAE0038E47C /* PostTableViewCell.swift */,
 				DF3B927128CA2E4200162F1E /* PlayerView.swift */,
 				DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */,
 			);
@@ -165,6 +202,15 @@
 			path = CaptureVideo;
 			sourceTree = "<group>";
 		};
+		DFCDCC5728D0B99C0089DAB8 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				DFCDCC5528D0B8AA0089DAB8 /* ScanViewController.swift */,
+				DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		DFDD00E728CCD19700830B36 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +219,16 @@
 				DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		DFDD00F028CCF34300830B36 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DF05668628CEC09F00670911 /* Friends */,
+				DFDD00F128CCF36300830B36 /* ProfileViewController.swift */,
+				DFDD00F328CCF36E00830B36 /* Profile.storyboard */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,12 +293,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF05668328CE634500670911 /* recording.json in Resources */,
 				DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */,
 				DF219F4328CA0A9B0038E47C /* LaunchScreen.storyboard in Resources */,
+				DFDD00F428CCF36E00830B36 /* Profile.storyboard in Resources */,
 				DF219F4028CA0A9B0038E47C /* Assets.xcassets in Resources */,
 				DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */,
+				DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */,
 				DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */,
 				DF219F3E28CA0A9A0038E47C /* Main.storyboard in Resources */,
+				DFCDCC5928D0B9AE0089DAB8 /* Scan.storyboard in Resources */,
 				DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,12 +358,16 @@
 			files = (
 				DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */,
 				DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */,
+				DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */,
+				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
+				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,
 				DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */,
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
 				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
-				DF219F5128CA0BAE0038E47C /* PostTableViewCell.swift in Sources */,
+				DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,
+				DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */,
 				DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */,
 				DF7B6D0228CA91680082A4B0 /* CaptureVideo.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,
@@ -457,9 +521,12 @@
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Reals;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to capture Reals";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -467,11 +534,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.RealsUIKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -486,9 +553,12 @@
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Reals;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to capture Reals";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Feed;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -496,11 +566,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.RealsUIKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

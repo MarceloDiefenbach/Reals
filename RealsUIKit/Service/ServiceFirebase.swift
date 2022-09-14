@@ -10,17 +10,130 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 import AVFoundation
 
+
 struct Post {
-    let title: String
-    let owner: String
+    let ownerId: String
+    let ownerUsername: String
     let photo: String
+    let title: String
+    let postUid: String
+}
+
+struct FriendRequest {
+    let ownerIdSender: String
+    let ownerUsernameSender: String
+    let ownerIdReceiver: String
+    let ownerUsernameReceiver: String
+    let requestId: String
+}
+
+struct User {
+    let username: String
+    let email: String
+    let userId: String
 }
 
 struct ServiceFirebase {
     
+    #warning("se precisar de ajuda, falar com a gabi")
+    // separar os serviços por tipo em arquivos diferentes
+    // tem que ter um singleton que ai o serviço vai ser criado só uma vez
+    
     let db = Firestore.firestore()
+    let firebaseAuth = Auth.auth()
+    
+    func getAllUsers(completionHandler: @escaping ([User]) -> Void) {
+        
+        var allUsers: [User] = []
+        
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                if let snapshotDocumentos = querySnapshot?.documents {
+                    for doc in snapshotDocumentos {
+                        
+                        let data = doc.data()
+                        
+                        if let username = data["username"] as? String,
+                           let email = data["email"] as? String {
+                            
+                            let user = User(username: username, email: email, userId: doc.documentID)
+                            
+                            allUsers.append(user)
+                        }
+                    }
+                    completionHandler(allUsers)
+                }
+            }
+        }
+    }
+    
+    //MARK: - getAllFriends: get only username of friends
+    func getAllFriends(completionHandler: @escaping ([User]) -> Void) {
+        
+        var allFriends: [User] = []
+        
+        db.collection("users").document(firebaseAuth.currentUser!.uid).getDocument() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                if let data = querySnapshot?.data() {
+                    let friends = data["friends"] as? [String] ?? []
+                    
+                    for friend in friends {
+                        let user = User(username: friend, email: "", userId: "")
+                        if user.username != UserDefaults.standard.string(forKey: "username") {
+                            allFriends.append(user)
+                        }
+                    }
+                    completionHandler(allFriends)
+                }
+            }
+        }
+    }
+    
+    func getAllUsersWithoutFriends(completionHandler: @escaping ([User]) -> Void) {
+            
+        getAllFriends(completionHandler: { (response) in
+            
+            var allUsersWithoutFriends: [User] = []
+            
+            db.collection("users").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    
+                    if let snapshotDocumentos = querySnapshot?.documents {
+                        for doc in snapshotDocumentos {
+                            
+                            let data = doc.data()
+                            
+                            if let username = data["username"] as? String,
+                               let email = data["email"] as? String,
+                               let userId = doc.documentID as? String {
+                                
+                                if username != UserDefaults.standard.string(forKey: "username") {
+                                    if !response.contains(where: { $0.username == username }) {
+                                        allUsersWithoutFriends.append(User(username: username, email: email, userId: userId))
+                                    }
+                                }
+                                print(allUsersWithoutFriends)
+                            }
+                        }
+                        completionHandler(allUsersWithoutFriends)
+                    }
+                }
+            }
+            
+        })
+        
+    }
     
     func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
         
@@ -36,9 +149,9 @@ struct ServiceFirebase {
                         
                         let data = doc.data()
                         
-                        if let title = data["title"] as? String, let owner = data["ownerId"] as? String, let photo = data["photo"] as? String {
+                        if let title = data["title"] as? String, let ownerId = data["ownerId"] as? String, let photo = data["photo"] as? String, let ownerUsername = data["ownerUsername"] as? String {
                             
-                            let post = Post(title: title, owner: owner, photo: photo)
+                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
                             
                             posts.append(post)
                             print(post)
@@ -50,35 +163,114 @@ struct ServiceFirebase {
         }
     }
     
-    func getImageFromString (urlString: String, completionHandler: @escaping (UIImage) -> Void) {
-        guard let url = URL(string: urlString) else {return}
+    func getFriendsReals(completionHandler: @escaping ([Post]) -> Void) {
         
-        DispatchQueue.global(qos: .background).async {
-            guard let image = try? Data(contentsOf: url) else { return }
-            DispatchQueue.main.async {
-                completionHandler(UIImage(data: image)!)
+        var posts: [Post] = []
+        
+        var friendsUsername: [String] = []
+        
+        getAllFriends(completionHandler: { (friends) in
+            
+            friendsUsername = friends.map( { $0.username } )
+            friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")
+          
+            db.collection("posts").whereField("ownerUsername", in: friendsUsername).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+
+                    if let snapshotDocumentos = querySnapshot?.documents {
+                        for doc in snapshotDocumentos {
+
+                             let data = doc.data()
+
+                            if let title = data["title"] as? String,
+                               let ownerId = data["ownerId"] as? String,
+                               let photo = data["photo"] as? String,
+                               let ownerUsername = data["ownerUsername"] as? String {
+
+                                let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
+
+                                posts.append(post)
+                                print(post)
+                            }
+                        }
+                        completionHandler(posts)
+                    }
+                }
             }
+            
+        })
+    }
+    
+    func verifyIsExist(username: String, completionHandler: @escaping (Bool) -> Void) {
+        
+        var exist: Bool = false
+        
+        print(username)
+
+        db.collection("users").whereField("username", isEqualTo: username)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        if document.data()["username"] as! String == username {
+                            exist = true
+                        } else {
+                            exist = false
+                        }
+                        
+                    }
+                }
+                completionHandler(exist)
+        }
+
+    }
+    
+    func createReals(urlVideo: String){
+        
+        var ref: DocumentReference? = nil
+
+        ref = db.collection("posts").addDocument(data:
+            [
+                "ownerId": firebaseAuth.currentUser?.uid,
+                "ownerUsername": UserDefaults.standard.string(forKey: "username"),
+                "photo": urlVideo,
+                "title": "",
+                "date": Date.now,
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(ref!.documentID)")
+                }
         }
         
     }
     
-    func createReals(urlVideo: String, username: String){
+    func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
         
-        db.collection("posts").document().setData(
-            [
-                "ownerId": username,
-                "photo": urlVideo,
-                "title": "Teste Upload"
-            ]
-        )
-    }
-    
-    func uploadVideo(urlVideo: URL) {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let formattedDate = format.string(from: date)
+        print(formattedDate)
+
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
         
         let storageRef = Storage.storage().reference()
         
         // Create a reference to the file you want to upload
-        let riversRef = storageRef.child("images/video.mp4")
+        let riversRef = storageRef.child("videoReals/\(year)/\(month)/\(day)/\(String(describing: firebaseAuth.currentUser!.uid))-\(hour)-\(minute)-\(seconds).mp4")
         
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
@@ -100,7 +292,8 @@ struct ServiceFirebase {
                     // Uh-oh, an error occurred!
                     return
                 }
-                createReals(urlVideo: url?.description ?? "", username: "PohMarcelo")
+                print(url?.description)
+                createReals(urlVideo: url?.description ?? "")
             }
         }
         
@@ -121,6 +314,8 @@ struct ServiceFirebase {
         
         uploadTask.observe(.success) { snapshot in
             // Upload completed successfully
+            print("finalizou")
+            completionHandler(true)
         }
         
         uploadTask.observe(.failure) { snapshot in
@@ -148,4 +343,183 @@ struct ServiceFirebase {
             }
         }
     }
+    
+    func addFriend(usernameToAdd: String) {
+        
+        if usernameToAdd != "" {
+            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
+                "friends": FieldValue.arrayUnion([usernameToAdd ?? ""])
+            ])
+            
+            getIdByUser(username: usernameToAdd, completionHandler: { (ownerID) -> Void in
+                print()
+                db.collection("users").document(ownerID).updateData([
+                    "friends": FieldValue.arrayUnion([UserDefaults.standard.string(forKey: "username") ?? ""])
+                ])
+            })
+        }
+    }
+    
+    func removeFriend(usernameToAdd: String) {
+        
+        if usernameToAdd != "" {
+            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
+                "friends": FieldValue.arrayRemove([usernameToAdd ?? ""])
+            ])
+            
+            getIdByUser(username: usernameToAdd, completionHandler: { (ownerID) -> Void in
+                print()
+                db.collection("users").document(ownerID).updateData([
+                    "friends": FieldValue.arrayRemove([UserDefaults.standard.string(forKey: "username") ?? "k"])
+                ])
+            })
+        }
+    }
+    
+    func getAllRequestFriend(completionHandler: @escaping ([FriendRequest]) -> Void) {
+        
+        var exist: Bool = false
+        
+        var allFriendsRequests: [FriendRequest] = []
+
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest")
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        
+                        let data = document.data()
+                        
+                        if let ownerIdSender = data["ownerIdSender"] as? String,
+                           let ownerUsernameSender = data["ownerUsernameSender"] as? String,
+                           let ownerIdReceiver = data["ownerIdReceiver"] as? String,
+                           let ownerUsernameReceiver = data["ownerUsernameReceiver"] as? String,
+                           let requestId = document.documentID as?String {
+                            
+                            let friendRequest = FriendRequest(
+                                ownerIdSender: ownerIdSender,
+                                ownerUsernameSender: ownerUsernameSender,
+                                ownerIdReceiver: ownerIdReceiver,
+                                ownerUsernameReceiver: ownerUsernameReceiver,
+                                requestId: requestId
+                            )
+                            
+                            allFriendsRequests.append(friendRequest)
+                            print(allFriendsRequests)
+                    }
+                }
+                completionHandler(allFriendsRequests)
+            }
+        }
+    }
+    
+    func doRequestFriend(
+        ownerUsernameReceiver: String,
+        completionHandler: @escaping (Bool) -> Void) {
+        
+        getIdByUser(username: ownerUsernameReceiver, completionHandler: { (usernameReturn) -> Void in
+            
+            db.collection("users").document(usernameReturn).collection("friendsRequest").document()
+                .setData(
+                    [
+                        "ownerIdSender": firebaseAuth.currentUser?.uid,
+                        "ownerUsernameSender": UserDefaults.standard.string(forKey: "username"),
+                        "ownerIdReceiver": usernameReturn,
+                        "ownerUsernameReceiver": ownerUsernameReceiver
+                    ]
+                )
+            completionHandler(true)
+        })
+    }
+    
+    func deleteFriendRequest(requestId: String, completionHandler: @escaping (Bool) -> Void) {
+        
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest").document(requestId).delete(){ err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+            completionHandler(true)
+        }
+    }
+    
+    func getIdByUser(username: String, completionHandler: @escaping (String) -> Void) {
+        
+        var ownerIDReceiver: String = ""
+
+        db.collection("users").whereField("username", isEqualTo: username)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        print(document.documentID)
+                        ownerIDReceiver = document.documentID
+                        
+                    }
+                }
+                completionHandler(ownerIDReceiver)
+        }
+
+    }
+    
+    func getUserByEmail(email: String, completionHandler: @escaping (String) -> Void) {
+        
+      var ownerUsernameReceiver: String = ""
+
+        db.collection("users").whereField("email", isEqualTo: email)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        print(document.data()["username"] ?? "")
+                        
+                        ownerUsernameReceiver = document.data()["username"] as! String
+                        
+                    }
+                }
+                completionHandler(ownerUsernameReceiver)
+        }
+
+    }
+
+    func acceptFriendRequest(
+        ownerUsernameReceiver: String,
+        requestId: String,
+        completionHandler: @escaping (String) -> Void) {
+
+            addFriend(usernameToAdd: ownerUsernameReceiver)
+
+            deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
+
+            })
+
+    }
+    
+    func rejectFriendRequest(requestId: String) {
+        deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
+
+        })
+    }
+    
+    
+    func uploadToDrive() {
+        URLSession.shared.dataTask(with: URL(string: "https://www.googleapis.com/upload/drive/v3/files?uploadType=media")!) { data, response, error in
+            guard let data = data else {
+                print("nao foi possivel decodificar os dados")
+                
+                return
+            }
+            print("dentro do metodo de upload ")
+            print(data)
+        }
+    }
+    
 }

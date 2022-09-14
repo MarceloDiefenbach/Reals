@@ -11,5 +11,8 @@ target 'RealsUIKit' do
   pod 'FirebaseCore'
   pod 'FirebaseAuth'
   pod 'Firebase/Storage'
+  
+  # Pods for LottieAnimations
+  pod 'lottie-ios'
 
 end

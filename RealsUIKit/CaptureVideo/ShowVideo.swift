@@ -13,12 +13,18 @@ class VideoPlayback: UIViewController {
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
     var service = ServiceFirebase()
-
-
     var videoURL: URL!
-    //connect this to your uiview in storyboard
+    
     @IBOutlet weak var videoView: UIView!
 
+    @IBAction func publishRealButton(_ sender: Any) {
+        upload()
+    }
+    @IBAction func retakeReal(_ sender: Any) {
+        self.dismiss(animated: true, completion: {})
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,10 +39,26 @@ class VideoPlayback: UIViewController {
         avPlayer.replaceCurrentItem(with: playerItem)
     
         avPlayer.play()
-        upload()
+        avPlayer.actionAtItemEnd = .none
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playerItemDidReachEnd(notification:)),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: avPlayer.currentItem)
+        
+    }
+    @objc func playerItemDidReachEnd(notification: Notification) {
+        if let playerItem = notification.object as? AVPlayerItem {
+            playerItem.seek(to: CMTime.zero)
+
+        }
     }
     
     func upload(){
-        service.uploadVideo(urlVideo: videoURL)
+        service.uploadVideo(urlVideo: videoURL, completionHandler: { (uploadFinish) in
+            // esse codigo pega a ultima rootViewController do contexto e fecha tudo que ta aberto por cima
+            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
+            viewController?.dismiss(animated: true, completion: nil)
+        })
     }
 }
