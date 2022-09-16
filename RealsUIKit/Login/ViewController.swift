@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
     var serviceSocial = ServiceSocial()
+    var serviceUpload = ServiceUploadPanda()
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
         if firebaseAuth.currentUser?.email != nil {
             performSegue(withIdentifier: "goToFeed", sender: nil)
         }
+//        serviceUpload.uploadPandaVideo()
     }
     
     override func viewDidLoad() {
@@ -45,6 +47,8 @@ class ViewController: UIViewController {
         passwordField.text = ""
         passwordField.isSecureTextEntry = true
         requestPermissionToNotifications()
+        
+        
         
     }
     

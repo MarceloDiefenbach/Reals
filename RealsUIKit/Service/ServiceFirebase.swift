@@ -109,10 +109,12 @@ struct ServiceFirebase {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
+//                        print("\(document.documentID) => \(document.data())")
+                        let usernameData = document.data()["username"] as? String
 
-                        if document.data()["username"] as! String == username {
+                        if usernameData?.lowercased() == username.lowercased() {
                             exist = true
+                            break
                         } else {
                             exist = false
                         }
