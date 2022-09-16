@@ -12,6 +12,7 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     var delegate: DelegateUserRequests!
+    var control: Bool = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +25,10 @@ class UserTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func addFriendButton(_ sender: Any) {
-        delegate.followSomeone(usernameToFollow: nameLabel.text ?? "")
+        if control {
+            delegate.followSomeone(usernameToFollow: nameLabel.text ?? "")
+            control = false
+        }
     }
     
 }

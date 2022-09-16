@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="53P-Kf-mnP">
-                                <rect key="frame" x="0.0" y="483" width="414" height="413"/>
+                                <rect key="frame" x="0.0" y="103" width="414" height="793"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellUser" id="KOF-rU-2PB" customClass="UserTableViewCell" customModule="RealsUIKit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="63"/>
@@ -38,7 +38,7 @@
                                                         <constraint firstAttribute="width" constant="97" id="d1i-8W-ioW"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Adicionar"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title="Seguir"/>
                                                     <connections>
                                                         <action selector="addFriendButton:" destination="KOF-rU-2PB" eventType="touchUpInside" id="IIR-xK-qi5"/>
                                                     </connections>
@@ -83,7 +83,7 @@
                                                         <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
                                                     <connections>
-                                                        <action selector="addFriendButton:" destination="tM4-am-xTP" eventType="touchUpInside" id="efr-Sx-Big"/>
+                                                        <action selector="unfollowButton:" destination="tM4-am-xTP" eventType="touchUpInside" id="zSc-EK-t1D"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -98,7 +98,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addButton" destination="cM2-Mn-0fg" id="lMR-GK-dOA"/>
                                             <outlet property="nameLabel" destination="gMU-OB-3O5" id="SQX-81-Plx"/>
                                         </connections>
                                     </tableViewCell>
@@ -142,7 +141,7 @@
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lcF-dF-Vs4">
-                                <rect key="frame" x="20" y="444" width="374" height="32"/>
+                                <rect key="frame" x="20" y="64" width="374" height="32"/>
                                 <segments>
                                     <segment title="Geral"/>
                                     <segment title="Amigos"/>
@@ -157,7 +156,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="53P-Kf-mnP" secondAttribute="bottom" id="6bX-VX-9tc"/>
                             <constraint firstItem="lcF-dF-Vs4" firstAttribute="leading" secondItem="nMz-bP-gy9" secondAttribute="leading" constant="20" id="Ayf-vM-cry"/>
-                            <constraint firstItem="lcF-dF-Vs4" firstAttribute="top" secondItem="nMz-bP-gy9" secondAttribute="top" constant="400" id="CKc-Ei-jVo"/>
+                            <constraint firstItem="lcF-dF-Vs4" firstAttribute="top" secondItem="nMz-bP-gy9" secondAttribute="top" constant="20" id="CKc-Ei-jVo"/>
                             <constraint firstItem="53P-Kf-mnP" firstAttribute="top" secondItem="lcF-dF-Vs4" secondAttribute="bottom" constant="8" symbolic="YES" id="Fpk-jb-r1k"/>
                             <constraint firstItem="nMz-bP-gy9" firstAttribute="trailing" secondItem="lcF-dF-Vs4" secondAttribute="trailing" constant="20" id="ZuW-tH-VlI"/>
                             <constraint firstItem="53P-Kf-mnP" firstAttribute="leading" secondItem="nMz-bP-gy9" secondAttribute="leading" id="dmf-8e-GpY"/>

@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
+    var serviceSocial = ServiceSocial()
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!

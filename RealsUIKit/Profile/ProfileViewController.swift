@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
     let service = ServiceFirebase()
+    let serviceUpload = ServiceUpload()
     
     //MARK: - outlets
     
@@ -29,9 +30,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
 //        service.doRequestFriend(ownerUsernameReceiver: "PohMarcelo", completionHandler: { (receiver) in
-//
 //        })
 //        service.addFriend(usernameToAdd: "teste")
+//        serviceUpload.uploadPandaVideo()
     }
 }
 

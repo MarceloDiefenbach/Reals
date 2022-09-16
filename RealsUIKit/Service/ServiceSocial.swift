@@ -19,41 +19,42 @@ class ServiceSocial {
 
     func followSomeone(usernameToFollow: String, completionHandler: @escaping (Bool) -> Void) {
         
-        db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
-            "friends": FieldValue.arrayUnion([usernameToFollow])
-        ])
-        
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friends").addDocument(data: ["username" : usernameToFollow])
+        completionHandler(true)
     }
     
     func unfollowSomeone(usernameToUnfollow: String, completionHandler: @escaping (Bool) -> Void) {
         
-        db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
-            "friends": FieldValue.arrayRemove([usernameToUnfollow])
-        ])
-        
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friends").whereField("username", isEqualTo: usernameToUnfollow).getDocuments { (querySnapshot, error) in
+            if error != nil {
+                print(error)
+            } else {
+                for document in querySnapshot!.documents {
+                    document.reference.delete()
+                }
+            }
+        }
     }
     
     func getUsersFollowing(completionHandler: @escaping ([User]) -> Void ) {
         
         var allFollowing: [User] = []
         
-        db.collection("users").document(firebaseAuth.currentUser!.uid).getDocument() { (querySnapshot, err) in
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friends").getDocuments { querySnapshot, err in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                
-                if let data = querySnapshot?.data() {
-                    let friends = data["friends"] as? [String] ?? []
-                    
-                    for friend in friends {
-                        let user = User(username: friend, email: "", userId: "")
-                        if user.username != UserDefaults.standard.string(forKey: "username") {
-                            allFollowing.append(user)
-                        }
-                    }
-                    completionHandler(allFollowing)
+                for document in querySnapshot!.documents {
+                    allFollowing.append(
+                        User(
+                            username: document.data()["username"] as! String,
+                            email: "",
+                            userId: ""
+                        )
+                    )
                 }
             }
+            completionHandler(allFollowing)
         }
     }
     

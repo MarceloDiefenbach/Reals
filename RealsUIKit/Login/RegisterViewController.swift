@@ -88,7 +88,6 @@ class RegisterViewController: UIViewController {
                     [
                         "username": self.usernameField.text!,
                         "email": self.emailField.text!,
-                        "friends": ["teste"]
                     ]
                     , merge: true
                 )

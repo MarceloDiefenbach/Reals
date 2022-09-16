@@ -68,7 +68,7 @@ struct ServiceFirebase {
             friendsUsername = friends.map( { $0.username } )
             friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")
           
-            db.collection("posts").whereField("ownerUsername", in: friendsUsername).getDocuments() { (querySnapshot, err) in
+            db.collection("posts").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -84,9 +84,10 @@ struct ServiceFirebase {
                                let ownerUsername = data["ownerUsername"] as? String {
 
                                 let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
-
-                                posts.append(post)
-                                print(post)
+                                if friendsUsername.contains(where: {$0 == ownerUsername}) {
+                                    posts.append(post)
+                                    print(post)
+                                }
                             }
                         }
                         completionHandler(posts)
@@ -103,25 +104,24 @@ struct ServiceFirebase {
         
         print(username)
 
-        db.collection("users").whereField("username", isEqualTo: username)
-            .getDocuments() { (querySnapshot, err) in
+        db.collection("users").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")
-                        
+
                         if document.data()["username"] as! String == username {
                             exist = true
                         } else {
                             exist = false
                         }
-                        
+
                     }
                 }
                 completionHandler(exist)
         }
-
+        completionHandler(true)
     }
     
     func createReals(urlVideo: String){
@@ -238,38 +238,6 @@ struct ServiceFirebase {
         }
     }
     
-    func addFriend(usernameToAdd: String) {
-        
-        if usernameToAdd != "" {
-            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
-                "friends": FieldValue.arrayUnion([usernameToAdd ?? ""])
-            ])
-            
-            getIdByUser(username: usernameToAdd, completionHandler: { (ownerID) -> Void in
-                print()
-                db.collection("users").document(ownerID).updateData([
-                    "friends": FieldValue.arrayUnion([UserDefaults.standard.string(forKey: "username") ?? ""])
-                ])
-            })
-        }
-    }
-    
-    func removeFriend(usernameToRemove: String) {
-        
-        if usernameToRemove != "" {
-            db.collection("users").document(firebaseAuth.currentUser!.uid).updateData([
-                "friends": FieldValue.arrayRemove([usernameToRemove ?? ""])
-            ])
-            
-            getIdByUser(username: usernameToRemove, completionHandler: { (ownerID) -> Void in
-                print()
-                db.collection("users").document(ownerID).updateData([
-                    "friends": FieldValue.arrayRemove([UserDefaults.standard.string(forKey: "username") ?? "k"])
-                ])
-            })
-        }
-    }
-    
     func getAllRequestFriend(completionHandler: @escaping ([FriendRequest]) -> Void) {
         
         var allFriendsRequests: [FriendRequest] = []
@@ -296,96 +264,46 @@ struct ServiceFirebase {
         }
     }
     
-    func doRequestFriend(
-        usernameToRequest: String,
-        completionHandler: @escaping (Bool) -> Void) {
-        
-        getIdByUser(username: usernameToRequest, completionHandler: { (usernameReturn) -> Void in
-            
-            db.collection("users").document(usernameReturn).collection("friendsRequest").document()
-                .setData(
-                    [
-                        "username": UserDefaults.standard.string(forKey: "username")
-                    ]
-                )
-            completionHandler(true)
-        })
-    }
-    
-    func deleteFriendRequest(requestId: String, completionHandler: @escaping (Bool) -> Void) {
-        
-        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest").document(requestId).delete(){ err in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                print("Document successfully removed!")
-            }
-            completionHandler(true)
-        }
-    }
-    
     func getIdByUser(username: String, completionHandler: @escaping (String) -> Void) {
         
         var ownerIDReceiver: String = ""
 
-        db.collection("users").whereField("username", isEqualTo: username)
-            .getDocuments() { (querySnapshot, err) in
+        db.collection("users").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")
-                        
                         print(document.documentID)
-                        ownerIDReceiver = document.documentID
-                        
+                        if document.data()["username"] as? String == username {
+                            ownerIDReceiver = document.documentID
+                        }
                     }
                 }
                 completionHandler(ownerIDReceiver)
         }
-
     }
     
     func getUserByEmail(email: String, completionHandler: @escaping (String) -> Void) {
         
       var ownerUsernameReceiver: String = ""
 
-        db.collection("users").whereField("email", isEqualTo: email)
-            .getDocuments() { (querySnapshot, err) in
+        db.collection("users").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")
-                        
                         print(document.data()["username"] ?? "")
-                        
-                        ownerUsernameReceiver = document.data()["username"] as! String
+                        if document.data()["username"] as? String == email {
+                            ownerUsernameReceiver = document.data()["username"] as! String
+                        }
                         
                     }
                 }
                 completionHandler(ownerUsernameReceiver)
         }
 
-    }
-
-    func acceptFriendRequest(
-        usernameReceiver: String,
-        requestId: String,
-        completionHandler: @escaping (String) -> Void) {
-
-            addFriend(usernameToAdd: usernameReceiver)
-
-            deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
-
-            })
-
-    }
-    
-    func rejectFriendRequest(requestId: String) {
-        deleteFriendRequest(requestId: requestId, completionHandler: { (deleteResponse) in
-
-        })
     }
     
     
