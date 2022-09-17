@@ -294,17 +294,17 @@ extension CaptureVideo {
         
         }
 
-        @objc func startButtonTapped(sender: UITapGestureRecognizer) {
-            if sender.state == .ended {
-                startCapture()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.stopRecording()
-                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.performSegue(withIdentifier: "showVideo", sender: nil)
-                 }
-            }
+    @objc func startButtonTapped(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            startCapture()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.stopRecording()
+             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.performSegue(withIdentifier: "showVideo", sender: nil)
+             }
         }
+    }
     
     func setCancelRecordButton() {
         

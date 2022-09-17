@@ -16,8 +16,9 @@ class VideoCellTableViewCell: UITableViewCell {
     var delegate: MyCustomCellDelegator!
     @IBOutlet weak var opacityLayer: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var service = ServiceFirebase()
     
-    var post: Post?
+    var post: Post!
 
     //MARK: - outlets
     
@@ -27,17 +28,12 @@ class VideoCellTableViewCell: UITableViewCell {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var createRealsButton: UIButton!
     @IBOutlet weak var stackAlreadyDontPostToday: UIStackView!
+    @IBOutlet weak var reportDeleteIcon: UIImageView!
     
     //MARK: - actions
     
     @IBAction func createReals(_ sender: Any) {
         self.delegate.createReals()
-    }
-    
-    @IBAction func reportButton(_ sender: Any) {
-        if(self.delegate != nil){ //Just to be safe.
-            self.delegate.callSegueFromCell(ownerUsername: post?.ownerUsername ?? "", postUid: post?.postUid ?? "", ownerId: post?.ownerId ?? "", photo: post?.photo ?? "")
-        }
     }
     
     //MARK: - functions
@@ -57,14 +53,49 @@ class VideoCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         //Setup you avplayer while the cell is created
         self.setupMoviePlayer()
-        
+        setupReportDeleteButton()
+
         blackMaskImage.layer.cornerRadius = 16
         activityIndicator.startAnimating()
         
         verifyIfAlreadyPostToday()
-        
     }
     
+    func setupReportDeleteButton() {
+        if post?.ownerUsername == UserDefaults.standard.string(forKey: "username") {
+            let imageIcon = UIImage(systemName: "trash")
+            reportDeleteIcon.image = imageIcon
+        } else {
+            let imageIcon = UIImage(systemName: "exclamationmark.triangle")
+            reportDeleteIcon.image = imageIcon
+        }
+        setReportDeleteButton()
+    }
+    
+    func setReportDeleteButton() {
+        
+        let tapStartButton = UITapGestureRecognizer(target: self, action: #selector(self.reportDeleteButton))
+            reportDeleteIcon.addGestureRecognizer(tapStartButton)
+            reportDeleteIcon.isUserInteractionEnabled = true
+    }
+
+    @objc func reportDeleteButton(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            if post?.ownerUsername == UserDefaults.standard.string(forKey: "username") {
+                service.deleteVideo(videoPath: post?.videoPath ?? "", documentId: post?.postUid ?? "", completionHandler: { (response) in
+                    if response {
+    //                    deu certo
+                    } else {
+    //                    alerta de erro
+                    }
+                })
+            } else {
+                if(self.delegate != nil){ //Just to be safe.
+                    self.delegate.callSegueFromCell(ownerUsername: post?.ownerUsername ?? "", postUid: post?.postUid ?? "", ownerId: post?.ownerId ?? "", photo: post?.photo ?? "")
+                }
+            }
+        }
+    }
     
     func verifyIfAlreadyPostToday() {
         

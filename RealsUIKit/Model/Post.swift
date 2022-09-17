@@ -13,5 +13,6 @@ struct Post {
     let photo: String
     let title: String
     let postUid: String
+    let videoPath: String
 //    let date: Any
 }

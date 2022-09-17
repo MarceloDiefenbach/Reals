@@ -43,9 +43,9 @@ struct ServiceFirebase {
                         
                         let data = doc.data()
                         
-                        if let title = data["title"] as? String, let ownerId = data["ownerId"] as? String, let photo = data["photo"] as? String, let ownerUsername = data["ownerUsername"] as? String {
+                        if let title = data["title"] as? String, let ownerId = data["ownerId"] as? String, let photo = data["photo"] as? String, let ownerUsername = data["ownerUsername"] as? String, let videoPath = data["videoPath"] as? String {
                             
-                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
+                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath)
                             
                             posts.append(post)
                             print(post)
@@ -81,9 +81,10 @@ struct ServiceFirebase {
                             if let title = data["title"] as? String,
                                let ownerId = data["ownerId"] as? String,
                                let photo = data["photo"] as? String,
-                               let ownerUsername = data["ownerUsername"] as? String {
+                               let ownerUsername = data["ownerUsername"] as? String,
+                               let videoPath = data["videoPath"] as? String {
 
-                                let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID)
+                                let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath)
                                 if friendsUsername.contains(where: {$0 == ownerUsername}) {
                                     posts.append(post)
                                     print(post)
@@ -125,7 +126,7 @@ struct ServiceFirebase {
         }
     }
     
-    func createReals(urlVideo: String){
+    func createReals(urlVideo: String, videoPath: String){
         
         var ref: DocumentReference? = nil
 
@@ -136,6 +137,7 @@ struct ServiceFirebase {
                 "photo": urlVideo,
                 "title": "",
                 "date": Date.now,
+                "videoPath": videoPath
             ]) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
@@ -188,7 +190,7 @@ struct ServiceFirebase {
                     return
                 }
                 print(url?.description)
-                createReals(urlVideo: url?.description ?? "")
+                createReals(urlVideo: url?.description ?? "", videoPath: "videoReals/\(year)/\(month)/\(day)/\(String(describing: firebaseAuth.currentUser!.uid))-\(hour)-\(minute)-\(seconds).mp4")
             }
         }
         
@@ -238,6 +240,30 @@ struct ServiceFirebase {
                 }
             }
         }
+    }
+    
+    func deleteVideo(videoPath: String, documentId: String, completionHandler: @escaping (Bool) -> Void ) {
+        let storageRef = Storage.storage().reference()
+
+        let desertRef = storageRef.child(videoPath)
+
+        // Delete the file
+        desertRef.delete { error in
+          if let error = error {
+              completionHandler(false)
+          } else {
+            // File deleted successfully
+          }
+        }
+        db.collection("posts").document(documentId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+                completionHandler(false)
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        completionHandler(true)
     }
     
     func getAllRequestFriend(completionHandler: @escaping ([FriendRequest]) -> Void) {
