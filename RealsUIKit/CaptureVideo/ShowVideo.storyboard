@@ -50,20 +50,39 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5b-JI-2fW">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9DC-Vo-Yra">
+                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="9DC-Vo-Yra" firstAttribute="centerX" secondItem="S5b-JI-2fW" secondAttribute="centerX" id="X1m-TI-qFq"/>
+                                    <constraint firstItem="9DC-Vo-Yra" firstAttribute="centerY" secondItem="S5b-JI-2fW" secondAttribute="centerY" id="hzy-WQ-oGv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="top" secondItem="S5b-JI-2fW" secondAttribute="top" id="1NH-oN-nd2"/>
                             <constraint firstAttribute="bottom" secondItem="AJ2-vz-ATW" secondAttribute="bottom" id="6GZ-Vy-ben"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="S5b-JI-2fW" secondAttribute="trailing" id="8wf-FZ-xNw"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="HgD-7a-cZS"/>
                             <constraint firstItem="0C2-KY-9AN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="NZi-jw-edy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="0C2-KY-9AN" secondAttribute="bottom" constant="20" id="OkW-Rw-dgk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0C2-KY-9AN" secondAttribute="trailing" constant="20" id="hpW-pp-ftP"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="htR-FL-cGq"/>
+                            <constraint firstItem="S5b-JI-2fW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="lfv-yF-7v4"/>
+                            <constraint firstItem="S5b-JI-2fW" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="rbZ-j3-U1f"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="w3D-FU-vcF"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="9DC-Vo-Yra" id="6PW-Ua-wTo"/>
+                        <outlet property="loadingBackground" destination="S5b-JI-2fW" id="pIo-TC-S9A"/>
                         <outlet property="videoView" destination="AJ2-vz-ATW" id="Qh8-GZ-j9L"/>
                     </connections>
                 </viewController>

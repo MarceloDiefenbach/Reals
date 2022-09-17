@@ -13,4 +13,5 @@ struct Post {
     let photo: String
     let title: String
     let postUid: String
+//    let date: Any
 }

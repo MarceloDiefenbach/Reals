@@ -15,6 +15,7 @@ class VideoCellTableViewCell: UITableViewCell {
     var paused: Bool = false
     var delegate: MyCustomCellDelegator!
     @IBOutlet weak var opacityLayer: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var post: Post?
 
@@ -25,6 +26,7 @@ class VideoCellTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var createRealsButton: UIButton!
+    @IBOutlet weak var stackAlreadyDontPostToday: UIStackView!
     
     //MARK: - actions
     
@@ -57,20 +59,38 @@ class VideoCellTableViewCell: UITableViewCell {
         self.setupMoviePlayer()
         
         blackMaskImage.layer.cornerRadius = 16
+        activityIndicator.startAnimating()
         
-        let date = Date()
+        verifyIfAlreadyPostToday()
+        
+    }
+    
+    
+    func verifyIfAlreadyPostToday() {
+        
+        let date = Date.now
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
         _ = format.string(from: date)
         _ = Calendar.current
         let day = Calendar.current.component(.day, from: date)
         
-        if UserDefaults.standard.integer(forKey: "alreadyPost") != day {
-            opacityLayer.layer.opacity = 0
-            createRealsButton.isHidden = true
+        var lastPost: Date
+        
+        if let lastPostTest: Date = UserDefaults.standard.object(forKey: "dateFromLastPostss") as? Date {
+            lastPost = lastPostTest
         } else {
-            opacityLayer.layer.opacity = 0.85
-            createRealsButton.isHidden = false
+            lastPost = Date.now-172800
+        }
+        
+        let dayDefaults = Calendar.current.component(.day, from: lastPost)
+        
+        if dayDefaults == day {
+            opacityLayer.layer.opacity = 0
+            stackAlreadyDontPostToday.isHidden = true
+        } else {
+            opacityLayer.layer.opacity = 0.9
+            stackAlreadyDontPostToday.isHidden = false
         }
     }
 

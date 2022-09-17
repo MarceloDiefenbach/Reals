@@ -29,7 +29,6 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func createAccountButton(_ sender: Any) {
-        
         if emailField.text ?? "" == "" || passwordField.text ?? "" == "" || usernameField.text ?? "" == "" {
             let alert = UIAlertController(title: "Campos vazios", message: "Preencha todos os campos e tente novamente", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
@@ -37,12 +36,10 @@ class RegisterViewController: UIViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         } else {
-        
                 service.verifyIsExist(username: usernameField.text ?? "", completionHandler: { (existUsername) -> Void in
                     
                     print(existUsername)
                     if existUsername {
-                        
                         let alert = UIAlertController(title: "Usuário já existe", message: "O nome de usuário informado já está sendo utilizado, escolha outro e tente novamente", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                             //nothing to do
@@ -55,11 +52,7 @@ class RegisterViewController: UIViewController {
                             email: self.emailField.text ?? "",
                             password: self.passwordField.text ?? "",
                             completionHandler: { (valueReturn) -> Void in
-                                let alert = UIAlertController(title: "Conta criada", message: "", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                                    //nothing to do
-                                }))
-                                self.present(alert, animated: true, completion: nil)
+                                
                             })
                     }
                 })

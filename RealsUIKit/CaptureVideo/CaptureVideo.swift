@@ -14,6 +14,8 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     var previewLayer: AVCaptureVideoPreviewLayer!
     var activeInput: AVCaptureDeviceInput!
     var outputURL: URL!
+    var videoData: Data!
+    var videoSize: Double!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -197,7 +199,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
                  return
              }
              print("File size before compression: \(Double(data.count / 1048576)) mb")
-
+            self.videoSize = Double(data.count / 1048576)
              let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + UUID().uuidString + ".mp4")
              compressVideo(inputURL: outputFileURL as URL,
                            outputURL: compressedURL) { exportSession in
@@ -216,6 +218,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
                          return
                      }
                      self.outputURL = compressedURL
+                     self.videoData = compressedData
                      print("File size after compression: \(Double(compressedData.count / 1048576)) mb")
                  case .failed:
                      break
@@ -232,6 +235,8 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
             let displayVC = segue.destination as! VideoPlayback
 
               displayVC.videoURL = outputURL! as URL
+              displayVC.videoSize = self.videoSize
+              displayVC.videoData = self.videoData
           }
       }
 }

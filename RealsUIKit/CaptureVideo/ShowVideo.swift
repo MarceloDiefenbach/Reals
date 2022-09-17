@@ -14,6 +14,11 @@ class VideoPlayback: UIViewController {
     var avPlayerLayer: AVPlayerLayer!
     var service = ServiceFirebase()
     var videoURL: URL!
+    var videoSize: Double?
+    var videoData: Data?
+    var serviceUpload = ServiceUploadPanda()
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingBackground: UIView!
     
     @IBOutlet weak var videoView: UIView!
 
@@ -28,6 +33,7 @@ class VideoPlayback: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(videoURL)
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -46,6 +52,11 @@ class VideoPlayback: UIViewController {
                                                name: .AVPlayerItemDidPlayToEndTime,
                                                object: avPlayer.currentItem)
         
+        activityIndicator.startAnimating()
+        loadingBackground.isHidden = true
+        loadingBackground.isHidden = true
+        loadingBackground.layer.opacity = 0.8
+        
     }
     @objc func playerItemDidReachEnd(notification: Notification) {
         if let playerItem = notification.object as? AVPlayerItem {
@@ -55,10 +66,18 @@ class VideoPlayback: UIViewController {
     }
     
     func upload(){
+        loadingBackground.isHidden = false
+        loadingBackground.isHidden = false
+//        serviceUpload.uploadPandaVideo(videoData: videoData ?? Data.init(), videoSize: (videoSize != nil), urlVideo: videoURL) { (response) in
+//            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
+//            viewController?.dismiss(animated: true, completion: nil)
+//        }
         service.uploadVideo(urlVideo: videoURL, completionHandler: { (uploadFinish) in
             // esse codigo pega a ultima rootViewController do contexto e fecha tudo que ta aberto por cima
             let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
             viewController?.dismiss(animated: true, completion: nil)
+            self.loadingBackground.isHidden = true
+            self.loadingBackground.isHidden = true
         })
     }
 }

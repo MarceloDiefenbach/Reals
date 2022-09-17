@@ -27,7 +27,6 @@ class ViewController: UIViewController {
         doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
             print(self.firebaseAuth.currentUser?.email)
             print(completionReturn)
-            self.saveOnUserDefaults()
         })
     }
     
@@ -43,12 +42,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailField.text = ""
-        passwordField.text = ""
+        emailField.text = "lelod15@gmail.com"
+        passwordField.text = "lelo318318"
         passwordField.isSecureTextEntry = true
         requestPermissionToNotifications()
-        
-        
         
     }
     
@@ -56,16 +53,14 @@ class ViewController: UIViewController {
     //MARK: - FUNCTIONS
     
     func doLogin(email: String, password: String, completionHandler: @escaping (String) -> Void) {
-        
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            guard let strongSelf = authResult?.user else { return }
-            print(strongSelf)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                self.performSegue(withIdentifier: "goToFeed", sender: nil)
-            })
-
-
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+          guard let strongSelf = self else { return }
+            if authResult != nil {
+                self?.saveOnUserDefaults()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    self?.performSegue(withIdentifier: "goToFeed", sender: nil)
+                })
+            }
         }
         completionHandler("teste")
     }
@@ -75,6 +70,7 @@ class ViewController: UIViewController {
         service.getUserByEmail(email: emailField.text ?? "", completionHandler: { (response) in
             print(response)
             UserDefaults.standard.set(response, forKey: "username")
+            UserDefaults.standard.set(self.emailField.text, forKey: "email" ?? "")
         })
         
     }

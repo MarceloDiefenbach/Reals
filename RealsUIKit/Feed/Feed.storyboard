@@ -41,18 +41,32 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="598.5"/>
                                                             <color key="backgroundColor" systemColor="labelColor"/>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-1e-Nht">
-                                                            <rect key="frame" x="20" y="20" width="120" height="34.5"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="filled" title="Gravar Reals">
-                                                                <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
-                                                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </buttonConfiguration>
-                                                            <connections>
-                                                                <action selector="createReals:" destination="hcs-fb-gJX" eventType="touchUpInside" id="SeO-iq-6QP"/>
-                                                            </connections>
-                                                        </button>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ybs-ek-leR">
+                                                            <rect key="frame" x="60" y="221.5" width="254" height="156"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grave seu reals para ver o vídeos de seus amigos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIN-ed-bb8">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="254" height="86"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-1e-Nht">
+                                                                    <rect key="frame" x="0.0" y="106" width="254" height="50"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="50" id="AGG-EL-T4O"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="filled" title="Gravar Reals">
+                                                                        <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
+                                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </buttonConfiguration>
+                                                                    <connections>
+                                                                        <action selector="createReals:" destination="hcs-fb-gJX" eventType="touchUpInside" id="SeO-iq-6QP"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Qcr-Zj-IXw">
                                                             <rect key="frame" x="16" y="527" width="342" height="47.5"/>
                                                             <subviews>
@@ -86,7 +100,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="qyn-Lo-wRu" secondAttribute="trailing" id="4pL-MU-zrZ"/>
                                                         <constraint firstItem="qyn-Lo-wRu" firstAttribute="top" secondItem="xQM-hB-vBQ" secondAttribute="top" id="6Iy-ER-mgH"/>
-                                                        <constraint firstItem="A0F-1e-Nht" firstAttribute="top" secondItem="xQM-hB-vBQ" secondAttribute="top" constant="20" id="6cP-Ed-cfd"/>
+                                                        <constraint firstItem="ybs-ek-leR" firstAttribute="centerY" secondItem="xQM-hB-vBQ" secondAttribute="centerY" id="6sI-2l-2OK"/>
                                                         <constraint firstItem="FNY-EB-Osw" firstAttribute="height" secondItem="xQM-hB-vBQ" secondAttribute="height" multiplier="0.999165" id="HAK-zw-SdY"/>
                                                         <constraint firstAttribute="bottom" secondItem="Qcr-Zj-IXw" secondAttribute="bottom" constant="24" id="IeQ-5j-G2z"/>
                                                         <constraint firstAttribute="trailing" secondItem="rjW-x9-hrj" secondAttribute="trailing" constant="20" id="KXu-Xk-vqp"/>
@@ -96,12 +110,14 @@
                                                         <constraint firstItem="qyn-Lo-wRu" firstAttribute="leading" secondItem="xQM-hB-vBQ" secondAttribute="leading" id="auv-Va-Zgv"/>
                                                         <constraint firstAttribute="width" secondItem="xQM-hB-vBQ" secondAttribute="height" multiplier="1:1.6" id="fTu-D1-Y4C"/>
                                                         <constraint firstAttribute="bottom" secondItem="qyn-Lo-wRu" secondAttribute="bottom" id="g3t-QO-hkh"/>
+                                                        <constraint firstItem="ybs-ek-leR" firstAttribute="centerX" secondItem="xQM-hB-vBQ" secondAttribute="centerX" id="lT3-N8-lPY"/>
                                                         <constraint firstItem="FNY-EB-Osw" firstAttribute="top" secondItem="xQM-hB-vBQ" secondAttribute="top" id="mPA-ao-Q59"/>
-                                                        <constraint firstItem="A0F-1e-Nht" firstAttribute="leading" secondItem="xQM-hB-vBQ" secondAttribute="leading" constant="20" id="qR2-ZD-U24"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ybs-ek-leR" secondAttribute="trailing" constant="60" id="mjI-VJ-UCx"/>
                                                         <constraint firstItem="rjW-x9-hrj" firstAttribute="top" secondItem="xQM-hB-vBQ" secondAttribute="top" constant="22" id="rtC-SZ-m1j"/>
                                                         <constraint firstAttribute="bottom" secondItem="FNY-EB-Osw" secondAttribute="bottom" constant="0.5" id="ru3-7A-PvT"/>
                                                         <constraint firstItem="FNY-EB-Osw" firstAttribute="width" secondItem="xQM-hB-vBQ" secondAttribute="width" id="tDc-gd-1HE"/>
                                                         <constraint firstItem="Qcr-Zj-IXw" firstAttribute="leading" secondItem="xQM-hB-vBQ" secondAttribute="leading" constant="16" id="uYb-3N-KhC"/>
+                                                        <constraint firstItem="ybs-ek-leR" firstAttribute="leading" secondItem="xQM-hB-vBQ" secondAttribute="leading" constant="60" id="zVe-uG-lhp"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -113,9 +129,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="adu-kg-BXV" id="Qgc-Ro-LoT"/>
                                             <outlet property="blackMaskImage" destination="FNY-EB-Osw" id="AJb-KT-2Mg"/>
                                             <outlet property="createRealsButton" destination="A0F-1e-Nht" id="NZT-Wu-7YR"/>
                                             <outlet property="opacityLayer" destination="qyn-Lo-wRu" id="teU-12-4QW"/>
+                                            <outlet property="stackAlreadyDontPostToday" destination="ybs-ek-leR" id="Wfe-T3-XJI"/>
                                             <outlet property="subtitleLabel" destination="7I9-1Y-0kV" id="7d1-wq-YaF"/>
                                             <outlet property="titleLabel" destination="2pP-6Y-16p" id="wSz-tc-MFh"/>
                                             <outlet property="videoPlayerSuperView" destination="xQM-hB-vBQ" id="H8X-Cw-gN5"/>
@@ -134,22 +152,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reals" id="Do0-pe-XpF">
-                        <leftBarButtonItems>
-                            <barButtonItem image="person.fill" catalog="system" id="UdM-c7-0U7">
-                                <connections>
-                                    <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="automatic" id="KQi-L7-2NS"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="person.3.fill" catalog="system" id="lx9-LR-TMg">
-                                <connections>
-                                    <action selector="friendsButton:" destination="Y6W-OH-hqX" id="Lwp-se-iEQ"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="EKV-TP-NXD">
+                        <barButtonItem key="leftBarButtonItem" image="person.3.fill" catalog="system" id="lx9-LR-TMg">
                             <connections>
-                                <action selector="CreateRealButton:" destination="Y6W-OH-hqX" id="cY5-bu-gru"/>
-                                <segue destination="xSI-5o-4oO" kind="presentation" identifier="goToCapture" modalPresentationStyle="fullScreen" id="XJJ-Hr-wLx"/>
+                                <action selector="friendsButton:" destination="Y6W-OH-hqX" id="Lwp-se-iEQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="person.fill" catalog="system" id="UdM-c7-0U7">
+                            <connections>
+                                <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="automatic" id="KQi-L7-2NS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -309,7 +319,6 @@
         <image name="exclamationmark.triangle" catalog="system" width="32" height="32"/>
         <image name="person.3.fill" catalog="system" width="32" height="32"/>
         <image name="person.fill" catalog="system" width="32" height="32"/>
-        <image name="plus.circle" catalog="system" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

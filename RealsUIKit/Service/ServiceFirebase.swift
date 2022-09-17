@@ -67,8 +67,8 @@ struct ServiceFirebase {
             
             friendsUsername = friends.map( { $0.username } )
             friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")
-          
-            db.collection("posts").getDocuments() { (querySnapshot, err) in
+
+            db.collection("posts").order(by: "date", descending: true).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -123,7 +123,6 @@ struct ServiceFirebase {
                 }
                 completionHandler(exist)
         }
-        completionHandler(true)
     }
     
     func createReals(urlVideo: String){
@@ -211,6 +210,7 @@ struct ServiceFirebase {
         uploadTask.observe(.success) { snapshot in
             // Upload completed successfully
             print("finalizou")
+            UserDefaults.standard.set(Date.now, forKey: "dateFromLastPostss")
             completionHandler(true)
         }
         
@@ -297,7 +297,7 @@ struct ServiceFirebase {
                     for document in querySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")
                         print(document.data()["username"] ?? "")
-                        if document.data()["username"] as? String == email {
+                        if document.data()["email"] as? String == email {
                             ownerUsernameReceiver = document.data()["username"] as! String
                         }
                         
