@@ -18,6 +18,9 @@ class ProfileViewController: UIViewController {
     let serviceUpload = ServiceUpload()
     
     //MARK: - outlets
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var username: UILabel!
+    
     
     //MARK: - actions
     @IBAction func deleteAccount(_ sender: Any) {
@@ -28,14 +31,14 @@ class ProfileViewController: UIViewController {
         logOut()
     }
     
+    //MARK: - ViewDidLoad
+    
     override func viewDidLoad() {
-//        service.doRequestFriend(ownerUsernameReceiver: "PohMarcelo", completionHandler: { (receiver) in
-//        })
-//        service.addFriend(usernameToAdd: "teste")
-//        serviceUpload.uploadPandaVideo()
+        setUsersData()
     }
 }
 
+//MARK: - functions
 
 extension ProfileViewController {
     
@@ -75,6 +78,18 @@ extension ProfileViewController {
         alert.addAction(UIAlertAction(title: "Não apagar", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+//MARK: - set de UI
+
+extension ProfileViewController {
+    
+    func setUsersData() {
+        profileImage.layer.cornerRadius = profileImage.frame.height/2
+        
+        username.text = UserDefaults.standard.string(forKey: "username")
     }
     
 }
