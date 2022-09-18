@@ -32,6 +32,14 @@
                                     <constraint firstAttribute="width" secondItem="mNq-6L-daS" secondAttribute="height" multiplier="1:1" id="pde-cD-iHD"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.triangle.2.circlepath" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gaO-nc-Bok">
+                                <rect key="frame" x="289" y="760.5" width="40" height="39"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gaO-nc-Bok" secondAttribute="height" multiplier="1:1" id="2Gd-eF-zER"/>
+                                    <constraint firstAttribute="height" constant="40" id="7xP-sl-iph"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -39,9 +47,11 @@
                             <constraint firstItem="mNq-6L-daS" firstAttribute="leading" secondItem="CZC-za-mJG" secondAttribute="trailing" constant="40" id="2OS-1L-BhR"/>
                             <constraint firstItem="mNq-6L-daS" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="J3N-lK-HGy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="V1U-KD-NSH" secondAttribute="trailing" id="OIo-ml-kUg"/>
+                            <constraint firstItem="gaO-nc-Bok" firstAttribute="leading" secondItem="mNq-6L-daS" secondAttribute="trailing" constant="40" id="TXH-9P-KkA"/>
                             <constraint firstItem="V1U-KD-NSH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Xwx-dN-PG5"/>
                             <constraint firstItem="CZC-za-mJG" firstAttribute="centerY" secondItem="mNq-6L-daS" secondAttribute="centerY" id="bjL-J0-Ikd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="mNq-6L-daS" secondAttribute="bottom" constant="40" id="bkV-tv-Z3i"/>
+                            <constraint firstItem="gaO-nc-Bok" firstAttribute="centerY" secondItem="mNq-6L-daS" secondAttribute="centerY" id="edl-U4-IRZ"/>
                             <constraint firstItem="V1U-KD-NSH" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="j0r-Q8-Usr"/>
                             <constraint firstItem="mNq-6L-daS" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.2" constant="1" id="meB-QC-H25"/>
                             <constraint firstItem="CZC-za-mJG" firstAttribute="height" secondItem="mNq-6L-daS" secondAttribute="height" multiplier="0.3" constant="1" id="nNM-dg-Egd"/>
@@ -52,7 +62,9 @@
                         <outlet property="camPreview" destination="V1U-KD-NSH" id="Yrp-Xx-0Lw"/>
                         <outlet property="cancelButton" destination="CZC-za-mJG" id="WNK-po-SmW"/>
                         <outlet property="startRecordButton" destination="mNq-6L-daS" id="FOx-PX-sbJ"/>
+                        <outlet property="switchCameraButton" destination="gaO-nc-Bok" id="609-xd-rs1"/>
                         <segue destination="TIz-8X-YZJ" kind="show" identifier="showVideo" id="MTK-EM-qlu"/>
+                        <segue destination="kaa-Mb-ScJ" kind="presentation" identifier="goToBackCamera" animates="NO" modalPresentationStyle="fullScreen" id="rqb-Au-5TL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -69,8 +81,74 @@
             </objects>
             <point key="canvasLocation" x="569" y="240"/>
         </scene>
+        <!--CaptureVideoBack-->
+        <scene sceneID="Zh2-xq-z6r">
+            <objects>
+                <viewController storyboardIdentifier="captureVideoBack" title="CaptureVideoBack" id="kaa-Mb-ScJ" customClass="CaptureVideoBack" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eur-eP-J9d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H76-pd-2Jc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancelButton" translatesAutoresizingMaskIntoConstraints="NO" id="C6a-5d-8MM">
+                                <rect key="frame" x="99" y="767" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="C6a-5d-8MM" secondAttribute="height" multiplier="1:1" id="mxR-2A-EBJ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startRecordButton" translatesAutoresizingMaskIntoConstraints="NO" id="iEx-ea-sNr">
+                                <rect key="frame" x="165" y="738" width="84" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iEx-ea-sNr" secondAttribute="height" multiplier="1:1" id="Hv9-Rf-yFk"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.triangle.2.circlepath" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="arA-5t-BY8">
+                                <rect key="frame" x="289" y="760.5" width="37" height="39"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="arA-5t-BY8" secondAttribute="height" multiplier="12:13" id="EQ2-ON-FxJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="nJj-fu-i0M"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LTs-8U-hau"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="C6a-5d-8MM" firstAttribute="height" secondItem="iEx-ea-sNr" secondAttribute="height" multiplier="0.3" constant="1" id="1xc-Zd-mtr"/>
+                            <constraint firstItem="C6a-5d-8MM" firstAttribute="centerY" secondItem="iEx-ea-sNr" secondAttribute="centerY" id="B0d-jy-PBv"/>
+                            <constraint firstItem="iEx-ea-sNr" firstAttribute="centerX" secondItem="Eur-eP-J9d" secondAttribute="centerX" id="TEA-Id-gMX"/>
+                            <constraint firstItem="iEx-ea-sNr" firstAttribute="leading" secondItem="C6a-5d-8MM" secondAttribute="trailing" constant="40" id="V9W-Kz-Byn"/>
+                            <constraint firstItem="arA-5t-BY8" firstAttribute="leading" secondItem="iEx-ea-sNr" secondAttribute="trailing" constant="40" id="Xn7-xA-cNb"/>
+                            <constraint firstItem="iEx-ea-sNr" firstAttribute="width" secondItem="Eur-eP-J9d" secondAttribute="width" multiplier="0.2" constant="1" id="fUT-Wx-9sZ"/>
+                            <constraint firstItem="H76-pd-2Jc" firstAttribute="bottom" secondItem="Eur-eP-J9d" secondAttribute="bottom" id="fc6-yz-Fom"/>
+                            <constraint firstItem="H76-pd-2Jc" firstAttribute="top" secondItem="Eur-eP-J9d" secondAttribute="top" id="ldx-90-Njn"/>
+                            <constraint firstItem="LTs-8U-hau" firstAttribute="bottom" secondItem="iEx-ea-sNr" secondAttribute="bottom" constant="40" id="mBc-Y2-DRh"/>
+                            <constraint firstItem="LTs-8U-hau" firstAttribute="trailing" secondItem="H76-pd-2Jc" secondAttribute="trailing" id="nfm-Du-woQ"/>
+                            <constraint firstItem="H76-pd-2Jc" firstAttribute="leading" secondItem="LTs-8U-hau" secondAttribute="leading" id="rVt-ha-QVG"/>
+                            <constraint firstItem="arA-5t-BY8" firstAttribute="centerY" secondItem="iEx-ea-sNr" secondAttribute="centerY" id="uXm-cd-6bR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="camPreview" destination="H76-pd-2Jc" id="vb3-wp-fFh"/>
+                        <outlet property="cancelButton" destination="C6a-5d-8MM" id="u3D-Or-vzS"/>
+                        <outlet property="startRecordButton" destination="iEx-ea-sNr" id="2Qw-BA-Beu"/>
+                        <outlet property="switchCameraButton" destination="arA-5t-BY8" id="8y4-hf-g0J"/>
+                        <segue destination="TIz-8X-YZJ" kind="presentation" identifier="showVideo2" id="hh3-nN-bKN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fJK-xZ-SoF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7" y="839"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="hh3-nN-bKN"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.triangle.2.circlepath" catalog="system" width="32" height="32"/>
         <image name="cancelButton" width="155" height="155"/>
         <image name="startRecordButton" width="183" height="183"/>
         <systemColor name="systemBackgroundColor">
