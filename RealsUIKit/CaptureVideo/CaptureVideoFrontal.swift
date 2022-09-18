@@ -7,6 +7,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     @IBOutlet weak var camPreview: UIView!
     @IBOutlet weak var startRecordButton: UIImageView!
     @IBOutlet weak var cancelButton: UIImageView!
+    @IBOutlet weak var switchCameraButton: UIImageView!
     
     let captureSession = AVCaptureSession()
     let movieOutput = AVCaptureMovieFileOutput()
@@ -16,13 +17,18 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     var outputURL: URL!
     var videoData: Data!
     var videoSize: Double!
+    var cameraType: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
         setStartRecordButton()
         setCancelRecordButton()
-        
+        setSwitchRecordButton()
+        setupPreview2()
+    }
+    
+    func setupPreview2() {
         // Do any additional setup after loading the view, typically from a nib.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if self.setupSession() {
@@ -50,11 +56,10 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     func setupSession() -> Bool {
 //        captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
 
-        // Setup Camera
-        let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
-
+        let frontalCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)!
+        
         do {
-            let input = try AVCaptureDeviceInput(device: camera!)
+            let input = try AVCaptureDeviceInput(device: frontalCamera)
             if captureSession.canAddInput(input) {
                 captureSession.addInput(input)
                 activeInput = input
@@ -86,15 +91,8 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
         return true
     }
 
-    func setupCaptureMode(_ mode: Int) {
-        // Video Mode
-
-    }
-
     //MARK:- Camera Session
     func startSession() {
-
-
         if !captureSession.isRunning {
             videoQueue().async {
                 self.captureSession.startRunning()
@@ -303,6 +301,20 @@ extension CaptureVideo {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.performSegue(withIdentifier: "showVideo", sender: nil)
              }
+        }
+    }
+    
+    func setSwitchRecordButton() {
+        
+        let tapSwitchButton = UITapGestureRecognizer(target: self, action: #selector(self.switchButtonTapped))
+            switchCameraButton.addGestureRecognizer(tapSwitchButton)
+            switchCameraButton.isUserInteractionEnabled = true
+        
+        }
+
+    @objc func switchButtonTapped(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            self.performSegue(withIdentifier: "goToBackCamera", sender: nil)
         }
     }
     
