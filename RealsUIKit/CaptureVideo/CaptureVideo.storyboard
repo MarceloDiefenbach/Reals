@@ -63,7 +63,7 @@
                         <outlet property="cancelButton" destination="CZC-za-mJG" id="WNK-po-SmW"/>
                         <outlet property="startRecordButton" destination="mNq-6L-daS" id="FOx-PX-sbJ"/>
                         <outlet property="switchCameraButton" destination="gaO-nc-Bok" id="609-xd-rs1"/>
-                        <segue destination="TIz-8X-YZJ" kind="show" identifier="showVideo" id="MTK-EM-qlu"/>
+                        <segue destination="TIz-8X-YZJ" kind="presentation" identifier="showVideo" modalPresentationStyle="fullScreen" id="MTK-EM-qlu"/>
                         <segue destination="kaa-Mb-ScJ" kind="presentation" identifier="goToBackCamera" animates="NO" modalPresentationStyle="fullScreen" id="rqb-Au-5TL"/>
                     </connections>
                 </viewController>
@@ -136,7 +136,7 @@
                         <outlet property="cancelButton" destination="C6a-5d-8MM" id="u3D-Or-vzS"/>
                         <outlet property="startRecordButton" destination="iEx-ea-sNr" id="2Qw-BA-Beu"/>
                         <outlet property="switchCameraButton" destination="arA-5t-BY8" id="8y4-hf-g0J"/>
-                        <segue destination="TIz-8X-YZJ" kind="presentation" identifier="showVideo2" id="hh3-nN-bKN"/>
+                        <segue destination="TIz-8X-YZJ" kind="presentation" identifier="showVideo2" modalPresentationStyle="fullScreen" id="hh3-nN-bKN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fJK-xZ-SoF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
