@@ -128,9 +128,8 @@ struct ServiceFirebase {
     
     func createReals(urlVideo: String, videoPath: String){
         
-        var ref: DocumentReference? = nil
-
-        ref = db.collection("posts").addDocument(data:
+        var refUser: DocumentReference? = nil
+        refUser = db.collection("users").document(firebaseAuth.currentUser?.uid ?? "").collection("posts").addDocument(data:
             [
                 "ownerId": firebaseAuth.currentUser?.uid,
                 "ownerUsername": UserDefaults.standard.string(forKey: "username"),
@@ -142,10 +141,27 @@ struct ServiceFirebase {
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    print("Document added with ID: \(ref!.documentID)")
+                    print("Document added with ID: \(refUser!.documentID)")
                 }
         }
         
+        var ref: DocumentReference? = nil
+        ref = db.collection("posts").addDocument(data:
+            [
+                "ownerId": firebaseAuth.currentUser?.uid,
+                "ownerUsername": UserDefaults.standard.string(forKey: "username"),
+                "photo": urlVideo,
+                "title": "",
+                "date": Date.now,
+                "videoPath": videoPath,
+                "documentIdOnUsersPosts": refUser!.documentID
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(ref!.documentID)")
+                }
+        }
     }
     
     func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
@@ -256,6 +272,14 @@ struct ServiceFirebase {
           }
         }
         db.collection("posts").document(documentId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+                completionHandler(false)
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        db.collection("users").document(firebaseAuth.currentUser?.uid ?? "").collection("posts").whereField("videoPath", isEqualTo: videoPath).document().delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
                 completionHandler(false)
