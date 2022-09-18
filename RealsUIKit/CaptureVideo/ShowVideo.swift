@@ -32,7 +32,7 @@ class VideoPlayback: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         print(videoURL)
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
