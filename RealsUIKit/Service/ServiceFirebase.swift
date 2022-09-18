@@ -279,14 +279,6 @@ struct ServiceFirebase {
                 print("Document successfully removed!")
             }
         }
-        db.collection("users").document(firebaseAuth.currentUser?.uid ?? "").collection("posts").whereField("videoPath", isEqualTo: videoPath).document().delete() { err in
-            if let err = err {
-                print("Error removing document: \(err)")
-                completionHandler(false)
-            } else {
-                print("Document successfully removed!")
-            }
-        }
         completionHandler(true)
     }
     
