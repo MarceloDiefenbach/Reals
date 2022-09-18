@@ -5,6 +5,8 @@ protocol MyCustomCellDelegator: AnyObject {
     func callSegueFromCell(ownerUsername: String, postUid: String, ownerId: String, photo: String)
     
     func createReals()
+    
+    func deletePost(videoPath: String, documentId: String)
 }
 
 class VideoCellTableViewCell: UITableViewCell {
@@ -82,13 +84,7 @@ class VideoCellTableViewCell: UITableViewCell {
     @objc func reportDeleteButton(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             if post?.ownerUsername == UserDefaults.standard.string(forKey: "username") {
-                service.deleteVideo(videoPath: post?.videoPath ?? "", documentId: post?.postUid ?? "", completionHandler: { (response) in
-                    if response {
-    //                    deu certo
-                    } else {
-    //                    alerta de erro
-                    }
-                })
+                self.delegate.deletePost(videoPath: post.videoPath, documentId: post.postUid)
             } else {
                 if(self.delegate != nil){ //Just to be safe.
                     self.delegate.callSegueFromCell(ownerUsername: post?.ownerUsername ?? "", postUid: post?.postUid ?? "", ownerId: post?.ownerId ?? "", photo: post?.photo ?? "")
@@ -99,16 +95,16 @@ class VideoCellTableViewCell: UITableViewCell {
     
     func verifyIfAlreadyPostToday() {
         
-        let date = Date.now
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        _ = format.string(from: date)
-        _ = Calendar.current
-        let day = Calendar.current.component(.day, from: date)
+        var day = Date.now
+        let today = Calendar.current.component(.day, from: day)
+        day = Date.now-86400
+        let yesterday = Calendar.current.component(.day, from: day)
+        print(day)
+        print(yesterday)
         
         var lastPost: Date
         
-        if let lastPostTest: Date = UserDefaults.standard.object(forKey: "dateFromLastPostss") as? Date {
+        if let lastPostTest: Date = UserDefaults.standard.object(forKey: "dateFromLastPosts") as? Date {
             lastPost = lastPostTest
         } else {
             lastPost = Date.now-172800
@@ -116,7 +112,9 @@ class VideoCellTableViewCell: UITableViewCell {
         
         let dayDefaults = Calendar.current.component(.day, from: lastPost)
         
-        if dayDefaults == day {
+//        opacityLayer.tintColor = UIColor(named: "cardBackground")
+
+        if dayDefaults == today || dayDefaults == yesterday {
             opacityLayer.layer.opacity = 0
             stackAlreadyDontPostToday.isHidden = true
         } else {

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import AVKit
 import AVFoundation
+import FirebaseAuth
 
 class FeedViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class FeedViewController: UIViewController {
     var service = ServiceFirebase()
     var posts: [Post] = []
     var controlQuantityPost: Int = 0
+    let firebaseAuth = Auth.auth()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -44,6 +46,10 @@ class FeedViewController: UIViewController {
         visibleIP = IndexPath.init(row: 0, section: 0)
         
         setupRefreshControl()
+        
+        service.getUserByEmail(email: firebaseAuth.currentUser?.email ?? "", completionHandler: { (response) in
+            UserDefaults.standard.set(response, forKey: "username")
+        })
     }
     
     func playVideoOnTheCell(cell : VideoCellTableViewCell, indexPath : IndexPath){
@@ -128,5 +134,25 @@ extension FeedViewController: MyCustomCellDelegator {
         self.photo = photo
         self.postUid = postUid
         performSegue(withIdentifier: "goToReport", sender: nil)
+    }
+    
+    func deletePost(videoPath: String, documentId: String) {
+        let alert = UIAlertController(title: "Apagar Real", message: "Essa ação não poderá ser desfeita!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Apagar", style: .destructive, handler: { action in
+            self.service.deleteVideo(videoPath: videoPath, documentId: documentId, completionHandler: { (response) in
+                if response {
+                    UserDefaults.standard.set(Date.now-172800, forKey: "dateFromLastPosts")
+                } else {
+//                    alerta de erro
+                }
+            })
+        }))
+        alert.addAction(UIAlertAction(title: "Não apagar", style: .cancel, handler: { action in
+        
+            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
+            viewController?.dismiss(animated: true, completion: nil)
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }

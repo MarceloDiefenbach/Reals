@@ -212,7 +212,7 @@ struct ServiceFirebase {
         uploadTask.observe(.success) { snapshot in
             // Upload completed successfully
             print("finalizou")
-            UserDefaults.standard.set(Date.now, forKey: "dateFromLastPostss")
+            UserDefaults.standard.set(Date.now, forKey: "dateFromLastPosts")
             completionHandler(true)
         }
         
