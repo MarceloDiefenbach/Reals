@@ -6,7 +6,10 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseCore
+import FirebaseMessaging
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { success, error in
+            guard success else {
+                return
+            }
+            
+            print("Successfully Registered in APNS")
+        })
+        
+        application.registerForRemoteNotifications()
+        
         return true
     }
 
@@ -34,3 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//MARK: - MessagingDelegate
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        messaging.token { token, error in
+            guard let token = token else {
+                return
+            }
+
+            print("Firebase Token: \(token)")
+        }
+    }
+}
+
+//MARK: - UNUserNotificationCenterDelegate
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+}
