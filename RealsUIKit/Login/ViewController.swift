@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         if firebaseAuth.currentUser?.email != nil {
             performSegue(withIdentifier: "goToFeed", sender: nil)
         }
-//        serviceUpload.uploadPandaVideo()
+        service.getDateChange()
     }
     
     override func viewDidLoad() {

@@ -43,9 +43,14 @@ struct ServiceFirebase {
                         
                         let data = doc.data()
                         
-                        if let title = data["title"] as? String, let ownerId = data["ownerId"] as? String, let photo = data["photo"] as? String, let ownerUsername = data["ownerUsername"] as? String, let videoPath = data["videoPath"] as? String {
+                        if let title = data["title"] as? String,
+                           let ownerId = data["ownerId"] as? String,
+                           let photo = data["photo"] as? String,
+                           let ownerUsername = data["ownerUsername"] as? String,
+                           let videoPath = data["videoPath"] as? String,
+                           let date = data["date"] as? Int {
                             
-                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath)
+                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
                             
                             posts.append(post)
                             print(post)
@@ -68,7 +73,7 @@ struct ServiceFirebase {
             friendsUsername = friends.map( { $0.username } )
             friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")
 
-            db.collection("posts").order(by: "date", descending: true).getDocuments() { (querySnapshot, err) in
+            db.collection("posts").whereField("date", isGreaterThan: UserDefaults.standard.integer(forKey: "dateChange")).order(by: "date", descending: true).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -82,9 +87,11 @@ struct ServiceFirebase {
                                let ownerId = data["ownerId"] as? String,
                                let photo = data["photo"] as? String,
                                let ownerUsername = data["ownerUsername"] as? String,
-                               let videoPath = data["videoPath"] as? String {
+                               let videoPath = data["videoPath"] as? String,
+                               let date = data["date"] as? Int {
 
-                                let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath)
+                                let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
+
                                 if friendsUsername.contains(where: {$0 == ownerUsername}) {
                                     posts.append(post)
                                     print(post)
@@ -135,7 +142,7 @@ struct ServiceFirebase {
                 "ownerUsername": UserDefaults.standard.string(forKey: "username"),
                 "photo": urlVideo,
                 "title": "",
-                "date": Date.now,
+                "date": Int(Date.now.timeIntervalSince1970),
                 "videoPath": videoPath
             ]) { err in
                 if let err = err {
@@ -152,7 +159,7 @@ struct ServiceFirebase {
                 "ownerUsername": UserDefaults.standard.string(forKey: "username"),
                 "photo": urlVideo,
                 "title": "",
-                "date": Date.now,
+                "date": Int(Date.now.timeIntervalSince1970),
                 "videoPath": videoPath,
                 "documentIdOnUsersPosts": refUser!.documentID
             ]) { err in
@@ -361,6 +368,25 @@ struct ServiceFirebase {
             print("dentro do metodo de upload ")
             print(data)
         }
+    }
+    
+    func getDateChange() {
+        
+        db.collection("dateChange")
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        print(data["dateChange"])
+                        if let dateChange = data["dateChange"] as? Int {
+                            UserDefaults.standard.set(dateChange, forKey: "dateChange")
+                        }
+                    }
+                }
+        }
+        
     }
     
 }

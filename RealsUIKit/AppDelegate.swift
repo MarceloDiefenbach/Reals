@@ -72,7 +72,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // ...
 
     // Print full message.
-    print(userInfo)
+    print("willPresent")
+    print(userInfo["changeDay"])
 
     // Change this to your preferred presentation option
     return [[.alert, .sound]]
@@ -89,6 +90,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 
     // Print full message.
+    print("didReceive")
     print(userInfo)
   }
     
@@ -109,6 +111,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
           
           // Print full message.
           print(userInfo)
+          print("aqui \(userInfo["changeDay"])")
 
           return UIBackgroundFetchResult.newData
     }
