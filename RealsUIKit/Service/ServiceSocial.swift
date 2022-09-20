@@ -108,10 +108,37 @@ class ServiceSocial {
                     }
                 }
             }
-            
         })
-        
     }
     
+    func verifyIfFcmTokenChange() {
+        
+        if let fcmTokenNow = UserDefaults.standard.string(forKey: "fcmTokenNow") {
+         
+            if let fcmToken = UserDefaults.standard.string(forKey: "fcmToken"){
+                
+                if fcmToken != fcmTokenNow{
+                    saveToken(token: fcmTokenNow ?? "")
+                }
+                
+            } else {
+                saveToken(token: fcmTokenNow ?? "")
+            }
+            
+        }
+    }
+    
+    func saveToken(token: String) {
+        UserDefaults.standard.set(token, forKey: "fcmToken")
+        db.collection("users").document(firebaseAuth.currentUser?.uid ?? "").setData([
+            "fcmToken": token
+        ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("the user has sign up or is logged in")
+            }
+        }
+    }
     
 }

@@ -38,8 +38,6 @@ class VideoCellTableViewCell: UITableViewCell {
         self.delegate.createReals()
     }
     
-    //MARK: - functions
-    
     //This will be called everytime a new value is set on the videoplayer item
     var videoPlayerItem: AVPlayerItem? = nil {
         didSet {
@@ -94,27 +92,8 @@ class VideoCellTableViewCell: UITableViewCell {
     }
     
     func verifyIfAlreadyPostToday() {
-        
-        var day = Date.now
-        let today = Calendar.current.component(.day, from: day)
-        day = Date.now-86400
-        let yesterday = Calendar.current.component(.day, from: day)
-        print(day)
-        print(yesterday)
-        
-        var lastPost: Date
-        
-        if let lastPostTest: Date = UserDefaults.standard.object(forKey: "dateFromLastPosts") as? Date {
-            lastPost = lastPostTest
-        } else {
-            lastPost = Date.now-172800
-        }
-        
-        let dayDefaults = Calendar.current.component(.day, from: lastPost)
-        
-//        opacityLayer.tintColor = UIColor(named: "cardBackground")
 
-        if dayDefaults == today || dayDefaults == yesterday {
+        if UserDefaults.standard.bool(forKey: "alreadyPost") {
             opacityLayer.layer.opacity = 0
             stackAlreadyDontPostToday.isHidden = true
         } else {

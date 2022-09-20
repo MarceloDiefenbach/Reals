@@ -58,6 +58,8 @@ class ViewController: UIViewController {
         requestPermissionToNotifications()
         setupAppleButton()
         
+        serviceSocial.verifyIfFcmTokenChange()
+        
     }
     
     func setupAppleButton() {

@@ -79,6 +79,7 @@ struct ServiceFirebase {
                 } else {
 
                     if let snapshotDocumentos = querySnapshot?.documents {
+                        UserDefaults.standard.set(false, forKey: "alreadyPost")
                         for doc in snapshotDocumentos {
 
                              let data = doc.data()
@@ -89,13 +90,22 @@ struct ServiceFirebase {
                                let ownerUsername = data["ownerUsername"] as? String,
                                let videoPath = data["videoPath"] as? String,
                                let date = data["date"] as? Int {
+                                
+                                print(date)
 
                                 let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
 
-                                if friendsUsername.contains(where: {$0 == ownerUsername}) {
-                                    posts.append(post)
-                                    print(post)
-                                }
+//                                if post.date > UserDefaults.standard.integer(forKey: "dateChange") {
+                                    if friendsUsername.contains(where: {$0 == ownerUsername}) {
+                                        posts.append(post)
+                                        print(post)
+                                    }
+                                    
+                                    if ownerUsername == UserDefaults.standard.string(forKey: "username") {
+                                        UserDefaults.standard.set(true, forKey: "alreadyPost")
+                                    }
+//                                }
+                                
                             }
                         }
                         completionHandler(posts)
@@ -169,6 +179,7 @@ struct ServiceFirebase {
                     print("Document added with ID: \(ref!.documentID)")
                 }
         }
+        UserDefaults.standard.set(true, forKey: "alreadyPost")
     }
     
     func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
@@ -273,6 +284,7 @@ struct ServiceFirebase {
         // Delete the file
         desertRef.delete { error in
           if let error = error {
+              UserDefaults.standard.set(false, forKey: "alreadyPost")
               completionHandler(false)
           } else {
             // File deleted successfully
@@ -379,9 +391,14 @@ struct ServiceFirebase {
                 } else {
                     for document in querySnapshot!.documents {
                         let data = document.data()
-                        print(data["dateChange"])
+                        
                         if let dateChange = data["dateChange"] as? Int {
-                            UserDefaults.standard.set(dateChange, forKey: "dateChange")
+                            if dateChange != UserDefaults.standard.integer(forKey: "dateChange") {
+                                UserDefaults.standard.set(dateChange, forKey: "dateChange")
+                                UserDefaults.standard.set(false, forKey: "alreadyPost")
+                            } else {
+                                
+                            }
                         }
                     }
                 }
