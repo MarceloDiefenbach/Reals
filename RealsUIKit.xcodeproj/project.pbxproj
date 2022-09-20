@@ -11,6 +11,7 @@
 		DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668428CEBC6A00670911 /* UsersViewController.swift */; };
 		DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF05668728CEC0AE00670911 /* Friends.storyboard */; };
 		DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668928CECB3500670911 /* UserTableViewCell.swift */; };
+		DF0E930A28D9434E003329F9 /* SetUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0E930928D9434E003329F9 /* SetUsernameViewController.swift */; };
 		DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3628CA0A9A0038E47C /* AppDelegate.swift */; };
 		DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */; };
 		DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F3A28CA0A9A0038E47C /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 		DF05668428CEBC6A00670911 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		DF05668728CEC0AE00670911 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		DF05668928CECB3500670911 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		DF0E930928D9434E003329F9 /* SetUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUsernameViewController.swift; sourceTree = "<group>"; };
 		DF219F3328CA0A9A0038E47C /* RealsUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealsUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF219F3628CA0A9A0038E47C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				DF219F3C28CA0A9A0038E47C /* Main.storyboard */,
 				DF219F3A28CA0A9A0038E47C /* ViewController.swift */,
 				DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */,
+				DF0E930928D9434E003329F9 /* SetUsernameViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */,
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,
 				DFDF7FE228D20B8E007DD713 /* http.swift in Sources */,
+				DF0E930A28D9434E003329F9 /* SetUsernameViewController.swift in Sources */,
 				DFB75F7228D29590000D5B5F /* User.swift in Sources */,
 				DFB75F7628D33D6B000D5B5F /* ServiceUpload.swift in Sources */,
 			);

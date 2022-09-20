@@ -16,6 +16,24 @@ class ServiceSocial {
     
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
+    
+    func verifyIfHaveUsername(uid: String, completionHandler: @escaping (Bool) -> Void) {
+
+        db.collection("users").document(uid).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data() as? [String: Any]
+                if dataDescription?["username"] != nil && dataDescription?["username"] as! String != "" {
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            } else {
+                print("Document does not exist")
+                completionHandler(false)
+            }
+        }
+    }
+    
 
     func followSomeone(usernameToFollow: String, completionHandler: @escaping (Bool) -> Void) {
         
