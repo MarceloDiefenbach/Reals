@@ -18,6 +18,55 @@
             </objects>
             <point key="canvasLocation" x="764" y="83"/>
         </scene>
+        <!--Set Username View Controller-->
+        <scene sceneID="0w7-ag-kEV">
+            <objects>
+                <viewController id="u5x-XF-wUz" customClass="SetUsernameViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mBp-Uf-U1q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kxe-pd-1Hq">
+                                <rect key="frame" x="20" y="396" width="374" height="104"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GYF-7z-yWW" userLabel="Email">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="username"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEc-pp-t8t">
+                                        <rect key="frame" x="0.0" y="54" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="7SI-CY-evf"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Definir username"/>
+                                        <connections>
+                                            <action selector="finishButtonAction:" destination="u5x-XF-wUz" eventType="touchUpInside" id="AXK-qi-pfD"/>
+                                            <action selector="loginButton:" destination="ljt-Dv-mfd" eventType="touchUpInside" id="TgG-O4-sG7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7bi-ER-Zqz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7bi-ER-Zqz" firstAttribute="trailing" secondItem="kxe-pd-1Hq" secondAttribute="trailing" constant="20" id="1aY-Vu-TF6"/>
+                            <constraint firstItem="kxe-pd-1Hq" firstAttribute="centerY" secondItem="mBp-Uf-U1q" secondAttribute="centerY" id="JCm-xv-eh0"/>
+                            <constraint firstItem="kxe-pd-1Hq" firstAttribute="centerX" secondItem="mBp-Uf-U1q" secondAttribute="centerX" id="Mbg-Ak-cWL"/>
+                            <constraint firstItem="kxe-pd-1Hq" firstAttribute="leading" secondItem="7bi-ER-Zqz" secondAttribute="leading" constant="20" id="bSu-YP-wOo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="usernameField" destination="GYF-7z-yWW" id="LwU-lb-HGF"/>
+                        <segue destination="SHE-0A-bDs" kind="presentation" identifier="finishUsernameSet" modalPresentationStyle="fullScreen" id="siH-eG-RlM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m4k-zB-gLI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="326"/>
+        </scene>
         <!--Login-->
         <scene sceneID="91t-vb-t67">
             <objects>
@@ -73,6 +122,7 @@
                         <outlet property="emailField" destination="O4g-uT-EY8" id="tMG-5r-UWs"/>
                         <outlet property="passwordField" destination="16v-0c-l92" id="4hs-mr-bZH"/>
                         <segue destination="SHE-0A-bDs" kind="presentation" identifier="goToFeed" modalPresentationStyle="fullScreen" id="ZZR-7M-FkL"/>
+                        <segue destination="u5x-XF-wUz" kind="presentation" identifier="setUsername" modalPresentationStyle="fullScreen" id="MIF-bu-XxC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFh-Vo-U7o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -149,7 +199,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZZR-7M-FkL"/>
+        <segue reference="siH-eG-RlM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
