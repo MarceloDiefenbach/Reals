@@ -113,7 +113,7 @@ class ServiceSocial {
     
     func verifyIfFcmTokenChange() {
         
-        if let alreadySave = UserDefaults.standard.string(forKey: "alreadySave") {
+        if UserDefaults.standard.string(forKey: "alreadySave") != nil {
             
             if let fcmTokenNow = UserDefaults.standard.string(forKey: "fcmTokenNow") {
              
