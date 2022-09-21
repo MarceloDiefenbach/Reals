@@ -53,7 +53,6 @@ class VideoCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         //Setup you avplayer while the cell is created
         self.setupMoviePlayer()
-        setupReportDeleteButton()
 
         blackMaskImage.layer.cornerRadius = 16
         activityIndicator.startAnimating()
@@ -61,8 +60,17 @@ class VideoCellTableViewCell: UITableViewCell {
         verifyIfAlreadyPostToday()
     }
     
-    func setupReportDeleteButton() {
-        if post?.ownerUsername == UserDefaults.standard.string(forKey: "username") {
+        //padrão pra organizar a célula
+    func configureDiefenbach() {
+        // Data Source
+        
+        // Layout
+    }
+    
+    func setupReportDeleteButton(post: Post) {
+        self.post = post
+        
+        if post.ownerUsername == UserDefaults.standard.string(forKey: "username") {
             let imageIcon = UIImage(systemName: "trash")
             reportDeleteIcon.image = imageIcon
         } else {

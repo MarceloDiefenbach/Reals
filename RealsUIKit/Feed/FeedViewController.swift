@@ -117,6 +117,7 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.post = posts[indexPath.row]
             cell.delegate = self
+            cell.setupReportDeleteButton(post: posts[indexPath.row])
             playVideoOnTheCell(cell: cell, indexPath: indexPath)
             return cell
         }
