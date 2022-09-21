@@ -113,18 +113,24 @@ class ServiceSocial {
     
     func verifyIfFcmTokenChange() {
         
-        if let fcmTokenNow = UserDefaults.standard.string(forKey: "fcmTokenNow") {
-         
-            if let fcmToken = UserDefaults.standard.string(forKey: "fcmToken"){
-                
-                if fcmToken != fcmTokenNow{
-                    saveToken(token: fcmTokenNow ?? "")
-                }
-                
-            } else {
-                saveToken(token: fcmTokenNow ?? "")
-            }
+        if let alreadySave = UserDefaults.standard.string(forKey: "alreadySave") {
             
+            if let fcmTokenNow = UserDefaults.standard.string(forKey: "fcmTokenNow") {
+             
+                if let fcmToken = UserDefaults.standard.string(forKey: "fcmToken"){
+
+                    if fcmToken != fcmTokenNow{
+                        saveToken(token: fcmTokenNow)
+                    }
+                } else {
+                    saveToken(token: fcmTokenNow)
+                }
+            }
+        } else {
+            
+            if let fcmTokenNow = UserDefaults.standard.string(forKey: "fcmTokenNow") {
+                saveToken(token: fcmTokenNow)
+            }
         }
     }
     
