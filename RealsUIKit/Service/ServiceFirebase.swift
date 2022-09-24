@@ -172,6 +172,7 @@ struct ServiceFirebase {
                 "date": Int(Date.now.timeIntervalSince1970),
                 "videoPath": videoPath,
                 "documentIdOnUsersPosts": refUser!.documentID
+                "fcmToken": UserDefaults.standard.string(forKey: "fcmTokenNow")
             ]) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
