@@ -12,6 +12,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var serviceSocial = ServiceSocial()
     var service = ServiceFirebase()
+    var sender = PushNotificationSender()
     
     var contentShowInList: [User] = []
     var users: [User] = []
@@ -148,7 +149,10 @@ extension UsersViewController {
 extension UsersViewController: DelegateUserRequests {
     
     func followSomeone(userToFollow: User) {
-        serviceSocial.followSomeone(userToFollow: userToFollow, completionHandler: { (repsonse) in
+        serviceSocial.followSomeone(userToFollow: userToFollow, completionHandler: { (response) in
+            if response {
+                self.sender.sendFollowNotification(user: userToFollow)
+            }
         })
         self.getAllUsersWithoutFriends()
     }

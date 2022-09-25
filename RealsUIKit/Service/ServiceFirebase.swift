@@ -182,7 +182,7 @@ struct ServiceFirebase {
                 }
         }
         UserDefaults.standard.set(true, forKey: "alreadyPost")
-        sender.sendNotificationPost()
+//        sender.sendNotificationPost()
     }
     
     func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
