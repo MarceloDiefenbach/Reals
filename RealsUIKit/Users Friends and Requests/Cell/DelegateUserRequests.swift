@@ -10,5 +10,5 @@ import Foundation
 protocol DelegateUserRequests: AnyObject {
     func unfollowSomeone(usernameToUnfollow: User)
     
-    func followSomeone(usernameToFollow: User)
+    func followSomeone(userToFollow: User)
 }

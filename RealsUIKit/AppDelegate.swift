@@ -73,6 +73,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     // Print full message.
     print("willPresent")
+    print(userInfo["changeDay"])
 
     // Change this to your preferred presentation option
     return [[.alert, .sound]]

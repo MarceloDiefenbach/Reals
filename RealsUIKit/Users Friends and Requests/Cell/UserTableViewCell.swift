@@ -32,7 +32,7 @@ class UserTableViewCell: UITableViewCell {
     
     @IBAction func addFriendButton(_ sender: Any) {
         if control {
-            delegate.followSomeone(usernameToFollow: user!)
+            delegate.followSomeone(userToFollow: user!)
             control = false
         }
     }

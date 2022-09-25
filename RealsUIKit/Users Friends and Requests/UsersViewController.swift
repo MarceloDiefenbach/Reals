@@ -147,8 +147,8 @@ extension UsersViewController {
 //MARK: - delegat of cells
 extension UsersViewController: DelegateUserRequests {
     
-    func followSomeone(usernameToFollow: User) {
-        serviceSocial.followSomeone(usernameToFollow: usernameToFollow, completionHandler: { (repsonse) in
+    func followSomeone(userToFollow: User) {
+        serviceSocial.followSomeone(userToFollow: userToFollow, completionHandler: { (repsonse) in
         })
         self.getAllUsersWithoutFriends()
     }
