@@ -57,8 +57,7 @@ class ViewController: UIViewController {
         passwordField.isSecureTextEntry = true
         requestPermissionToNotifications()
         setupAppleButton()
-        
-        serviceSocial.verifyIfFcmTokenChange()
+
         
     }
     

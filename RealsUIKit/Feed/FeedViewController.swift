@@ -13,6 +13,7 @@ import FirebaseAuth
 
 class FeedViewController: UIViewController {
     
+    var serviceSocial = ServiceSocial()
     var ownerId: String = ""
     var ownerUsername: String = ""
     var photo: String = ""
@@ -33,6 +34,9 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        serviceSocial.verifyIfFcmTokenChange()
+        
         tableView.delegate = self
         tableView.dataSource = self
         

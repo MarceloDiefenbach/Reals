@@ -79,9 +79,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "335"
-            endingLineNumber = "335"
-            landmarkName = "getIdByUser(username:completionHandler:)"
-            landmarkType = "7">
+            endingLineNumber = "335">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,9 +93,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "340"
-            endingLineNumber = "340"
-            landmarkName = "getIdByUser(username:completionHandler:)"
-            landmarkType = "7">
+            endingLineNumber = "340">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -128,7 +124,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
             endingLineNumber = "184"
-            landmarkName = "createReals(urlVideo:videoPath:)"
+            landmarkName = "uploadVideo(urlVideo:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -143,9 +139,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "376"
-            endingLineNumber = "376"
-            landmarkName = "uploadToDrive()"
-            landmarkType = "7">
+            endingLineNumber = "376">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -255,9 +249,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "getHosts()"
-            landmarkType = "7">
+            endingLineNumber = "117">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -366,8 +358,8 @@
             filePath = "RealsUIKit/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "userNotificationCenter(_:didReceive:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -382,8 +374,8 @@
             filePath = "RealsUIKit/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "messaging(_:didReceiveRegistrationToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -399,9 +391,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "391"
-            endingLineNumber = "391"
-            landmarkName = "getDateChange()"
-            landmarkType = "7">
+            endingLineNumber = "391">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -446,7 +436,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
             endingLineNumber = "30"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -462,7 +452,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -478,7 +468,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
             endingLineNumber = "33"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -494,7 +484,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
             endingLineNumber = "35"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -510,7 +500,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
             endingLineNumber = "37"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -525,9 +515,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "firstStep(fileName:completionHandler:)"
-            landmarkType = "7">
+            endingLineNumber = "86">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -542,7 +530,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
             endingLineNumber = "44"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -558,7 +546,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -574,7 +562,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
             endingLineNumber = "55"
-            landmarkName = "uploadPandaVideo(videoData:videoSize:urlVideo:completionHandler:)"
+            landmarkName = "uploadPandaVideo()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
