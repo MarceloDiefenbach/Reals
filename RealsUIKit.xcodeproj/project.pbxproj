@@ -21,6 +21,7 @@
 		DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */; };
 		DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F5228CA0BC80038E47C /* Feed.storyboard */; };
 		DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5428CA0BD50038E47C /* FeedViewController.swift */; };
+		DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EDBDF28E10B3600B2160B /* Notification.swift */; };
 		DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927128CA2E4200162F1E /* PlayerView.swift */; };
 		DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */; };
 		DF7B6D0228CA91680082A4B0 /* CaptureVideoFrontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */; };
@@ -68,6 +69,7 @@
 		DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFirebase.swift; sourceTree = "<group>"; };
 		DF219F5228CA0BC80038E47C /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		DF219F5428CA0BD50038E47C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		DF2EDBDF28E10B3600B2160B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		DF3B927128CA2E4200162F1E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
 		DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoFrontal.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				DFDF7FE128D20B8E007DD713 /* http.swift */,
 				DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */,
 				DFB75F7528D33D6B000D5B5F /* ServiceUpload.swift */,
+				DF2EDBDF28E10B3600B2160B /* Notification.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */,
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,
 				DFDF7FE228D20B8E007DD713 /* http.swift in Sources */,
+				DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */,
 				DF0E930A28D9434E003329F9 /* SetUsernameViewController.swift in Sources */,
 				DFB75F7228D29590000D5B5F /* User.swift in Sources */,
 				DFB75F7628D33D6B000D5B5F /* ServiceUpload.swift in Sources */,

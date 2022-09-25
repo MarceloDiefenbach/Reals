@@ -21,6 +21,7 @@ struct FriendRequest {
 struct ServiceFirebase {
     
     var serviceSocial = ServiceSocial()
+    let sender = PushNotificationSender()
     
     #warning("se precisar de ajuda, falar com a gabi")
     // separar os serviços por tipo em arquivos diferentes
@@ -181,6 +182,7 @@ struct ServiceFirebase {
                 }
         }
         UserDefaults.standard.set(true, forKey: "alreadyPost")
+//        sender.sendNotificationPost()
     }
     
     func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {

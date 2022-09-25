@@ -35,20 +35,20 @@ class ServiceSocial {
     }
     
 
-    func followSomeone(usernameToFollow: User, completionHandler: @escaping (Bool) -> Void) {
+    func followSomeone(userToFollow: User, completionHandler: @escaping (Bool) -> Void) {
         db.collection("users")
             .document(firebaseAuth.currentUser!.uid)
             .collection("following")
             .addDocument(data:
                             [
-                                "username" : usernameToFollow.username,
-                                "email" : usernameToFollow.email,
-                                "userId" : usernameToFollow.userId,
-                                "fcmToken" : usernameToFollow.fcmToken,
+                                "username" : userToFollow.username,
+                                "email" : userToFollow.email,
+                                "userId" : userToFollow.userId,
+                                "fcmToken" : userToFollow.fcmToken,
                             ]
             )
         db.collection("users")
-            .document(usernameToFollow.userId)
+            .document(userToFollow.userId)
             .collection("followers")
             .addDocument(data:
                             [
