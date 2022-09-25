@@ -13,6 +13,7 @@ class FriendTableViewCell: UITableViewCell {
     @IBOutlet weak var addButton: UIButton!
     var delegate: DelegateUserRequests!
     var control: Bool = true
+    var user: User?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,9 +26,13 @@ class FriendTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setUser(user: User) {
+        self.user = user
+    }
+    
     @IBAction func unfollowButton(_ sender: Any) {
         if control {
-            delegate.unfollowSomeone(usernameToUnfollow: nameLabel.text ?? "")
+            delegate.unfollowSomeone(usernameToUnfollow: user!)
             self.control = false
         }
     }

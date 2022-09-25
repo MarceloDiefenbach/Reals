@@ -79,7 +79,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "335"
-            endingLineNumber = "335">
+            endingLineNumber = "335"
+            landmarkName = "getIdByUser(username:completionHandler:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -93,7 +95,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "340"
-            endingLineNumber = "340">
+            endingLineNumber = "340"
+            landmarkName = "getIdByUser(username:completionHandler:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -124,7 +128,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
             endingLineNumber = "184"
-            landmarkName = "uploadVideo(urlVideo:completionHandler:)"
+            landmarkName = "createReals(urlVideo:videoPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -139,7 +143,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "376"
-            endingLineNumber = "376">
+            endingLineNumber = "376"
+            landmarkName = "uploadToDrive()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -184,8 +190,8 @@
             filePath = "RealsUIKit/Users Friends and Requests/UsersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "updateTableView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -262,8 +268,8 @@
             filePath = "RealsUIKit/Service/ServiceSocial.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "getAllUsersWithoutFriends(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -391,7 +397,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "391"
-            endingLineNumber = "391">
+            endingLineNumber = "391"
+            landmarkName = "getDateChange()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -404,8 +412,8 @@
             filePath = "RealsUIKit/Users Friends and Requests/UsersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -595,6 +603,38 @@
             startingLineNumber = "56"
             endingLineNumber = "56"
             landmarkName = "sendPushNotification(to:title:body:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "17A3BC77-6A74-4D0B-9C17-769B88C322FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealsUIKit/Login/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "938CCCCB-D11C-4923-9E6F-EDCDD00E7DD8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealsUIKit/Users Friends and Requests/Cell/FriendTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "unfollowButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

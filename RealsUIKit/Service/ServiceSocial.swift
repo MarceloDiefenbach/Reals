@@ -22,10 +22,10 @@ class ServiceSocial {
         db.collection("users").document(uid).getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data() as? [String: Any]
-                if dataDescription?["username"] != nil && dataDescription?["username"] as! String != "" {
-                    completionHandler(true)
-                } else {
+                if dataDescription?["username"] == nil || dataDescription?["username"] as! String == "" {
                     completionHandler(false)
+                } else {
+                    completionHandler(true)
                 }
             } else {
                 print("Document does not exist")
@@ -35,15 +35,44 @@ class ServiceSocial {
     }
     
 
-    func followSomeone(usernameToFollow: String, completionHandler: @escaping (Bool) -> Void) {
-        
-        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friends").addDocument(data: ["username" : usernameToFollow])
+    func followSomeone(usernameToFollow: User, completionHandler: @escaping (Bool) -> Void) {
+        db.collection("users")
+            .document(firebaseAuth.currentUser!.uid)
+            .collection("following")
+            .addDocument(data:
+                            [
+                                "username" : usernameToFollow.username,
+                                "email" : usernameToFollow.email,
+                                "userId" : usernameToFollow.userId,
+                                "fcmToken" : usernameToFollow.fcmToken,
+                            ]
+            )
+        db.collection("users")
+            .document(usernameToFollow.userId)
+            .collection("followers")
+            .addDocument(data:
+                            [
+                                "username" : UserDefaults.standard.string(forKey: "username"),
+                                "email" : firebaseAuth.currentUser!.email,
+                                "userId" : firebaseAuth.currentUser!.uid,
+                                "fcmToken" : UserDefaults.standard.string(forKey: "fcmTokenNow"),
+                            ]
+            )
         completionHandler(true)
+
     }
     
-    func unfollowSomeone(usernameToUnfollow: String, completionHandler: @escaping (Bool) -> Void) {
-        
-        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friends").whereField("username", isEqualTo: usernameToUnfollow).getDocuments { (querySnapshot, error) in
+    func unfollowSomeone(usernameToUnfollow: User, completionHandler: @escaping (Bool) -> Void) {
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("following").whereField("username", isEqualTo: usernameToUnfollow.username).getDocuments { (querySnapshot, error) in
+            if error != nil {
+                print(error)
+            } else {
+                for document in querySnapshot!.documents {
+                    document.reference.delete()
+                }
+            }
+        }
+        db.collection("users").document(usernameToUnfollow.userId).collection("followers").whereField("username", isEqualTo: UserDefaults.standard.string(forKey: "username")).getDocuments { (querySnapshot, error) in
             if error != nil {
                 print(error)
             } else {
@@ -57,19 +86,55 @@ class ServiceSocial {
     func getUsersFollowing(completionHandler: @escaping ([User]) -> Void ) {
         
         var allFollowing: [User] = []
-        
-        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friends").getDocuments { querySnapshot, err in
+        print(firebaseAuth.currentUser!.uid)
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("following").getDocuments { querySnapshot, err in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    allFollowing.append(
-                        User(
-                            username: document.data()["username"] as! String,
-                            email: "",
-                            userId: ""
+                    
+                    if let username = document.data()["username"] as? String,
+                       let email = document.data()["email"] as? String,
+                       let userId = document.data()["userId"] as? String,
+                       let fcmToken = document.data()["fcmToken"] as? String {
+                        allFollowing.append(
+                            User(
+                                username: username,
+                                email: email,
+                                userId: userId,
+                                fcmToken: fcmToken
+                            )
                         )
-                    )
+                    }
+                }
+            }
+            completionHandler(allFollowing)
+        }
+    }
+    
+    func getFollowers(completionHandler: @escaping ([User]) -> Void ) {
+        
+        var allFollowing: [User] = []
+        print(firebaseAuth.currentUser!.uid)
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("followers").getDocuments { querySnapshot, err in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    if let username = document.data()["username"] as? String,
+                       let email = document.data()["email"] as? String,
+                       let userId = document.data()["userId"] as? String,
+                       let fcmToken = document.data()["fcmToken"] as? String {
+                        allFollowing.append(
+                            User(
+                                username: username,
+                                email: email,
+                                userId: userId,
+                                fcmToken: fcmToken
+                            )
+                        )
+                    }
                 }
             }
             completionHandler(allFollowing)
@@ -94,11 +159,12 @@ class ServiceSocial {
                             
                             if let username = data["username"] as? String,
                                let email = data["email"] as? String,
-                               let userId = doc.documentID as? String {
+                               let userId = doc.documentID as? String,
+                               let fcmToken = data["fcmToken"] as? String {
                                 
                                 if username != UserDefaults.standard.string(forKey: "username") {
                                     if !response.contains(where: { $0.username == username }) {
-                                        allUsersWithoutFriends.append(User(username: username, email: email, userId: userId))
+                                        allUsersWithoutFriends.append(User(username: username, email: email, userId: userId, fcmToken: fcmToken))
                                     }
                                 }
                                 print(allUsersWithoutFriends)

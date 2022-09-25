@@ -45,7 +45,7 @@
 		DFDF7FE228D20B8E007DD713 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE128D20B8E007DD713 /* http.swift */; };
 		DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */; };
 		DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3828D1602600156053 /* FriendTableViewCell.swift */; };
-		DFF96A3B28D1617B00156053 /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3A28D1617B00156053 /* RequestTableViewCell.swift */; };
+		DFF96A3B28D1617B00156053 /* FollowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +93,7 @@
 		DFDF7FE128D20B8E007DD713 /* http.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = http.swift; sourceTree = "<group>"; };
 		DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateUserRequests.swift; sourceTree = "<group>"; };
 		DFF96A3828D1602600156053 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
-		DFF96A3A28D1617B00156053 /* RequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
+		DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTableViewCell.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,7 +283,7 @@
 			children = (
 				DF05668928CECB3500670911 /* UserTableViewCell.swift */,
 				DFF96A3828D1602600156053 /* FriendTableViewCell.swift */,
-				DFF96A3A28D1617B00156053 /* RequestTableViewCell.swift */,
+				DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */,
 				DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */,
 			);
 			path = Cell;
@@ -433,7 +433,7 @@
 				DF8E3B3328D6653E001AC8AC /* EmptyCellTableViewCell.swift in Sources */,
 				DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */,
 				DF7B6D0228CA91680082A4B0 /* CaptureVideoFrontal.swift in Sources */,
-				DFF96A3B28D1617B00156053 /* RequestTableViewCell.swift in Sources */,
+				DFF96A3B28D1617B00156053 /* FollowerTableViewCell.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,
 				DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */,
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,

@@ -139,23 +139,6 @@ extension ViewController {
             }
         }
     }
-    
-    func setNotification() {
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Ei, ta na hora!"
-        content.subtitle = "Vem gravar um Real"
-        content.sound = UNNotificationSound.default
-
-        // show this notification five seconds from now
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-        // choose a random identifier
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-        // add our notification request
-        UNUserNotificationCenter.current().add(request)
-    }
 }
 
 
@@ -214,7 +197,7 @@ extension ViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-            Auth.auth().signIn(with: credential) { (authResult, error) in
+            Auth.auth().signIn(with: credential) { [self] (authResult, error) in
                 if (error != nil) {
                     // Error. If error.code == .MissingOrInvalidNonce, make sure
                     // you're sending the SHA256-hashed nonce as a hex string with
@@ -227,26 +210,24 @@ extension ViewController: ASAuthorizationControllerDelegate {
                 let displayName = user.displayName ?? ""
                 guard let uid = Auth.auth().currentUser?.uid else { return }
                 
-                if false {
-                    let db = Firestore.firestore()
-                    db.collection("users").document(uid).setData([
-                        "email": email,
-                        "uid": uid
-                    ]) { err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                        } else {
-                            print("the user has sign up or is logged in")
-                        }
+                let db = Firestore.firestore()
+                db.collection("users").document(uid).setData([
+                    "email": email,
+                    "uid": uid
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("the user has sign up or is logged in")
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        self.performSegue(withIdentifier: "goToFeed", sender: nil)
-                    })
-                } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        self.performSegue(withIdentifier: "setUsername", sender: nil)
-                    })
                 }
+                serviceSocial.verifyIfHaveUsername(uid: self.firebaseAuth.currentUser?.uid ?? "", completionHandler: { (response) in
+                    if response {
+                        self.performSegue(withIdentifier: "goToFeed", sender: nil)
+                    } else {
+                        self.performSegue(withIdentifier: "setUsername", sender: nil)
+                    }
+                })
             }
         }
     }

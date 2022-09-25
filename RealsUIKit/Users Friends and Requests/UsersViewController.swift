@@ -16,6 +16,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var contentShowInList: [User] = []
     var users: [User] = []
     var following: [User] = []
+    var followers: [User] = []
     let searchController = UISearchController(searchResultsController: nil)
     var filteredUsers: [User] = []
     
@@ -38,14 +39,17 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         segmentedControl.setTitle("Usuários", forSegmentAt: 0)
         segmentedControl.setTitle("Seguindo", forSegmentAt: 1)
+        segmentedControl.setTitle("Seguidores", forSegmentAt: 2)
     }
     
     @IBAction func actionBlockedToggle(_ sender: UISegmentedControl) {
         
         if segmentedControl.selectedSegmentIndex == 0 {
             self.getAllUsersWithoutFriends()
-        } else {
+        } else if segmentedControl.selectedSegmentIndex == 1 {
             self.getAllFollowing()
+        } else {
+            self.getAllFollowers()
         }
     }
     
@@ -60,21 +64,31 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             cell.nameLabel.text = contentShowInList[indexPath.row].username
             cell.delegate = self
+            cell.setUser(user: contentShowInList[indexPath.row])
             return cell
             
-        } else {
+        } else if segmentedControl.selectedSegmentIndex == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellFriend") as! FriendTableViewCell
             
             cell.nameLabel.text = contentShowInList[indexPath.row].username
+            cell.setUser(user: contentShowInList[indexPath.row])
             cell.delegate = self
             return cell
             
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellFollower") as! FollowerTableViewCell
+            
+            cell.nameLabel.text = contentShowInList[indexPath.row].username
+            cell.setUser(user: contentShowInList[indexPath.row])
+            cell.delegate = self
+            return cell
         }
     }
     
     func updateTableViewData() {
         getAllUsersWithoutFriends()
         getAllFollowing()
+        getAllFollowers()
         updateTableView()
     }
     
@@ -90,12 +104,12 @@ extension UsersViewController: UISearchResultsUpdating {
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
-    
-  func updateSearchResults(for searchController: UISearchController) {
+        
+    func updateSearchResults(for searchController: UISearchController) {
       let searchBar = searchController.searchBar
       filterContentForSearchText(searchBar.text!)
-  }
-    
+    }
+
     func filterContentForSearchText(_ searchText: String) {
         filteredUsers = users.filter { (user: User) -> Bool in
         return user.username.lowercased().contains(searchText.lowercased())
@@ -121,18 +135,25 @@ extension UsersViewController {
             self.updateTableView()
         })
     }
+    func getAllFollowers() {
+        serviceSocial.getFollowers(completionHandler: { (followers) in
+            self.followers = followers
+            self.contentShowInList = followers
+            self.updateTableView()
+        })
+    }
 }
 
 //MARK: - delegat of cells
 extension UsersViewController: DelegateUserRequests {
     
-    func followSomeone(usernameToFollow: String) {
+    func followSomeone(usernameToFollow: User) {
         serviceSocial.followSomeone(usernameToFollow: usernameToFollow, completionHandler: { (repsonse) in
         })
         self.getAllUsersWithoutFriends()
     }
     
-    func unfollowSomeone(usernameToUnfollow: String) {
+    func unfollowSomeone(usernameToUnfollow: User) {
         serviceSocial.unfollowSomeone(usernameToUnfollow: usernameToUnfollow, completionHandler: { (repsonse) in
         })
         self.getAllFollowing()

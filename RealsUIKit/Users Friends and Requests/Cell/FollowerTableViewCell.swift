@@ -7,16 +7,20 @@
 
 import UIKit
 
-class RequestTableViewCell: UITableViewCell {
+class FollowerTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
     var delegate: DelegateUserRequests!
+    var user: User?
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func setUser(user: User) {
+        self.user = user
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

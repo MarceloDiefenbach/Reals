@@ -11,4 +11,5 @@ struct User {
     let username: String
     let email: String
     let userId: String
+    let fcmToken: String
 }

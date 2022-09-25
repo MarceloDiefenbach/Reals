@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DelegateUserRequests: AnyObject {
-    func unfollowSomeone(usernameToUnfollow: String)
+    func unfollowSomeone(usernameToUnfollow: User)
     
-    func followSomeone(usernameToFollow: String)
+    func followSomeone(usernameToFollow: User)
 }

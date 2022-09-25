@@ -88,6 +88,7 @@ class RegisterViewController: UIViewController {
                     [
                         "username": self.usernameField.text!,
                         "email": self.emailField.text!,
+                        "fcmToken": "000"
                     ]
                     , merge: true
                 )
