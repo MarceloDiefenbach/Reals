@@ -40,12 +40,7 @@ class PushNotificationSender {
 
         var receivers: [String] = []
 
-        service.getFollowers(completionHandler: { (users) in
-
-            for user in users {
-                receivers.append(user.fcmToken)
-            }
-            print(receivers)
+        service.getFcmTokenOfFollowers(completionHandler: { (receivers) in
 
             let urlString = "https://fcm.googleapis.com/fcm/send"
             let url = NSURL(string: urlString)!

@@ -13,6 +13,7 @@ class VideoPlayback: UIViewController {
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
     var service = ServiceFirebase()
+    var serviceSocial = ServiceSocial()
     var videoURL: URL!
     var videoSize: Double?
     var videoData: Data?
@@ -61,7 +62,6 @@ class VideoPlayback: UIViewController {
     @objc func playerItemDidReachEnd(notification: Notification) {
         if let playerItem = notification.object as? AVPlayerItem {
             playerItem.seek(to: CMTime.zero)
-
         }
     }
     

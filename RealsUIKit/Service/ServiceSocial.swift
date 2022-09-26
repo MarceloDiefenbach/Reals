@@ -215,23 +215,40 @@ class ServiceSocial {
         }
     }
     
-//        func updateFcmTokenOnUsersThatFollowMe(token: String) {
-//
-//            getFollowers(completionHandler: {(users) in
-//
-//                for user in users {
-//
-//                    db.collection("users").document(user.userId).collection("following").setData([
-//                        "fcmToken": token
-//                    ], merge: true) { err in
-//                        if let err = err {
-//                            print("Error writing document: \(err)")
-//                        } else {
-//                            print("the user has sign up or is logged in")
-//                        }
-//                    }
-//                }
-//            })
-//        }
+        func getFcmTokenOfFollowers(completionHandler: @escaping ([String]) -> Void) {
+            
+            var fcmTokens: [String] = []
+
+            getFollowers(completionHandler: {(users) in
+                
+                self.db.collection("users").getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                        completionHandler(fcmTokens)
+                    } else {
+                        
+                        if let snapshotDocumentos = querySnapshot?.documents {
+                            for doc in snapshotDocumentos {
+                                
+                                let data = doc.data()
+                                
+                                if let username = data["username"] as? String,
+                                   let email = data["email"] as? String,
+                                   let userId = doc.documentID as? String,
+                                   let fcmToken = data["fcmToken"] as? String {
+                                    
+                                    if username != UserDefaults.standard.string(forKey: "username") {
+                                        if users.contains(where: { $0.username == username }) {
+                                            fcmTokens.append(fcmToken)
+                                        }
+                                    }
+                                }
+                            }
+                            completionHandler(fcmTokens)
+                        }
+                    }
+                }
+            })
+        }
     
 }
