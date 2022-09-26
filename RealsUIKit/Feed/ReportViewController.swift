@@ -28,6 +28,19 @@ class ReportViewController: UIViewController, UITextFieldDelegate {
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func reportAndBlock(_ sender: Any) {
+        let alert = UIAlertController(title: "Denuncia recebida", message: "Vamos analisar em até 24 horas e se necessário interviremos na publicação", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { action in
+        
+            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
+            viewController?.dismiss(animated: true, completion: nil)
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         
         ownerUsername.text = ownerUsernameVar

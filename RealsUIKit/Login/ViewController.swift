@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     var serviceSocial = ServiceSocial()
     let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
 
+    @IBOutlet weak var termsOfUseButton: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         passwordField.isSecureTextEntry = true
         requestPermissionToNotifications()
         setupAppleButton()
+        setTermsOfUseInteraction()
 
         
     }
@@ -138,6 +140,24 @@ extension ViewController {
             }
         }
     }
+}
+
+//MARK: - Terms of use button
+extension ViewController {
+    
+    func setTermsOfUseInteraction() {
+        
+        let tapTermsOfUseButton = UITapGestureRecognizer(target: self, action: #selector(self.termsOfUseButtonFunction))
+        termsOfUseButton.addGestureRecognizer(tapTermsOfUseButton)
+        termsOfUseButton.isUserInteractionEnabled = true
+    }
+
+    @objc func termsOfUseButtonFunction(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            self.performSegue(withIdentifier: "showTermsOfUseLogin", sender: nil)
+        }
+    }
+    
 }
 
 

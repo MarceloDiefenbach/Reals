@@ -22,6 +22,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var termsOfUseSwitch: UISwitch!
+    @IBOutlet weak var termsOfUseButton: UILabel!
     
     @IBAction func backToLoginButton(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -41,22 +43,30 @@ class RegisterViewController: UIViewController {
             
             service.verifyIsExist(username: usernameField.text ?? "", completionHandler: { (existUsername) -> Void in
                 
-                print(existUsername)
-                if existUsername {
-                    let alert = UIAlertController(title: "Usuário já existe", message: "O nome de usuário informado já está sendo utilizado, escolha outro e tente novamente", preferredStyle: .alert)
+                if self.termsOfUseSwitch.isOn {
+                    print(existUsername)
+                    if existUsername {
+                        let alert = UIAlertController(title: "Usuário já existe", message: "O nome de usuário informado já está sendo utilizado, escolha outro e tente novamente", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                            //nothing to do
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    } else {
+                        self.createAccount(
+                            username: self.usernameField.text ?? "",
+                            email: self.emailField.text ?? "",
+                            password: self.passwordField.text ?? "",
+                            completionHandler: { (valueReturn) -> Void in
+                                
+                            })
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Termos de uso", message: "Você precisa ler e aceitar nossos termos de uso", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                         //nothing to do
                     }))
                     self.present(alert, animated: true, completion: nil)
-                    
-                } else {
-                    self.createAccount(
-                        username: self.usernameField.text ?? "",
-                        email: self.emailField.text ?? "",
-                        password: self.passwordField.text ?? "",
-                        completionHandler: { (valueReturn) -> Void in
-                            
-                        })
                 }
             })
         }
@@ -69,6 +79,8 @@ class RegisterViewController: UIViewController {
         emailField.text = ""
         passwordField.text = ""
         passwordField.isSecureTextEntry = true
+        
+        setTermsOfUseInteraction()
         
     }
     
@@ -113,4 +125,16 @@ class RegisterViewController: UIViewController {
         completionHandler("account created")
     }
     
+    func setTermsOfUseInteraction() {
+        
+        let tapTermsOfUseButton = UITapGestureRecognizer(target: self, action: #selector(self.termsOfUseButtonFunction))
+        termsOfUseButton.addGestureRecognizer(tapTermsOfUseButton)
+        termsOfUseButton.isUserInteractionEnabled = true
+    }
+
+    @objc func termsOfUseButtonFunction(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            self.performSegue(withIdentifier: "showTermsOfUse", sender: nil)
+        }
+    }
 }
