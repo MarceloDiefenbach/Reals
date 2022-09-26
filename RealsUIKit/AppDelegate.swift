@@ -110,7 +110,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
           
           // Print full message.
           print(userInfo)
-          print("aqui \(userInfo["changeDay"])")
 
           return UIBackgroundFetchResult.newData
     }

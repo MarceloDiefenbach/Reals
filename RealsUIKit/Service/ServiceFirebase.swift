@@ -22,13 +22,13 @@ struct ServiceFirebase {
     
     var serviceSocial = ServiceSocial()
     
-    #warning("se precisar de ajuda, falar com a gabi")
+#warning("se precisar de ajuda, falar com a gabi")
     // separar os serviços por tipo em arquivos diferentes
     // tem que ter um singleton que ai o serviço vai ser criado só uma vez
     
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
-
+    
     func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
         
         var posts: [Post] = []
@@ -72,18 +72,18 @@ struct ServiceFirebase {
             
             friendsUsername = friends.map( { $0.username } )
             friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")
-
+            
             db.collection("posts").whereField("date", isGreaterThan: UserDefaults.standard.integer(forKey: "dateChange")).order(by: "date", descending: true).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
-
+                    
                     if let snapshotDocumentos = querySnapshot?.documents {
                         UserDefaults.standard.set(false, forKey: "alreadyPost")
                         for doc in snapshotDocumentos {
-
-                             let data = doc.data()
-
+                            
+                            let data = doc.data()
+                            
                             if let title = data["title"] as? String,
                                let ownerId = data["ownerId"] as? String,
                                let photo = data["photo"] as? String,
@@ -92,19 +92,19 @@ struct ServiceFirebase {
                                let date = data["date"] as? Int {
                                 
                                 print(date)
-
+                                
                                 let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
-
-//                                if post.date > UserDefaults.standard.integer(forKey: "dateChange") {
-                                    if friendsUsername.contains(where: {$0 == ownerUsername}) {
-                                        posts.append(post)
-                                        print(post)
-                                    }
-                                    
-                                    if ownerUsername == UserDefaults.standard.string(forKey: "username") {
-                                        UserDefaults.standard.set(true, forKey: "alreadyPost")
-                                    }
-//                                }
+                                
+                                //                                if post.date > UserDefaults.standard.integer(forKey: "dateChange") {
+                                if friendsUsername.contains(where: {$0 == ownerUsername}) {
+                                    posts.append(post)
+                                    print(post)
+                                }
+                                
+                                if ownerUsername == UserDefaults.standard.string(forKey: "username") {
+                                    UserDefaults.standard.set(true, forKey: "alreadyPost")
+                                }
+                                //                                }
                                 
                             }
                         }
@@ -121,25 +121,25 @@ struct ServiceFirebase {
         var exist: Bool = false
         
         print(username)
-
+        
         db.collection("users").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-//                        print("\(document.documentID) => \(document.data())")
-                        let usernameData = document.data()["username"] as? String
-
-                        if usernameData?.lowercased() == username.lowercased() {
-                            exist = true
-                            break
-                        } else {
-                            exist = false
-                        }
-
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    //                        print("\(document.documentID) => \(document.data())")
+                    let usernameData = document.data()["username"] as? String
+                    
+                    if usernameData?.lowercased() == username.lowercased() {
+                        exist = true
+                        break
+                    } else {
+                        exist = false
                     }
+                    
                 }
-                completionHandler(exist)
+            }
+            completionHandler(exist)
         }
     }
     
@@ -190,7 +190,7 @@ struct ServiceFirebase {
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let formattedDate = format.string(from: date)
         print(formattedDate)
-
+        
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
@@ -281,17 +281,17 @@ struct ServiceFirebase {
     
     func deleteVideo(videoPath: String, documentId: String, completionHandler: @escaping (Bool) -> Void ) {
         let storageRef = Storage.storage().reference()
-
+        
         let desertRef = storageRef.child(videoPath)
-
+        
         // Delete the file
         desertRef.delete { error in
-          if let error = error {
-              UserDefaults.standard.set(false, forKey: "alreadyPost")
-              completionHandler(false)
-          } else {
-            // File deleted successfully
-          }
+            if let error = error {
+                UserDefaults.standard.set(false, forKey: "alreadyPost")
+                completionHandler(false)
+            } else {
+                // File deleted successfully
+            }
         }
         db.collection("posts").document(documentId).delete() { err in
             if let err = err {
@@ -307,7 +307,7 @@ struct ServiceFirebase {
     func getAllRequestFriend(completionHandler: @escaping ([FriendRequest]) -> Void) {
         
         var allFriendsRequests: [FriendRequest] = []
-
+        
         db.collection("users").document(firebaseAuth.currentUser!.uid).collection("friendsRequest")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -323,53 +323,53 @@ struct ServiceFirebase {
                             
                             allFriendsRequests.append(friendRequest)
                             print(allFriendsRequests)
+                        }
                     }
+                    completionHandler(allFriendsRequests)
                 }
-                completionHandler(allFriendsRequests)
             }
-        }
     }
     
     func getIdByUser(username: String, completionHandler: @escaping (String) -> Void) {
         
         var ownerIDReceiver: String = ""
-
+        
         db.collection("users").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        print(document.documentID)
-                        if document.data()["username"] as? String == username {
-                            ownerIDReceiver = document.documentID
-                        }
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    print(document.documentID)
+                    if document.data()["username"] as? String == username {
+                        ownerIDReceiver = document.documentID
                     }
                 }
-                completionHandler(ownerIDReceiver)
+            }
+            completionHandler(ownerIDReceiver)
         }
     }
     
     func getUserByEmail(email: String, completionHandler: @escaping (String) -> Void) {
         
-      var ownerUsernameReceiver: String = ""
-
+        var ownerUsernameReceiver: String = ""
+        
         db.collection("users").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        print(document.data()["username"] ?? "")
-                        if document.data()["email"] as? String == email {
-                            ownerUsernameReceiver = document.data()["username"] as! String
-                        }
-                        
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    print(document.data()["username"] ?? "")
+                    if document.data()["email"] as? String == email {
+                        ownerUsernameReceiver = document.data()["username"] as! String
                     }
+                    
                 }
-                completionHandler(ownerUsernameReceiver)
+            }
+            completionHandler(ownerUsernameReceiver)
         }
-
+        
     }
     
     
@@ -407,7 +407,7 @@ struct ServiceFirebase {
                 }
                 
                 
-        }
+            }
         
     }
     

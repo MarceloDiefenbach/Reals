@@ -18,7 +18,7 @@ class ServiceSocial {
     let firebaseAuth = Auth.auth()
     
     func verifyIfHaveUsername(uid: String, completionHandler: @escaping (Bool) -> Void) {
-
+        
         db.collection("users").document(uid).getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data() as? [String: Any]
@@ -34,32 +34,33 @@ class ServiceSocial {
         }
     }
     
-
+    
     func followSomeone(userToFollow: User, completionHandler: @escaping (Bool) -> Void) {
         db.collection("users")
             .document(firebaseAuth.currentUser!.uid)
             .collection("following")
-            .addDocument(data:
-                            [
-                                "username" : userToFollow.username,
-                                "email" : userToFollow.email,
-                                "userId" : userToFollow.userId,
-                                "fcmToken" : userToFollow.fcmToken,
-                            ]
+            .document(userToFollow.userId).setData(
+                [
+                    "username" : userToFollow.username,
+                    "email" : userToFollow.email,
+                    "userId" : userToFollow.userId,
+                    "fcmToken" : userToFollow.fcmToken,
+                ]
             )
         db.collection("users")
             .document(userToFollow.userId)
             .collection("followers")
-            .addDocument(data:
-                            [
-                                "username" : UserDefaults.standard.string(forKey: "username"),
-                                "email" : firebaseAuth.currentUser!.email,
-                                "userId" : firebaseAuth.currentUser!.uid,
-                                "fcmToken" : UserDefaults.standard.string(forKey: "fcmTokenNow"),
-                            ]
-            )
+            .document(firebaseAuth.currentUser!.uid).setData(
+                [
+                    "username" : UserDefaults.standard.string(forKey: "username"),
+                    "email" : firebaseAuth.currentUser!.email,
+                    "userId" : firebaseAuth.currentUser!.uid,
+                    "fcmToken" : UserDefaults.standard.string(forKey: "fcmTokenNow"),
+                ],
+                merge: true)
+        //        sender.sendFollowNotification(user: userToFollow)
         completionHandler(true)
-
+        
     }
     
     func unfollowSomeone(usernameToUnfollow: User, completionHandler: @escaping (Bool) -> Void) {
@@ -142,7 +143,7 @@ class ServiceSocial {
     }
     
     func getAllUsersWithoutFriends(completionHandler: @escaping ([User]) -> Void) {
-            
+        
         getUsersFollowing(completionHandler: { (response) in
             
             var allUsersWithoutFriends: [User] = []
@@ -182,11 +183,12 @@ class ServiceSocial {
         if UserDefaults.standard.string(forKey: "alreadySave") != nil {
             
             if let fcmTokenNow = UserDefaults.standard.string(forKey: "fcmTokenNow") {
-             
+                
                 if let fcmToken = UserDefaults.standard.string(forKey: "fcmToken"){
-
+                    
                     if fcmToken != fcmTokenNow{
                         saveToken(token: fcmTokenNow)
+                        
                     }
                 } else {
                     saveToken(token: fcmTokenNow)
@@ -213,4 +215,26 @@ class ServiceSocial {
         }
     }
     
+    //    func updateFcmTokenOnUsersThatFollowMe(token: String) {
+    //
+    //        getFollowers(completionHandler: {(users) in
+    //
+    //            for user in users {
+    //
+    //                db.collection("users").document(user.userId).collection("following").setData([
+    //                    "fcmToken": token
+    //                ], merge: true) { err in
+    //                    if let err = err {
+    //                        print("Error writing document: \(err)")
+    //                    } else {
+    //                        print("the user has sign up or is logged in")
+    //                    }
+    //                }
+    //
+    //            }
+    //
+    //        })
+    //
+    //    }
+    //
 }

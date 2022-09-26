@@ -148,12 +148,12 @@ extension FeedViewController: MyCustomCellDelegator {
                 if response {
                     UserDefaults.standard.set(Date.now-172800, forKey: "dateFromLastPosts")
                 } else {
-//                    alerta de erro
+                    //                    alerta de erro
                 }
             })
         }))
         alert.addAction(UIAlertAction(title: "Não apagar", style: .cancel, handler: { action in
-        
+            
             let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
             viewController?.dismiss(animated: true, completion: nil)
             
