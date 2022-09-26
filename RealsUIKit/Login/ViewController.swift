@@ -233,7 +233,7 @@ extension ViewController: ASAuthorizationControllerDelegate {
                 db.collection("users").document(uid).setData([
                     "email": email,
                     "uid": uid
-                ]) { err in
+                ], merge: true) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
