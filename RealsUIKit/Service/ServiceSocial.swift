@@ -160,15 +160,21 @@ class ServiceSocial {
                             
                             if let username = data["username"] as? String,
                                let email = data["email"] as? String,
-                               let userId = doc.documentID as? String,
-                               let fcmToken = data["fcmToken"] as? String {
+                               let userId = doc.documentID as? String {
                                 
-                                if username != UserDefaults.standard.string(forKey: "username") {
-                                    if !response.contains(where: { $0.username == username }) {
-                                        allUsersWithoutFriends.append(User(username: username, email: email, userId: userId, fcmToken: fcmToken))
+                                if let fcmToken = data["fcmToken"] as? String {
+                                    if username != UserDefaults.standard.string(forKey: "username") {
+                                        if !response.contains(where: { $0.username == username }) {
+                                            allUsersWithoutFriends.append(User(username: username, email: email, userId: userId, fcmToken: fcmToken))
+                                        }
+                                    }
+                                } else {
+                                    if username != UserDefaults.standard.string(forKey: "username") {
+                                        if !response.contains(where: { $0.username == username }) {
+                                            allUsersWithoutFriends.append(User(username: username, email: email, userId: userId, fcmToken: ""))
+                                        }
                                     }
                                 }
-                                print(allUsersWithoutFriends)
                             }
                         }
                         completionHandler(allUsersWithoutFriends)
