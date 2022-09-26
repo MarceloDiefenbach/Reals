@@ -215,26 +215,23 @@ class ServiceSocial {
         }
     }
     
-    //    func updateFcmTokenOnUsersThatFollowMe(token: String) {
-    //
-    //        getFollowers(completionHandler: {(users) in
-    //
-    //            for user in users {
-    //
-    //                db.collection("users").document(user.userId).collection("following").setData([
-    //                    "fcmToken": token
-    //                ], merge: true) { err in
-    //                    if let err = err {
-    //                        print("Error writing document: \(err)")
-    //                    } else {
-    //                        print("the user has sign up or is logged in")
-    //                    }
-    //                }
-    //
-    //            }
-    //
-    //        })
-    //
-    //    }
-    //
+//        func updateFcmTokenOnUsersThatFollowMe(token: String) {
+//
+//            getFollowers(completionHandler: {(users) in
+//
+//                for user in users {
+//
+//                    db.collection("users").document(user.userId).collection("following").setData([
+//                        "fcmToken": token
+//                    ], merge: true) { err in
+//                        if let err = err {
+//                            print("Error writing document: \(err)")
+//                        } else {
+//                            print("the user has sign up or is logged in")
+//                        }
+//                    }
+//                }
+//            })
+//        }
+    
 }
