@@ -16,7 +16,6 @@ class ServiceSocial {
     
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
-    let sender = PushNotificationSender()
     
     func verifyIfHaveUsername(uid: String, completionHandler: @escaping (Bool) -> Void) {
 
@@ -59,7 +58,6 @@ class ServiceSocial {
                                 "fcmToken" : UserDefaults.standard.string(forKey: "fcmTokenNow"),
                             ]
             )
-        sender.sendFollowNotification(user: userToFollow)
         completionHandler(true)
 
     }

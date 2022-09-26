@@ -21,7 +21,6 @@ struct FriendRequest {
 struct ServiceFirebase {
     
     var serviceSocial = ServiceSocial()
-    let sender = PushNotificationSender()
     
     #warning("se precisar de ajuda, falar com a gabi")
     // separar os serviços por tipo em arquivos diferentes
@@ -149,8 +148,8 @@ struct ServiceFirebase {
         var refUser: DocumentReference? = nil
         refUser = db.collection("users").document(firebaseAuth.currentUser?.uid ?? "").collection("posts").addDocument(data:
             [
-                "ownerId": firebaseAuth.currentUser?.uid,
-                "ownerUsername": UserDefaults.standard.string(forKey: "username"),
+                "ownerId": firebaseAuth.currentUser?.uid ?? "",
+                "ownerUsername": UserDefaults.standard.string(forKey: "username") ?? "",
                 "photo": urlVideo,
                 "title": "",
                 "date": Int(Date.now.timeIntervalSince1970),
@@ -166,14 +165,14 @@ struct ServiceFirebase {
         var ref: DocumentReference? = nil
         ref = db.collection("posts").addDocument(data:
             [
-                "ownerId": firebaseAuth.currentUser?.uid,
-                "ownerUsername": UserDefaults.standard.string(forKey: "username"),
+                "ownerId": firebaseAuth.currentUser?.uid ?? "",
+                "ownerUsername": UserDefaults.standard.string(forKey: "username") ?? "",
                 "photo": urlVideo,
                 "title": "",
                 "date": Int(Date.now.timeIntervalSince1970),
                 "videoPath": videoPath,
                 "documentIdOnUsersPosts": refUser!.documentID,
-                "fcmToken": UserDefaults.standard.string(forKey: "fcmTokenNow")
+                "fcmToken": UserDefaults.standard.string(forKey: "fcmTokenNow") ?? ""
             ]) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
@@ -182,7 +181,6 @@ struct ServiceFirebase {
                 }
         }
         UserDefaults.standard.set(true, forKey: "alreadyPost")
-//        sender.sendNotificationPost()
     }
     
     func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
@@ -212,21 +210,18 @@ struct ServiceFirebase {
         
         // Upload the file to the path "images/rivers.jpg"
         let uploadTask = riversRef.putFile(from: urlVideo, metadata: metadata) { metadata, error in
-            print(error)
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
                 return
             }
             // Metadata contains file metadata such as size, content-type.
             let size = metadata.size
-            print(size)
             // You can also access to download URL after upload.
             riversRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {
                     // Uh-oh, an error occurred!
                     return
                 }
-                print(url?.description)
                 createReals(urlVideo: url?.description ?? "", videoPath: "videoReals/\(year)/\(month)/\(day)/\(String(describing: firebaseAuth.currentUser!.uid))-\(hour)-\(minute)-\(seconds).mp4")
             }
         }
@@ -258,21 +253,26 @@ struct ServiceFirebase {
                 switch (StorageErrorCode(rawValue: error.code)!) {
                 case .objectNotFound:
                     // File doesn't exist
+                    completionHandler(false)
                     break
                 case .unauthorized:
                     // User doesn't have permission to access file
+                    completionHandler(false)
                     break
                 case .cancelled:
                     // User canceled the upload
+                    completionHandler(false)
                     break
                     
                     /* ... */
                     
                 case .unknown:
                     // Unknown error occurred, inspect the server response
+                    completionHandler(false)
                     break
                 default:
                     // A separate error occurred. This is a good place to retry the upload.
+                    completionHandler(false)
                     break
                 }
             }

@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import UIKit
 
 class PushNotificationSender {
-    
+
     var service = ServiceSocial()
-    
+
     func sendPushNotification(to tokens: String, title: String, body: String) {
         let urlString = "https://fcm.googleapis.com/fcm/send"
         let url = NSURL(string: urlString)!
@@ -36,18 +35,18 @@ class PushNotificationSender {
         }
         task.resume()
     }
-    
+
     func sendNotificationPost() {
-        
+
         var receivers: [String] = []
-        
+
         service.getFollowers(completionHandler: { (users) in
-            
+
             for user in users {
                 receivers.append(user.fcmToken)
             }
             print(receivers)
-            
+
             let urlString = "https://fcm.googleapis.com/fcm/send"
             let url = NSURL(string: urlString)!
             let paramString: [String : Any] = ["registration_ids" : receivers,
@@ -72,7 +71,7 @@ class PushNotificationSender {
             task.resume()
         })
     }
-    
+
     func sendFollowNotification(user: User) {
         let urlString = "https://fcm.googleapis.com/fcm/send"
         let url = NSURL(string: urlString)!

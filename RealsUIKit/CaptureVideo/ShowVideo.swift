@@ -16,18 +16,18 @@ class VideoPlayback: UIViewController {
     var videoURL: URL!
     var videoSize: Double?
     var videoData: Data?
-    var serviceUpload = ServiceUploadPanda()
+    let sender = PushNotificationSender()
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingBackground: UIView!
-    
     @IBOutlet weak var videoView: UIView!
-
+    
     @IBAction func publishRealButton(_ sender: Any) {
         upload()
     }
+    
     @IBAction func retakeReal(_ sender: Any) {
         self.dismiss(animated: true, completion: {})
-
     }
     
     override func viewDidLoad() {
@@ -78,6 +78,7 @@ class VideoPlayback: UIViewController {
             viewController?.dismiss(animated: true, completion: nil)
             self.loadingBackground.isHidden = true
             self.loadingBackground.isHidden = true
+            self.sender.sendNotificationPost()
         })
     }
 }

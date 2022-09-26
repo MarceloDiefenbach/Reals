@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
     var serviceSocial = ServiceSocial()
-    var serviceUpload = ServiceUploadPanda()
     let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
 
     @IBOutlet weak var emailField: UITextField!
