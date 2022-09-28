@@ -70,10 +70,19 @@ class VideoPlayback: UIViewController {
         loadingBackground.isHidden = false
 
         service.uploadVideo(urlVideo: videoURL, completionHandler: { (uploadFinish) in
-            AppCoordinator.shared.changeToCurrentRoot()
-            self.loadingBackground.isHidden = true
-            self.loadingBackground.isHidden = true
-            self.sender.sendNotificationPost()
+            
+            if uploadFinish {
+                AppCoordinator.shared.changeToCurrentRoot()
+                self.loadingBackground.isHidden = true
+                self.loadingBackground.isHidden = true
+                self.sender.sendNotificationPost()
+            } else {
+                let alert = UIAlertController(title: "Reals não publicado", message: "Tivemos um erro na hora de publicar o seu Reals, tenta mais tarde.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
+                    AppCoordinator.shared.changeToCurrentRoot()
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         })
     }
 }
