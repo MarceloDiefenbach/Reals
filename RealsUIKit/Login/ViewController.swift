@@ -19,11 +19,16 @@ class ViewController: UIViewController {
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
     var serviceSocial = ServiceSocial()
-    let appleButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
 
     @IBOutlet weak var termsOfUseButton: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var emailBG: UIView!
+    @IBOutlet weak var PasswordBG: UIView!
+    
+    @IBOutlet weak var appleButtonInterface: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
     
     @IBAction func loginButton(_ sender: Any) {
         
@@ -35,43 +40,67 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if firebaseAuth.currentUser?.email != nil {
-            
-            serviceSocial.verifyIfHaveUsername(uid: firebaseAuth.currentUser?.uid ?? "", completionHandler: { (response) in
-                if response {
-                    self.performSegue(withIdentifier: "goToFeed", sender: nil)
-                } else {
-                    self.performSegue(withIdentifier: "setUsername", sender: nil)
-                }
-            })
-        }
-        service.getDateChange()
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        emailField.text = ""
-        passwordField.text = ""
-        passwordField.isSecureTextEntry = true
         requestPermissionToNotifications()
-        setupAppleButton()
+        
         setTermsOfUseInteraction()
-
+        
+        setupTextFieldEmail(textField: emailField, backgroung: emailBG)
+        setupTextFieldPassword(textField: passwordField, backgroung: PasswordBG)
+        setupLoginButton(button: loginButton)
+        setupAppleButton(button: appleButtonInterface)
+        setupCreateAccountButton(button: createAccountButton)
         
     }
     
-    func setupAppleButton() {
-            view.addSubview(appleButton)
-            appleButton.cornerRadius = 12
-            appleButton.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
-            appleButton.translatesAutoresizingMaskIntoConstraints = false
-            appleButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            appleButton.widthAnchor.constraint(equalToConstant: 235).isActive = true
-            appleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            appleButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70).isActive = true
-        }
+    func setupTextFieldEmail(textField: UITextField, backgroung: UIView) {
+        textField.text = ""
+        textField.layer.borderWidth = 0.0
+        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
+        textField.delegate = self
+        
+        backgroung.layer.borderWidth = 0.0
+        backgroung.layer.cornerRadius = 16
+        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
+    }
+    
+    func setupTextFieldPassword(textField: UITextField, backgroung: UIView) {
+        textField.text = ""
+        textField.layer.borderWidth = 0.0
+        textField.isSecureTextEntry = true
+        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
+        textField.delegate = self
+        
+        backgroung.layer.borderWidth = 0.0
+        backgroung.layer.cornerRadius = 16
+        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
+    }
+    
+    func setupLoginButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+        button.backgroundColor = UIColor(named: "primary")
+    }
+    
+    func setupCreateAccountButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+    }
+    
+    func setupAppleButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(.black).cgColor
+        button.backgroundColor = .white
+        
+        button.setTitleColor(UIColor(named: "primary"), for: .normal)
+    }
+    @IBAction func appleButtonAction(_ sender: Any) {
+        startSignInWithAppleFlow()
+    }
         
     // Unhashed nonce.
     fileprivate var currentNonce: String?
@@ -111,7 +140,7 @@ class ViewController: UIViewController {
             if authResult != nil {
                 self?.saveOnUserDefaults()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    self?.performSegue(withIdentifier: "goToFeed", sender: nil)
+                    AppCoordinator.shared.changeToRootViewController(atStoryboard: "Feed")
                 })
             }
         }
@@ -242,9 +271,9 @@ extension ViewController: ASAuthorizationControllerDelegate {
                 }
                 serviceSocial.verifyIfHaveUsername(uid: self.firebaseAuth.currentUser?.uid ?? "", completionHandler: { (response) in
                     if response {
-                        self.performSegue(withIdentifier: "goToFeed", sender: nil)
+                        AppCoordinator.shared.changeToRootViewController(atStoryboard: "Feed")
                     } else {
-                        self.performSegue(withIdentifier: "setUsername", sender: nil)
+                        AppCoordinator.shared.changeToRootViewController(atStoryboard: "SetUsername")
                     }
                 })
             }
@@ -260,5 +289,13 @@ extension ViewController: ASAuthorizationControllerDelegate {
 extension ViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+//MARK: - keyboard controller
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }

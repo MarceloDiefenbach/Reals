@@ -145,10 +145,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hh3-nN-bKN"/>
+        <segue reference="MTK-EM-qlu"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.triangle.2.circlepath" catalog="system" width="32" height="32"/>
+        <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="cancelButton" width="155" height="155"/>
         <image name="startRecordButton" width="183" height="183"/>
         <systemColor name="systemBackgroundColor">

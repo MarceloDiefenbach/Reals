@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,18 +18,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="r6S-b1-3UU">
-                                <rect key="frame" x="20" y="764" width="374" height="78"/>
+                                <rect key="frame" x="20" y="735" width="374" height="107"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="710-1W-3et">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="31"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pr-Kl-pEE">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
+                                        <color key="backgroundColor" name="primary"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="zMC-Bf-yGy"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Sair da conta"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Logout">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
                                         <connections>
-                                            <action selector="logOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ugn-RQ-9po"/>
+                                            <action selector="logOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Dxa-h9-dYj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thv-gK-15M">
-                                        <rect key="frame" x="0.0" y="47" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="76" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Apagar conta">
                                             <color key="baseForegroundColor" systemColor="systemPinkColor"/>
@@ -67,6 +74,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="logOutButton" destination="2Pr-Kl-pEE" id="SJo-Gg-Otu"/>
                         <outlet property="profileImage" destination="PRW-sd-TAM" id="r39-Zf-GfK"/>
                         <outlet property="username" destination="MHX-7W-J2j" id="8dN-KW-K6O"/>
                     </connections>
@@ -78,6 +86,9 @@
     </scenes>
     <resources>
         <image name="DefaultProfile" width="184" height="184"/>
+        <namedColor name="primary">
+            <color red="0.73099999999999998" green="0.94999999999999996" blue="0.049000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

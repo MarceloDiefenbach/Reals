@@ -24,6 +24,7 @@ class FeedViewController: UIViewController {
     let firebaseAuth = Auth.auth()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var createButton: UIBarButtonItem!
     
     var visibleIP : IndexPath?
     var aboutToBecomeInvisibleCell = -1
@@ -54,6 +55,13 @@ class FeedViewController: UIViewController {
         service.getUserByEmail(email: firebaseAuth.currentUser?.email ?? "", completionHandler: { (response) in
             UserDefaults.standard.set(response, forKey: "username")
         })
+        let username = UserDefaults.standard.string(forKey: "username")
+        if username == "juusdy" || username == "Chumiga™" || username == "rafaelruwer" || username == "PohMarcelo" || username == "Nico" || username == "Prolene" {
+            createButton.isEnabled = true
+        } else {
+            createButton.isEnabled = false
+            createButton.tintColor = .clear
+        }
     }
     
     func playVideoOnTheCell(cell : VideoCellTableViewCell, indexPath : IndexPath){

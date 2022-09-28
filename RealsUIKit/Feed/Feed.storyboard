@@ -43,7 +43,7 @@
                                                             <color key="backgroundColor" name="black"/>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ybs-ek-leR">
-                                                            <rect key="frame" x="60" y="221.5" width="254" height="156"/>
+                                                            <rect key="frame" x="60" y="216.5" width="254" height="166"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grave seu reals para ver os vídeos de seus amigos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIN-ed-bb8">
                                                                     <rect key="frame" x="0.0" y="0.0" width="254" height="86"/>
@@ -51,17 +51,18 @@
                                                                     <color key="textColor" name="white"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0F-1e-Nht">
-                                                                    <rect key="frame" x="0.0" y="106" width="254" height="50"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDm-pQ-xpa">
+                                                                    <rect key="frame" x="0.0" y="106" width="254" height="60"/>
+                                                                    <color key="backgroundColor" name="primary"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="50" id="AGG-EL-T4O"/>
+                                                                        <constraint firstAttribute="height" constant="60" id="Ged-Tf-fof"/>
                                                                     </constraints>
                                                                     <state key="normal" title="Button"/>
-                                                                    <buttonConfiguration key="configuration" style="filled" title="Gravar Reals">
-                                                                        <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" title="Gravar Reals">
+                                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </buttonConfiguration>
                                                                     <connections>
-                                                                        <action selector="createReals:" destination="hcs-fb-gJX" eventType="touchUpInside" id="SeO-iq-6QP"/>
+                                                                        <action selector="createReals:" destination="hcs-fb-gJX" eventType="touchUpInside" id="ECN-hC-i9g"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -85,6 +86,7 @@
                                                         </stackView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hpd-pl-iEr">
                                                             <rect key="frame" x="334" y="21" width="20" height="18"/>
+                                                            <color key="tintColor" name="primary"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="hpd-pl-iEr" secondAttribute="height" multiplier="1:1" id="6sq-By-0gE"/>
                                                                 <constraint firstAttribute="width" constant="20" id="YYV-co-gYM"/>
@@ -125,7 +127,7 @@
                                         <connections>
                                             <outlet property="activityIndicator" destination="adu-kg-BXV" id="Qgc-Ro-LoT"/>
                                             <outlet property="blackMaskImage" destination="FNY-EB-Osw" id="AJb-KT-2Mg"/>
-                                            <outlet property="createRealsButton" destination="A0F-1e-Nht" id="NZT-Wu-7YR"/>
+                                            <outlet property="createRealsButton" destination="lDm-pQ-xpa" id="yP2-qY-Mt4"/>
                                             <outlet property="opacityLayer" destination="qyn-Lo-wRu" id="teU-12-4QW"/>
                                             <outlet property="reportDeleteIcon" destination="hpd-pl-iEr" id="144-C0-zfl"/>
                                             <outlet property="stackAlreadyDontPostToday" destination="ybs-ek-leR" id="Wfe-T3-XJI"/>
@@ -145,7 +147,7 @@
                                                     <rect key="frame" x="20" y="10" width="374" height="598.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pAQ-09-DT1">
-                                                            <rect key="frame" x="40" y="206.5" width="294" height="186"/>
+                                                            <rect key="frame" x="40" y="201.5" width="294" height="196"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Seus amigos estão atrasados!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZR-15-gvn">
                                                                     <rect key="frame" x="0.0" y="0.0" width="294" height="76.5"/>
@@ -159,18 +161,18 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nz2-m7-K6Y">
-                                                                    <rect key="frame" x="0.0" y="136" width="294" height="50"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPl-yf-PkK">
+                                                                    <rect key="frame" x="0.0" y="136" width="294" height="60"/>
+                                                                    <color key="backgroundColor" name="primary"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="50" id="6QR-1p-trh"/>
+                                                                        <constraint firstAttribute="height" constant="60" id="6sf-4c-FAV"/>
                                                                     </constraints>
                                                                     <state key="normal" title="Button"/>
-                                                                    <buttonConfiguration key="configuration" style="filled" title="Gravar Reals">
-                                                                        <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
-                                                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" title="Gravar Reals">
+                                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </buttonConfiguration>
                                                                     <connections>
-                                                                        <segue destination="xSI-5o-4oO" kind="presentation" identifier="emptyGoToCapture" id="uWO-jY-aUw"/>
+                                                                        <segue destination="xSI-5o-4oO" kind="presentation" modalPresentationStyle="fullScreen" id="5L9-c9-BpC"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -192,6 +194,9 @@
                                                 <constraint firstItem="YbZ-TI-9xd" firstAttribute="top" secondItem="4Hx-ql-nUD" secondAttribute="top" constant="10" id="cDF-uc-3PZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="captureVideoButton" destination="IPl-yf-PkK" id="dyQ-Fx-3Hn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -207,17 +212,29 @@
                     </view>
                     <navigationItem key="navigationItem" title="Reals" id="Do0-pe-XpF">
                         <barButtonItem key="leftBarButtonItem" image="person.3.fill" catalog="system" id="lx9-LR-TMg">
+                            <color key="tintColor" name="primary"/>
                             <connections>
                                 <action selector="friendsButton:" destination="Y6W-OH-hqX" id="Lwp-se-iEQ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="person.fill" catalog="system" id="UdM-c7-0U7">
-                            <connections>
-                                <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="automatic" id="KQi-L7-2NS"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="person.fill" catalog="system" id="UdM-c7-0U7">
+                                <color key="tintColor" name="primary"/>
+                                <connections>
+                                    <segue destination="v2O-Uf-IeC" kind="presentation" identifier="goToProfile" modalPresentationStyle="automatic" id="KQi-L7-2NS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="plus.circle.fill" catalog="system" id="QXj-Ff-OlG">
+                                <color key="tintColor" name="primary"/>
+                                <connections>
+                                    <action selector="createButton:" destination="3te-WA-g1H" id="VFz-ju-Mgg"/>
+                                    <segue destination="xSI-5o-4oO" kind="presentation" modalPresentationStyle="fullScreen" id="NCH-wk-sP3"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="createButton" destination="QXj-Ff-OlG" id="prj-Yb-Jz2"/>
                         <outlet property="tableView" destination="p3Y-yA-d8G" id="8Dn-Wz-w0K"/>
                         <segue destination="qwi-ws-q8K" kind="showDetail" identifier="goToReport" id="fJV-2m-3tq"/>
                         <segue destination="rGQ-HK-uu5" kind="presentation" identifier="goToFriends" id="Mbe-zG-ZyD"/>
@@ -225,6 +242,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="3te-WA-g1H" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
@@ -269,7 +287,10 @@
                                             <constraint firstAttribute="height" constant="50" id="jXh-T9-JIM"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Apenas denunciar"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Apenas denunciar">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" name="primary"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="onlyReport:" destination="qwi-ws-q8K" eventType="touchUpInside" id="DfC-HM-WtD"/>
                                         </connections>
@@ -373,18 +394,22 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uWO-jY-aUw"/>
+        <segue reference="NCH-wk-sP3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="blackMask" width="370" height="663"/>
         <image name="exclamationmark.triangle" catalog="system" width="128" height="112"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="black">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primary">
+            <color red="0.73099999999999998" green="0.94999999999999996" blue="0.049000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

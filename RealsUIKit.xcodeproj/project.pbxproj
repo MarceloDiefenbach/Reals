@@ -27,6 +27,9 @@
 		DF7B6D0228CA91680082A4B0 /* CaptureVideoFrontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */; };
 		DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */; };
 		DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */; };
+		DF81B95B28E37F160044BBC2 /* Load.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF81B95A28E37F160044BBC2 /* Load.storyboard */; };
+		DF81B95D28E3894B0044BBC2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF81B95C28E3894B0044BBC2 /* AppCoordinator.swift */; };
+		DF81B95F28E38D460044BBC2 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF81B95E28E38D460044BBC2 /* UIApplication+Extension.swift */; };
 		DF8E3B3128D65556001AC8AC /* LottiewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E3B3028D65556001AC8AC /* LottiewView.swift */; };
 		DF8E3B3328D6653E001AC8AC /* EmptyCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E3B3228D6653E001AC8AC /* EmptyCellTableViewCell.swift */; };
 		DF8E3B3628D67AAA001AC8AC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */; };
@@ -45,6 +48,8 @@
 		DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F528CD125900830B36 /* ReportViewController.swift */; };
 		DFDF7FE228D20B8E007DD713 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE128D20B8E007DD713 /* http.swift */; };
 		DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */; };
+		DFE6250028E341CF00F98E9F /* Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE624FF28E341CF00F98E9F /* Load.swift */; };
+		DFE6250328E3444800F98E9F /* SetUsername.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE6250228E3444800F98E9F /* SetUsername.storyboard */; };
 		DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3828D1602600156053 /* FriendTableViewCell.swift */; };
 		DFF96A3B28D1617B00156053 /* FollowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
@@ -75,6 +80,9 @@
 		DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoFrontal.swift; sourceTree = "<group>"; };
 		DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CaptureVideo.storyboard; sourceTree = "<group>"; };
 		DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
+		DF81B95A28E37F160044BBC2 /* Load.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Load.storyboard; sourceTree = "<group>"; };
+		DF81B95C28E3894B0044BBC2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		DF81B95E28E38D460044BBC2 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		DF8E3B3028D65556001AC8AC /* LottiewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottiewView.swift; sourceTree = "<group>"; };
 		DF8E3B3228D6653E001AC8AC /* EmptyCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellTableViewCell.swift; sourceTree = "<group>"; };
 		DF8E3B3428D67AA7001AC8AC /* RealsUIKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RealsUIKit.entitlements; sourceTree = "<group>"; };
@@ -94,6 +102,8 @@
 		DFDD00F528CD125900830B36 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		DFDF7FE128D20B8E007DD713 /* http.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = http.swift; sourceTree = "<group>"; };
 		DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateUserRequests.swift; sourceTree = "<group>"; };
+		DFE624FF28E341CF00F98E9F /* Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Load.swift; sourceTree = "<group>"; };
+		DFE6250228E3444800F98E9F /* SetUsername.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetUsername.storyboard; sourceTree = "<group>"; };
 		DFF96A3828D1602600156053 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTableViewCell.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +193,7 @@
 				DFDD00F028CCF34300830B36 /* Profile */,
 				DFDD00E728CCD19700830B36 /* Login */,
 				DF219F3628CA0A9A0038E47C /* AppDelegate.swift */,
+				DF81B95C28E3894B0044BBC2 /* AppCoordinator.swift */,
 				DF219F3828CA0A9A0038E47C /* SceneDelegate.swift */,
 				DF219F3F28CA0A9B0038E47C /* Assets.xcassets */,
 				DF219F4128CA0A9B0038E47C /* LaunchScreen.storyboard */,
@@ -227,6 +238,7 @@
 		DF3B927028CA203700162F1E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DF81B95E28E38D460044BBC2 /* UIApplication+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,6 +280,8 @@
 				DF219F3A28CA0A9A0038E47C /* ViewController.swift */,
 				DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */,
 				DF0E930928D9434E003329F9 /* SetUsernameViewController.swift */,
+				DFE6250128E341D300F98E9F /* Load */,
+				DFE6250228E3444800F98E9F /* SetUsername.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -279,6 +293,15 @@
 				DFDD00F328CCF36E00830B36 /* Profile.storyboard */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		DFE6250128E341D300F98E9F /* Load */ = {
+			isa = PBXGroup;
+			children = (
+				DFE624FF28E341CF00F98E9F /* Load.swift */,
+				DF81B95A28E37F160044BBC2 /* Load.storyboard */,
+			);
+			path = Load;
 			sourceTree = "<group>";
 		};
 		DFF96A3728D1600B00156053 /* Cell */ = {
@@ -360,10 +383,12 @@
 				DFDD00F428CCF36E00830B36 /* Profile.storyboard in Resources */,
 				DF219F4028CA0A9B0038E47C /* Assets.xcassets in Resources */,
 				DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */,
+				DF81B95B28E37F160044BBC2 /* Load.storyboard in Resources */,
 				DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */,
 				DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */,
 				DF219F3E28CA0A9A0038E47C /* Main.storyboard in Resources */,
 				DFCDCC5928D0B9AE0089DAB8 /* Scan.storyboard in Resources */,
+				DFE6250328E3444800F98E9F /* SetUsername.storyboard in Resources */,
 				DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,7 +454,9 @@
 				DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */,
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
 				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
+				DF81B95D28E3894B0044BBC2 /* AppCoordinator.swift in Sources */,
 				DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */,
+				DFE6250028E341CF00F98E9F /* Load.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,
 				DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */,
 				DF8E3B3128D65556001AC8AC /* LottiewView.swift in Sources */,
@@ -442,6 +469,7 @@
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,
 				DFDF7FE228D20B8E007DD713 /* http.swift in Sources */,
 				DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */,
+				DF81B95F28E38D460044BBC2 /* UIApplication+Extension.swift in Sources */,
 				DF0E930A28D9434E003329F9 /* SetUsernameViewController.swift in Sources */,
 				DFB75F7228D29590000D5B5F /* User.swift in Sources */,
 				DFB75F7628D33D6B000D5B5F /* ServiceUpload.swift in Sources */,
@@ -593,7 +621,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -602,7 +630,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Load;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -610,7 +638,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -629,7 +657,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -638,7 +666,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Used to capture Reals";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Load;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -646,7 +674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

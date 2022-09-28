@@ -369,9 +369,7 @@ struct ServiceFirebase {
             }
             completionHandler(ownerUsernameReceiver)
         }
-        
     }
-    
     
     func uploadToDrive() {
         URLSession.shared.dataTask(with: URL(string: "https://www.googleapis.com/upload/drive/v3/files?uploadType=media")!) { data, response, error in

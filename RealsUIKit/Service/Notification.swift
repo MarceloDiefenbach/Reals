@@ -70,8 +70,8 @@ class PushNotificationSender {
     func sendFollowNotification(user: User) {
         let urlString = "https://fcm.googleapis.com/fcm/send"
         let url = NSURL(string: urlString)!
-        let paramString: [String : Any] = ["registration_ids" : user.fcmToken,
-                                           "notification" : ["title" : "@\(user.username) seguiu você", "body" : ""]
+        let paramString: [String : Any] = ["to" : user.fcmToken,
+                                           "notification" : ["title" : "@\(UserDefaults.standard.string(forKey: "username") ?? "") seguiu você", "body" : ""]
         ]
         let request = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "POST"

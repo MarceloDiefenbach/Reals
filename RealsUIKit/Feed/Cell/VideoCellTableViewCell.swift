@@ -58,13 +58,12 @@ class VideoCellTableViewCell: UITableViewCell {
         activityIndicator.startAnimating()
         
         verifyIfAlreadyPostToday()
+        setupLoginButton(button: createRealsButton)
     }
     
-        //padrão pra organizar a célula
-    func configureDiefenbach() {
-        // Data Source
-        
-        // Layout
+    func setupLoginButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+        button.backgroundColor = UIColor(named: "primary")
     }
     
     func setupReportDeleteButton(post: Post) {

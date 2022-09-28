@@ -270,12 +270,22 @@ extension CaptureVideoBack {
     @objc func startButtonTapped(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             startCapture()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.stopRecording()
-             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.performSegue(withIdentifier: "showVideo2", sender: nil)
-             }
+            let username = UserDefaults.standard.string(forKey: "username")
+            if username == "juusdy" || username == "Chumiga™" || username == "rafaelruwer" || username == "PohMarcelo" || username == "Nico" || username == "Prolene"{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.stopRecording()
+                 }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                    self.performSegue(withIdentifier: "showVideo2", sender: nil)
+                 }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.stopRecording()
+                 }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.performSegue(withIdentifier: "showVideo2", sender: nil)
+                 }
+            }
         }
     }
     
@@ -303,8 +313,7 @@ extension CaptureVideoBack {
 
         @objc func cancelButtonTapped(sender: UITapGestureRecognizer) {
             if sender.state == .ended {
-                let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
-                viewController?.dismiss(animated: true, completion: nil)
+                AppCoordinator.shared.changeToCurrentRoot()
             }
         }
     

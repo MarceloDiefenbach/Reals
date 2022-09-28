@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
     //MARK: - outlets
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var logOutButton: UIButton!
     
     
     //MARK: - actions
@@ -35,7 +36,15 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         setUsersData()
+        setupLogoutButton(button: logOutButton)
     }
+    
+    //MARK: - layout
+    func setupLogoutButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+        button.backgroundColor = UIColor(named: "primary")
+    }
+    
 }
 
 //MARK: - functions
@@ -46,8 +55,7 @@ extension ProfileViewController {
         do {
             try firebaseAuth.signOut()
             
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-            
+            AppCoordinator.shared.changeToRootViewController(atStoryboard: "Main")
             
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
@@ -67,7 +75,7 @@ extension ProfileViewController {
                     do {
                         try self.firebaseAuth.signOut()
                         
-                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        AppCoordinator.shared.changeToRootViewController(atStoryboard: "Main")
                         
                     } catch let signOutError as NSError {
                         print("Error signing out: %@", signOutError)

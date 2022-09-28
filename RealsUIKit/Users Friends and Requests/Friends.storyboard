@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,7 +39,10 @@
                                                         <constraint firstAttribute="width" constant="97" id="d1i-8W-ioW"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Seguir"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title="Seguir">
+                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="baseBackgroundColor" name="primary"/>
+                                                    </buttonConfiguration>
                                                     <connections>
                                                         <action selector="addFriendButton:" destination="KOF-rU-2PB" eventType="touchUpInside" id="IIR-xK-qi5"/>
                                                     </connections>
@@ -102,14 +106,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellFollower" id="fsT-uN-njw" customClass="FollowerTableViewCell" customModule="RealsUIKit" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="170.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="170.5" width="414" height="58.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fsT-uN-njw" id="gFW-dE-15g">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Marcelo Diefen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ho-I5-iJc">
-                                                    <rect key="frame" x="20" y="12" width="374" height="20.5"/>
+                                                    <rect key="frame" x="20" y="19" width="374" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -118,6 +122,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="3Ho-I5-iJc" secondAttribute="trailing" id="3dd-e3-mYp"/>
                                                 <constraint firstItem="3Ho-I5-iJc" firstAttribute="centerY" secondItem="gFW-dE-15g" secondAttribute="centerY" id="EQo-xw-6ph"/>
+                                                <constraint firstItem="3Ho-I5-iJc" firstAttribute="top" secondItem="gFW-dE-15g" secondAttribute="topMargin" constant="8" id="Gwo-nO-HUn"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="3Ho-I5-iJc" secondAttribute="bottom" constant="8" id="UNN-bV-P0H"/>
                                                 <constraint firstItem="3Ho-I5-iJc" firstAttribute="leading" secondItem="gFW-dE-15g" secondAttribute="leadingMargin" id="haY-zA-xxf"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -162,6 +168,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="primary">
+            <color red="0.73099999999999998" green="0.94999999999999996" blue="0.049000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
