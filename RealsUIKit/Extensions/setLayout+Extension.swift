@@ -10,10 +10,11 @@ import UIKit
 
 extension UIViewController: UITextFieldDelegate {
     
-    func setupTextFieldDefault(textField: UITextField, backgroung: UIView) {
+    func setupTextFieldDefault(placeholder: String, textField: UITextField, backgroung: UIView) {
         textField.text = ""
         textField.layer.borderWidth = 0.0
-        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "plaholderColor")!])
+        
         textField.delegate = self
         
         backgroung.layer.borderWidth = 0.0
@@ -24,7 +25,7 @@ extension UIViewController: UITextFieldDelegate {
     func setupTextFieldEmail(textField: UITextField, backgroung: UIView) {
         textField.text = ""
         textField.layer.borderWidth = 0.0
-        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
+        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "plaholderColor")!])
         textField.textContentType = .emailAddress
         textField.delegate = self
         
@@ -38,7 +39,7 @@ extension UIViewController: UITextFieldDelegate {
         textField.layer.borderWidth = 0.0
         textField.isSecureTextEntry = true
         textField.textContentType = .password
-        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
+        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "plaholderColor")!])
         textField.delegate = self
         
         backgroung.layer.borderWidth = 0.0
@@ -58,3 +59,4 @@ extension UIViewController: UITextFieldDelegate {
         return false
     }
 }
+
