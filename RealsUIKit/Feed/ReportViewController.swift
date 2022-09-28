@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ReportViewController: UIViewController, UITextFieldDelegate {
+class ReportViewController: UIViewController {
 
     var ownerUsernameVar: String?
     var ownerIdVar: String?
@@ -46,12 +46,6 @@ class ReportViewController: UIViewController, UITextFieldDelegate {
         ownerUsername.text = ownerUsernameVar
         postUid.text = postUidVar
         
-    }
-    
-    //close keyboard on return button
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
     }
     
 }

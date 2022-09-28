@@ -18,8 +18,11 @@ class SetUsernameViewController: UIViewController {
     var uid: String?
     
     @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var usernameBG: UIView!
+    @IBOutlet weak var setUsernameButton: UIButton!
     
     override func viewDidLoad() {
+        setupTextFieldDefault(textField: usernameField, backgroung: usernameBG)
         
     }
     

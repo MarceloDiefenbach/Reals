@@ -22,6 +22,7 @@
 		DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F5228CA0BC80038E47C /* Feed.storyboard */; };
 		DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5428CA0BD50038E47C /* FeedViewController.swift */; };
 		DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EDBDF28E10B3600B2160B /* Notification.swift */; };
+		DF31AF1828E46D4C00E07928 /* setLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */; };
 		DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927128CA2E4200162F1E /* PlayerView.swift */; };
 		DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */; };
 		DF7B6D0228CA91680082A4B0 /* CaptureVideoFrontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */; };
@@ -75,6 +76,7 @@
 		DF219F5228CA0BC80038E47C /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		DF219F5428CA0BD50038E47C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		DF2EDBDF28E10B3600B2160B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setLayout+Extension.swift"; sourceTree = "<group>"; };
 		DF3B927128CA2E4200162F1E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
 		DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoFrontal.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				DF81B95E28E38D460044BBC2 /* UIApplication+Extension.swift */,
+				DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -279,9 +282,9 @@
 				DF219F3C28CA0A9A0038E47C /* Main.storyboard */,
 				DF219F3A28CA0A9A0038E47C /* ViewController.swift */,
 				DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */,
+				DFE6250228E3444800F98E9F /* SetUsername.storyboard */,
 				DF0E930928D9434E003329F9 /* SetUsernameViewController.swift */,
 				DFE6250128E341D300F98E9F /* Load */,
-				DFE6250228E3444800F98E9F /* SetUsername.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */,
 				DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */,
 				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
+				DF31AF1828E46D4C00E07928 /* setLayout+Extension.swift in Sources */,
 				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
 				DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,

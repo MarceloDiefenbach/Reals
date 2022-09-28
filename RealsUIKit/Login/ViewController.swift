@@ -51,34 +51,11 @@ class ViewController: UIViewController {
         setTermsOfUseInteraction()
         
         setupTextFieldEmail(textField: emailField, backgroung: emailBG)
-        setupTextFieldPassword(textField: passwordField, backgroung: PasswordBG)
+        setupTextFieldSecure(textField: passwordField, backgroung: PasswordBG)
         setupLoginButton(button: loginButton)
         setupAppleButton(button: appleButtonInterface)
         setupCreateAccountButton(button: createAccountButton)
         
-    }
-    
-    func setupTextFieldEmail(textField: UITextField, backgroung: UIView) {
-        textField.text = ""
-        textField.layer.borderWidth = 0.0
-        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
-        textField.delegate = self
-        
-        backgroung.layer.borderWidth = 0.0
-        backgroung.layer.cornerRadius = 16
-        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
-    }
-    
-    func setupTextFieldPassword(textField: UITextField, backgroung: UIView) {
-        textField.text = ""
-        textField.layer.borderWidth = 0.0
-        textField.isSecureTextEntry = true
-        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
-        textField.delegate = self
-        
-        backgroung.layer.borderWidth = 0.0
-        backgroung.layer.cornerRadius = 16
-        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
     }
     
     func setupLoginButton(button: UIButton) {
@@ -290,13 +267,5 @@ extension ViewController: ASAuthorizationControllerDelegate {
 extension ViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
-    }
-}
-
-//MARK: - keyboard controller
-extension ViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
     }
 }
