@@ -87,7 +87,7 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0U-W2-bbw">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" name="primary"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="dXX-1W-aEZ"/>
                                                         </constraints>
@@ -102,14 +102,14 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY1-8C-r3G">
                                                         <rect key="frame" x="0.0" y="76" width="374" height="60"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="mcO-hO-k7h"/>
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="applelogo" catalog="system" title="Continue with Apple" imagePadding="8">
                                                             <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
-                                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="baseForegroundColor" name="black"/>
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="appleButtonAction:" destination="ljt-Dv-mfd" eventType="touchUpInside" id="S4j-iF-KvZ"/>
@@ -423,19 +423,16 @@ Você é responsável por todo contéudo que submeter dentro do aplicativo e pod
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="A8Q-C2-fUk"/>
-        <segue reference="Ca2-Oe-3rY"/>
+        <segue reference="ma4-y2-YIa"/>
+        <segue reference="ZZR-7M-FkL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="applelogo" catalog="system" width="103" height="128"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="black">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="primary">
-            <color red="0.65000000000000002" green="0.84999999999999998" blue="0.048999998718500137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.64999997615814209" green="0.85000002384185791" blue="0.048999998718500137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
