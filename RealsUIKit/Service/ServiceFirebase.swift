@@ -143,7 +143,7 @@ struct ServiceFirebase {
         }
     }
     
-    func createReals(urlVideo: String, videoPath: String){
+    func createReals(subtitle: String, urlVideo: String, videoPath: String){
         
         var refUser: DocumentReference? = nil
         refUser = db.collection("users").document(firebaseAuth.currentUser?.uid ?? "").collection("posts").addDocument(data:
@@ -151,7 +151,7 @@ struct ServiceFirebase {
                 "ownerId": firebaseAuth.currentUser?.uid ?? "",
                 "ownerUsername": UserDefaults.standard.string(forKey: "username") ?? "",
                 "photo": urlVideo,
-                "title": "",
+                "title": subtitle,
                 "date": Int(Date.now.timeIntervalSince1970),
                 "videoPath": videoPath
             ]) { err in
@@ -168,7 +168,7 @@ struct ServiceFirebase {
                 "ownerId": firebaseAuth.currentUser?.uid ?? "",
                 "ownerUsername": UserDefaults.standard.string(forKey: "username") ?? "",
                 "photo": urlVideo,
-                "title": "",
+                "title": subtitle,
                 "date": Int(Date.now.timeIntervalSince1970),
                 "videoPath": videoPath,
                 "documentIdOnUsersPosts": refUser!.documentID,
@@ -183,7 +183,7 @@ struct ServiceFirebase {
         UserDefaults.standard.set(true, forKey: "alreadyPost")
     }
     
-    func uploadVideo(urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
+    func uploadVideo(subtitle: String, urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
         
         let date = Date()
         let format = DateFormatter()
@@ -222,7 +222,7 @@ struct ServiceFirebase {
                     // Uh-oh, an error occurred!
                     return
                 }
-                createReals(urlVideo: url?.description ?? "", videoPath: "videoReals/\(year)/\(month)/\(day)/\(String(describing: firebaseAuth.currentUser!.uid))-\(hour)-\(minute)-\(seconds).mp4")
+                createReals(subtitle: subtitle, urlVideo: url?.description ?? "", videoPath: "videoReals/\(year)/\(month)/\(day)/\(String(describing: firebaseAuth.currentUser!.uid))-\(hour)-\(minute)-\(seconds).mp4")
             }
         }
         

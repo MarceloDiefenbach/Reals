@@ -3,6 +3,8 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,68 +23,101 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0C2-KY-9AN">
-                                <rect key="frame" x="20" y="734" width="374" height="108"/>
+                                <rect key="frame" x="20" y="712" width="374" height="130"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdG-NJ-BBR">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjW-Kw-lQC">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="62"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd " placeholder="Digite a legenda do seu Real" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kEU-Rr-VFA" userLabel="Subtitle">
+                                                <rect key="frame" x="16" y="16" width="342" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="TLa-Ig-ulW"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5b-JI-2fW">
+                                                <rect key="frame" x="-20" y="-757" width="414" height="896"/>
+                                                <subviews>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9DC-Vo-Yra">
+                                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                                    </activityIndicatorView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="9DC-Vo-Yra" firstAttribute="centerX" secondItem="S5b-JI-2fW" secondAttribute="centerX" id="X1m-TI-qFq"/>
+                                                    <constraint firstItem="9DC-Vo-Yra" firstAttribute="centerY" secondItem="S5b-JI-2fW" secondAttribute="centerY" id="hzy-WQ-oGv"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="6oK-dv-Ddx"/>
+                                            <constraint firstItem="kEU-Rr-VFA" firstAttribute="leading" secondItem="VjW-Kw-lQC" secondAttribute="leading" constant="16" id="Dqc-JE-5yM"/>
+                                            <constraint firstAttribute="bottom" secondItem="kEU-Rr-VFA" secondAttribute="bottom" constant="16" id="YDo-jL-q0T"/>
+                                            <constraint firstItem="kEU-Rr-VFA" firstAttribute="top" secondItem="VjW-Kw-lQC" secondAttribute="top" constant="16" id="jb9-jy-nau"/>
+                                            <constraint firstAttribute="trailing" secondItem="kEU-Rr-VFA" secondAttribute="trailing" constant="16" id="kgc-Ta-kKz"/>
+                                            <constraint firstAttribute="top" secondItem="S5b-JI-2fW" secondAttribute="top" constant="757" id="ybW-PC-x29"/>
+                                            <constraint firstItem="S5b-JI-2fW" firstAttribute="bottom" secondItem="VjW-Kw-lQC" secondAttribute="bottom" constant="77" id="yx6-ai-670"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Publicar"/>
-                                        <connections>
-                                            <action selector="publishRealButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kCt-dN-RbC"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QkH-ei-hy3">
-                                        <rect key="frame" x="0.0" y="58" width="374" height="50"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6v-dU-pIM" userLabel="Publicar">
+                                        <rect key="frame" x="0.0" y="70" width="374" height="60"/>
+                                        <color key="backgroundColor" name="primary"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="EvJ-Ps-NUh"/>
+                                            <constraint firstAttribute="height" constant="60" id="hwz-NI-YPz"/>
                                         </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Gravar outro Real">
+                                        <buttonConfiguration key="configuration" style="plain" title="Publicar Real">
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="retakeReal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7ro-WL-ctN"/>
+                                            <action selector="publishRealButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="e2v-Vh-O45"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5b-JI-2fW">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9DC-Vo-Yra">
-                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4F-68-KGX" userLabel="Cancelar">
+                                <rect key="frame" x="20" y="64" width="45.5" height="45"/>
+                                <color key="backgroundColor" name="primary"/>
                                 <constraints>
-                                    <constraint firstItem="9DC-Vo-Yra" firstAttribute="centerX" secondItem="S5b-JI-2fW" secondAttribute="centerX" id="X1m-TI-qFq"/>
-                                    <constraint firstItem="9DC-Vo-Yra" firstAttribute="centerY" secondItem="S5b-JI-2fW" secondAttribute="centerY" id="hzy-WQ-oGv"/>
+                                    <constraint firstAttribute="height" constant="45" id="dbr-jm-4Eo"/>
                                 </constraints>
-                            </view>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="clear" catalog="system" symbolScale="large"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="retakeReal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6cP-UX-au7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="top" secondItem="S5b-JI-2fW" secondAttribute="top" id="1NH-oN-nd2"/>
                             <constraint firstAttribute="bottom" secondItem="AJ2-vz-ATW" secondAttribute="bottom" id="6GZ-Vy-ben"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="S5b-JI-2fW" secondAttribute="trailing" id="8wf-FZ-xNw"/>
+                            <constraint firstItem="B4F-68-KGX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="9cG-8B-9su"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="HgD-7a-cZS"/>
+                            <constraint firstItem="B4F-68-KGX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="JVT-dT-evp"/>
                             <constraint firstItem="0C2-KY-9AN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="NZi-jw-edy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="0C2-KY-9AN" secondAttribute="bottom" constant="20" id="OkW-Rw-dgk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0C2-KY-9AN" secondAttribute="trailing" constant="20" id="hpW-pp-ftP"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="htR-FL-cGq"/>
-                            <constraint firstItem="S5b-JI-2fW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="lfv-yF-7v4"/>
-                            <constraint firstItem="S5b-JI-2fW" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="rbZ-j3-U1f"/>
                             <constraint firstItem="AJ2-vz-ATW" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="w3D-FU-vcF"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="9DC-Vo-Yra" id="6PW-Ua-wTo"/>
+                        <outlet property="constraintBottom" destination="OkW-Rw-dgk" id="Dua-PC-8BZ"/>
                         <outlet property="loadingBackground" destination="S5b-JI-2fW" id="pIo-TC-S9A"/>
+                        <outlet property="publishButton" destination="T6v-dU-pIM" id="LgJ-2A-ZDJ"/>
+                        <outlet property="retakeRealButton" destination="B4F-68-KGX" id="JKb-pG-btf"/>
+                        <outlet property="subtitleBG" destination="VjW-Kw-lQC" id="Wbm-a9-uwq"/>
+                        <outlet property="subtitleTextField" destination="kEU-Rr-VFA" id="ciE-EH-Rne"/>
                         <outlet property="videoView" destination="AJ2-vz-ATW" id="Qh8-GZ-j9L"/>
                     </connections>
                 </viewController>
@@ -92,8 +127,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="clear" catalog="system" width="128" height="114"/>
+        <namedColor name="primary">
+            <color red="0.64999997615814209" green="0.85000002384185791" blue="0.048999998718500137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

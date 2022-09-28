@@ -37,7 +37,7 @@ class RegisterViewController: UIViewController {
         
         
         setupTextFieldEmail(textField: emailField, backgroung: emailBG)
-        setupTextFieldDefault(textField: usernameField, backgroung: usernameBG)
+        setupTextFieldDefault(placeholder: "Username", textField: usernameField, backgroung: usernameBG)
         setupTextFieldSecure(textField: passwordField, backgroung: passwordBG)
     }
     
