@@ -185,6 +185,7 @@
 		DF219F3528CA0A9A0038E47C /* RealsUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				DF5E9C6628E4D8B30070122C /* CoreData */,
 				DF8E3B3428D67AA7001AC8AC /* RealsUIKit.entitlements */,
 				DFB75F7028D29585000D5B5F /* Model */,
 				DF05667F28CE617B00670911 /* LottieFiles */,
@@ -202,7 +203,6 @@
 				DF219F3F28CA0A9B0038E47C /* Assets.xcassets */,
 				DF219F4128CA0A9B0038E47C /* LaunchScreen.storyboard */,
 				DF219F4428CA0A9B0038E47C /* Info.plist */,
-				DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */,
 			);
 			path = RealsUIKit;
 			sourceTree = "<group>";
@@ -247,6 +247,14 @@
 				DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DF5E9C6628E4D8B30070122C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		DF7B6D0028CA91570082A4B0 /* CaptureVideo */ = {

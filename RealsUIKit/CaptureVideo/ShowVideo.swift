@@ -38,8 +38,7 @@ class VideoPlayback: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(videoURL)
+
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -104,7 +103,7 @@ class VideoPlayback: UIViewController {
                 
                 AppCoordinator.shared.changeToCurrentRoot()
                 self.loadingBackground.isHidden = true
-//                self.sender.sendNotificationPost()
+                self.sender.sendNotificationPost()
                 
             } else {
                 

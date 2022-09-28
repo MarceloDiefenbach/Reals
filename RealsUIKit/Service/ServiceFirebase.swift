@@ -12,6 +12,7 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseAuth
 import AVFoundation
+import CoreData
 
 struct FriendRequest {
     let username: String
@@ -22,9 +23,13 @@ struct ServiceFirebase {
     
     var serviceSocial = ServiceSocial()
     
-#warning("se precisar de ajuda, falar com a gabi")
-    // separar os serviços por tipo em arquivos diferentes
-    // tem que ter um singleton que ai o serviço vai ser criado só uma vez
+    var persistentContainer: NSPersistentContainer {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError()
+        }
+        
+        return appDelegate.persistentContainer
+    }
     
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
@@ -53,7 +58,6 @@ struct ServiceFirebase {
                             let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
                             
                             posts.append(post)
-                            print(post)
                         }
                     }
                     completionHandler(posts)
@@ -91,29 +95,69 @@ struct ServiceFirebase {
                                let videoPath = data["videoPath"] as? String,
                                let date = data["date"] as? Int {
                                 
-                                print(date)
-                                
                                 let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
                                 
-                                //                                if post.date > UserDefaults.standard.integer(forKey: "dateChange") {
                                 if friendsUsername.contains(where: {$0 == ownerUsername}) {
                                     posts.append(post)
-                                    print(post)
                                 }
                                 
                                 if ownerUsername == UserDefaults.standard.string(forKey: "username") {
                                     UserDefaults.standard.set(true, forKey: "alreadyPost")
                                 }
-                                //                                }
-                                
                             }
                         }
+                        
+                        DispatchQueue.main.async {
+                            for post in posts {
+                                do {
+                                    let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
+                                    let predicate = NSPredicate(format: "videoUrl == '\(post.photo)'")
+                                    realsVideoClassFetchRequest.predicate = predicate
+                                    
+                                    let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
+                                    let formatted = videos.map {"\($0)"}.joined(separator: "\n")
+                                    print(formatted)
+                                    if formatted == "" {
+                                        let data = try? Data.init(contentsOf: URL(string: post.photo)!)
+                                        if let data = data { saveDataCoreData(videoData: data, videoURL: post.photo) }
+                                    }
+                                } catch {
+                                    fatalError()
+                                }
+                            }
+                        }
+                        getVideoOfCell()
                         completionHandler(posts)
                     }
                 }
             }
             
         })
+    }
+    
+    func getVideoOfCell() {
+        do {
+            let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
+            let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
+            print(videos[1].videoData)
+            
+        } catch {
+            fatalError("erro ao pegar os videos")
+        }
+    }
+    
+    func saveDataCoreData(videoData: Data, videoURL: String) {
+        let reals = RealsVideoClass(context: persistentContainer.viewContext)
+        
+        reals.videoData = videoData
+        reals.videoUrl = videoURL
+        reals.date = Date.now
+        
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            fatalError("deu erro")
+        }
     }
     
     func verifyIsExist(username: String, completionHandler: @escaping (Bool) -> Void) {
@@ -127,7 +171,7 @@ struct ServiceFirebase {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    //                        print("\(document.documentID) => \(document.data())")
+
                     let usernameData = document.data()["username"] as? String
                     
                     if usernameData?.lowercased() == username.lowercased() {
