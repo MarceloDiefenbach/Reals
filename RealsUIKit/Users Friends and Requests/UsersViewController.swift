@@ -7,8 +7,34 @@
 
 import Foundation
 import UIKit
+import GoogleMobileAds
 
-class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GADBannerViewDelegate {
+    
+    var bannerView: GADBannerView!
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        bannerView.backgroundColor = .black
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+        
+    }
     
     var serviceSocial = ServiceSocial()
     var service = ServiceFirebase()
@@ -23,13 +49,13 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Candies"
@@ -41,6 +67,39 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         segmentedControl.setTitle("Usuários", forSegmentAt: 0)
         segmentedControl.setTitle("Seguindo", forSegmentAt: 1)
         segmentedControl.setTitle("Seguidores", forSegmentAt: 2)
+        
+        //MARK: - admob
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-5038687707625733/4269905853"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        bannerView.delegate = self
+
+    }
+    
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+      print("bannerViewDidReceiveAd")
+    }
+
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+      print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+
+    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+      print("bannerViewDidRecordImpression")
+    }
+
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+      print("bannerViewWillPresentScreen")
+    }
+
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+      print("bannerViewWillDIsmissScreen")
+    }
+
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+      print("bannerViewDidDismissScreen")
     }
     
     @IBAction func actionBlockedToggle(_ sender: UISegmentedControl) {
@@ -55,7 +114,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return contentShowInList.count
+        return contentShowInList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,19 +162,19 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 extension UsersViewController: UISearchResultsUpdating {
     
     var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
+        return searchController.searchBar.text?.isEmpty ?? true
     }
-        
+    
     func updateSearchResults(for searchController: UISearchController) {
-      let searchBar = searchController.searchBar
-      filterContentForSearchText(searchBar.text!)
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
     }
-
+    
     func filterContentForSearchText(_ searchText: String) {
         filteredUsers = users.filter { (user: User) -> Bool in
-        return user.username.lowercased().contains(searchText.lowercased())
-      }
-      updateTableView()
+            return user.username.lowercased().contains(searchText.lowercased())
+        }
+        updateTableView()
     }
 }
 

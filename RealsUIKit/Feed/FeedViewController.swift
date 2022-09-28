@@ -123,6 +123,15 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
+            print(URL(string: posts[indexPath.row].photo))
+            if let theProfileImageUrl = URL(string: posts[indexPath.row].photo) {
+                do {
+                    let videoData = try Data(contentsOf: theProfileImageUrl as URL)
+                    print(videoData)
+                } catch {
+                    print("Unable to load data: \(error)")
+                }
+            }
             cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
             cell.titleLabel.text = posts[indexPath.row].ownerUsername
             cell.subtitleLabel.text = posts[indexPath.row].title
