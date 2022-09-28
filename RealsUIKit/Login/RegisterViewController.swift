@@ -11,7 +11,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-class RegisterViewController: UIViewController, UITextFieldDelegate {
+class RegisterViewController: UIViewController {
 
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
@@ -35,33 +35,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         setupOutlineButton(button: backToLoginButton)
         setupCreateAccountButton(button: createAccountButton)
         
-        setupTextFieldDefault(textField: emailField, backgroung: emailBG)
+        
+        setupTextFieldEmail(textField: emailField, backgroung: emailBG)
         setupTextFieldDefault(textField: usernameField, backgroung: usernameBG)
-        setupTextFieldDefault(textField: emailField, backgroung: emailBG)
         setupTextFieldSecure(textField: passwordField, backgroung: passwordBG)
-    }
-
-    func setupTextFieldDefault(textField: UITextField, backgroung: UIView) {
-        textField.text = ""
-        textField.layer.borderWidth = 0.0
-        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
-        textField.delegate = self
-        
-        backgroung.layer.borderWidth = 0.0
-        backgroung.layer.cornerRadius = 16
-        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
-    }
-    
-    func setupTextFieldSecure(textField: UITextField, backgroung: UIView) {
-        textField.text = ""
-        textField.layer.borderWidth = 0.0
-        textField.isSecureTextEntry = true
-        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
-        textField.delegate = self
-        
-        backgroung.layer.borderWidth = 0.0
-        backgroung.layer.cornerRadius = 16
-        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
     }
     
     func setupCreateAccountButton(button: UIButton) {

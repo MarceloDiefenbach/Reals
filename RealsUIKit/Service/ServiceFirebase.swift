@@ -409,4 +409,38 @@ struct ServiceFirebase {
         
     }
     
+    func uploadPhotoIMGBB() {
+        
+        let key = "b8e89775998ecfc7a202366d8e29c36c"
+        let urlString = "https://api.imgbb.com/1/upload?key=\(key)"
+        let url = NSURL(string: urlString)!
+        
+        let image = UIImage(named: "splash")!
+        let imageData: Data = image.pngData()!
+
+        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+        let paramString: [String : Any] = [
+            "image" : strBase64
+        ]
+        
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: paramString)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let task =  URLSession.shared.dataTask(with: request as URLRequest)  { (data, response, error) in
+            do {
+                if let jsonData = data {
+                    if let jsonDataDict  = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject] {
+                        NSLog("Received data:\n\(jsonDataDict))")
+                    }
+                }
+            } catch let err as NSError {
+                print(err.debugDescription)
+            }
+        }
+        task.resume()
+        
+    }
+    
 }
