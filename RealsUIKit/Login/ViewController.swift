@@ -98,6 +98,7 @@ class ViewController: UIViewController {
         
         button.setTitleColor(UIColor(named: "primary"), for: .normal)
     }
+    
     @IBAction func appleButtonAction(_ sender: Any) {
         startSignInWithAppleFlow()
     }

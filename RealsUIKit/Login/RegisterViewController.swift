@@ -11,7 +11,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
 
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
@@ -22,12 +22,65 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var termsOfUseSwitch: UISwitch!
     @IBOutlet weak var termsOfUseButton: UILabel!
+    @IBOutlet weak var usernameBG: UIView!
+    @IBOutlet weak var emailBG: UIView!
+    @IBOutlet weak var passwordBG: UIView!
+    @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var backToLoginButton: UIButton!
+    
+    
+    override func viewDidLoad() {
+        
+        setupOutlineButton(button: backToLoginButton)
+        setupCreateAccountButton(button: createAccountButton)
+        
+        setupTextFieldDefault(textField: emailField, backgroung: emailBG)
+        setupTextFieldDefault(textField: usernameField, backgroung: usernameBG)
+        setupTextFieldDefault(textField: emailField, backgroung: emailBG)
+        setupTextFieldSecure(textField: passwordField, backgroung: passwordBG)
+    }
+
+    func setupTextFieldDefault(textField: UITextField, backgroung: UIView) {
+        textField.text = ""
+        textField.layer.borderWidth = 0.0
+        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
+        textField.delegate = self
+        
+        backgroung.layer.borderWidth = 0.0
+        backgroung.layer.cornerRadius = 16
+        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
+    }
+    
+    func setupTextFieldSecure(textField: UITextField, backgroung: UIView) {
+        textField.text = ""
+        textField.layer.borderWidth = 0.0
+        textField.isSecureTextEntry = true
+        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "black")!])
+        textField.delegate = self
+        
+        backgroung.layer.borderWidth = 0.0
+        backgroung.layer.cornerRadius = 16
+        backgroung.layer.backgroundColor = UIColor(named: "textfieldColor")?.cgColor
+    }
+    
+    func setupCreateAccountButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+    }
+    
+    func setupOutlineButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(.black).cgColor
+        button.backgroundColor = .white
+    }
+    
+    
+    //MARK: - FUNCTIONS
     
     @IBAction func backToLoginButton(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
-
+        
     }
     
     @IBAction func createAccountButton(_ sender: Any) {
@@ -43,53 +96,25 @@ class RegisterViewController: UIViewController {
             
             service.verifyIsExist(username: usernameField.text ?? "", completionHandler: { (existUsername) -> Void in
                 
-                if self.termsOfUseSwitch.isOn {
-                    print(existUsername)
-                    if existUsername {
-                        let alert = UIAlertController(title: "Usuário já existe", message: "O nome de usuário informado já está sendo utilizado, escolha outro e tente novamente", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                            //nothing to do
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                        
-                    } else {
-                        self.createAccount(
-                            username: self.usernameField.text ?? "",
-                            email: self.emailField.text ?? "",
-                            password: self.passwordField.text ?? "",
-                            completionHandler: { (valueReturn) -> Void in
-                                
-                            })
-                    }
-                } else {
-                    let alert = UIAlertController(title: "Termos de uso", message: "Você precisa ler e aceitar nossos termos de uso", preferredStyle: .alert)
+                if existUsername {
+                    let alert = UIAlertController(title: "Usuário já existe", message: "O nome de usuário informado já está sendo utilizado, escolha outro e tente novamente", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                         //nothing to do
                     }))
                     self.present(alert, animated: true, completion: nil)
+                    
+                } else {
+                    self.createAccount(
+                        username: self.usernameField.text ?? "",
+                        email: self.emailField.text ?? "",
+                        password: self.passwordField.text ?? "",
+                        completionHandler: { (valueReturn) -> Void in
+                            
+                        })
                 }
             })
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        usernameField.text = ""
-        emailField.text = ""
-        passwordField.text = ""
-        passwordField.isSecureTextEntry = true
-        
-        setTermsOfUseInteraction()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
-    //MARK: - FUNCTIONS
     
     func createAccount(username: String, email: String, password: String, completionHandler: @escaping (String) -> Void) {
 
