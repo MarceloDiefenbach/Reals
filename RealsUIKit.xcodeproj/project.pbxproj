@@ -34,6 +34,7 @@
 		DF8E3B3328D6653E001AC8AC /* EmptyCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E3B3228D6653E001AC8AC /* EmptyCellTableViewCell.swift */; };
 		DF8E3B3628D67AAA001AC8AC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */; };
 		DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */; };
+		DFA6BA8328E3D06F00429254 /* RealsVideosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */; };
 		DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */; };
 		DFB75F7228D29590000D5B5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7128D29590000D5B5F /* User.swift */; };
 		DFB75F7428D295A7000D5B5F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7328D295A7000D5B5F /* Post.swift */; };
@@ -88,6 +89,7 @@
 		DF8E3B3428D67AA7001AC8AC /* RealsUIKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RealsUIKit.entitlements; sourceTree = "<group>"; };
 		DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoBack.swift; sourceTree = "<group>"; };
+		DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealsVideosModel.xcdatamodel; sourceTree = "<group>"; };
 		DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSocial.swift; sourceTree = "<group>"; };
 		DFB75F7128D29590000D5B5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DFB75F7328D295A7000D5B5F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				DF219F3F28CA0A9B0038E47C /* Assets.xcassets */,
 				DF219F4128CA0A9B0038E47C /* LaunchScreen.storyboard */,
 				DF219F4428CA0A9B0038E47C /* Info.plist */,
+				DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */,
 			);
 			path = RealsUIKit;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */,
 				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
 				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
+				DFA6BA8328E3D06F00429254 /* RealsVideosModel.xcdatamodeld in Sources */,
 				DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,
 				DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */,
@@ -706,6 +710,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */,
+			);
+			currentVersion = DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */;
+			path = RealsVideosModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DF219F2B28CA0A9A0038E47C /* Project object */;
 }
