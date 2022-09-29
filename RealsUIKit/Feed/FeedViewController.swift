@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import FirebaseAuth
+import CoreData
 
 class FeedViewController: UIViewController {
     
@@ -32,6 +33,14 @@ class FeedViewController: UIViewController {
     var videoURLs = Array<URL>()
     var firstLoad = true
     let refreshControl = UIRefreshControl()
+    
+    var persistentContainer: NSPersistentContainer {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError()
+        }
+        
+        return appDelegate.persistentContainer
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,16 +132,15 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
-            print(URL(string: posts[indexPath.row].photo))
-            if let theProfileImageUrl = URL(string: posts[indexPath.row].photo) {
-                do {
-                    let videoData = try Data(contentsOf: theProfileImageUrl as URL)
-                    print(videoData)
-                } catch {
-                    print("Unable to load data: \(error)")
-                }
+            
+            if true {
+                let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo) as! Data
+                let videoAsset: AVAsset = videoData.getAVAsset()
+                cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+            } else {
+                cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
             }
-            cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
+            
             cell.titleLabel.text = posts[indexPath.row].ownerUsername
             cell.subtitleLabel.text = posts[indexPath.row].title
             cell.selectionStyle = .none
@@ -176,5 +184,34 @@ extension FeedViewController: MyCustomCellDelegator {
             
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension Data {
+    func getAVAsset() -> AVAsset {
+        let directory = NSTemporaryDirectory()
+        let fileName = "\(NSUUID().uuidString).mov"
+        let fullURL = NSURL.fileURL(withPathComponents: [directory, fileName])
+        try! self.write(to: fullURL!)
+        let asset = AVAsset(url: fullURL!)
+        return asset
+    }
+}
+
+//MARK: - get video of CoreData
+extension FeedViewController {
+    func getVideoOfCell(videoURL: String) -> Any {
+        do {
+            let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
+            let predicate = NSPredicate(format: "videoUrl == '\(videoURL)'")
+            realsVideoClassFetchRequest.predicate = predicate
+            
+            let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
+            let formatted = videos.map {"\($0)"}.joined(separator: "\n")
+            
+            return videos[0].videoData!
+        } catch {
+            fatalError("Error when get video of CoreData \(#function)")
+        }
     }
 }
