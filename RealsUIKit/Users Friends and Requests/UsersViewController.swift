@@ -64,9 +64,9 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         updateTableViewData()
         
-        segmentedControl.setTitle("Usuários", forSegmentAt: 0)
-        segmentedControl.setTitle("Seguindo", forSegmentAt: 1)
-        segmentedControl.setTitle("Seguidores", forSegmentAt: 2)
+        segmentedControl.setTitle("Users", forSegmentAt: 0)
+        segmentedControl.setTitle("Following", forSegmentAt: 1)
+        segmentedControl.setTitle("Followers", forSegmentAt: 2)
         
         //MARK: - admob
         bannerView = GADBannerView(adSize: GADAdSizeBanner)

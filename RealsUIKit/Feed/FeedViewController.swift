@@ -23,6 +23,9 @@ class FeedViewController: UIViewController {
     var posts: [Post] = []
     var controlQuantityPost: Int = 0
     let firebaseAuth = Auth.auth()
+    let coreDataQueue = DispatchQueue(label: "CoreDataQueue", qos: .utility, attributes: [.concurrent], autoreleaseFrequency: .workItem)
+    
+    var savedVideosURL: [String] = []
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var createButton: UIBarButtonItem!
@@ -34,13 +37,13 @@ class FeedViewController: UIViewController {
     var firstLoad = true
     let refreshControl = UIRefreshControl()
     
-    var persistentContainer: NSPersistentContainer {
+    let persistentContainer: NSPersistentContainer = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
         }
         
         return appDelegate.persistentContainer
-    }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,12 +136,34 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
             
-            if true {
-                let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo) as! Data
+            if let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo) as? Data {
                 let videoAsset: AVAsset = videoData.getAVAsset()
                 cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
             } else {
                 cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
+                
+                coreDataQueue.async {
+                    do {
+                        let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
+                        let predicate = NSPredicate(format: "videoUrl == '\(self.posts[indexPath.row].photo)'")
+                        realsVideoClassFetchRequest.predicate = predicate
+                        
+                        let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
+                        let formatted = videos.map {"\($0)"}.joined(separator: "\n")
+                        print(formatted)
+                        if formatted == "" {
+                            let data = try? Data.init(contentsOf: URL(string: self.posts[indexPath.row].photo)!)
+                            let videoURL = self.posts[indexPath.row].photo
+                            if let data = data, !self.savedVideosURL.contains(videoURL) {
+                                self.savedVideosURL.append(videoURL)
+                                self.saveDataCoreData(videoData: data, videoURL: videoURL)
+                            }
+                        }
+                    } catch {
+                        fatalError()
+                    }
+                }
+                
             }
             
             cell.titleLabel.text = posts[indexPath.row].ownerUsername
@@ -151,6 +176,21 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
+    
+    func saveDataCoreData(videoData: Data, videoURL: String) {
+        let reals = RealsVideoClass(context: persistentContainer.viewContext)
+        
+        reals.videoData = videoData
+        reals.videoUrl = videoURL
+        reals.date = Date.now
+        
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            fatalError("deu erro")
+        }
+    }
+    
 }
 
 extension FeedViewController: MyCustomCellDelegator {
@@ -209,7 +249,11 @@ extension FeedViewController {
             let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
             let formatted = videos.map {"\($0)"}.joined(separator: "\n")
             
-            return videos[0].videoData!
+            if let video = videos.first?.videoData {
+                return video
+            } else {
+                return ""
+            }
         } catch {
             fatalError("Error when get video of CoreData \(#function)")
         }

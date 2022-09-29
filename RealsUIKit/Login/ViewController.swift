@@ -33,8 +33,7 @@ class ViewController: UIViewController {
     @IBAction func loginButton(_ sender: Any) {
         
         doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
-            print(self.firebaseAuth.currentUser?.email)
-            print(completionReturn)
+            //TODO: - colocar aqui a logica de ir pra outra tela
         })
     }
     
@@ -128,7 +127,6 @@ class ViewController: UIViewController {
     func saveOnUserDefaults() {
         
         service.getUserByEmail(email: emailField.text ?? "", completionHandler: { (response) in
-            print(response)
             UserDefaults.standard.set(response, forKey: "username")
             UserDefaults.standard.set(self.emailField.text, forKey: "email" ?? "")
         })

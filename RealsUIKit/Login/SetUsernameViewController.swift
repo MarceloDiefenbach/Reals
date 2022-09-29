@@ -37,8 +37,6 @@ class SetUsernameViewController: UIViewController {
             
         } else {
             service.verifyIsExist(username: usernameField.text ?? "", completionHandler: { (existUsername) -> Void in
-                
-                print(existUsername)
                 if existUsername {
                     let alert = UIAlertController(title: "Usuário já existe", message: "O nome de usuário informado já está sendo utilizado, escolha outro e tente novamente", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in

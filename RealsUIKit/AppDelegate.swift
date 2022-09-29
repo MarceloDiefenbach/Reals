@@ -86,6 +86,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func getPersistantContainer() -> NSPersistentContainer {
+        return self.persistentContainer
+    }
 }
 
 
@@ -121,7 +124,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     // Print full message.
     print("didReceive")
-    print(userInfo)
   }
     
     func application(_ application: UIApplication,

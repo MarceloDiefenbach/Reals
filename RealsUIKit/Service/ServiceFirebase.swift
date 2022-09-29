@@ -106,26 +106,6 @@ struct ServiceFirebase {
                                 }
                             }
                         }
-                        
-                        DispatchQueue.main.async {
-                            for post in posts {
-                                do {
-                                    let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-                                    let predicate = NSPredicate(format: "videoUrl == '\(post.photo)'")
-                                    realsVideoClassFetchRequest.predicate = predicate
-                                    
-                                    let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-                                    let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-                                    print(formatted)
-                                    if formatted == "" {
-                                        let data = try? Data.init(contentsOf: URL(string: post.photo)!)
-                                        if let data = data { saveDataCoreData(videoData: data, videoURL: post.photo) }
-                                    }
-                                } catch {
-                                    fatalError()
-                                }
-                            }
-                        }
                         completionHandler(posts)
                     }
                 }
@@ -156,20 +136,6 @@ struct ServiceFirebase {
             
         } catch {
             fatalError("erro ao pegar os videos")
-        }
-    }
-    
-    func saveDataCoreData(videoData: Data, videoURL: String) {
-        let reals = RealsVideoClass(context: persistentContainer.viewContext)
-        
-        reals.videoData = videoData
-        reals.videoUrl = videoURL
-        reals.date = Date.now
-        
-        do {
-            try persistentContainer.viewContext.save()
-        } catch {
-            fatalError("deu erro")
         }
     }
     
@@ -396,8 +362,6 @@ struct ServiceFirebase {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    print(document.documentID)
                     if document.data()["username"] as? String == username {
                         ownerIDReceiver = document.documentID
                     }
@@ -416,8 +380,6 @@ struct ServiceFirebase {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    print(document.data()["username"] ?? "")
                     if document.data()["email"] as? String == email {
                         ownerUsernameReceiver = document.data()["username"] as! String
                     }
