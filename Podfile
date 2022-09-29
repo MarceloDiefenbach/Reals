@@ -15,5 +15,6 @@ target 'RealsUIKit' do
   
   # Pods for LottieAnimations
   pod 'lottie-ios'
+  pod 'Google-Mobile-Ads-SDK'
 
 end
