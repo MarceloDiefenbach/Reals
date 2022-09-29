@@ -134,13 +134,12 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
             
             if true {
-                let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo)
+                let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo) as! Data
                 let videoAsset: AVAsset = videoData.getAVAsset()
                 cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
             } else {
                 cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
             }
-            
             
             cell.titleLabel.text = posts[indexPath.row].ownerUsername
             cell.subtitleLabel.text = posts[indexPath.row].title
@@ -150,21 +149,6 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             cell.setupReportDeleteButton(post: posts[indexPath.row])
             playVideoOnTheCell(cell: cell, indexPath: indexPath)
             return cell
-        }
-    }
-    
-    func getVideoOfCell(videoURL: String) -> Data {
-        do {
-            let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-            let predicate = NSPredicate(format: "videoUrl == '\(videoURL)'")
-            realsVideoClassFetchRequest.predicate = predicate
-            
-            let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-            let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-            
-            return videos[0].videoData!
-        } catch {
-            fatalError("erro ao pegar os videos")
         }
     }
 }
@@ -211,5 +195,23 @@ extension Data {
         try! self.write(to: fullURL!)
         let asset = AVAsset(url: fullURL!)
         return asset
+    }
+}
+
+//MARK: - get video of CoreData
+extension FeedViewController {
+    func getVideoOfCell(videoURL: String) -> Any {
+        do {
+            let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
+            let predicate = NSPredicate(format: "videoUrl == '\(videoURL)'")
+            realsVideoClassFetchRequest.predicate = predicate
+            
+            let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
+            let formatted = videos.map {"\($0)"}.joined(separator: "\n")
+            
+            return videos[0].videoData!
+        } catch {
+            fatalError("Error when get video of CoreData \(#function)")
+        }
     }
 }

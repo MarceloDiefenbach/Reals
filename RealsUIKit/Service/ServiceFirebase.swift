@@ -54,9 +54,9 @@ struct ServiceFirebase {
                            let ownerUsername = data["ownerUsername"] as? String,
                            let videoPath = data["videoPath"] as? String,
                            let date = data["date"] as? Int {
-                            
+                                
                             let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
-                            
+                                
                             posts.append(post)
                         }
                     }
@@ -126,7 +126,6 @@ struct ServiceFirebase {
                                 }
                             }
                         }
-                        getVideoOfCell()
                         completionHandler(posts)
                     }
                 }
@@ -135,11 +134,25 @@ struct ServiceFirebase {
         })
     }
     
-    func getVideoOfCell() {
+    func deleteVideosOfCoreData() {
         do {
             let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
             let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
-            print(videos[1].videoData)
+            
+            for video in videos {
+                persistentContainer.viewContext.delete(video)
+            }
+            getVideos()
+        } catch {
+            fatalError("erro ao pegar os videos")
+        }
+    }
+    
+    func getVideos() {
+        do {
+            let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
+            let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
+            print(formatted)
             
         } catch {
             fatalError("erro ao pegar os videos")
@@ -415,18 +428,6 @@ struct ServiceFirebase {
         }
     }
     
-    func uploadToDrive() {
-        URLSession.shared.dataTask(with: URL(string: "https://www.googleapis.com/upload/drive/v3/files?uploadType=media")!) { data, response, error in
-            guard let data = data else {
-                print("nao foi possivel decodificar os dados")
-                
-                return
-            }
-            print("dentro do metodo de upload ")
-            print(data)
-        }
-    }
-    
     func getDateChange() {
         
         db.collection("dateChange")
@@ -439,6 +440,7 @@ struct ServiceFirebase {
                         
                         if let dateChange = data["dateChange"] as? Int {
                             if dateChange != UserDefaults.standard.integer(forKey: "dateChange") {
+                                deleteVideosOfCoreData()
                                 UserDefaults.standard.set(dateChange, forKey: "dateChange")
                                 UserDefaults.standard.set(false, forKey: "alreadyPost")
                             } else {
