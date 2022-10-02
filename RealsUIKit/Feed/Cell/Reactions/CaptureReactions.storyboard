@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K4R-JQ-Sae">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CaptureVideo-->
+        <scene sceneID="H5c-xJ-0C9">
+            <objects>
+                <viewController storyboardIdentifier="captureVideo" title="CaptureVideo" id="K4R-JQ-Sae" customClass="CaptureReactions" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rza-Fr-OIt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="etU-Tz-PGC">
+                                <rect key="frame" x="20" y="261" width="374" height="374"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6p-Qe-fU0">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="374"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="B6p-Qe-fU0" secondAttribute="trailing" id="5ck-QJ-ib0"/>
+                                    <constraint firstAttribute="width" secondItem="etU-Tz-PGC" secondAttribute="height" multiplier="1:1" id="NMV-VU-JPU"/>
+                                    <constraint firstAttribute="bottom" secondItem="B6p-Qe-fU0" secondAttribute="bottom" id="c0d-ml-a9C"/>
+                                    <constraint firstItem="B6p-Qe-fU0" firstAttribute="leading" secondItem="etU-Tz-PGC" secondAttribute="leading" id="n9z-IA-rLH"/>
+                                    <constraint firstItem="B6p-Qe-fU0" firstAttribute="top" secondItem="etU-Tz-PGC" secondAttribute="top" id="xYS-ZU-7hI"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancelButton" translatesAutoresizingMaskIntoConstraints="NO" id="EcJ-9P-bVF">
+                                <rect key="frame" x="99" y="767" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EcJ-9P-bVF" secondAttribute="height" multiplier="1:1" id="iKg-eQ-agh"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startRecordButton" translatesAutoresizingMaskIntoConstraints="NO" id="gtg-sS-0gW">
+                                <rect key="frame" x="165" y="738" width="84" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gtg-sS-0gW" secondAttribute="height" multiplier="1:1" id="wEB-sr-wZ4"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8eX-h1-BfY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EcJ-9P-bVF" firstAttribute="centerY" secondItem="gtg-sS-0gW" secondAttribute="centerY" id="84p-Mb-Ids"/>
+                            <constraint firstItem="8eX-h1-BfY" firstAttribute="trailing" secondItem="etU-Tz-PGC" secondAttribute="trailing" constant="20" id="DIJ-he-CXc"/>
+                            <constraint firstItem="gtg-sS-0gW" firstAttribute="width" secondItem="rza-Fr-OIt" secondAttribute="width" multiplier="0.2" constant="1" id="Ezx-p4-I7d"/>
+                            <constraint firstItem="8eX-h1-BfY" firstAttribute="bottom" secondItem="gtg-sS-0gW" secondAttribute="bottom" constant="40" id="Iha-SG-y80"/>
+                            <constraint firstItem="etU-Tz-PGC" firstAttribute="centerY" secondItem="rza-Fr-OIt" secondAttribute="centerY" id="JCU-fs-YWU"/>
+                            <constraint firstItem="EcJ-9P-bVF" firstAttribute="height" secondItem="gtg-sS-0gW" secondAttribute="height" multiplier="0.3" constant="1" id="cH2-me-xA6"/>
+                            <constraint firstItem="etU-Tz-PGC" firstAttribute="centerX" secondItem="rza-Fr-OIt" secondAttribute="centerX" id="ckT-bN-qhh"/>
+                            <constraint firstItem="etU-Tz-PGC" firstAttribute="leading" secondItem="8eX-h1-BfY" secondAttribute="leading" constant="20" id="fZi-NY-DYC"/>
+                            <constraint firstItem="gtg-sS-0gW" firstAttribute="leading" secondItem="EcJ-9P-bVF" secondAttribute="trailing" constant="40" id="h28-MC-ccP"/>
+                            <constraint firstItem="gtg-sS-0gW" firstAttribute="centerX" secondItem="rza-Fr-OIt" secondAttribute="centerX" id="qcG-3F-qc7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="camPreview" destination="B6p-Qe-fU0" id="UUr-WR-6ld"/>
+                        <outlet property="cancelButton" destination="EcJ-9P-bVF" id="66z-tO-iCT"/>
+                        <outlet property="startRecordButton" destination="gtg-sS-0gW" id="af5-LO-F00"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vk5-Oz-322" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7" y="97"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cancelButton" width="155" height="155"/>
+        <image name="startRecordButton" width="183" height="183"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

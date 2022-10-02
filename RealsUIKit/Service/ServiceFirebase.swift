@@ -34,41 +34,42 @@ struct ServiceFirebase {
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
     
-    func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
-        
-        var posts: [Post] = []
-        
-        db.collection("posts").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                
-                if let snapshotDocumentos = querySnapshot?.documents {
-                    for doc in snapshotDocumentos {
-                        
-                        let data = doc.data()
-                        
-                        if let title = data["title"] as? String,
-                           let ownerId = data["ownerId"] as? String,
-                           let photo = data["photo"] as? String,
-                           let ownerUsername = data["ownerUsername"] as? String,
-                           let videoPath = data["videoPath"] as? String,
-                           let date = data["date"] as? Int {
-                                
-                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
-                                
-                            posts.append(post)
-                        }
-                    }
-                    completionHandler(posts)
-                }
-            }
-        }
-    }
+//    func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
+//        
+//        var posts: [Post] = []
+//        
+//        db.collection("posts").getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                
+//                if let snapshotDocumentos = querySnapshot?.documents {
+//                    for doc in snapshotDocumentos {
+//                        
+//                        let data = doc.data()
+//                        
+//                        if let title = data["title"] as? String,
+//                           let ownerId = data["ownerId"] as? String,
+//                           let photo = data["photo"] as? String,
+//                           let ownerUsername = data["ownerUsername"] as? String,
+//                           let videoPath = data["videoPath"] as? String,
+//                           let date = data["date"] as? Int {
+//                                
+//                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
+//                                
+//                            posts.append(post)
+//                        }
+//                    }
+//                    completionHandler(posts)
+//                }
+//            }
+//        }
+//    }
     
     func getFriendsReals(completionHandler: @escaping ([Post]) -> Void) {
         
         var posts: [Post] = []
+        var reactions: [Reaction] = []
         
         var friendsUsername: [String] = []
         
@@ -85,34 +86,153 @@ struct ServiceFirebase {
                     if let snapshotDocumentos = querySnapshot?.documents {
                         UserDefaults.standard.set(false, forKey: "alreadyPost")
                         for doc in snapshotDocumentos {
-                            
                             let data = doc.data()
                             
-                            if let title = data["title"] as? String,
-                               let ownerId = data["ownerId"] as? String,
-                               let photo = data["photo"] as? String,
-                               let ownerUsername = data["ownerUsername"] as? String,
-                               let videoPath = data["videoPath"] as? String,
-                               let date = data["date"] as? Int {
-                                
-                                let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
-                                
-                                if friendsUsername.contains(where: {$0 == ownerUsername}) {
-                                    posts.append(post)
+                            db.collection("posts").document(doc.documentID).collection("reactions").getDocuments() { (querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    if let snapshotDocumentos = querySnapshot?.documents {
+                                        for doc in snapshotDocumentos {
+                                            let dataReaction = doc.data()
+                                            print(dataReaction)
+                                            if let username = dataReaction["username"] as? String,
+                                               let image = dataReaction["video"] as? String,
+                                               let userId = dataReaction["userID"] as? String {
+                                                
+                                                reactions.append(Reaction(username: username, reactionUrl: image, userId: userId))
+                                            }
+                                        }
+                                    }
                                 }
-                                
-                                if ownerUsername == UserDefaults.standard.string(forKey: "username") {
-                                    UserDefaults.standard.set(true, forKey: "alreadyPost")
+                                if let title = data["title"] as? String,
+                                   let ownerId = data["ownerId"] as? String,
+                                   let photo = data["photo"] as? String,
+                                   let ownerUsername = data["ownerUsername"] as? String,
+                                   let videoPath = data["videoPath"] as? String,
+                                   let date = data["date"] as? Int {
+                                    
+                                    let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date, reactions: reactions)
+                                    
+                                    if friendsUsername.contains(where: {$0 == ownerUsername}) {
+                                        posts.append(post)
+                                    }
+                                    
+                                    if ownerUsername == UserDefaults.standard.string(forKey: "username") {
+                                        UserDefaults.standard.set(true, forKey: "alreadyPost")
+                                    }
                                 }
+                                reactions = []
+                                completionHandler(posts)
                             }
                         }
-                        completionHandler(posts)
                     }
                 }
             }
-            
         })
     }
+    
+    func uploadReactions(post: Post, urlVideo: URL, completionHandler: @escaping (Bool) -> Void) {
+        
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let formattedDate = format.string(from: date)
+        print(formattedDate)
+        
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        
+        let storageRef = Storage.storage().reference()
+        
+        let riversRef = storageRef.child("reactions/\(post.postUid)/\(String(describing: firebaseAuth.currentUser!.uid))/\(year)/\(month)/\(day)/\(hour)-\(minute)-\(seconds).mp4")
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "video/mp4"
+        
+        
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = riversRef.putFile(from: urlVideo, metadata: metadata) { metadata, error in
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+            }
+            // Metadata contains file metadata such as size, content-type.
+            let size = metadata.size
+            // You can also access to download URL after upload.
+            riversRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                saveReactionsOnPost(postId: post.postUid, urlVideo: url?.description ?? "", videoPath: "reactions/\(post.postUid)/\(String(describing: firebaseAuth.currentUser!.uid))/\(year)/\(month)/\(day)/\(hour)-\(minute)-\(seconds).mp4")
+            }
+        }
+    
+        uploadTask.observe(.resume) { snapshot in
+        }
+        
+        uploadTask.observe(.pause) { snapshot in
+        }
+        
+        uploadTask.observe(.progress) { snapshot in
+            let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
+            / Double(snapshot.progress!.totalUnitCount)
+        }
+        
+        uploadTask.observe(.success) { snapshot in
+            print("finalizou")
+            UserDefaults.standard.set(Date.now, forKey: "dateFromLastPosts")
+            completionHandler(true)
+        }
+        
+        uploadTask.observe(.failure) { snapshot in
+            if let error = snapshot.error as? NSError {
+                switch (StorageErrorCode(rawValue: error.code)!) {
+                case .objectNotFound:
+                    completionHandler(false)
+                    break
+                case .unauthorized:
+                    completionHandler(false)
+                    break
+                case .cancelled:
+                    completionHandler(false)
+                    break
+                case .unknown:
+                    completionHandler(false)
+                    break
+                default:
+                    completionHandler(false)
+                    break
+                }
+            }
+        }
+    }
+    
+    func saveReactionsOnPost(postId: String, urlVideo: String, videoPath: String){
+        
+        let username = UserDefaults.standard.string(forKey: "username")
+        
+        db.collection("posts").document(postId).collection("reactions").document(username ?? "").setData(
+            [
+                "userID": firebaseAuth.currentUser?.uid ?? "",
+                "username": UserDefaults.standard.string(forKey: "username") ?? "",
+                "video": urlVideo,
+                "videoPath": videoPath
+            ], merge: true) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with")
+                }
+        }
+    }
+    
     
     func deleteVideosOfCoreData() {
         do {
@@ -224,22 +344,17 @@ struct ServiceFirebase {
         
         let storageRef = Storage.storage().reference()
         
-        // Create a reference to the file you want to upload
         let riversRef = storageRef.child("videoReals/\(year)/\(month)/\(day)/\(String(describing: firebaseAuth.currentUser!.uid))-\(hour)-\(minute)-\(seconds).mp4")
         
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"
         
         
-        // Upload the file to the path "images/rivers.jpg"
         let uploadTask = riversRef.putFile(from: urlVideo, metadata: metadata) { metadata, error in
             guard let metadata = metadata else {
-                // Uh-oh, an error occurred!
                 return
             }
-            // Metadata contains file metadata such as size, content-type.
             let size = metadata.size
-            // You can also access to download URL after upload.
             riversRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {
                     // Uh-oh, an error occurred!
@@ -249,23 +364,18 @@ struct ServiceFirebase {
             }
         }
         
-        // Listen for state changes, errors, and completion of the upload.
         uploadTask.observe(.resume) { snapshot in
-            // Upload resumed, also fires when the upload starts
         }
         
         uploadTask.observe(.pause) { snapshot in
-            // Upload paused
         }
         
         uploadTask.observe(.progress) { snapshot in
-            // Upload reported progress
             let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
             / Double(snapshot.progress!.totalUnitCount)
         }
         
         uploadTask.observe(.success) { snapshot in
-            // Upload completed successfully
             print("finalizou")
             UserDefaults.standard.set(Date.now, forKey: "dateFromLastPosts")
             completionHandler(true)
@@ -275,26 +385,18 @@ struct ServiceFirebase {
             if let error = snapshot.error as? NSError {
                 switch (StorageErrorCode(rawValue: error.code)!) {
                 case .objectNotFound:
-                    // File doesn't exist
                     completionHandler(false)
                     break
                 case .unauthorized:
-                    // User doesn't have permission to access file
                     completionHandler(false)
                     break
                 case .cancelled:
-                    // User canceled the upload
                     completionHandler(false)
                     break
-                    
-                    /* ... */
-                    
                 case .unknown:
-                    // Unknown error occurred, inspect the server response
                     completionHandler(false)
                     break
                 default:
-                    // A separate error occurred. This is a good place to retry the upload.
                     completionHandler(false)
                     break
                 }
@@ -307,7 +409,7 @@ struct ServiceFirebase {
         
         let desertRef = storageRef.child(videoPath)
         
-        // Delete the file
+
         desertRef.delete { error in
             if let error = error {
                 UserDefaults.standard.set(false, forKey: "alreadyPost")

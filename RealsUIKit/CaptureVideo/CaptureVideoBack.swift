@@ -313,7 +313,7 @@ extension CaptureVideoBack {
 
         @objc func cancelButtonTapped(sender: UITapGestureRecognizer) {
             if sender.state == .ended {
-                AppCoordinator.shared.changeToCurrentRoot()
+                AppCoordinator.shared.changeToRootViewController(atStoryboard: "Feed")
             }
         }
     

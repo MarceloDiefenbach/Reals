@@ -1,13 +1,18 @@
+//
+//  CaptureReactions.swift
+//  RealsUIKit
+//
+//  Created by Marcelo Diefenbach on 01/10/22.
+//
+
 import UIKit
 import AVFoundation
 
-
-class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
+class CaptureReactions: UIViewController, AVCaptureFileOutputRecordingDelegate {
     
     @IBOutlet weak var camPreview: UIView!
     @IBOutlet weak var startRecordButton: UIImageView!
     @IBOutlet weak var cancelButton: UIImageView!
-    @IBOutlet weak var switchCameraButton: UIImageView!
     
     let captureSession = AVCaptureSession()
     let movieOutput = AVCaptureMovieFileOutput()
@@ -18,13 +23,14 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     var videoData: Data!
     var videoSize: Double!
     var cameraType: Bool = false
+    var post: Post?
+    var service = ServiceFirebase()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
+        captureSession.sessionPreset = AVCaptureSession.Preset.medium
         setStartRecordButton()
         setCancelRecordButton()
-        setSwitchRecordButton()
         setupPreview2()
     }
     
@@ -54,7 +60,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
     //MARK:- Setup Camera
 
     func setupSession() -> Bool {
-//        captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
+        captureSession.sessionPreset = AVCaptureSession.Preset.medium
 
         let frontalCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)!
         
@@ -241,7 +247,7 @@ class CaptureVideo: UIViewController, AVCaptureFileOutputRecordingDelegate {
 
 //MARK: - compress video
 
-extension CaptureVideo {
+extension CaptureReactions {
 
      func compressVideo(inputURL: URL,
                         outputURL: URL,
@@ -260,29 +266,7 @@ extension CaptureVideo {
      }
  }
 
-//MARK: - tentativa de limitar o frame rate
-
-extension AVCaptureDevice {
-    func set(frameRate: Double) {
-    guard let range = activeFormat.videoSupportedFrameRateRanges.first,
-        range.minFrameRate...range.maxFrameRate ~= frameRate
-        else {
-            print("Requested FPS is not supported by the device's activeFormat !")
-            return
-    }
-
-    do { try lockForConfiguration()
-        activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: Int32(frameRate))
-        activeVideoMaxFrameDuration = CMTimeMake(value: 1, timescale: Int32(frameRate))
-        unlockForConfiguration()
-    } catch {
-        print("LockForConfiguration failed with error: \(error.localizedDescription)")
-    }
-  }
-}
-
-
-extension CaptureVideo {
+extension CaptureReactions {
     
     func setStartRecordButton() {
         
@@ -295,36 +279,17 @@ extension CaptureVideo {
     @objc func startButtonTapped(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             startCapture()
-            let username = UserDefaults.standard.string(forKey: "username")
-            if username == "juusdy" || username == "Chumiga™" || username == "rafaelruwer" || username == "PohMarcelo" || username == "Nico" || username == "Prolene"{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    self.stopRecording()
-                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                    self.performSegue(withIdentifier: "showVideo", sender: nil)
-                 }
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.stopRecording()
-                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.performSegue(withIdentifier: "showVideo", sender: nil)
-                 }
-            }
-        }
-    }
-    
-    func setSwitchRecordButton() {
-        
-        let tapSwitchButton = UITapGestureRecognizer(target: self, action: #selector(self.switchButtonTapped))
-            switchCameraButton.addGestureRecognizer(tapSwitchButton)
-            switchCameraButton.isUserInteractionEnabled = true
-        
-        }
-
-    @objc func switchButtonTapped(sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            self.performSegue(withIdentifier: "goToBackCamera", sender: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.stopRecording()
+             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                
+                self.service.uploadReactions(post: self.post!, urlVideo: self.outputURL! as URL, completionHandler: { (response) in
+                    if response {
+                        AppCoordinator.shared.changeToCurrentRoot()
+                    }
+                })
+             }
         }
     }
     

@@ -36,6 +36,7 @@ class FeedViewController: UIViewController {
     var videoURLs = Array<URL>()
     var firstLoad = true
     let refreshControl = UIRefreshControl()
+    var index: Int = 0
     
     let persistentContainer: NSPersistentContainer = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -56,6 +57,7 @@ class FeedViewController: UIViewController {
         service.getFriendsReals { (posts) in
             self.posts = posts
             self.controlQuantityPost = posts.count
+            print(posts)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -86,17 +88,6 @@ class FeedViewController: UIViewController {
     
     @IBAction func friendsButton(_ sender: Any) {
         performSegue(withIdentifier: "goToFriends", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "goToReport"){
-            let displayVC = segue.destination as! ReportViewController
-            
-            displayVC.ownerIdVar = self.ownerId
-            displayVC.ownerUsernameVar = self.ownerUsername
-            displayVC.postUidVar = self.postUid
-            
-        }
     }
     
     func setupRefreshControl() {
@@ -135,7 +126,7 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
-            
+            cell.index = indexPath.row
             if let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo) as? Data {
                 let videoAsset: AVAsset = videoData.getAVAsset()
                 cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
@@ -190,12 +181,33 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             fatalError("deu erro")
         }
     }
-    
 }
 
 extension FeedViewController: MyCustomCellDelegator {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToCaptureReactions"{
+            let destination = segue.destination as? CaptureReactions
+            
+            destination?.post = posts[index]
+        }
+        if (segue.identifier == "goToReport"){
+            let displayVC = segue.destination as! ReportViewController
+            
+            displayVC.ownerIdVar = self.ownerId
+            displayVC.ownerUsernameVar = self.ownerUsername
+            displayVC.postUidVar = self.postUid
+            
+        }
+    }
+    
     func createReals() {
-        performSegue(withIdentifier: "goToCapture", sender: nil)
+        self.performSegue(withIdentifier: "goToCapture", sender: nil)
+    }
+    
+    func captureReactions(index: Int) {
+        self.index = index
+        self.performSegue(withIdentifier: "goToCaptureReactions", sender: nil)
     }
     
     func callSegueFromCell(ownerUsername: String, postUid: String, ownerId: String, photo: String) {
