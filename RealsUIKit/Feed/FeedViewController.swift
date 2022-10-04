@@ -20,7 +20,12 @@ class FeedViewController: UIViewController {
     var photo: String = ""
     var postUid: String = ""
     var service = ServiceFirebase()
-    var posts: [Post] = []
+    var posts: [Post] = [] {
+        didSet {
+            print("Tem loop")
+            posts.sort(by: { $0.date > $1.date })
+        }
+    }
     var controlQuantityPost: Int = 0
     let firebaseAuth = Auth.auth()
     let coreDataQueue = DispatchQueue(label: "CoreDataQueue", qos: .utility, attributes: [.concurrent], autoreleaseFrequency: .workItem)
@@ -181,6 +186,15 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             fatalError("deu erro")
         }
     }
+    
+    func reload(tableView: UITableView) {
+
+        let contentOffset = tableView.contentOffset
+        tableView.reloadData()
+        tableView.layoutIfNeeded()
+        tableView.setContentOffset(contentOffset, animated: false)
+
+    }
 }
 
 extension FeedViewController: MyCustomCellDelegator {
@@ -231,8 +245,7 @@ extension FeedViewController: MyCustomCellDelegator {
         }))
         alert.addAction(UIAlertAction(title: "Não apagar", style: .cancel, handler: { action in
             
-            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
-            viewController?.dismiss(animated: true, completion: nil)
+            AppCoordinator.shared.changeToCurrentRoot(animated: true)
             
         }))
         self.present(alert, animated: true, completion: nil)

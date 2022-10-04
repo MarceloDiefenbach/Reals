@@ -113,7 +113,6 @@ class ViewController: UIViewController {
     
     func doLogin(email: String, password: String, completionHandler: @escaping (String) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-          guard let strongSelf = self else { return }
             if authResult != nil {
                 self?.saveOnUserDefaults()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
@@ -128,7 +127,7 @@ class ViewController: UIViewController {
         
         service.getUserByEmail(email: emailField.text ?? "", completionHandler: { (response) in
             UserDefaults.standard.set(response, forKey: "username")
-            UserDefaults.standard.set(self.emailField.text, forKey: "email" ?? "")
+            UserDefaults.standard.set(self.emailField.text, forKey: "email")
         })
         
     }

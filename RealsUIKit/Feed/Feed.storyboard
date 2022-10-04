@@ -442,7 +442,7 @@
         <image name="person.fill" catalog="system" width="32" height="32"/>
         <image name="plus.circle.fill" catalog="system" width="32" height="32"/>
         <namedColor name="primary">
-            <color red="0.73099999999999998" green="0.94999999999999996" blue="0.049000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.64999997615814209" green="0.85000002384185791" blue="0.048999998718500137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

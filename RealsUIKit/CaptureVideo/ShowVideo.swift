@@ -110,6 +110,7 @@ class VideoPlayback: UIViewController {
                 let alert = UIAlertController(title: "Reals não publicado", message: "Tivemos um erro na hora de publicar o seu Reals, tenta mais tarde.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { action in
                     AppCoordinator.shared.changeToCurrentRoot()
+                    self.loadingBackground.isHidden = true
                 }))
                 self.present(alert, animated: true, completion: nil)
                 
@@ -124,6 +125,6 @@ class VideoPlayback: UIViewController {
         }
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
-        return count <= 40
+        return count <= 150
     }
 }

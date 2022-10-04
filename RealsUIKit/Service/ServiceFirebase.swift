@@ -513,11 +513,8 @@ struct ServiceFirebase {
                         }
                     }
                 }
-                
-                
             }
-        
-    }
+        }
     
     func uploadPhotoIMGBB() {
         

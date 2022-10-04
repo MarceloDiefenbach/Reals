@@ -18,24 +18,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="r6S-b1-3UU">
-                                <rect key="frame" x="20" y="735" width="374" height="107"/>
+                                <rect key="frame" x="20" y="659" width="374" height="183"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pr-Kl-pEE">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
-                                        <color key="backgroundColor" name="primary"/>
+                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="zMC-Bf-yGy"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Admin">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="adminEntry:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="lOJ-NV-XHz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ili-Tt-0FI">
+                                        <rect key="frame" x="0.0" y="76" width="374" height="60"/>
+                                        <color key="backgroundColor" name="primary"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="e1m-e4-Z1B"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Logout">
                                             <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="logOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Dxa-h9-dYj"/>
+                                            <action selector="logOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GJS-ZJ-b0B"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thv-gK-15M">
-                                        <rect key="frame" x="0.0" y="76" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="152" width="374" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Apagar conta">
                                             <color key="baseForegroundColor" systemColor="systemPinkColor"/>
@@ -74,7 +88,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="logOutButton" destination="2Pr-Kl-pEE" id="SJo-Gg-Otu"/>
+                        <outlet property="adminButton" destination="2Pr-Kl-pEE" id="yLv-Pf-rqy"/>
+                        <outlet property="logOutButton" destination="ili-Tt-0FI" id="bjY-Ou-Air"/>
                         <outlet property="profileImage" destination="PRW-sd-TAM" id="r39-Zf-GfK"/>
                         <outlet property="username" destination="MHX-7W-J2j" id="8dN-KW-K6O"/>
                     </connections>
@@ -87,7 +102,7 @@
     <resources>
         <image name="DefaultProfile" width="184" height="184"/>
         <namedColor name="primary">
-            <color red="0.73099999999999998" green="0.94999999999999996" blue="0.049000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.64999997615814209" green="0.85000002384185791" blue="0.048999998718500137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

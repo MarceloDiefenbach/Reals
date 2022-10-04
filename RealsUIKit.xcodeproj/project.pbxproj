@@ -36,6 +36,8 @@
 		DF8E3B3628D67AAA001AC8AC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */; };
 		DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */; };
 		DFA6BA8328E3D06F00429254 /* RealsVideosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */; };
+		DFAC6EFA28EC669000B3DE87 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFAC6EF928EC669000B3DE87 /* Admin.storyboard */; };
+		DFAC6EFC28EC669C00B3DE87 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */; };
 		DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */; };
 		DFB75F7228D29590000D5B5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7128D29590000D5B5F /* User.swift */; };
 		DFB75F7428D295A7000D5B5F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7328D295A7000D5B5F /* Post.swift */; };
@@ -98,6 +100,8 @@
 		DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoBack.swift; sourceTree = "<group>"; };
 		DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealsVideosModel.xcdatamodel; sourceTree = "<group>"; };
+		DFAC6EF928EC669000B3DE87 /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
+		DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSocial.swift; sourceTree = "<group>"; };
 		DFB75F7128D29590000D5B5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DFB75F7328D295A7000D5B5F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -283,6 +287,15 @@
 			path = CaptureVideo;
 			sourceTree = "<group>";
 		};
+		DFAC6EF828EC665D00B3DE87 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				DFAC6EF928EC669000B3DE87 /* Admin.storyboard */,
+				DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
 		DFB75F7028D29585000D5B5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +350,7 @@
 		DFDD00F028CCF34300830B36 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DFAC6EF828EC665D00B3DE87 /* Admin */,
 				DFDD00F128CCF36300830B36 /* ProfileViewController.swift */,
 				DFDD00F328CCF36E00830B36 /* Profile.storyboard */,
 			);
@@ -425,6 +439,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFAC6EFA28EC669000B3DE87 /* Admin.storyboard in Resources */,
 				DF05668328CE634500670911 /* recording.json in Resources */,
 				DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */,
 				DF219F4328CA0A9B0038E47C /* LaunchScreen.storyboard in Resources */,
@@ -511,6 +526,7 @@
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
 				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
 				DF81B95D28E3894B0044BBC2 /* AppCoordinator.swift in Sources */,
+				DFAC6EFC28EC669C00B3DE87 /* AdminViewController.swift in Sources */,
 				DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */,
 				DFE6250028E341CF00F98E9F /* Load.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,

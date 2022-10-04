@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var adminButton: UIButton!
     
     
     //MARK: - actions
@@ -32,11 +33,20 @@ class ProfileViewController: UIViewController {
         logOut()
     }
     
+    @IBAction func adminEntry(_ sender: Any) {
+        AppCoordinator.shared.changeToRootViewController(atStoryboard: "Admin")
+    }
+    
     //MARK: - ViewDidLoad
     
     override func viewDidLoad() {
         setUsersData()
         setupLogoutButton(button: logOutButton)
+        setupPrimaryButton(button: adminButton)
+        
+        if UserDefaults.standard.string(forKey: "username") != "PohMarcelo" {
+            adminButton.isHidden = true
+        }
     }
     
     //MARK: - layout
