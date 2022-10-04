@@ -282,7 +282,7 @@ class ServiceSocial {
     
     func changeDateOnFirebaseToSwitchDayPosts() {
         
-        let date = String(format: "%.0f", Date.now.timeIntervalSince1970.rounded())
+        let date = Int(Date.now.timeIntervalSince1970.rounded())
         
         db.collection("dateChange")
             .getDocuments() { (querySnapshot, err) in

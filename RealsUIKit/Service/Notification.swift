@@ -101,7 +101,7 @@ class PushNotificationSender {
             let urlString = "https://fcm.googleapis.com/fcm/send"
             let url = NSURL(string: urlString)!
             let paramString: [String : Any] = ["registration_ids" : receivers,
-                                               "notification" : ["title" : "É hora de gravar seu reals", "body" : "Seja a primeira pessoa a postar e veja seus amigos"]
+                                               "notification" : ["title" : "🎬 Reals time has arrived ", "body" : "Be the first person to post"]
             ]
             let request = NSMutableURLRequest(url: url as URL)
             request.httpMethod = "POST"
