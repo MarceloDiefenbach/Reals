@@ -96,6 +96,8 @@ class PushNotificationSender {
 
         service.getAllFcmToken(completionHandler: { (receivers) in
 
+            self.service.changeDateOnFirebaseToSwitchDayPosts()
+            
             let urlString = "https://fcm.googleapis.com/fcm/send"
             let url = NSURL(string: urlString)!
             let paramString: [String : Any] = ["registration_ids" : receivers,

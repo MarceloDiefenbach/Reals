@@ -280,20 +280,7 @@ class ServiceSocial {
         }
     }
     
-    func changeDateOnFirebaseToSwitchDayPosts(token: String) {
-        UserDefaults.standard.set(token, forKey: "fcmToken")
-        db.collection("dateChange").document(firebaseAuth.currentUser?.uid ?? "").setData([
-            "fcmToken": token
-        ], merge: true) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("the user has sign up or is logged in")
-            }
-        }
-    }
-    
-    func getDateChange() {
+    func changeDateOnFirebaseToSwitchDayPosts() {
         
         let date = String(format: "%.0f", Date.now.timeIntervalSince1970.rounded())
         
@@ -306,7 +293,7 @@ class ServiceSocial {
                         let data = document.data()
                         print(document.documentID)
                         self.db.collection("dateChange").document(document.documentID).setData([
-                            "dateChangee": date
+                            "dateChange": date
                         ], merge: true) { err in
                             if let err = err {
                                 print("Error writing document: \(err)")
