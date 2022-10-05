@@ -22,7 +22,6 @@ class FeedViewController: UIViewController {
     var service = ServiceFirebase()
     var posts: [Post] = [] {
         didSet {
-            print("Tem loop")
             posts.sort(by: { $0.date > $1.date })
         }
     }
@@ -66,7 +65,6 @@ class FeedViewController: UIViewController {
         service.getFriendsReals { (posts) in
             self.posts = posts
             self.controlQuantityPost = posts.count
-            print(posts)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -107,11 +105,9 @@ class FeedViewController: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         
         service.getFriendsReals { (posts) in
-            if self.controlQuantityPost != posts.count {
-                self.posts = posts
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+            self.posts = posts
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
             self.refreshControl.endRefreshing()
         }
@@ -150,7 +146,6 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
                         
                         let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
                         let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-                        print(formatted)
                         if formatted == "" {
                             let data = try? Data.init(contentsOf: URL(string: self.posts[indexPath.row].photo)!)
                             let videoURL = self.posts[indexPath.row].photo
@@ -283,11 +278,9 @@ extension FeedViewController {
 extension FeedViewController: CaptionReactionObserverDelegate {
     
     func didFinishUploadingReaction() {
-        print("CREDO")
         let contentOffset = tableView.contentOffset
         service.getFriendsReals { (posts) in
             self.posts = posts
-            self.controlQuantityPost = posts.count
             DispatchQueue.main.asyncAfter(deadline: .now()+5) {
                 self.tableView.reloadData()
                 self.tableView.layoutIfNeeded()

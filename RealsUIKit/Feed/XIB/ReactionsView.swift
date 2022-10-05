@@ -9,7 +9,6 @@ import UIKit
 
 class ReactionsView: UIView {
     
-
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var recordButton: UIButton!
     var delegate: MyCustomCellDelegator?

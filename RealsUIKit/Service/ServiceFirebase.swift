@@ -95,7 +95,6 @@ struct ServiceFirebase {
                                     if let snapshotDocumentos = querySnapshot?.documents {
                                         for doc in snapshotDocumentos {
                                             let dataReaction = doc.data()
-                                            print(dataReaction)
                                             if let username = dataReaction["username"] as? String,
                                                let image = dataReaction["video"] as? String,
                                                let userId = dataReaction["userID"] as? String {
@@ -138,7 +137,6 @@ struct ServiceFirebase {
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let formattedDate = format.string(from: date)
-        print(formattedDate)
         
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
@@ -252,7 +250,6 @@ struct ServiceFirebase {
         do {
             let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
             let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
-            print(formatted)
             
         } catch {
             fatalError("erro ao pegar os videos")
@@ -262,8 +259,6 @@ struct ServiceFirebase {
     func verifyIsExist(username: String, completionHandler: @escaping (Bool) -> Void) {
         
         var exist: Bool = false
-        
-        print(username)
         
         db.collection("users").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -332,7 +327,6 @@ struct ServiceFirebase {
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let formattedDate = format.string(from: date)
-        print(formattedDate)
         
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
@@ -373,12 +367,13 @@ struct ServiceFirebase {
         uploadTask.observe(.progress) { snapshot in
             let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
             / Double(snapshot.progress!.totalUnitCount)
+            
         }
         
         uploadTask.observe(.success) { snapshot in
-            print("finalizou")
             UserDefaults.standard.set(Date.now, forKey: "dateFromLastPosts")
             completionHandler(true)
+            
         }
         
         uploadTask.observe(.failure) { snapshot in

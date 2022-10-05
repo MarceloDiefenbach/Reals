@@ -10,15 +10,20 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
+import UXCam
 
 class Load: UIViewController {
     
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
     var serviceSocial = ServiceSocial()
+    let configuration = UXCamConfiguration(appKey: "p4qehcg4jthkb5g")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UXCam.optIntoSchematicRecordings()
+        UXCam.start(with: configuration)
         
         if firebaseAuth.currentUser?.email != nil {
             

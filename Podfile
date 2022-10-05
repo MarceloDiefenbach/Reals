@@ -16,5 +16,8 @@ target 'RealsUIKit' do
   # Pods for LottieAnimations
   pod 'lottie-ios'
   pod 'Google-Mobile-Ads-SDK'
+  
+  # Pod for UXCam
+  pod 'UXCam', "~> 3.4.2"
 
 end
