@@ -45,6 +45,17 @@
                                     <constraint firstAttribute="width" secondItem="gtg-sS-0gW" secondAttribute="height" multiplier="1:1" id="wEB-sr-wZ4"/>
                                 </constraints>
                             </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fu5-rw-epE" userLabel="Loading Background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ZWM-cZ-esm">
+                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8eX-h1-BfY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,9 +73,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="ZWM-cZ-esm" id="g74-BO-H7d"/>
                         <outlet property="camPreview" destination="B6p-Qe-fU0" id="UUr-WR-6ld"/>
                         <outlet property="cancelButton" destination="EcJ-9P-bVF" id="66z-tO-iCT"/>
+                        <outlet property="loadingBackground" destination="fu5-rw-epE" id="0dh-wK-OtC"/>
                         <outlet property="startRecordButton" destination="gtg-sS-0gW" id="af5-LO-F00"/>
+                        <outlet property="viewMask" destination="etU-Tz-PGC" id="ROC-W9-PKn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vk5-Oz-322" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

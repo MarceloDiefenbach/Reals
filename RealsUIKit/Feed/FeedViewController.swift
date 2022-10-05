@@ -226,11 +226,8 @@ extension FeedViewController: MyCustomCellDelegator {
         let alert = UIAlertController(title: "Apagar Real", message: "Essa ação não poderá ser desfeita!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Apagar", style: .destructive, handler: { action in
             self.service.deleteVideo(videoPath: videoPath, documentId: documentId, completionHandler: { (response) in
-                if response {
-                    UserDefaults.standard.set(Date.now-172800, forKey: "dateFromLastPosts")
-                } else {
-                    //                    alerta de erro
-                }
+                self.didFinishUploadingReaction()
+                AppCoordinator.shared.changeToCurrentRoot(animated: true)
             })
         }))
         alert.addAction(UIAlertAction(title: "Não apagar", style: .cancel, handler: { action in
@@ -281,7 +278,7 @@ extension FeedViewController: CaptionReactionObserverDelegate {
         let contentOffset = tableView.contentOffset
         service.getFriendsReals { (posts) in
             self.posts = posts
-            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.tableView.reloadData()
                 self.tableView.layoutIfNeeded()
                 self.tableView.setContentOffset(contentOffset, animated: false)

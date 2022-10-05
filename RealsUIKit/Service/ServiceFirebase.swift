@@ -148,7 +148,7 @@ struct ServiceFirebase {
         
         let storageRef = Storage.storage().reference()
         
-        let riversRef = storageRef.child("reactions/\(post.postUid)/\(String(describing: firebaseAuth.currentUser!.uid))/\(year)/\(month)/\(day)/\(hour)-\(minute)-\(seconds).mp4")
+        let riversRef = storageRef.child("reactions/\(year)-\(month)-\(day)/\(post.postUid)/\(String(describing: firebaseAuth.currentUser!.uid))/\(year)/\(month)/\(day)/\(hour)-\(minute)-\(seconds).mp4")
         
         let metadata = StorageMetadata()
         metadata.contentType = "video/mp4"

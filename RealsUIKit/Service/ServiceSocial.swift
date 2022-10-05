@@ -256,7 +256,29 @@ class ServiceSocial {
             }
         })
     }
+    
+    func getFcmTokenOfUser(username: String, completionHandler: @escaping ([String]) -> Void) {
+        
+        var fcmTokens: [String] = []
 
+        db.collection("users").whereField("username", isEqualTo: username).getDocuments() {(querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                if let snapshotDocumentos = querySnapshot?.documents {
+                    UserDefaults.standard.set(false, forKey: "alreadyPost")
+                    for doc in snapshotDocumentos {
+                        let data = doc.data()
+                            if let fcmToken = data["fcmToken"] as? String {
+                                fcmTokens.append(fcmToken)
+                            }
+                            completionHandler(fcmTokens)
+                        }
+                    }
+                }
+            }
+        }
+    
     func getAllFcmToken(completionHandler: @escaping ([String]) -> Void) {
         
         var fcmTokens: [String] = []
@@ -284,7 +306,7 @@ class ServiceSocial {
         
         let date = Int(Date.now.timeIntervalSince1970.rounded())
         
-        db.collection("dateChange")
+        self.db.collection("dateChange")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -305,4 +327,4 @@ class ServiceSocial {
                 }
             }
         }
-}
+    }

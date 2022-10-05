@@ -28,11 +28,18 @@ class ReactionsView: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        setupPrimaryButton(button: recordButton)
     }
     
     @IBAction func createReals(_ sender: Any) {
         //TODO: - here we need to go to capture video as modal
         AppCoordinator.shared.changeToRootViewController(atStoryboard: "CaptureVideo")
+    }
+    
+    func setupPrimaryButton(button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height/2
+        button.backgroundColor = UIColor(named: "primary")
+        button.titleLabel?.tintColor = UIColor.black
     }
 
 }

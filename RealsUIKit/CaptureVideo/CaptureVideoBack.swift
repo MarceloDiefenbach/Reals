@@ -270,22 +270,12 @@ extension CaptureVideoBack {
     @objc func startButtonTapped(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             startCapture()
-            let username = UserDefaults.standard.string(forKey: "username")
-            if username == "juusdy" || username == "Chumiga™" || username == "rafaelruwer" || username == "PohMarcelo" || username == "Nico" || username == "Prolene"{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    self.stopRecording()
-                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                    self.performSegue(withIdentifier: "showVideo2", sender: nil)
-                 }
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.stopRecording()
-                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.performSegue(withIdentifier: "showVideo2", sender: nil)
-                 }
-            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.stopRecording()
+             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                self.performSegue(withIdentifier: "showVideo2", sender: nil)
+             }
         }
     }
     

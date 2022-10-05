@@ -20,7 +20,6 @@ class VideoCellTableViewCell: UITableViewCell {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
         }
-        
         return appDelegate.persistentContainer
     }()
 
@@ -33,6 +32,7 @@ class VideoCellTableViewCell: UITableViewCell {
     var service = ServiceFirebase()
     @IBOutlet weak var reactionsTableView: UITableView!
     var savedVideosURL: [String] = []
+    var index: Int?
     
     
     //MARK: - Reactions
@@ -41,8 +41,6 @@ class VideoCellTableViewCell: UITableViewCell {
             reactionsTableView.reloadData()
         }
     }
-    
-    var index: Int?
 
     //MARK: - outlets
     @IBOutlet weak var videoPlayerSuperView: UIView!
@@ -55,10 +53,6 @@ class VideoCellTableViewCell: UITableViewCell {
     //MARK: - actions
     var videoPlayerItem: AVPlayerItem? = nil {
         didSet {
-            /*
-             If needed, configure player item here before associating it with a player.
-             (example: adding outputs, setting text style rules, selecting media options)
-             */
             avPlayer?.replaceCurrentItem(with: self.videoPlayerItem)
         }
     }
@@ -72,7 +66,6 @@ class VideoCellTableViewCell: UITableViewCell {
         activityIndicator.startAnimating()
         
         verifyIfAlreadyPostToday()
-//        setupLoginButton(button: createRealsButton)
         opacityLayer.delegate = delegate
         
         reactionsTableView.delegate = self
@@ -138,7 +131,7 @@ class VideoCellTableViewCell: UITableViewCell {
         if UserDefaults.standard.bool(forKey: "alreadyPost") {
             opacityLayer.layer.opacity = 0
         } else {
-            opacityLayer.layer.opacity = 1
+            opacityLayer.layer.opacity = 0.95
         }
     }
 
@@ -190,7 +183,6 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("Username: \(post.ownerUsername), reações: \(post.reactions.count)")
         return post.reactions.count
     }
     
@@ -212,7 +204,7 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
                         
                         let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
                         let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-//                        print(formatted)
+                        
                         if formatted == "" {
                             let data = try? Data.init(contentsOf: URL(string: self.post.reactions[indexPath.row].reactionUrl)!)
                             let videoURL = self.post.reactions[indexPath.row].reactionUrl
@@ -226,7 +218,6 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
-//        print("Célula sendo criada, usuário: \(post.ownerUsername), index: \(indexPath.row)")
             playVideoOnTheCell(cell: cell, indexPath: indexPath)
             return cell
     }

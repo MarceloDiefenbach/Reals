@@ -125,7 +125,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clear" catalog="system" width="128" height="114"/>
+        <image name="clear" catalog="system" width="32" height="32"/>
         <namedColor name="primary">
             <color red="0.64999997615814209" green="0.85000002384185791" blue="0.048999998718500137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

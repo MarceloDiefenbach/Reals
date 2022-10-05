@@ -21,7 +21,7 @@
 		DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */; };
 		DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F5228CA0BC80038E47C /* Feed.storyboard */; };
 		DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5428CA0BD50038E47C /* FeedViewController.swift */; };
-		DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EDBDF28E10B3600B2160B /* Notification.swift */; };
+		DF2EDBE028E10B3600B2160B /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EDBDF28E10B3600B2160B /* PushNotificationSender.swift */; };
 		DF31AF1828E46D4C00E07928 /* setLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */; };
 		DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927128CA2E4200162F1E /* PlayerView.swift */; };
 		DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */; };
@@ -87,7 +87,7 @@
 		DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFirebase.swift; sourceTree = "<group>"; };
 		DF219F5228CA0BC80038E47C /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		DF219F5428CA0BD50038E47C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		DF2EDBDF28E10B3600B2160B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		DF2EDBDF28E10B3600B2160B /* PushNotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationSender.swift; sourceTree = "<group>"; };
 		DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setLayout+Extension.swift"; sourceTree = "<group>"; };
 		DF3B927128CA2E4200162F1E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 				DFDF7FE128D20B8E007DD713 /* http.swift */,
 				DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */,
 				DFB75F7528D33D6B000D5B5F /* ServiceUpload.swift */,
-				DF2EDBDF28E10B3600B2160B /* Notification.swift */,
+				DF2EDBDF28E10B3600B2160B /* PushNotificationSender.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -559,7 +559,7 @@
 				DF487DBB28ECFAE900971925 /* NotificationService.swift in Sources */,
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,
 				DFDF7FE228D20B8E007DD713 /* http.swift in Sources */,
-				DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */,
+				DF2EDBE028E10B3600B2160B /* PushNotificationSender.swift in Sources */,
 				DF81B95F28E38D460044BBC2 /* UIApplication+Extension.swift in Sources */,
 				DF487DBD28ECFC0F00971925 /* CaptureReactionNotificationService.swift in Sources */,
 				DF0E930A28D9434E003329F9 /* SetUsernameViewController.swift in Sources */,
@@ -713,7 +713,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -730,7 +730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -749,7 +749,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -766,7 +766,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

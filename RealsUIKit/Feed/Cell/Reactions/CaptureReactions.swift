@@ -13,6 +13,10 @@ class CaptureReactions: UIViewController, AVCaptureFileOutputRecordingDelegate {
     @IBOutlet weak var camPreview: UIView!
     @IBOutlet weak var startRecordButton: UIImageView!
     @IBOutlet weak var cancelButton: UIImageView!
+    @IBOutlet weak var loadingBackground: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var viewMask: UIView!
+    
     
     let captureSession = AVCaptureSession()
     let movieOutput = AVCaptureMovieFileOutput()
@@ -25,6 +29,7 @@ class CaptureReactions: UIViewController, AVCaptureFileOutputRecordingDelegate {
     var cameraType: Bool = false
     var post: Post?
     var service = ServiceFirebase()
+    var pushNotificationService = PushNotificationSender()
     
     let captureReactionNotificationService = CaptureReactionNotificationService()
     
@@ -34,6 +39,16 @@ class CaptureReactions: UIViewController, AVCaptureFileOutputRecordingDelegate {
         setStartRecordButton()
         setCancelRecordButton()
         setupPreview2()
+        setupLoadingView()
+        viewMask.layer.cornerRadius = viewMask.bounds.height/2.1
+        viewMask.layer.borderWidth = 5
+        viewMask.layer.borderColor = UIColor(named: "primary")?.cgColor
+    }
+    
+    func setupLoadingView() {
+        loadingBackground.isHidden = true
+        loadingBackground.layer.opacity = 0.8
+        activityIndicator.startAnimating()
     }
     
     func setupPreview2() {
@@ -284,13 +299,17 @@ extension CaptureReactions {
             startCapture()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.stopRecording()
+                self.loadingBackground.isHidden = false
              }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 
                 self.service.uploadReactions(post: self.post!, urlVideo: self.outputURL! as URL, completionHandler: { (response) in
                     if response {
                         self.captureReactionNotificationService.postNotification(.didFinishUploadingReaction)
-                        AppCoordinator.shared.changeToCurrentRoot()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                            self.pushNotificationService.sendReactionNotification(username: post?.ownerUsername ?? "")
+                            AppCoordinator.shared.changeToCurrentRoot()
+                        }
                     }
                 })
              }
