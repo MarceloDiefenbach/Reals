@@ -26,6 +26,8 @@ class CaptureReactions: UIViewController, AVCaptureFileOutputRecordingDelegate {
     var post: Post?
     var service = ServiceFirebase()
     
+    let captureReactionNotificationService = CaptureReactionNotificationService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         captureSession.sessionPreset = AVCaptureSession.Preset.medium
@@ -223,6 +225,7 @@ class CaptureReactions: UIViewController, AVCaptureFileOutputRecordingDelegate {
                      }
                      self.outputURL = compressedURL
                      self.videoData = compressedData
+                     
                      print("File size after compression: \(Double(compressedData.count / 1048576)) mb")
                  case .failed:
                      break
@@ -286,6 +289,7 @@ extension CaptureReactions {
                 
                 self.service.uploadReactions(post: self.post!, urlVideo: self.outputURL! as URL, completionHandler: { (response) in
                     if response {
+                        self.captureReactionNotificationService.postNotification(.didFinishUploadingReaction)
                         AppCoordinator.shared.changeToCurrentRoot()
                     }
                 })

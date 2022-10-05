@@ -43,6 +43,8 @@ class FeedViewController: UIViewController {
     let refreshControl = UIRefreshControl()
     var index: Int = 0
     
+    let captionReactionObserver = CaptionReactionObserver()
+    
     let persistentContainer: NSPersistentContainer = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
@@ -53,6 +55,8 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        captionReactionObserver.delegate = self
         
         serviceSocial.verifyIfFcmTokenChange()
         
@@ -186,15 +190,6 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             fatalError("deu erro")
         }
     }
-    
-    func reload(tableView: UITableView) {
-
-        let contentOffset = tableView.contentOffset
-        tableView.reloadData()
-        tableView.layoutIfNeeded()
-        tableView.setContentOffset(contentOffset, animated: false)
-
-    }
 }
 
 extension FeedViewController: MyCustomCellDelegator {
@@ -283,4 +278,22 @@ extension FeedViewController {
             fatalError("Error when get video of CoreData \(#function)")
         }
     }
+}
+
+extension FeedViewController: CaptionReactionObserverDelegate {
+    
+    func didFinishUploadingReaction() {
+        print("CREDO")
+        let contentOffset = tableView.contentOffset
+        service.getFriendsReals { (posts) in
+            self.posts = posts
+            self.controlQuantityPost = posts.count
+            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
+                self.tableView.reloadData()
+                self.tableView.layoutIfNeeded()
+                self.tableView.setContentOffset(contentOffset, animated: false)
+            }
+        }
+    }
+    
 }

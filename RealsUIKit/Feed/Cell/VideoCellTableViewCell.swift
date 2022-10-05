@@ -36,7 +36,12 @@ class VideoCellTableViewCell: UITableViewCell {
     
     
     //MARK: - Reactions
-    var post: Post!
+    var post: Post! {
+        didSet {
+            reactionsTableView.reloadData()
+        }
+    }
+    
     var index: Int?
 
     //MARK: - outlets
@@ -185,15 +190,11 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        print("Username: \(post.ownerUsername), reações: \(post.reactions.count)")
         return post.reactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if post.reactions.count == 0 {
-            let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "Cell")
-
-            return cell
-        } else {
             let cell = self.reactionsTableView.dequeueReusableCell(withIdentifier: "reactionsCell") as! ReactionsTableViewCell
             cell.backgroundColor = UIColor.clear
             
@@ -211,7 +212,7 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
                         
                         let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
                         let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-                        print(formatted)
+//                        print(formatted)
                         if formatted == "" {
                             let data = try? Data.init(contentsOf: URL(string: self.post.reactions[indexPath.row].reactionUrl)!)
                             let videoURL = self.post.reactions[indexPath.row].reactionUrl
@@ -225,9 +226,9 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
+//        print("Célula sendo criada, usuário: \(post.ownerUsername), index: \(indexPath.row)")
             playVideoOnTheCell(cell: cell, indexPath: indexPath)
             return cell
-        }
     }
     
     func saveDataCoreData(videoData: Data, videoURL: String) {

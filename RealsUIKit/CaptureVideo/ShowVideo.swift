@@ -87,7 +87,6 @@ class VideoPlayback: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    
     @objc func playerItemDidReachEnd(notification: Notification) {
         if let playerItem = notification.object as? AVPlayerItem {
             playerItem.seek(to: CMTime.zero)
@@ -101,7 +100,7 @@ class VideoPlayback: UIViewController {
             
             if uploadFinish {
                 
-                AppCoordinator.shared.changeToCurrentRoot()
+                AppCoordinator.shared.changeToRootViewController(atStoryboard: "Feed")
                 self.loadingBackground.isHidden = true
                 self.sender.sendNotificationPost()
                 
