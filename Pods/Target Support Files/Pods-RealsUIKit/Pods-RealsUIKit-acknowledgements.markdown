@@ -4136,6 +4136,10 @@ The externally maintained libraries used by libuv are:
    limitations under the License.
 
 
+## UXCam
+
+Copyright (c) 2013-2022, UXCam Inc. All rights reserved.
+
 ## abseil
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF0009F428EF58EF00C55335 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0009F328EF58EF00C55335 /* CoreDataService.swift */; };
 		DF05668328CE634500670911 /* recording.json in Resources */ = {isa = PBXBuildFile; fileRef = DF05668228CE634500670911 /* recording.json */; };
 		DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668428CEBC6A00670911 /* UsersViewController.swift */; };
 		DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF05668728CEC0AE00670911 /* Friends.storyboard */; };
@@ -21,10 +22,13 @@
 		DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */; };
 		DF219F5328CA0BC80038E47C /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF219F5228CA0BC80038E47C /* Feed.storyboard */; };
 		DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF219F5428CA0BD50038E47C /* FeedViewController.swift */; };
-		DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EDBDF28E10B3600B2160B /* Notification.swift */; };
+		DF2EDBE028E10B3600B2160B /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EDBDF28E10B3600B2160B /* PushNotificationSender.swift */; };
 		DF31AF1828E46D4C00E07928 /* setLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */; };
 		DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927128CA2E4200162F1E /* PlayerView.swift */; };
 		DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */; };
+		DF487DBB28ECFAE900971925 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF487DBA28ECFAE900971925 /* NotificationService.swift */; };
+		DF487DBD28ECFC0F00971925 /* CaptureReactionNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF487DBC28ECFC0F00971925 /* CaptureReactionNotificationService.swift */; };
+		DF487DBF28ECFE2F00971925 /* CaptionReactionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF487DBE28ECFE2F00971925 /* CaptionReactionObserver.swift */; };
 		DF7B6D0228CA91680082A4B0 /* CaptureVideoFrontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */; };
 		DF7B6D0428CA93040082A4B0 /* CaptureVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */; };
 		DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */; };
@@ -36,6 +40,8 @@
 		DF8E3B3628D67AAA001AC8AC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */; };
 		DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */; };
 		DFA6BA8328E3D06F00429254 /* RealsVideosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */; };
+		DFAC6EFA28EC669000B3DE87 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFAC6EF928EC669000B3DE87 /* Admin.storyboard */; };
+		DFAC6EFC28EC669C00B3DE87 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */; };
 		DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */; };
 		DFB75F7228D29590000D5B5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7128D29590000D5B5F /* User.swift */; };
 		DFB75F7428D295A7000D5B5F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F7328D295A7000D5B5F /* Post.swift */; };
@@ -43,6 +49,12 @@
 		DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */; };
 		DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCDCC5528D0B8AA0089DAB8 /* ScanViewController.swift */; };
 		DFCDCC5928D0B9AE0089DAB8 /* Scan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */; };
+		DFD8FC3A28E8862A00FC8801 /* ReactionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFD8FC3928E8862A00FC8801 /* ReactionsView.xib */; };
+		DFD8FC3E28E886C500FC8801 /* ReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD8FC3D28E886C500FC8801 /* ReactionsView.swift */; };
+		DFD8FC4128E8975000FC8801 /* ReactionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD8FC4028E8975000FC8801 /* ReactionsTableViewCell.swift */; };
+		DFD8FC4328E8CC5100FC8801 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD8FC4228E8CC5100FC8801 /* Reaction.swift */; };
+		DFD8FC4528E8E75A00FC8801 /* CaptureReactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD8FC4428E8E75A00FC8801 /* CaptureReactions.swift */; };
+		DFD8FC4728E8E77900FC8801 /* CaptureReactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFD8FC4628E8E77900FC8801 /* CaptureReactions.storyboard */; };
 		DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */; };
 		DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */; };
 		DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F128CCF36300830B36 /* ProfileViewController.swift */; };
@@ -60,6 +72,7 @@
 /* Begin PBXFileReference section */
 		11ECBFC9ED00B60B12D59871 /* Pods-RealsUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.debug.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealsUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF0009F328EF58EF00C55335 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		DF05668228CE634500670911 /* recording.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recording.json; sourceTree = "<group>"; };
 		DF05668428CEBC6A00670911 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		DF05668728CEC0AE00670911 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
@@ -76,10 +89,13 @@
 		DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFirebase.swift; sourceTree = "<group>"; };
 		DF219F5228CA0BC80038E47C /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		DF219F5428CA0BD50038E47C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		DF2EDBDF28E10B3600B2160B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		DF2EDBDF28E10B3600B2160B /* PushNotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationSender.swift; sourceTree = "<group>"; };
 		DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setLayout+Extension.swift"; sourceTree = "<group>"; };
 		DF3B927128CA2E4200162F1E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
+		DF487DBA28ECFAE900971925 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		DF487DBC28ECFC0F00971925 /* CaptureReactionNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureReactionNotificationService.swift; sourceTree = "<group>"; };
+		DF487DBE28ECFE2F00971925 /* CaptionReactionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionReactionObserver.swift; sourceTree = "<group>"; };
 		DF7B6D0128CA91680082A4B0 /* CaptureVideoFrontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoFrontal.swift; sourceTree = "<group>"; };
 		DF7B6D0328CA93040082A4B0 /* CaptureVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CaptureVideo.storyboard; sourceTree = "<group>"; };
 		DF7B6D0528CA957F0082A4B0 /* ShowVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVideo.swift; sourceTree = "<group>"; };
@@ -92,6 +108,8 @@
 		DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoBack.swift; sourceTree = "<group>"; };
 		DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealsVideosModel.xcdatamodel; sourceTree = "<group>"; };
+		DFAC6EF928EC669000B3DE87 /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
+		DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSocial.swift; sourceTree = "<group>"; };
 		DFB75F7128D29590000D5B5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DFB75F7328D295A7000D5B5F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -99,6 +117,12 @@
 		DFC98A7928CA143F0012A289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DFCDCC5528D0B8AA0089DAB8 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Scan.storyboard; sourceTree = "<group>"; };
+		DFD8FC3928E8862A00FC8801 /* ReactionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionsView.xib; sourceTree = "<group>"; };
+		DFD8FC3D28E886C500FC8801 /* ReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsView.swift; sourceTree = "<group>"; };
+		DFD8FC4028E8975000FC8801 /* ReactionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsTableViewCell.swift; sourceTree = "<group>"; };
+		DFD8FC4228E8CC5100FC8801 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
+		DFD8FC4428E8E75A00FC8801 /* CaptureReactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureReactions.swift; sourceTree = "<group>"; };
+		DFD8FC4628E8E77900FC8801 /* CaptureReactions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CaptureReactions.storyboard; sourceTree = "<group>"; };
 		DFDBE21D28CB60600018B66E /* ShowVideo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowVideo.storyboard; sourceTree = "<group>"; };
 		DFDD00EC28CCD1CC00830B36 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		DFDD00F128CCF36300830B36 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -210,11 +234,13 @@
 		DF219F4A28CA0AC60038E47C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				DF487DB928ECFAA900971925 /* NotificationObserverAndPost */,
 				DF219F4B28CA0ADB0038E47C /* ServiceFirebase.swift */,
 				DFDF7FE128D20B8E007DD713 /* http.swift */,
 				DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */,
 				DFB75F7528D33D6B000D5B5F /* ServiceUpload.swift */,
-				DF2EDBDF28E10B3600B2160B /* Notification.swift */,
+				DF2EDBDF28E10B3600B2160B /* PushNotificationSender.swift */,
+				DF0009F328EF58EF00C55335 /* CoreDataService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -222,6 +248,7 @@
 		DF219F4E28CA0B9C0038E47C /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				DFD8FC3828E8861B00FC8801 /* XIB */,
 				DF219F4F28CA0BA10038E47C /* Cell */,
 				DF219F5428CA0BD50038E47C /* FeedViewController.swift */,
 				DFDD00F528CD125900830B36 /* ReportViewController.swift */,
@@ -233,6 +260,7 @@
 		DF219F4F28CA0BA10038E47C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				DFD8FC3F28E8973600FC8801 /* Reactions */,
 				DF3B927128CA2E4200162F1E /* PlayerView.swift */,
 				DF3B927328CA353D00162F1E /* VideoCellTableViewCell.swift */,
 				DF8E3B3228D6653E001AC8AC /* EmptyCellTableViewCell.swift */,
@@ -247,6 +275,16 @@
 				DF31AF1728E46D4C00E07928 /* setLayout+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DF487DB928ECFAA900971925 /* NotificationObserverAndPost */ = {
+			isa = PBXGroup;
+			children = (
+				DF487DBA28ECFAE900971925 /* NotificationService.swift */,
+				DF487DBC28ECFC0F00971925 /* CaptureReactionNotificationService.swift */,
+				DF487DBE28ECFE2F00971925 /* CaptionReactionObserver.swift */,
+			);
+			path = NotificationObserverAndPost;
 			sourceTree = "<group>";
 		};
 		DF5E9C6628E4D8B30070122C /* CoreData */ = {
@@ -269,11 +307,21 @@
 			path = CaptureVideo;
 			sourceTree = "<group>";
 		};
+		DFAC6EF828EC665D00B3DE87 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				DFAC6EF928EC669000B3DE87 /* Admin.storyboard */,
+				DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
 		DFB75F7028D29585000D5B5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				DFB75F7128D29590000D5B5F /* User.swift */,
 				DFB75F7328D295A7000D5B5F /* Post.swift */,
+				DFD8FC4228E8CC5100FC8801 /* Reaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,6 +333,25 @@
 				DFCDCC5828D0B9AE0089DAB8 /* Scan.storyboard */,
 			);
 			path = QRCode;
+			sourceTree = "<group>";
+		};
+		DFD8FC3828E8861B00FC8801 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				DFD8FC3928E8862A00FC8801 /* ReactionsView.xib */,
+				DFD8FC3D28E886C500FC8801 /* ReactionsView.swift */,
+			);
+			path = XIB;
+			sourceTree = "<group>";
+		};
+		DFD8FC3F28E8973600FC8801 /* Reactions */ = {
+			isa = PBXGroup;
+			children = (
+				DFD8FC4028E8975000FC8801 /* ReactionsTableViewCell.swift */,
+				DFD8FC4428E8E75A00FC8801 /* CaptureReactions.swift */,
+				DFD8FC4628E8E77900FC8801 /* CaptureReactions.storyboard */,
+			);
+			path = Reactions;
 			sourceTree = "<group>";
 		};
 		DFDD00E728CCD19700830B36 /* Login */ = {
@@ -303,6 +370,7 @@
 		DFDD00F028CCF34300830B36 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DFAC6EF828EC665D00B3DE87 /* Admin */,
 				DFDD00F128CCF36300830B36 /* ProfileViewController.swift */,
 				DFDD00F328CCF36E00830B36 /* Profile.storyboard */,
 			);
@@ -391,6 +459,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFAC6EFA28EC669000B3DE87 /* Admin.storyboard in Resources */,
 				DF05668328CE634500670911 /* recording.json in Resources */,
 				DFDBE21E28CB60600018B66E /* ShowVideo.storyboard in Resources */,
 				DF219F4328CA0A9B0038E47C /* LaunchScreen.storyboard in Resources */,
@@ -400,6 +469,8 @@
 				DF81B95B28E37F160044BBC2 /* Load.storyboard in Resources */,
 				DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */,
 				DFC98A7A28CA143F0012A289 /* GoogleService-Info.plist in Resources */,
+				DFD8FC3A28E8862A00FC8801 /* ReactionsView.xib in Resources */,
+				DFD8FC4728E8E77900FC8801 /* CaptureReactions.storyboard in Resources */,
 				DF219F3E28CA0A9A0038E47C /* Main.storyboard in Resources */,
 				DFCDCC5928D0B9AE0089DAB8 /* Scan.storyboard in Resources */,
 				DFE6250328E3444800F98E9F /* SetUsername.storyboard in Resources */,
@@ -459,18 +530,24 @@
 				DF219F3B28CA0A9A0038E47C /* ViewController.swift in Sources */,
 				DFB75F7428D295A7000D5B5F /* Post.swift in Sources */,
 				DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */,
+				DFD8FC4128E8975000FC8801 /* ReactionsTableViewCell.swift in Sources */,
 				DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */,
 				DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */,
+				DFD8FC4528E8E75A00FC8801 /* CaptureReactions.swift in Sources */,
 				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
 				DF31AF1828E46D4C00E07928 /* setLayout+Extension.swift in Sources */,
 				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
 				DFA6BA8328E3D06F00429254 /* RealsVideosModel.xcdatamodeld in Sources */,
+				DFD8FC4328E8CC5100FC8801 /* Reaction.swift in Sources */,
+				DFD8FC3E28E886C500FC8801 /* ReactionsView.swift in Sources */,
 				DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,
 				DFDD00ED28CCD1CC00830B36 /* RegisterViewController.swift in Sources */,
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
 				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
+				DF487DBF28ECFE2F00971925 /* CaptionReactionObserver.swift in Sources */,
 				DF81B95D28E3894B0044BBC2 /* AppCoordinator.swift in Sources */,
+				DFAC6EFC28EC669C00B3DE87 /* AdminViewController.swift in Sources */,
 				DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */,
 				DFE6250028E341CF00F98E9F /* Load.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,
@@ -478,14 +555,17 @@
 				DF8E3B3128D65556001AC8AC /* LottiewView.swift in Sources */,
 				DF8E3B3328D6653E001AC8AC /* EmptyCellTableViewCell.swift in Sources */,
 				DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */,
+				DF0009F428EF58EF00C55335 /* CoreDataService.swift in Sources */,
 				DF7B6D0228CA91680082A4B0 /* CaptureVideoFrontal.swift in Sources */,
 				DFF96A3B28D1617B00156053 /* FollowerTableViewCell.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,
 				DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */,
+				DF487DBB28ECFAE900971925 /* NotificationService.swift in Sources */,
 				DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */,
 				DFDF7FE228D20B8E007DD713 /* http.swift in Sources */,
-				DF2EDBE028E10B3600B2160B /* Notification.swift in Sources */,
+				DF2EDBE028E10B3600B2160B /* PushNotificationSender.swift in Sources */,
 				DF81B95F28E38D460044BBC2 /* UIApplication+Extension.swift in Sources */,
+				DF487DBD28ECFC0F00971925 /* CaptureReactionNotificationService.swift in Sources */,
 				DF0E930A28D9434E003329F9 /* SetUsernameViewController.swift in Sources */,
 				DFB75F7228D29590000D5B5F /* User.swift in Sources */,
 				DFB75F7628D33D6B000D5B5F /* ServiceUpload.swift in Sources */,
@@ -637,7 +717,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -654,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -673,7 +753,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -690,7 +770,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

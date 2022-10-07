@@ -15,5 +15,5 @@ struct Post {
     let postUid: String
     let videoPath: String
     let date: Int
-//    let date: Any
+    let reactions: [Reaction]
 }

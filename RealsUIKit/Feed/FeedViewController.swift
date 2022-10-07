@@ -14,14 +14,19 @@ import CoreData
 
 class FeedViewController: UIViewController {
     
-    var serviceSocial = ServiceSocial()
     var ownerId: String = ""
     var ownerUsername: String = ""
     var photo: String = ""
     var postUid: String = ""
+
+    var serviceSocial = ServiceSocial()
     var service = ServiceFirebase()
-    var posts: [Post] = []
-    var controlQuantityPost: Int = 0
+    var coreDataService = CoreDataService()
+    var posts: [Post] = [] {
+        didSet {
+            posts.sort(by: { $0.date > $1.date })
+        }
+    }
     let firebaseAuth = Auth.auth()
     let coreDataQueue = DispatchQueue(label: "CoreDataQueue", qos: .utility, attributes: [.concurrent], autoreleaseFrequency: .workItem)
     
@@ -36,8 +41,11 @@ class FeedViewController: UIViewController {
     var videoURLs = Array<URL>()
     var firstLoad = true
     let refreshControl = UIRefreshControl()
+    var index: Int = 0
     
-    let persistentContainer: NSPersistentContainer = {
+    let captionReactionObserver = CaptionReactionObserver()
+    
+    var persistentContainer: NSPersistentContainer = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
         }
@@ -49,31 +57,24 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         serviceSocial.verifyIfFcmTokenChange()
+        setupRefreshControl()
+        
+        captionReactionObserver.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
+        visibleIP = IndexPath.init(row: 0, section: 0)
         
         service.getFriendsReals { (posts) in
             self.posts = posts
-            self.controlQuantityPost = posts.count
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        visibleIP = IndexPath.init(row: 0, section: 0)
-        
-        setupRefreshControl()
-        
+
         service.getUserByEmail(email: firebaseAuth.currentUser?.email ?? "", completionHandler: { (response) in
             UserDefaults.standard.set(response, forKey: "username")
         })
-        let username = UserDefaults.standard.string(forKey: "username")
-        if username == "juusdy" || username == "Chumiga™" || username == "rafaelruwer" || username == "PohMarcelo" || username == "Nico" || username == "Prolene" {
-            createButton.isEnabled = true
-        } else {
-            createButton.isEnabled = false
-            createButton.tintColor = .clear
-        }
     }
     
     func playVideoOnTheCell(cell : VideoCellTableViewCell, indexPath : IndexPath){
@@ -88,17 +89,6 @@ class FeedViewController: UIViewController {
         performSegue(withIdentifier: "goToFriends", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "goToReport"){
-            let displayVC = segue.destination as! ReportViewController
-            
-            displayVC.ownerIdVar = self.ownerId
-            displayVC.ownerUsernameVar = self.ownerUsername
-            displayVC.postUidVar = self.postUid
-            
-        }
-    }
-    
     func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
@@ -107,11 +97,9 @@ class FeedViewController: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         
         service.getFriendsReals { (posts) in
-            if self.controlQuantityPost != posts.count {
-                self.posts = posts
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+            self.posts = posts
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
             self.refreshControl.endRefreshing()
         }
@@ -135,35 +123,13 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
-            
+            cell.index = indexPath.row
             if let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo) as? Data {
                 let videoAsset: AVAsset = videoData.getAVAsset()
                 cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
             } else {
                 cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
-                
-                coreDataQueue.async {
-                    do {
-                        let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-                        let predicate = NSPredicate(format: "videoUrl == '\(self.posts[indexPath.row].photo)'")
-                        realsVideoClassFetchRequest.predicate = predicate
-                        
-                        let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-                        let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-                        print(formatted)
-                        if formatted == "" {
-                            let data = try? Data.init(contentsOf: URL(string: self.posts[indexPath.row].photo)!)
-                            let videoURL = self.posts[indexPath.row].photo
-                            if let data = data, !self.savedVideosURL.contains(videoURL) {
-                                self.savedVideosURL.append(videoURL)
-                                self.saveDataCoreData(videoData: data, videoURL: videoURL)
-                            }
-                        }
-                    } catch {
-                        fatalError()
-                    }
-                }
-                
+                self.coreDataService.saveDataCoreData(videoUrl: self.posts[indexPath.row].photo)
             }
             
             cell.titleLabel.text = posts[indexPath.row].ownerUsername
@@ -176,26 +142,33 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-    
-    func saveDataCoreData(videoData: Data, videoURL: String) {
-        let reals = RealsVideoClass(context: persistentContainer.viewContext)
-        
-        reals.videoData = videoData
-        reals.videoUrl = videoURL
-        reals.date = Date.now
-        
-        do {
-            try persistentContainer.viewContext.save()
-        } catch {
-            fatalError("deu erro")
-        }
-    }
-    
 }
 
 extension FeedViewController: MyCustomCellDelegator {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToCaptureReactions"{
+            let destination = segue.destination as? CaptureReactions
+            
+            destination?.post = posts[index]
+        }
+        if (segue.identifier == "goToReport"){
+            let displayVC = segue.destination as! ReportViewController
+            
+            displayVC.ownerIdVar = self.ownerId
+            displayVC.ownerUsernameVar = self.ownerUsername
+            displayVC.postUidVar = self.postUid
+            
+        }
+    }
+    
     func createReals() {
-        performSegue(withIdentifier: "goToCapture", sender: nil)
+        self.performSegue(withIdentifier: "goToCapture", sender: nil)
+    }
+    
+    func captureReactions(index: Int) {
+        self.index = index
+        self.performSegue(withIdentifier: "goToCaptureReactions", sender: nil)
     }
     
     func callSegueFromCell(ownerUsername: String, postUid: String, ownerId: String, photo: String) {
@@ -210,17 +183,13 @@ extension FeedViewController: MyCustomCellDelegator {
         let alert = UIAlertController(title: "Apagar Real", message: "Essa ação não poderá ser desfeita!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Apagar", style: .destructive, handler: { action in
             self.service.deleteVideo(videoPath: videoPath, documentId: documentId, completionHandler: { (response) in
-                if response {
-                    UserDefaults.standard.set(Date.now-172800, forKey: "dateFromLastPosts")
-                } else {
-                    //                    alerta de erro
-                }
+                self.didFinishUploadingReaction()
+                AppCoordinator.shared.changeToCurrentRoot(animated: true)
             })
         }))
         alert.addAction(UIAlertAction(title: "Não apagar", style: .cancel, handler: { action in
             
-            let viewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first!.rootViewController
-            viewController?.dismiss(animated: true, completion: nil)
+            AppCoordinator.shared.changeToCurrentRoot(animated: true)
             
         }))
         self.present(alert, animated: true, completion: nil)
@@ -230,7 +199,7 @@ extension FeedViewController: MyCustomCellDelegator {
 extension Data {
     func getAVAsset() -> AVAsset {
         let directory = NSTemporaryDirectory()
-        let fileName = "\(NSUUID().uuidString).mov"
+        let fileName = "\(NSUUID().uuidString).mp4"
         let fullURL = NSURL.fileURL(withPathComponents: [directory, fileName])
         try! self.write(to: fullURL!)
         let asset = AVAsset(url: fullURL!)
@@ -258,4 +227,20 @@ extension FeedViewController {
             fatalError("Error when get video of CoreData \(#function)")
         }
     }
+}
+
+extension FeedViewController: CaptionReactionObserverDelegate {
+    
+    func didFinishUploadingReaction() {
+        let contentOffset = tableView.contentOffset
+        service.getFriendsReals { (posts) in
+            self.posts = posts
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                self.tableView.reloadData()
+                self.tableView.layoutIfNeeded()
+                self.tableView.setContentOffset(contentOffset, animated: false)
+            }
+        }
+    }
+    
 }
