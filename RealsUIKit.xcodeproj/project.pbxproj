@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF0009F428EF58EF00C55335 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0009F328EF58EF00C55335 /* CoreDataService.swift */; };
 		DF05668328CE634500670911 /* recording.json in Resources */ = {isa = PBXBuildFile; fileRef = DF05668228CE634500670911 /* recording.json */; };
 		DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05668428CEBC6A00670911 /* UsersViewController.swift */; };
 		DF05668828CEC0AE00670911 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF05668728CEC0AE00670911 /* Friends.storyboard */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		11ECBFC9ED00B60B12D59871 /* Pods-RealsUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.debug.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealsUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF0009F328EF58EF00C55335 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		DF05668228CE634500670911 /* recording.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recording.json; sourceTree = "<group>"; };
 		DF05668428CEBC6A00670911 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		DF05668728CEC0AE00670911 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */,
 				DFB75F7528D33D6B000D5B5F /* ServiceUpload.swift */,
 				DF2EDBDF28E10B3600B2160B /* PushNotificationSender.swift */,
+				DF0009F328EF58EF00C55335 /* CoreDataService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				DF8E3B3128D65556001AC8AC /* LottiewView.swift in Sources */,
 				DF8E3B3328D6653E001AC8AC /* EmptyCellTableViewCell.swift in Sources */,
 				DF219F5528CA0BD50038E47C /* FeedViewController.swift in Sources */,
+				DF0009F428EF58EF00C55335 /* CoreDataService.swift in Sources */,
 				DF7B6D0228CA91680082A4B0 /* CaptureVideoFrontal.swift in Sources */,
 				DFF96A3B28D1617B00156053 /* FollowerTableViewCell.swift in Sources */,
 				DF219F3928CA0A9A0038E47C /* SceneDelegate.swift in Sources */,

@@ -299,7 +299,7 @@ extension CaptureVideo {
                 self.stopRecording()
              }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                self.performSegue(withIdentifier: "showVideo2", sender: nil)
+                self.performSegue(withIdentifier: "showVideo", sender: nil)
              }
         }
     }

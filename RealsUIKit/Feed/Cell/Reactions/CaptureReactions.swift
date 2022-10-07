@@ -306,7 +306,7 @@ extension CaptureReactions {
                 self.service.uploadReactions(post: self.post!, urlVideo: self.outputURL! as URL, completionHandler: { (response) in
                     if response {
                         self.captureReactionNotificationService.postNotification(.didFinishUploadingReaction)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [self] in
                             self.pushNotificationService.sendReactionNotification(username: post?.ownerUsername ?? "")
                             AppCoordinator.shared.changeToCurrentRoot()
                         }

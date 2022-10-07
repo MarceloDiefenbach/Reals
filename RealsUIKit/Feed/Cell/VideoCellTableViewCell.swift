@@ -33,6 +33,7 @@ class VideoCellTableViewCell: UITableViewCell {
     @IBOutlet weak var reactionsTableView: UITableView!
     var savedVideosURL: [String] = []
     var index: Int?
+    var coreDataService = CoreDataService()
     
     
     //MARK: - Reactions
@@ -195,45 +196,10 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
                 cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
             } else {
                 cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: post.reactions[indexPath.row].reactionUrl)!)
-                
-                coreDataQueue.async {
-                    do {
-                        let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-                        let predicate = NSPredicate(format: "videoUrl == '\(self.post.reactions[indexPath.row].reactionUrl)'")
-                        realsVideoClassFetchRequest.predicate = predicate
-                        
-                        let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-                        let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-                        
-                        if formatted == "" {
-                            let data = try? Data.init(contentsOf: URL(string: self.post.reactions[indexPath.row].reactionUrl)!)
-                            let videoURL = self.post.reactions[indexPath.row].reactionUrl
-                            if let data = data, !self.savedVideosURL.contains(videoURL) {
-                                self.savedVideosURL.append(videoURL)
-                                self.saveDataCoreData(videoData: data, videoURL: videoURL)
-                            }
-                        }
-                    } catch {
-                        fatalError()
-                    }
-                }
+                self.coreDataService.saveDataCoreData(videoUrl: post.reactions[indexPath.row].reactionUrl)
             }
             playVideoOnTheCell(cell: cell, indexPath: indexPath)
             return cell
-    }
-    
-    func saveDataCoreData(videoData: Data, videoURL: String) {
-        let reals = RealsVideoClass(context: persistentContainer.viewContext)
-        
-        reals.videoData = videoData
-        reals.videoUrl = videoURL
-        reals.date = Date.now
-        
-        do {
-            try persistentContainer.viewContext.save()
-        } catch {
-            fatalError("deu erro")
-        }
     }
     
     func playVideoOnTheCell(cell : ReactionsTableViewCell, indexPath : IndexPath){

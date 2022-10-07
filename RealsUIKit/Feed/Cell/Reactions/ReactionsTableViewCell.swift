@@ -16,10 +16,18 @@ class ReactionsTableViewCell: UITableViewCell {
     @IBOutlet weak var videoPlayerSuperView: UIView!
     @IBOutlet weak var reactionsBG: UIView!
     
+    let corner = 5.0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setupMoviePlayer()
-        reactionsBG.layer.cornerRadius = reactionsBG.bounds.height/2
+        reactionsBG.layer.cornerRadius = reactionsBG.bounds.height/corner
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2))
     }
     
     var videoPlayerItem: AVPlayerItem? = nil {
@@ -34,7 +42,7 @@ class ReactionsTableViewCell: UITableViewCell {
     
     func setupMoviePlayer(){
         
-        videoPlayerSuperView.layer.cornerRadius = videoPlayerSuperView.bounds.height/2
+        videoPlayerSuperView.layer.cornerRadius = videoPlayerSuperView.bounds.height/corner
         
         self.avPlayer = AVPlayer.init(playerItem: self.videoPlayerItem)
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
@@ -55,7 +63,7 @@ class ReactionsTableViewCell: UITableViewCell {
 
         self.backgroundColor = .clear
         self.videoPlayerSuperView.layer.insertSublayer(avPlayerLayer!, at: 0)
-        self.videoPlayerSuperView.layer.cornerRadius = self.videoPlayerSuperView.bounds.height/2
+        self.videoPlayerSuperView.layer.cornerRadius = self.videoPlayerSuperView.bounds.height/corner
 
         // This notification is fired when the video ends, you can handle it in the method.
         NotificationCenter.default.addObserver(self,

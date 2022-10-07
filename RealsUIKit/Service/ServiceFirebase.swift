@@ -27,44 +27,11 @@ struct ServiceFirebase {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
         }
-        
         return appDelegate.persistentContainer
     }
     
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
-    
-//    func getAllPost(completionHandler: @escaping ([Post]) -> Void) {
-//        
-//        var posts: [Post] = []
-//        
-//        db.collection("posts").getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                
-//                if let snapshotDocumentos = querySnapshot?.documents {
-//                    for doc in snapshotDocumentos {
-//                        
-//                        let data = doc.data()
-//                        
-//                        if let title = data["title"] as? String,
-//                           let ownerId = data["ownerId"] as? String,
-//                           let photo = data["photo"] as? String,
-//                           let ownerUsername = data["ownerUsername"] as? String,
-//                           let videoPath = data["videoPath"] as? String,
-//                           let date = data["date"] as? Int {
-//                                
-//                            let post = Post(ownerId: ownerId, ownerUsername: ownerUsername, photo: photo, title: title, postUid: doc.documentID, videoPath: videoPath, date: date)
-//                                
-//                            posts.append(post)
-//                        }
-//                    }
-//                    completionHandler(posts)
-//                }
-//            }
-//        }
-//    }
     
     func getFriendsReals(completionHandler: @escaping ([Post]) -> Void) {
         
@@ -184,8 +151,7 @@ struct ServiceFirebase {
         }
         
         uploadTask.observe(.success) { snapshot in
-            print("finalizou")
-            UserDefaults.standard.set(Date.now, forKey: "dateFromLastPosts")
+            //return true to continue flow
             completionHandler(true)
         }
         

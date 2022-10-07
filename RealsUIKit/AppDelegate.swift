@@ -65,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         application.registerForRemoteNotifications()
-        
         Messaging.messaging().delegate = self
         
         return true

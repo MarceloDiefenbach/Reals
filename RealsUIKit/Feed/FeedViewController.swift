@@ -14,18 +14,19 @@ import CoreData
 
 class FeedViewController: UIViewController {
     
-    var serviceSocial = ServiceSocial()
     var ownerId: String = ""
     var ownerUsername: String = ""
     var photo: String = ""
     var postUid: String = ""
+
+    var serviceSocial = ServiceSocial()
     var service = ServiceFirebase()
+    var coreDataService = CoreDataService()
     var posts: [Post] = [] {
         didSet {
             posts.sort(by: { $0.date > $1.date })
         }
     }
-    var controlQuantityPost: Int = 0
     let firebaseAuth = Auth.auth()
     let coreDataQueue = DispatchQueue(label: "CoreDataQueue", qos: .utility, attributes: [.concurrent], autoreleaseFrequency: .workItem)
     
@@ -44,7 +45,7 @@ class FeedViewController: UIViewController {
     
     let captionReactionObserver = CaptionReactionObserver()
     
-    let persistentContainer: NSPersistentContainer = {
+    var persistentContainer: NSPersistentContainer = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
         }
@@ -55,34 +56,25 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        captionReactionObserver.delegate = self
-        
         serviceSocial.verifyIfFcmTokenChange()
+        setupRefreshControl()
+        
+        captionReactionObserver.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
+        visibleIP = IndexPath.init(row: 0, section: 0)
         
         service.getFriendsReals { (posts) in
             self.posts = posts
-            self.controlQuantityPost = posts.count
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        visibleIP = IndexPath.init(row: 0, section: 0)
-        
-        setupRefreshControl()
-        
+
         service.getUserByEmail(email: firebaseAuth.currentUser?.email ?? "", completionHandler: { (response) in
             UserDefaults.standard.set(response, forKey: "username")
         })
-        let username = UserDefaults.standard.string(forKey: "username")
-        if username == "juusdy" || username == "Chumiga™" || username == "rafaelruwer" || username == "PohMarcelo" || username == "Nico" || username == "Prolene" {
-            createButton.isEnabled = true
-        } else {
-            createButton.isEnabled = false
-            createButton.tintColor = .clear
-        }
     }
     
     func playVideoOnTheCell(cell : VideoCellTableViewCell, indexPath : IndexPath){
@@ -137,28 +129,7 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
                 cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
             } else {
                 cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
-                
-                coreDataQueue.async {
-                    do {
-                        let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-                        let predicate = NSPredicate(format: "videoUrl == '\(self.posts[indexPath.row].photo)'")
-                        realsVideoClassFetchRequest.predicate = predicate
-                        
-                        let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-                        let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-                        if formatted == "" {
-                            let data = try? Data.init(contentsOf: URL(string: self.posts[indexPath.row].photo)!)
-                            let videoURL = self.posts[indexPath.row].photo
-                            if let data = data, !self.savedVideosURL.contains(videoURL) {
-                                self.savedVideosURL.append(videoURL)
-                                self.saveDataCoreData(videoData: data, videoURL: videoURL)
-                            }
-                        }
-                    } catch {
-                        fatalError()
-                    }
-                }
-                
+                self.coreDataService.saveDataCoreData(videoUrl: self.posts[indexPath.row].photo)
             }
             
             cell.titleLabel.text = posts[indexPath.row].ownerUsername
@@ -169,20 +140,6 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
             cell.setupReportDeleteButton(post: posts[indexPath.row])
             playVideoOnTheCell(cell: cell, indexPath: indexPath)
             return cell
-        }
-    }
-    
-    func saveDataCoreData(videoData: Data, videoURL: String) {
-        let reals = RealsVideoClass(context: persistentContainer.viewContext)
-        
-        reals.videoData = videoData
-        reals.videoUrl = videoURL
-        reals.date = Date.now
-        
-        do {
-            try persistentContainer.viewContext.save()
-        } catch {
-            fatalError("deu erro")
         }
     }
 }
@@ -242,7 +199,7 @@ extension FeedViewController: MyCustomCellDelegator {
 extension Data {
     func getAVAsset() -> AVAsset {
         let directory = NSTemporaryDirectory()
-        let fileName = "\(NSUUID().uuidString).mov"
+        let fileName = "\(NSUUID().uuidString).mp4"
         let fullURL = NSURL.fileURL(withPathComponents: [directory, fileName])
         try! self.write(to: fullURL!)
         let asset = AVAsset(url: fullURL!)
@@ -278,7 +235,7 @@ extension FeedViewController: CaptionReactionObserverDelegate {
         let contentOffset = tableView.contentOffset
         service.getFriendsReals { (posts) in
             self.posts = posts
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.tableView.reloadData()
                 self.tableView.layoutIfNeeded()
                 self.tableView.setContentOffset(contentOffset, animated: false)
