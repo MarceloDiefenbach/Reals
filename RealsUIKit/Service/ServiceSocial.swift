@@ -12,6 +12,20 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseAuth
 
+enum GetUsersType: String {
+    case following
+    case followers
+    
+    var type: String {
+        switch self {
+        case .following:
+            return "following"
+        case .followers:
+            return "followers"
+        }
+    }
+}
+
 class ServiceSocial {
     
     let db = Firestore.firestore()
@@ -33,7 +47,6 @@ class ServiceSocial {
             }
         }
     }
-    
     
     func followSomeone(userToFollow: User, completionHandler: @escaping (Bool) -> Void) {
         db.collection("users")
@@ -58,7 +71,6 @@ class ServiceSocial {
                     "fcmToken" : UserDefaults.standard.string(forKey: "fcmTokenNow") ?? "",
                 ],
                 merge: true)
-        //        sender.sendFollowNotification(user: userToFollow)
         completionHandler(true)
         
     }
@@ -84,40 +96,12 @@ class ServiceSocial {
         }
     }
     
-    func getUsersFollowing(completionHandler: @escaping ([User]) -> Void ) {
-        
-        var allFollowing: [User] = []
-        print(firebaseAuth.currentUser!.uid)
-        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("following").getDocuments { querySnapshot, err in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    
-                    if let username = document.data()["username"] as? String,
-                       let email = document.data()["email"] as? String,
-                       let userId = document.data()["userId"] as? String,
-                       let fcmToken = document.data()["fcmToken"] as? String {
-                        allFollowing.append(
-                            User(
-                                username: username,
-                                email: email,
-                                userId: userId,
-                                fcmToken: fcmToken
-                            )
-                        )
-                    }
-                }
-            }
-            completionHandler(allFollowing)
-        }
-    }
     
-    func getFollowers(completionHandler: @escaping ([User]) -> Void ) {
+    func getUsers(usersType: GetUsersType, completionHandler: @escaping ([User]) -> Void) {
         
         var allFollowing: [User] = []
         print(firebaseAuth.currentUser!.uid)
-        db.collection("users").document(firebaseAuth.currentUser!.uid).collection("followers").getDocuments { querySnapshot, err in
+        db.collection("users").document(firebaseAuth.currentUser!.uid).collection(usersType.rawValue).getDocuments { querySnapshot, err in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -144,7 +128,7 @@ class ServiceSocial {
     
     func getAllUsersWithoutFriends(completionHandler: @escaping ([User]) -> Void) {
         
-        getUsersFollowing(completionHandler: { (response) in
+        getUsers(usersType: GetUsersType.following, completionHandler: { (response) in
             
             var allUsersWithoutFriends: [User] = []
             
@@ -225,7 +209,7 @@ class ServiceSocial {
         
         var fcmTokens: [String] = []
 
-        getFollowers(completionHandler: {(users) in
+        getUsers(usersType: GetUsersType.following, completionHandler: { (users) in
             
             self.db.collection("users").getDocuments() { (querySnapshot, err) in
                 if let err = err {

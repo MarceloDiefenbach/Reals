@@ -189,14 +189,14 @@ extension UsersViewController {
     }
     
     func getAllFollowing() {
-        serviceSocial.getUsersFollowing(completionHandler: { (following) in
+        serviceSocial.getUsers(usersType: GetUsersType.following, completionHandler: { (following) in
             self.following = following
             self.contentShowInList = following
             self.updateTableView()
         })
     }
     func getAllFollowers() {
-        serviceSocial.getFollowers(completionHandler: { (followers) in
+        serviceSocial.getUsers(usersType: GetUsersType.followers, completionHandler: { (followers) in
             self.followers = followers
             self.contentShowInList = followers
             self.updateTableView()

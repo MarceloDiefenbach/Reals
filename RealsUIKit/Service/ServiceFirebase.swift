@@ -40,7 +40,7 @@ struct ServiceFirebase {
         
         var friendsUsername: [String] = []
         
-        serviceSocial.getUsersFollowing(completionHandler: { (friends) in
+        serviceSocial.getUsers(usersType: GetUsersType.following, completionHandler: { (friends) in
             
             friendsUsername = friends.map( { $0.username } )
             friendsUsername.append(UserDefaults.standard.string(forKey: "username") ?? "")
