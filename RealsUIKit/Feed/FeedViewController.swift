@@ -18,6 +18,7 @@ class FeedViewController: UIViewController {
     var ownerUsername: String = ""
     var photo: String = ""
     var postUid: String = ""
+    var videos: [String: Data] = ["nil": Data.init()]
 
     var serviceSocial = ServiceSocial()
     var service = ServiceFirebase()
@@ -45,13 +46,6 @@ class FeedViewController: UIViewController {
     
     let captionReactionObserver = CaptionReactionObserver()
     
-    var persistentContainer: NSPersistentContainer = {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError()
-        }
-        
-        return appDelegate.persistentContainer
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,12 +118,34 @@ extension FeedViewController:  UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCellTableViewCell
             cell.index = indexPath.row
-            if let videoData: Data = getVideoOfCell(videoURL: posts[indexPath.row].photo) as? Data {
-                let videoAsset: AVAsset = videoData.getAVAsset()
+            
+            if let video = videos[self.posts[indexPath.row].photo] {
+                print("já ta salvo")
+                let videoAsset: AVAsset = video.getAVAsset()
                 cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+                
             } else {
-                cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: posts[indexPath.row].photo)!)
-                self.coreDataService.saveDataCoreData(videoUrl: self.posts[indexPath.row].photo)
+                if let videoData: Data = self.getVideoOfCell(videoURL: self.posts[indexPath.row].photo) as? Data {
+                    coreDataQueue.async {
+                        let videoAsset: AVAsset = videoData.getAVAsset()
+                        cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+                        self.videos["\(self.posts[indexPath.row].photo)"] = videoData
+                        print(self.videos)
+                    }
+                } else {
+                    coreDataQueue.async {
+                        do {
+                            self.coreDataService.saveDataCoreData(videoUrl: self.posts[indexPath.row].photo)
+                            let videoData = try Data(contentsOf: URL(string: self.posts[indexPath.row].photo)!)
+                            let videoAsset: AVAsset = videoData.getAVAsset()
+                            cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+                            
+                        } catch {
+                            fatalError("error playing video directly of firebase: \(#function)")
+                        }
+                    }
+                }
+                
             }
             
             cell.titleLabel.text = posts[indexPath.row].ownerUsername
@@ -211,20 +227,22 @@ extension Data {
 extension FeedViewController {
     func getVideoOfCell(videoURL: String) -> Any {
         do {
-            let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-            let predicate = NSPredicate(format: "videoUrl == '\(videoURL)'")
-            realsVideoClassFetchRequest.predicate = predicate
+            let folderURL = URL.createFolder(folderName: "StoredVideos")
             
-            let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-            let formatted = videos.map {"\($0)"}.joined(separator: "\n")
+            var invalidCharacters = CharacterSet(charactersIn: ":/")
+            invalidCharacters.formUnion(.newlines)
+            invalidCharacters.formUnion(.illegalCharacters)
+            invalidCharacters.formUnion(.controlCharacters)
+
+            let newFilename = videoURL
+                .components(separatedBy: invalidCharacters)
+                .joined(separator: "")
             
-            if let video = videos.first?.videoData {
-                return video
-            } else {
-                return ""
-            }
+            let permanentFileURL = folderURL?.appendingPathComponent(newFilename).appendingPathExtension("mp4")
+            let videoData = try Data(contentsOf: permanentFileURL!)
+            return videoData
         } catch {
-            fatalError("Error when get video of CoreData \(#function)")
+            return ""
         }
     }
 }

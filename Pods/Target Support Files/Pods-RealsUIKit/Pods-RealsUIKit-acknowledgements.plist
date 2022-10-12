@@ -3995,6 +3995,16 @@ Fuller's blog&lt;/a&gt;
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>https://platform.ironsrc.com/partners/terms-and-conditions-new-user</string>
+			<key>License</key>
+			<string>Commercial</string>
+			<key>Title</key>
+			<string>IronSourceSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>libuv is licensed for use as follows:
 
 ====

@@ -20,7 +20,9 @@
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<string>NO</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-5038687707625733~1974915004</string>
+	<string>ca-app-pub-8140153964962637~6897547542</string>
+	<key>NSAdvertisingAttributionReportEndpoint</key>
+	<string>We want to display ads</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -28,6 +30,10 @@
 	</dict>
 	<key>SKAdNetworkItems</key>
 	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>su67r6k2v3.skadnetwork</string>
+		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
 			<string>cstr6suwn9.skadnetwork</string>

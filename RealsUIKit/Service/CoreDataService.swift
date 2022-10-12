@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 import UIKit
 
 class CoreDataService: UIViewController {
@@ -16,48 +15,75 @@ class CoreDataService: UIViewController {
     let coreDataQueue = DispatchQueue(label: "CoreDataQueue", qos: .utility, attributes: [.concurrent], autoreleaseFrequency: .workItem)
     let captionReactionObserver = CaptionReactionObserver()
     
-    var persistentContainer: NSPersistentContainer = {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+    func saveDataCoreData(videoUrl: String) {
+        do {
+            guard let folderURL = URL.createFolder(folderName: "StoredVideos") else {
+                print("Can't create url")
+                return
+            }
+
+            var invalidCharacters = CharacterSet(charactersIn: ":/")
+            invalidCharacters.formUnion(.newlines)
+            invalidCharacters.formUnion(.illegalCharacters)
+            invalidCharacters.formUnion(.controlCharacters)
+
+            let newFilename = videoUrl
+                .components(separatedBy: invalidCharacters)
+                .joined(separator: "")
+            
+            let permanentFileURL = folderURL.appendingPathComponent(newFilename).appendingPathExtension("mp4")
+            let videoData = try Data(contentsOf: URL(string: videoUrl)!)
+            try videoData.write(to: permanentFileURL, options: .atomic)
+
+            
+        } catch {
             fatalError()
         }
-        
-        return appDelegate.persistentContainer
-    }()
-    
-    private func save(videoData: Data, videoURL: String) {
-        let reals = RealsVideoClass(context: persistentContainer.viewContext)
-        
-        reals.videoData = videoData
-        reals.videoUrl = videoURL
-        reals.date = Date.now
-        
-        DispatchQueue.main.async {
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        }
     }
     
-    func saveDataCoreData(videoUrl: String) {
-        coreDataQueue.async {
-            do {
-                let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-                let predicate = NSPredicate(format: "videoUrl == '\(videoUrl)'")
-                realsVideoClassFetchRequest.predicate = predicate
-                
-                let videos = try self.persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-                let formatted = videos.map {"\($0)"}.joined(separator: "\n")
-                
-                if formatted == "" {
-                    let data = try? Data.init(contentsOf: URL(string: videoUrl)!)
-                    let videoURL = videoUrl
-                    if let data = data, !self.savedVideosURL.contains(videoURL) {
-                        self.savedVideosURL.append(videoURL)
-                        self.save(videoData: data, videoURL: videoURL)
-                    }
+    func deleteYesterdayReals() {
+        
+        guard let folderURL = URL.createFolder(folderName: "StoredVideos") else {
+            print("Can't create url")
+            return
+        }
+        
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(at: folderURL)
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
+        
+    }
+    
+}
+
+extension URL {
+    static func createFolder(folderName: String) -> URL? {
+        let fileManager = FileManager.default
+        // Get document directory for device, this should succeed
+        if let documentDirectory = fileManager.urls(for: .documentDirectory,
+                                                    in: .userDomainMask).first {
+            // Construct a URL with desired folder name
+            let folderURL = documentDirectory.appendingPathComponent(folderName)
+            // If folder URL does not exist, create it
+            if !fileManager.fileExists(atPath: folderURL.path) {
+                do {
+                    // Attempt to create folder
+                    try fileManager.createDirectory(atPath: folderURL.path,
+                                                    withIntermediateDirectories: true,
+                                                    attributes: nil)
+                } catch {
+                    // Creation failed. Print error & return nil
+                    print(error.localizedDescription)
+                    return nil
                 }
-            } catch {
-                fatalError()
             }
+            // Folder either exists, or was created. Return URL
+            return folderURL
         }
+        // Will only be called if document directory not found
+        return nil
     }
-    
 }

@@ -102,7 +102,7 @@ class VideoPlayback: UIViewController {
                 
                 AppCoordinator.shared.changeToRootViewController(atStoryboard: "Feed")
                 self.loadingBackground.isHidden = true
-                self.sender.sendNotificationPost()
+//                self.sender.sendNotificationPost()
                 
             } else {
                 

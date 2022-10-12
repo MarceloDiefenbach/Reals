@@ -3856,6 +3856,10 @@ More information at <a href="http://landonf.org/2009/02/index.html">Landon
 Fuller's blog</a>
 
 
+## IronSourceSDK
+
+https://platform.ironsrc.com/partners/terms-and-conditions-new-user
+
 ## Libuv-gRPC
 
 libuv is licensed for use as follows:

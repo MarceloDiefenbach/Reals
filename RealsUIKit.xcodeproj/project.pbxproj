@@ -39,7 +39,6 @@
 		DF8E3B3328D6653E001AC8AC /* EmptyCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E3B3228D6653E001AC8AC /* EmptyCellTableViewCell.swift */; };
 		DF8E3B3628D67AAA001AC8AC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */; };
 		DFA3357F28D7BE2D00A26A1D /* CaptureVideoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */; };
-		DFA6BA8328E3D06F00429254 /* RealsVideosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */; };
 		DFAC6EFA28EC669000B3DE87 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFAC6EF928EC669000B3DE87 /* Admin.storyboard */; };
 		DFAC6EFC28EC669C00B3DE87 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */; };
 		DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */; };
@@ -60,6 +59,7 @@
 		DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F128CCF36300830B36 /* ProfileViewController.swift */; };
 		DFDD00F428CCF36E00830B36 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFDD00F328CCF36E00830B36 /* Profile.storyboard */; };
 		DFDD00F628CD125900830B36 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDD00F528CD125900830B36 /* ReportViewController.swift */; };
+		DFDF5C9228F6F7050073AFE4 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF5C9128F6F7050073AFE4 /* Video.swift */; };
 		DFDF7FE228D20B8E007DD713 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE128D20B8E007DD713 /* http.swift */; };
 		DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */; };
 		DFE6250028E341CF00F98E9F /* Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE624FF28E341CF00F98E9F /* Load.swift */; };
@@ -107,7 +107,6 @@
 		DF8E3B3428D67AA7001AC8AC /* RealsUIKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RealsUIKit.entitlements; sourceTree = "<group>"; };
 		DF8E3B3528D67AAA001AC8AC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DFA3357E28D7BE2D00A26A1D /* CaptureVideoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureVideoBack.swift; sourceTree = "<group>"; };
-		DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealsVideosModel.xcdatamodel; sourceTree = "<group>"; };
 		DFAC6EF928EC669000B3DE87 /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		DFAC6EFB28EC669C00B3DE87 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		DFB75F6E28D2950B000D5B5F /* ServiceSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSocial.swift; sourceTree = "<group>"; };
@@ -128,6 +127,7 @@
 		DFDD00F128CCF36300830B36 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DFDD00F328CCF36E00830B36 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		DFDD00F528CD125900830B36 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		DFDF5C9128F6F7050073AFE4 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		DFDF7FE128D20B8E007DD713 /* http.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = http.swift; sourceTree = "<group>"; };
 		DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateUserRequests.swift; sourceTree = "<group>"; };
 		DFE624FF28E341CF00F98E9F /* Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Load.swift; sourceTree = "<group>"; };
@@ -209,7 +209,6 @@
 		DF219F3528CA0A9A0038E47C /* RealsUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				DF5E9C6628E4D8B30070122C /* CoreData */,
 				DF8E3B3428D67AA7001AC8AC /* RealsUIKit.entitlements */,
 				DFB75F7028D29585000D5B5F /* Model */,
 				DF05667F28CE617B00670911 /* LottieFiles */,
@@ -287,14 +286,6 @@
 			path = NotificationObserverAndPost;
 			sourceTree = "<group>";
 		};
-		DF5E9C6628E4D8B30070122C /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		DF7B6D0028CA91570082A4B0 /* CaptureVideo */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +313,7 @@
 				DFB75F7128D29590000D5B5F /* User.swift */,
 				DFB75F7328D295A7000D5B5F /* Post.swift */,
 				DFD8FC4228E8CC5100FC8801 /* Reaction.swift */,
+				DFDF5C9128F6F7050073AFE4 /* Video.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -537,7 +529,6 @@
 				DF05668A28CECB3500670911 /* UserTableViewCell.swift in Sources */,
 				DF31AF1828E46D4C00E07928 /* setLayout+Extension.swift in Sources */,
 				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
-				DFA6BA8328E3D06F00429254 /* RealsVideosModel.xcdatamodeld in Sources */,
 				DFD8FC4328E8CC5100FC8801 /* Reaction.swift in Sources */,
 				DFD8FC3E28E886C500FC8801 /* ReactionsView.swift in Sources */,
 				DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */,
@@ -547,6 +538,7 @@
 				DF7B6D0628CA957F0082A4B0 /* ShowVideo.swift in Sources */,
 				DF487DBF28ECFE2F00971925 /* CaptionReactionObserver.swift in Sources */,
 				DF81B95D28E3894B0044BBC2 /* AppCoordinator.swift in Sources */,
+				DFDF5C9228F6F7050073AFE4 /* Video.swift in Sources */,
 				DFAC6EFC28EC669C00B3DE87 /* AdminViewController.swift in Sources */,
 				DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */,
 				DFE6250028E341CF00F98E9F /* Load.swift in Sources */,
@@ -717,7 +709,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -734,7 +726,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -753,7 +745,7 @@
 				CODE_SIGN_ENTITLEMENTS = RealsUIKit/RealsUIKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 6525BU9D84;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RealsUIKit/Info.plist;
@@ -770,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.reals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -802,19 +794,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		DFA6BA8128E3D06F00429254 /* RealsVideosModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */,
-			);
-			currentVersion = DFA6BA8228E3D06F00429254 /* RealsVideosModel.xcdatamodel */;
-			path = RealsVideosModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = DF219F2B28CA0A9A0038E47C /* Project object */;
 }

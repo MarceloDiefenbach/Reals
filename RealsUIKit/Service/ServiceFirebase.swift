@@ -23,13 +23,6 @@ struct ServiceFirebase {
     
     var serviceSocial = ServiceSocial()
     
-    var persistentContainer: NSPersistentContainer {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError()
-        }
-        return appDelegate.persistentContainer
-    }
-    
     let db = Firestore.firestore()
     let firebaseAuth = Auth.auth()
     
@@ -198,29 +191,29 @@ struct ServiceFirebase {
     }
     
     
-    func deleteVideosOfCoreData() {
-        do {
-            let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
-            let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
-            
-            for video in videos {
-                persistentContainer.viewContext.delete(video)
-            }
-            getVideos()
-        } catch {
-            fatalError("erro ao pegar os videos")
-        }
-    }
-    
-    func getVideos() {
-        do {
-            let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
-            let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
-            
-        } catch {
-            fatalError("erro ao pegar os videos")
-        }
-    }
+//    func deleteVideosOfCoreData() {
+//        do {
+//            let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
+//            let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
+//            
+//            for video in videos {
+//                persistentContainer.viewContext.delete(video)
+//            }
+//            getVideos()
+//        } catch {
+//            fatalError("erro ao pegar os videos")
+//        }
+//    }
+//    
+//    func getVideos() {
+//        do {
+//            let videos = try persistentContainer.viewContext.fetch(RealsVideoClass.fetchRequest())
+//            let formatted = videos.map {"\t\($0)"}.joined(separator: "\n")
+//            
+//        } catch {
+//            fatalError("erro ao pegar os videos")
+//        }
+//    }
     
     func verifyIsExist(username: String, completionHandler: @escaping (Bool) -> Void) {
         
@@ -465,7 +458,7 @@ struct ServiceFirebase {
                         
                         if let dateChange = data["dateChange"] as? Int {
                             if dateChange != UserDefaults.standard.integer(forKey: "dateChange") {
-                                deleteVideosOfCoreData()
+                                deleteYesterdayReals()
                                 UserDefaults.standard.set(dateChange, forKey: "dateChange")
                                 UserDefaults.standard.set(false, forKey: "alreadyPost")
                             } else {
@@ -476,6 +469,22 @@ struct ServiceFirebase {
                 }
             }
         }
+    
+    func deleteYesterdayReals() {
+        
+        guard let folderURL = URL.createFolder(folderName: "StoredVideos") else {
+            print("Can't create url")
+            return
+        }
+        
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(at: folderURL)
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
+        
+    }
     
     func uploadPhotoIMGBB() {
         

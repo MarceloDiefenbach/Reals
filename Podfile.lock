@@ -786,6 +786,7 @@ PODS:
     - Libuv-gRPC (= 0.0.10)
   - gRPC-Core/Interface (1.44.0)
   - GTMSessionFetcher/Core (2.1.0)
+  - IronSourceSDK (7.2.5.0)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
@@ -810,6 +811,7 @@ DEPENDENCIES:
   - FirebaseFirestore
   - FirebaseMessaging
   - Google-Mobile-Ads-SDK
+  - IronSourceSDK (= 7.2.5.0)
   - lottie-ios
   - UXCam (~> 3.4.2)
 
@@ -839,6 +841,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - IronSourceSDK
     - leveldb-library
     - Libuv-gRPC
     - lottie-ios
@@ -871,6 +874,7 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMSessionFetcher: ffbb25ec00ebcb5201adab0a56d808f6f1902d9f
+  IronSourceSDK: 59c9e16fa10f7b27e07df9edfbcf5a4bfc9ccfb3
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   lottie-ios: 9ae750cdc7820fecbd3c2f0cfc493038208fcdc4
@@ -878,6 +882,6 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   UXCam: def6c77900778a28b5fcb78eac5b51245404d9ef
 
-PODFILE CHECKSUM: b5aea4ae080cec2ef9a3234e222ff57b9309ef13
+PODFILE CHECKSUM: f5ff34e46327dd79240c432d2bbb1197ea3a4673
 
 COCOAPODS: 1.11.3
