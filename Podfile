@@ -19,9 +19,6 @@ target 'RealsUIKit' do
   
   # Pod for UXCam
   pod 'UXCam', "~> 3.4.2"
-  
-  # Pod IronSource
-  pod 'IronSourceSDK','7.2.5.0'
 
 
 end

@@ -39,11 +39,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FirebaseCoreDiagnostics.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FirebaseCoreExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -74,11 +69,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FirebaseStorageInternal.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -105,11 +95,6 @@
 			<false/>
 		</dict>
 		<key>GoogleUtilities.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>IronSourceSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
