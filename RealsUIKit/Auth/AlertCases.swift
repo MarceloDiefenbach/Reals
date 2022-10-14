@@ -13,6 +13,7 @@ enum AlertCases: String {
     case usernameAlreadyExist
     case invalidEmail
     case emailAlreadyExist
+    case success
     
     var alertTitle: String {
         switch self {
@@ -26,6 +27,8 @@ enum AlertCases: String {
             return "Invalid email"
         case .emailAlreadyExist:
             return "Email already exist"
+        case .success:
+            return "success"
         }
     }
     
@@ -41,6 +44,8 @@ enum AlertCases: String {
             return "Make sure you typed your email correctly"
         case .emailAlreadyExist:
             return "You need to use another email"
+        case .success:
+            return "success"
         }
     }
 }

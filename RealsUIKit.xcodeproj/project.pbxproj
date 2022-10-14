@@ -68,6 +68,7 @@
 		DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */; };
 		DFEC1F3728F990F200C504B3 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEC1F3628F990F200C504B3 /* RegisterViewModel.swift */; };
 		DFEC1F3928F993B100C504B3 /* AlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEC1F3828F993B100C504B3 /* AlertCases.swift */; };
+		DFEC1F3C28F998D500C504B3 /* SetUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEC1F3B28F998D500C504B3 /* SetUsernameViewModel.swift */; };
 		DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3828D1602600156053 /* FriendTableViewCell.swift */; };
 		DFF96A3B28D1617B00156053 /* FollowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
@@ -140,6 +141,7 @@
 		DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateUserRequests.swift; sourceTree = "<group>"; };
 		DFEC1F3628F990F200C504B3 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		DFEC1F3828F993B100C504B3 /* AlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCases.swift; sourceTree = "<group>"; };
+		DFEC1F3B28F998D500C504B3 /* SetUsernameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUsernameViewModel.swift; sourceTree = "<group>"; };
 		DFF96A3828D1602600156053 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTableViewCell.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -296,9 +298,9 @@
 		DF62CD5D28F9811500EB5969 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				DFEC1F3A28F998C200C504B3 /* SetUsername */,
 				DFEC1F3528F990DF00C504B3 /* Register */,
 				DFEC1F3428F981F300C504B3 /* Login */,
-				DF62CD6028F9811500EB5969 /* SetUsernameViewController.swift */,
 				DF62CD6128F9811500EB5969 /* Main.storyboard */,
 				DF62CD6328F9811500EB5969 /* Login.storyboard */,
 				DF62CD6428F9811500EB5969 /* Load */,
@@ -405,6 +407,15 @@
 				DFEC1F3628F990F200C504B3 /* RegisterViewModel.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		DFEC1F3A28F998C200C504B3 /* SetUsername */ = {
+			isa = PBXGroup;
+			children = (
+				DF62CD6028F9811500EB5969 /* SetUsernameViewController.swift */,
+				DFEC1F3B28F998D500C504B3 /* SetUsernameViewModel.swift */,
+			);
+			path = SetUsername;
 			sourceTree = "<group>";
 		};
 		DFF96A3728D1600B00156053 /* Cell */ = {
@@ -574,6 +585,7 @@
 				DF81B95D28E3894B0044BBC2 /* AppCoordinator.swift in Sources */,
 				DFDF5C9228F6F7050073AFE4 /* Video.swift in Sources */,
 				DFAC6EFC28EC669C00B3DE87 /* AdminViewController.swift in Sources */,
+				DFEC1F3C28F998D500C504B3 /* SetUsernameViewModel.swift in Sources */,
 				DFDD00F228CCF36300830B36 /* ProfileViewController.swift in Sources */,
 				DF62CD7328F9811500EB5969 /* RegisterViewController.swift in Sources */,
 				DF219F4C28CA0ADB0038E47C /* ServiceFirebase.swift in Sources */,

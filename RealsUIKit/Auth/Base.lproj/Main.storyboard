@@ -113,7 +113,6 @@
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="appleButtonAction:" destination="ljt-Dv-mfd" eventType="touchUpInside" id="S4j-iF-KvZ"/>
-                                                            <action selector="loginButton:" destination="ljt-Dv-mfd" eventType="touchUpInside" id="QbJ-ub-7uB"/>
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lrE-Bi-NMg">
@@ -194,7 +193,7 @@
             <objects>
                 <viewController title="Login" id="k1J-qF-pq7" customClass="RegisterViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Eo-Ap-uaK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Pgi-G6-Zwu">
@@ -360,7 +359,7 @@
             <objects>
                 <viewController id="noN-I1-LGS" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E2e-H8-39H">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bqh-xB-5kE">
@@ -423,8 +422,8 @@ Você é responsável por todo contéudo que submeter dentro do aplicativo e pod
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="A8Q-C2-fUk"/>
-        <segue reference="Ca2-Oe-3rY"/>
+        <segue reference="ma4-y2-YIa"/>
+        <segue reference="ZZR-7M-FkL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="applelogo" catalog="system" width="32" height="32"/>

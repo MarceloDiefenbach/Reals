@@ -35,11 +35,11 @@ class LoginViewController: UIViewController {
     @IBAction func loginButton(_ sender: Any) {
         
         loginViewModel.doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (response) -> Void in
-            let alert = UIAlertController(title: response.alertTitle, message: response.alertDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                //nothing to do
-            }))
-            self.present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: response.alertTitle, message: response.alertDescription, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+//                //nothing to do
+//            }))
+//            self.present(alert, animated: true, completion: nil)
         })
     }
     
