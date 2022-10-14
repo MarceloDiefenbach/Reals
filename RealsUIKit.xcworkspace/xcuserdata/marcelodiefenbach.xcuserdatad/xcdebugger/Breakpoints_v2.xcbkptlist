@@ -71,16 +71,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2D725C96-F4F2-4200-A25B-FBF94804FCF0"
+            uuid = "76EB123E-02E2-4E9B-B6E5-FF5B857BC616"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RealsUIKit/Feed/Cell/VideoCellTableViewCell.swift"
+            filePath = "RealsUIKit/Service/ServiceFirebase.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "verifyIsExist(username:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
