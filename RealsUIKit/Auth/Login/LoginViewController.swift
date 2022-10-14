@@ -16,7 +16,7 @@ import CryptoKit
 
 class LoginViewController: UIViewController {
     
-    var userViewModel = UserViewModel()
+    var loginViewModel = LoginViewModel()
     
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
@@ -34,14 +34,20 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButton(_ sender: Any) {
         
-        userViewModel.doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
-            //TODO: - maybe here we need to add logic to show error alerts
+        loginViewModel.doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (response) -> Void in
+            if response == .emptyFields || response == .usernameAlreadyExist{
+                let alert = UIAlertController(title: response.alertTitle, message: response.alertDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    //nothing to do
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userViewModel.requestPermissionToNotifications()
+        loginViewModel.requestPermissionToNotifications()
         
         setTermsOfUseInteraction()
         

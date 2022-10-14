@@ -27,7 +27,7 @@
 		DF487DBD28ECFC0F00971925 /* CaptureReactionNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF487DBC28ECFC0F00971925 /* CaptureReactionNotificationService.swift */; };
 		DF487DBF28ECFE2F00971925 /* CaptionReactionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF487DBE28ECFE2F00971925 /* CaptionReactionObserver.swift */; };
 		DF62CD6A28F9811500EB5969 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62CD5E28F9811500EB5969 /* LoginViewController.swift */; };
-		DF62CD6B28F9811500EB5969 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62CD5F28F9811500EB5969 /* UserViewModel.swift */; };
+		DF62CD6B28F9811500EB5969 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62CD5F28F9811500EB5969 /* LoginViewModel.swift */; };
 		DF62CD6C28F9811500EB5969 /* SetUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF62CD6028F9811500EB5969 /* SetUsernameViewController.swift */; };
 		DF62CD6D28F9811500EB5969 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF62CD6128F9811500EB5969 /* Main.storyboard */; };
 		DF62CD6E28F9811500EB5969 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF62CD6328F9811500EB5969 /* Login.storyboard */; };
@@ -66,6 +66,8 @@
 		DFDF5C9228F6F7050073AFE4 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF5C9128F6F7050073AFE4 /* Video.swift */; };
 		DFDF7FE228D20B8E007DD713 /* http.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE128D20B8E007DD713 /* http.swift */; };
 		DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */; };
+		DFEC1F3728F990F200C504B3 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEC1F3628F990F200C504B3 /* RegisterViewModel.swift */; };
+		DFEC1F3928F993B100C504B3 /* AlertCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEC1F3828F993B100C504B3 /* AlertCases.swift */; };
 		DFF96A3928D1602600156053 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3828D1602600156053 /* FriendTableViewCell.swift */; };
 		DFF96A3B28D1617B00156053 /* FollowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */; };
 		F61B25F4571F35D128C80D8E /* Pods_RealsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CB75AA666EF3F2E1F218B /* Pods_RealsUIKit.framework */; };
@@ -96,7 +98,7 @@
 		DF487DBC28ECFC0F00971925 /* CaptureReactionNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureReactionNotificationService.swift; sourceTree = "<group>"; };
 		DF487DBE28ECFE2F00971925 /* CaptionReactionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionReactionObserver.swift; sourceTree = "<group>"; };
 		DF62CD5E28F9811500EB5969 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		DF62CD5F28F9811500EB5969 /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		DF62CD5F28F9811500EB5969 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DF62CD6028F9811500EB5969 /* SetUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetUsernameViewController.swift; sourceTree = "<group>"; };
 		DF62CD6228F9811500EB5969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DF62CD6328F9811500EB5969 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -136,6 +138,8 @@
 		DFDF5C9128F6F7050073AFE4 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		DFDF7FE128D20B8E007DD713 /* http.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = http.swift; sourceTree = "<group>"; };
 		DFDF7FE328D20C08007DD713 /* DelegateUserRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateUserRequests.swift; sourceTree = "<group>"; };
+		DFEC1F3628F990F200C504B3 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		DFEC1F3828F993B100C504B3 /* AlertCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCases.swift; sourceTree = "<group>"; };
 		DFF96A3828D1602600156053 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		DFF96A3A28D1617B00156053 /* FollowerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTableViewCell.swift; sourceTree = "<group>"; };
 		E6BDF09979B91D7425D7FEB7 /* Pods-RealsUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealsUIKit.release.xcconfig"; path = "Target Support Files/Pods-RealsUIKit/Pods-RealsUIKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -292,14 +296,14 @@
 		DF62CD5D28F9811500EB5969 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				DFEC1F3528F990DF00C504B3 /* Register */,
 				DFEC1F3428F981F300C504B3 /* Login */,
-				DF62CD5F28F9811500EB5969 /* UserViewModel.swift */,
 				DF62CD6028F9811500EB5969 /* SetUsernameViewController.swift */,
 				DF62CD6128F9811500EB5969 /* Main.storyboard */,
 				DF62CD6328F9811500EB5969 /* Login.storyboard */,
 				DF62CD6428F9811500EB5969 /* Load */,
 				DF62CD6828F9811500EB5969 /* SetUsername.storyboard */,
-				DF62CD6928F9811500EB5969 /* RegisterViewController.swift */,
+				DFEC1F3828F993B100C504B3 /* AlertCases.swift */,
 			);
 			name = Auth;
 			path = RealsUIKit/Auth;
@@ -388,9 +392,19 @@
 		DFEC1F3428F981F300C504B3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				DF62CD5F28F9811500EB5969 /* LoginViewModel.swift */,
 				DF62CD5E28F9811500EB5969 /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		DFEC1F3528F990DF00C504B3 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				DF62CD6928F9811500EB5969 /* RegisterViewController.swift */,
+				DFEC1F3628F990F200C504B3 /* RegisterViewModel.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		DFF96A3728D1600B00156053 /* Cell */ = {
@@ -535,11 +549,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF62CD6B28F9811500EB5969 /* UserViewModel.swift in Sources */,
+				DF62CD6B28F9811500EB5969 /* LoginViewModel.swift in Sources */,
 				DF62CD6A28F9811500EB5969 /* LoginViewController.swift in Sources */,
 				DFB75F7428D295A7000D5B5F /* Post.swift in Sources */,
 				DF3B927428CA353D00162F1E /* VideoCellTableViewCell.swift in Sources */,
 				DFD8FC4128E8975000FC8801 /* ReactionsTableViewCell.swift in Sources */,
+				DFEC1F3928F993B100C504B3 /* AlertCases.swift in Sources */,
 				DF62CD6C28F9811500EB5969 /* SetUsernameViewController.swift in Sources */,
 				DFDF7FE428D20C08007DD713 /* DelegateUserRequests.swift in Sources */,
 				DFCDCC5628D0B8AA0089DAB8 /* ScanViewController.swift in Sources */,
@@ -550,6 +565,7 @@
 				DF05668528CEBC6A00670911 /* UsersViewController.swift in Sources */,
 				DFD8FC4328E8CC5100FC8801 /* Reaction.swift in Sources */,
 				DFD8FC3E28E886C500FC8801 /* ReactionsView.swift in Sources */,
+				DFEC1F3728F990F200C504B3 /* RegisterViewModel.swift in Sources */,
 				DFB75F6F28D2950B000D5B5F /* ServiceSocial.swift in Sources */,
 				DF219F3728CA0A9A0038E47C /* AppDelegate.swift in Sources */,
 				DF3B927228CA2E4200162F1E /* PlayerView.swift in Sources */,
