@@ -65,13 +65,12 @@ class RegisterViewController: UIViewController {
     @IBAction func createAccountButton(_ sender: Any) {
         
         registerViewModel.createAccount(email: emailField.text ?? "", password: passwordField.text ?? "", username: usernameField.text ?? "", completionHandler: { (response) in
-            if response == .emptyFields || response == .usernameAlreadyExist{
                 let alert = UIAlertController(title: response.alertTitle, message: response.alertDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                     //nothing to do
                 }))
                 self.present(alert, animated: true, completion: nil)
-            }
+            
         })
     }
         

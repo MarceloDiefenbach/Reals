@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
     var serviceSocial = ServiceSocial()
-
+    
     @IBOutlet weak var termsOfUseButton: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -35,13 +35,11 @@ class LoginViewController: UIViewController {
     @IBAction func loginButton(_ sender: Any) {
         
         loginViewModel.doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (response) -> Void in
-            if response == .emptyFields || response == .usernameAlreadyExist{
-                let alert = UIAlertController(title: response.alertTitle, message: response.alertDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-                    //nothing to do
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
+            let alert = UIAlertController(title: response.alertTitle, message: response.alertDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                //nothing to do
+            }))
+            self.present(alert, animated: true, completion: nil)
         })
     }
     
@@ -80,11 +78,11 @@ class LoginViewController: UIViewController {
     @IBAction func appleButtonAction(_ sender: Any) {
         startSignInWithAppleFlow()
     }
-        
+    
     // Unhashed nonce.
     fileprivate var currentNonce: String?
     
-     @available(iOS 13, *)
+    @available(iOS 13, *)
     @objc func startSignInWithAppleFlow() {
         let nonce = randomNonceString()
         currentNonce = nonce
@@ -121,7 +119,7 @@ extension LoginViewController {
         termsOfUseButton.addGestureRecognizer(tapTermsOfUseButton)
         termsOfUseButton.isUserInteractionEnabled = true
     }
-
+    
     @objc func termsOfUseButtonFunction(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             self.performSegue(withIdentifier: "showTermsOfUseLogin", sender: nil)
@@ -136,35 +134,35 @@ extension LoginViewController {
 extension LoginViewController {
     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
     private func randomNonceString(length: Int = 32) -> String {
-      precondition(length > 0)
-      let charset: Array<Character> =
-          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-      var result = ""
-      var remainingLength = length
-
-      while remainingLength > 0 {
-        let randoms: [UInt8] = (0 ..< 16).map { _ in
-          var random: UInt8 = 0
-          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-          if errorCode != errSecSuccess {
-            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-          }
-          return random
+        precondition(length > 0)
+        let charset: Array<Character> =
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
         }
-
-        randoms.forEach { random in
-          if remainingLength == 0 {
-            return
-          }
-
-          if random < charset.count {
-            result.append(charset[Int(random)])
-            remainingLength -= 1
-          }
-        }
-      }
-
-      return result
+        
+        return result
     }
 }
 
