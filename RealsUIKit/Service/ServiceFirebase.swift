@@ -219,9 +219,10 @@ struct ServiceFirebase {
         
         var exist: Bool = false
         
-        db.collection("users").getDocuments() { (querySnapshot, err) in
+        db.collection("users").whereField("username", isEqualTo: username).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
+                exist = true
             } else {
                 for document in querySnapshot!.documents {
 

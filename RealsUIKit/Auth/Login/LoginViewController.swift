@@ -14,7 +14,9 @@ import UserNotifications
 import AuthenticationServices
 import CryptoKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
+    
+    var userViewModel = UserViewModel()
     
     let firebaseAuth = Auth.auth()
     var service = ServiceFirebase()
@@ -32,20 +34,14 @@ class ViewController: UIViewController {
     
     @IBAction func loginButton(_ sender: Any) {
         
-        doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
-            //TODO: - colocar aqui a logica de ir pra outra tela
+        userViewModel.doLogin(email: emailField.text ?? "", password: passwordField.text ?? "", completionHandler: { (completionReturn) -> Void in
+            //TODO: - maybe here we need to add logic to show error alerts
         })
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestPermissionToNotifications()
+        userViewModel.requestPermissionToNotifications()
         
         setTermsOfUseInteraction()
         
@@ -108,46 +104,10 @@ class ViewController: UIViewController {
         return hashString
     }
     
-    
-    //MARK: - FUNCTIONS
-    
-    func doLogin(email: String, password: String, completionHandler: @escaping (String) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            if authResult != nil {
-                self?.saveOnUserDefaults()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    AppCoordinator.shared.changeToRootViewController(atStoryboard: "Feed")
-                })
-            }
-        }
-        completionHandler("teste")
-    }
-    
-    func saveOnUserDefaults() {
-        
-        service.getUserByEmail(email: emailField.text ?? "", completionHandler: { (response) in
-            UserDefaults.standard.set(response, forKey: "username")
-            UserDefaults.standard.set(self.emailField.text, forKey: "email")
-        })
-        
-    }
-}
-
-extension ViewController {
-    
-    func requestPermissionToNotifications() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-            if success {
-                print("All set!")
-            } else if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-    }
 }
 
 //MARK: - Terms of use button
-extension ViewController {
+extension LoginViewController {
     
     func setTermsOfUseInteraction() {
         
@@ -167,7 +127,7 @@ extension ViewController {
 
 //MARK: - login with apple
 
-extension ViewController {
+extension LoginViewController {
     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
     private func randomNonceString(length: Int = 32) -> String {
       precondition(length > 0)
@@ -203,7 +163,7 @@ extension ViewController {
 }
 
 @available(iOS 13.0, *)
-extension ViewController: ASAuthorizationControllerDelegate {
+extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
@@ -261,7 +221,7 @@ extension ViewController: ASAuthorizationControllerDelegate {
     }
 }
 
-extension ViewController : ASAuthorizationControllerPresentationContextProviding {
+extension LoginViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }

@@ -22,7 +22,7 @@
         <!--Login-->
         <scene sceneID="91t-vb-t67">
             <objects>
-                <viewController title="Login" id="ljt-Dv-mfd" customClass="ViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login" id="ljt-Dv-mfd" customClass="LoginViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bPU-d2-mwK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,7 @@
             <objects>
                 <viewController title="Login" id="k1J-qF-pq7" customClass="RegisterViewController" customModule="RealsUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Eo-Ap-uaK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Pgi-G6-Zwu">
@@ -360,7 +360,7 @@
             <objects>
                 <viewController id="noN-I1-LGS" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E2e-H8-39H">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bqh-xB-5kE">
@@ -427,7 +427,7 @@ Você é responsável por todo contéudo que submeter dentro do aplicativo e pod
         <segue reference="Ca2-Oe-3rY"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="applelogo" catalog="system" width="103" height="128"/>
+        <image name="applelogo" catalog="system" width="32" height="32"/>
         <namedColor name="black">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
