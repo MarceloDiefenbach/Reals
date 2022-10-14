@@ -71,7 +71,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //MARK: - admob
         bannerView = GADBannerView(adSize: GADAdSizeBanner)
         addBannerViewToView(bannerView)
-        bannerView.adUnitID = "ca-app-pub-5038687707625733/4269905853"
+        bannerView.adUnitID = "ca-app-pub-8140153964962637/3823827493"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self

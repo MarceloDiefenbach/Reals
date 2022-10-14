@@ -15,7 +15,11 @@ class PushNotificationSender {
         let urlString = "https://fcm.googleapis.com/fcm/send"
         let url = NSURL(string: urlString)!
         let paramString: [String : Any] = ["registration_ids" : tokens,
-                                           "notification" : ["title" : title, "body" : body]
+                                           "notification" : [
+                                            "title" : title,
+                                            "body" : body,
+                                            "sound" : "default"
+                                           ]
         ]
         let request = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "POST"
@@ -45,7 +49,11 @@ class PushNotificationSender {
             let urlString = "https://fcm.googleapis.com/fcm/send"
             let url = NSURL(string: urlString)!
             let paramString: [String : Any] = ["registration_ids" : receivers,
-                                               "notification" : ["title" : "@\(UserDefaults.standard.string(forKey: "username") ?? "A friend") just posted", "body" : "Click here to see now"]
+                                               "notification" : [
+                                                "title" : "@\(UserDefaults.standard.string(forKey: "username") ?? "A friend") just posted",
+                                                "body" : "Click here to see now",
+                                                "sound" : "default"
+                                               ]
             ]
             let request = NSMutableURLRequest(url: url as URL)
             request.httpMethod = "POST"
@@ -71,7 +79,11 @@ class PushNotificationSender {
         let urlString = "https://fcm.googleapis.com/fcm/send"
         let url = NSURL(string: urlString)!
         let paramString: [String : Any] = ["to" : user.fcmToken,
-                                           "notification" : ["title" : "@\(UserDefaults.standard.string(forKey: "username") ?? "") follow you", "body" : ""]
+                                           "notification" : [
+                                            "title" : "@\(UserDefaults.standard.string(forKey: "username") ?? "") follow you",
+                                            "body" : "",
+                                            "sound" : "default"
+                                           ]
         ]
         let request = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "POST"
@@ -99,7 +111,11 @@ class PushNotificationSender {
             let urlString = "https://fcm.googleapis.com/fcm/send"
             let url = NSURL(string: urlString)!
             let paramString: [String : Any] = ["to" : receiver[0],
-                                               "notification" : ["title" : "@\(UserDefaults.standard.string(forKey: "username") ?? "") reacted to your Real", "body" : ""]
+                                               "notification" : [
+                                                "title" : "@\(UserDefaults.standard.string(forKey: "username") ?? "") reacted to your Real",
+                                                "body" : "",
+                                                "sound" : "default"
+                                               ]
             ]
             
             let request = NSMutableURLRequest(url: url as URL)
@@ -132,7 +148,11 @@ class PushNotificationSender {
             let urlString = "https://fcm.googleapis.com/fcm/send"
             let url = NSURL(string: urlString)!
             let paramString: [String : Any] = ["registration_ids" : receivers,
-                                               "notification" : ["title" : "🎬 Reals time has arrived ", "body" : "Be the first person to post"]
+                                               "notification" : [
+                                                "title" : "🎬 Reals time has arrived ",
+                                                "body" : "Be the first person to post",
+                                                "sound" : "default"
+                                               ]
             ]
             let request = NSMutableURLRequest(url: url as URL)
             request.httpMethod = "POST"

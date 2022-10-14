@@ -15,13 +15,6 @@ protocol MyCustomCellDelegator: AnyObject {
 class VideoCellTableViewCell: UITableViewCell {
     
     let coreDataQueue = DispatchQueue(label: "CoreDataQueue", qos: .utility, attributes: [.concurrent], autoreleaseFrequency: .workItem)
-    
-    let persistentContainer: NSPersistentContainer = {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError()
-        }
-        return appDelegate.persistentContainer
-    }()
 
     var avPlayer: AVPlayer?
     var avPlayerLayer: AVPlayerLayer?
@@ -34,6 +27,7 @@ class VideoCellTableViewCell: UITableViewCell {
     var savedVideosURL: [String] = []
     var index: Int?
     var coreDataService = CoreDataService()
+    var videos: [String: Data] = ["nil": Data.init()]
     
     
     //MARK: - Reactions
@@ -51,7 +45,6 @@ class VideoCellTableViewCell: UITableViewCell {
     @IBOutlet weak var reportDeleteIcon: UIImageView!
     @IBOutlet weak var captureReactionButton: UIImageView!
     
-    //MARK: - actions
     var videoPlayerItem: AVPlayerItem? = nil {
         didSet {
             avPlayer?.replaceCurrentItem(with: self.videoPlayerItem)
@@ -188,18 +181,40 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = self.reactionsTableView.dequeueReusableCell(withIdentifier: "reactionsCell") as! ReactionsTableViewCell
-            cell.backgroundColor = UIColor.clear
+        let cell = self.reactionsTableView.dequeueReusableCell(withIdentifier: "reactionsCell") as! ReactionsTableViewCell
+        cell.backgroundColor = UIColor.clear
             
-            if let videoData: Data = getVideoOfCell(videoURL: post.reactions[indexPath.row].reactionUrl) as? Data {
-                let videoAsset: AVAsset = videoData.getAVAsset()
-                cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+        if let video = videos[self.post.reactions[indexPath.row].reactionUrl] {
+            print("já ta salvo")
+            let videoAsset: AVAsset = video.getAVAsset()
+            cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+            
+        } else {
+            if let videoData: Data = self.getVideoOfCell(videoURL: self.post.reactions[indexPath.row].reactionUrl) as? Data {
+                coreDataQueue.async {
+                    let videoAsset: AVAsset = videoData.getAVAsset()
+                    cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+                    self.videos["\(self.post.reactions[indexPath.row].reactionUrl)"] = videoData
+                    print(self.videos)
+                }
             } else {
-                cell.videoPlayerItem = AVPlayerItem.init(url: URL(string: post.reactions[indexPath.row].reactionUrl)!)
-                self.coreDataService.saveDataCoreData(videoUrl: post.reactions[indexPath.row].reactionUrl)
+                coreDataQueue.async {
+                    do {
+                        self.coreDataService.saveDataCoreData(videoUrl: self.post.reactions[indexPath.row].reactionUrl)
+                        let videoData = try Data(contentsOf: URL(string: self.post.reactions[indexPath.row].reactionUrl)!)
+                        let videoAsset: AVAsset = videoData.getAVAsset()
+                        cell.videoPlayerItem = AVPlayerItem.init(asset: videoAsset)
+                        
+                    } catch {
+                        fatalError("error playing video directly of firebase: \(#function)")
+                    }
+                }
+                
             }
-            playVideoOnTheCell(cell: cell, indexPath: indexPath)
-            return cell
+            
+        }
+        playVideoOnTheCell(cell: cell, indexPath: indexPath)
+        return cell
     }
     
     func playVideoOnTheCell(cell : ReactionsTableViewCell, indexPath : IndexPath){
@@ -216,20 +231,22 @@ extension VideoCellTableViewCell:  UITableViewDelegate, UITableViewDataSource {
 extension VideoCellTableViewCell {
     func getVideoOfCell(videoURL: String) -> Any {
         do {
-            let realsVideoClassFetchRequest = RealsVideoClass.fetchRequest()
-            let predicate = NSPredicate(format: "videoUrl == '\(videoURL)'")
-            realsVideoClassFetchRequest.predicate = predicate
+            let folderURL = URL.createFolder(folderName: "StoredVideos")
             
-            let videos = try persistentContainer.viewContext.fetch(realsVideoClassFetchRequest)
-            let formatted = videos.map {"\($0)"}.joined(separator: "\n")
+            var invalidCharacters = CharacterSet(charactersIn: ":/")
+            invalidCharacters.formUnion(.newlines)
+            invalidCharacters.formUnion(.illegalCharacters)
+            invalidCharacters.formUnion(.controlCharacters)
+
+            let newFilename = videoURL
+                .components(separatedBy: invalidCharacters)
+                .joined(separator: "")
             
-            if let video = videos.first?.videoData {
-                return video
-            } else {
-                return ""
-            }
+            let permanentFileURL = folderURL?.appendingPathComponent(newFilename).appendingPathExtension("mp4")
+            let videoData = try Data(contentsOf: permanentFileURL!)
+            return videoData
         } catch {
-            fatalError("Error when get video of CoreData \(#function)")
+            return ""
         }
     }
 }
